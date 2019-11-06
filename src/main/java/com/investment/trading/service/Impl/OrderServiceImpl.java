@@ -5,6 +5,7 @@ import com.investment.trading.repository.OrderRepository;
 import com.investment.trading.service.OrderService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @Service
@@ -15,13 +16,21 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public Mono<Order> newOrder(Order order) {
-    Order o = new Order();
-    o.setItems(order.getItems());
-    return orderRepository.save(o);
+    return orderRepository.save(order);
     }
 
     @Override
-    public Mono<Order> getOrder(String id) {
+    public Mono<Order> findOrderById(String id) {
         return orderRepository.findById(id);
+    }
+
+    @Override
+    public Flux<Order> findAllOrdersByContainingSKU(String sku) {
+        return orderRepository.findOrderByItemsContaining(sku);
+    }
+
+    @Override
+    public Mono<Void> deleteById(String id) {
+        return orderRepository.deleteById(id);
     }
 }
