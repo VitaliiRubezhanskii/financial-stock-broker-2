@@ -17,7 +17,7 @@ public class OrderController {
 
     private final OrderService orderService;
 
-    @GetMapping("/{sku}")
+    @GetMapping("/sku/{sku}")
     public Flux<Order> getAllOrdersContainingSKU(@PathVariable("sku") String sku){
         return orderService.findAllOrdersByContainingSKU(sku);
     }

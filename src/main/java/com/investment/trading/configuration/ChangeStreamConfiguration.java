@@ -18,18 +18,11 @@ import static org.springframework.data.mongodb.core.query.Criteria.where;
 public class ChangeStreamConfiguration {
 
     @Bean
-    public Subscription changeStreamIterable(MessageListenerContainer container) {
-        ChangeStreamRequest<Order> request = ChangeStreamRequest.builder(new MessageListener<ChangeStreamDocument<Document>, Order>() {
-            @Override
-            public void onMessage(Message<ChangeStreamDocument<Document>, Order> message) {
-                System.out.println("Received message with id: " + message.getRaw() + " ---------- " + message.getBody());
-            }
-        })
+    public Subscription subscription(MessageListenerContainer container) {
+        return container.register(ChangeStreamRequest.builder(this::convert)
                 .collection("order")
                 .filter(newAggregation(match(where("operationType").is("insert"))))
-                .build();
-
-        return container.register(request, Order.class);
+                .build(), Order.class);
     }
 
     @Bean
@@ -41,4 +34,9 @@ public class ChangeStreamConfiguration {
             }
         };
     }
+
+    private void convert(Message<ChangeStreamDocument<Document>, Order> message){
+        System.out.println("Received message with id: " + message.getRaw() + " ---------- " + message.getBody());
+    }
+
 }
