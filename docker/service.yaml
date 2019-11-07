@@ -1,11 +1,26 @@
-apiVersion: v1
 kind: Service
+apiVersion: v1
 metadata:
-  name: mongodb-cluster
+  name: mongodb
+  labels:
+    name: mongodb
 spec:
   selector:
-    app: mongodb
+    role: mongodb
   ports:
-    - name: mongoport
-      port: 27017
+    - port: 27017
+      targetPort: 27017
+  clusterIP: None
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: orderservice
+spec:
+  selector:
+    app: orderservice
+  ports:
+    - port: 8080
+      targetPort: 8080
   type: ClusterIP
+
