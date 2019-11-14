@@ -7,6 +7,5 @@ spring:
       password: root
       database: orders
 server:
-  servlet:
-    context-path: /orders
+#  context-path: /orders
   port: 8082
