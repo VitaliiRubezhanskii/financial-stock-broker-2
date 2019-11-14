@@ -11,7 +11,7 @@ public class ConfigApplication {
     }
 
     public void setup(){
-
+String t="";
     }
 
 }
