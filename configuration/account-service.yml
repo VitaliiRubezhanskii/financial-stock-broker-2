@@ -10,3 +10,5 @@ server:
   servlet:
     context-path: /accounts
   port: 8081
+info:
+  data: test
