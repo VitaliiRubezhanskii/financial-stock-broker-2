@@ -5,5 +5,5 @@ spring:
     config:
       server:
         git:
-          uri: https://github.com/VitaliiRubezhanskii/financial-stock-broker.git
-      label: initial
+          uri: https://github.com/VitaliiRubezhanskii/financial-stock-broker-2.git
+          search-paths: configuration
