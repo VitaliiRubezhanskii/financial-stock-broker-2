@@ -1,6 +1,0 @@
-server:
-  port: ${SERVER_PORT}
-spring:
-  data:
-    mongodb:
-      uri: ${URI}
