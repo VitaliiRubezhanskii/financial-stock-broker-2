@@ -7,9 +7,10 @@ spring:
   profiles:
     active: native
 
+  security:
+      user:
+        password: root
+
 server:
   port: 8888
 
-security:
-  user:
-    password: ${CONFIG_SERVICE_PASSWORD}
