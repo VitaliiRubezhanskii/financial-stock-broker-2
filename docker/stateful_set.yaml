@@ -1,0 +1,23 @@
+apiVersion: apps/v1beta1
+kind: StatefulSet
+metadata:
+ name: mongodb
+spec:
+ serviceName: "mongodb"
+ replicas: 3
+ template:
+   metadata:
+    labels:
+      role: mongodb
+   spec:
+      terminationGracePeriodSeconds: 10
+      containers:
+        - name: mongodb
+          ports:
+           - containerPort: 27017
+          image: vitalii1992/docker_mongo-replicator
+
+
+
+
+

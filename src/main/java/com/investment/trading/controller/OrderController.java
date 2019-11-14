@@ -1,5 +1,6 @@
 package com.investment.trading.controller;
 
+import com.google.gson.Gson;
 import com.investment.trading.domain.Order;
 import com.investment.trading.domain.OrderItem;
 import com.investment.trading.service.OrderService;
@@ -16,6 +17,7 @@ import java.util.List;
 public class OrderController {
 
     private final OrderService orderService;
+    private final Gson gson = new Gson();
 
     @GetMapping("/sku/{sku}")
     public Flux<Order> getAllOrdersContainingSKU(@PathVariable("sku") String sku){
@@ -23,12 +25,14 @@ public class OrderController {
     }
 
     @GetMapping("/{id}")
-    public Mono<Order> get(@PathVariable("id") String id) {
-        return orderService.findOrderById(id);
+    public Mono<Order> get(@PathVariable("id") String id) throws Exception {
+       return orderService.findOrderById(id);
+
     }
 
     @PostMapping
     public Mono<Order> create(@RequestBody Order order) {
+
         return orderService.newOrder(order);
     }
 //

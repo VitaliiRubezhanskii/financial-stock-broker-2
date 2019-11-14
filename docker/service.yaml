@@ -1,16 +1,16 @@
-kind: Service
 apiVersion: v1
+kind: Service
 metadata:
-  name: mongodb
-  labels:
-    name: mongodb
+ name: mongodb
+ labels:
+ name: mongodb
 spec:
-  selector:
-    role: mongodb
-  ports:
-    - port: 27017
-      targetPort: 27017
-  clusterIP: None
+ ports:
+ - port: 27017
+   targetPort: 27017
+ clusterIP: None
+ selector:
+   role: mongodb
 ---
 kind: Service
 apiVersion: v1
