@@ -10,8 +10,6 @@ public class ConfigApplication {
         SpringApplication.run(ConfigApplication.class, args);
     }
 
-    public void setup(){
-String t="";
-    }
+
 
 }
