@@ -1,0 +1,39 @@
+zuul:
+  ignoredServices:
+  host:
+    connect-timeout-millis: 20000
+    socket-timeout-millis: 20000
+
+  routes:
+    auth-service:
+      path: /uaa/**
+      url: auth-service
+      stripPrefix: false
+      sensitiveHeaders:
+
+    account-service:
+      path: /accounts/**
+      serviceId: account-service
+      stripPrefix: false
+      sensitiveHeaders:
+
+    analytics-service:
+       path: /analytics/**
+       serviceId: analytics-service
+       stripPrefix: false
+       sensitiveHeaders:
+
+    order-service:
+       path: /order/**
+       serviceId: order-service
+       stripPrefix: false
+       sensitiveHeaders:
+
+    quotes-provider-service:
+       path: /quotes/**
+       serviceId: quotes-provider-service
+       stripPrefix: false
+       sensitiveHeaders:
+
+server:
+  port: 8080

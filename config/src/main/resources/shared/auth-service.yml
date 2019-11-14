@@ -5,8 +5,8 @@ spring:
       port: 27017
       username: root
       password: root
-      database: accounts
+      database: oauth-db
 server:
   servlet:
-    context-path: /accounts
+    context-path: /uaa
   port: 8081
