@@ -1,3 +1,5 @@
+server:
+  port: 8081
 spring:
   data:
     mongodb:
@@ -6,7 +8,4 @@ spring:
       username: root
       password: root
       database: accounts
-server:
-  servlet:
-    context-path: /accounts
-  port: 8081
+
