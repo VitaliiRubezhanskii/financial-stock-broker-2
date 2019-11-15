@@ -8,4 +8,4 @@ spring:
       profile: dev
 
 server:
-  port: 8881
+  port: 8081

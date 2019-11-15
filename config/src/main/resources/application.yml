@@ -1,5 +1,3 @@
-server:
-  port: 8888
 spring:
   application:
     name: config-server
@@ -8,6 +6,11 @@ spring:
       server:
         git:
           uri: https://github.com/VitaliiRubezhanskii/financial-stock-broker-2.git
+          username: vitalii.rubezhanskii@gmail.com
+          password: Vitalik@1992
           searchPaths: configuration
       label: master
+
+server:
+  port: 8888
 
