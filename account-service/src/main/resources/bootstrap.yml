@@ -2,11 +2,8 @@ spring:
   application:
     name: account-service
   cloud:
-    config:
-      uri: http://localhost:8888
-management:
-  endpoints:
-    web:
-      exposure:
-        include: refresh
+      config:
+        env: default # optional
+        label: master # optional
+        uri: http://localhost:8888
 
