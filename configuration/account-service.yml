@@ -1,8 +1,12 @@
-server:
-  port: 8081
+spring:
+  profiles:
+    active: dev
+---
+
 spring:
   application:
     name: account-service
+  profiles: dev
   data:
     mongodb:
       host: localhost

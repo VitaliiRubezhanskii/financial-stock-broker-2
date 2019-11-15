@@ -1,9 +1,14 @@
 spring:
   application:
     name: account-service
+server:
+  port: 8081
+---
+spring:
+  profiles: dev
   cloud:
-      config:
-        env: default # optional
-        label: master # optional
-        uri: http://localhost:8888
+    config:
+      uri: http://localhost:8888
+spring.profiles.active: development
+
 
