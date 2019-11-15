@@ -3,4 +3,4 @@
 #    name: account-service
 spring:
   profiles:
-    active: dev
+    active: default

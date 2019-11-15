@@ -1,12 +1,12 @@
 spring:
   profiles:
-    active: dev
+    active: default
 ---
 
 spring:
   application:
     name: account-service
-  profiles: dev
+  profiles: default
   data:
     mongodb:
       host: localhost
