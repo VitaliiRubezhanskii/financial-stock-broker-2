@@ -3,10 +3,9 @@ spring:
     name: account-service
   cloud:
     config:
+      uri: http://localhost:8888
       label: master
-      uri: http://localhost:8888/
       profile: dev
+
 server:
-  port: 8081
-
-
+  port: 8881

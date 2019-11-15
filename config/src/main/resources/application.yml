@@ -7,7 +7,7 @@ spring:
     config:
       server:
         git:
-          uri: https://github.com/VitaliiRubezhanskii/financial-stock-broker-2
+          uri: https://github.com/VitaliiRubezhanskii/financial-stock-broker-2.git
           searchPaths: configuration
       label: master
 
