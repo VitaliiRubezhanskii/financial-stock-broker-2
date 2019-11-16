@@ -7,5 +7,3 @@ spring:
       label: master
       profile: dev
 
-server:
-  port: 8081
