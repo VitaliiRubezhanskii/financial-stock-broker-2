@@ -10,7 +10,7 @@ spring:
       port: 27017
       username: root
       password: root
-      database: orders
+      database: admin
   profiles: dev
 
 eureka:         #tells about the Eureka server details and its refresh time
