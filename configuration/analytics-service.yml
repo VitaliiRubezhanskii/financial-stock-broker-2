@@ -13,4 +13,4 @@ spring:
       password: root
       database: analytics
 analytics:
-  check:  check_servcie
+  check:  check_servcies
