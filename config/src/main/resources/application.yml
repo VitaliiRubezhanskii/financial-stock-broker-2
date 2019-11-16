@@ -6,8 +6,8 @@ spring:
       server:
         git:
           uri: https://github.com/VitaliiRubezhanskii/financial-stock-broker-2.git
-          username: vitalii.rubezhanskii@gmail.com
-          password: Vitalik@1992
+#          username: vitalii.rubezhanskii@gmail.com
+#          password: Vitalik@1992
           searchPaths: configuration
       label: master
 
