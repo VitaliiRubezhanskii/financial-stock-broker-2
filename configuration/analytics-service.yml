@@ -17,5 +17,5 @@ analytics:
 management:
   endpoints:
     web:
-      exposure:k
+      exposure:
         include: refresh, env
