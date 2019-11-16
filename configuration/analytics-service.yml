@@ -4,6 +4,7 @@ server:
 spring:
   application:
     name: analytics-service
+  profiles: default
   data:
     mongodb:
       host: localhost
