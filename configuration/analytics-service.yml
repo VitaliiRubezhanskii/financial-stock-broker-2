@@ -13,4 +13,9 @@ spring:
       password: root
       database: analytics
 analytics:
-  check:  check_servcies
+  check:  check_servcies_changed
+management:
+  endpoints:
+    web:
+      exposure:
+        include: refresh, env
