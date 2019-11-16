@@ -12,10 +12,18 @@ spring:
       username: root
       password: root
       database: analytics
-analytics:
-  check:  check_servcies_changed
+eureka:         #tells about the Eureka server details and its refresh time
+  instance:
+    leaseRenewalIntervalInSeconds: 1
+    leaseExpirationDurationInSeconds: 2
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+    healthcheck:
+      enabled: true
+    lease:
+      duration: 5
+
 management:
-  endpoints:
-    web:
-      exposure:
-        include: refresh, env
+  security:
+    enabled: false
