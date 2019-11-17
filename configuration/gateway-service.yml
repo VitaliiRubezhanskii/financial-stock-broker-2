@@ -42,8 +42,6 @@ zuul:
 eureka:
   instance:
     preferIpAddress: true
-    leaseRenewalIntervalInSeconds: 1
-    leaseExpirationDurationInSeconds: 2
   client:
     registerWithEureka: true
     fetchRegistry: true
@@ -53,8 +51,7 @@ eureka:
       enabled: true
     lease:
       duration: 5
-      eureka:
-      instance:
+
 
 hystrix.command.default.execution.isolation.thread.timeoutInMilliseconds: 60000
 ribbon:
