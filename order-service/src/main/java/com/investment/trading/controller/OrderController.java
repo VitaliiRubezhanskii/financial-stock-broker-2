@@ -27,7 +27,7 @@ public class OrderController {
         return orderService.findAllOrdersByContainingSKU(sku);
     }
 
-    @PatchMapping("/sample/order")
+    @PatchMapping("/order/sample")
     public Mono<Order> getExample(){
         return Mono.just(new Order("F4152", List.of(new OrderItem("sku_1"), new OrderItem("sku_2")), new File("Invoice"), LocalDateTime.now()));
     }
