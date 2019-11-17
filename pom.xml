@@ -23,17 +23,18 @@
         <relativePath/>
     </parent>
 
-
     <modules>
-        <module>order-service</module>
-        <module>account-service</module>
-        <module>analytics-service</module>
-        <module>quotes-provider-service</module>
-        <module>auth</module>
-        <module>config</module>
-        <module>monitoring</module>
-        <module>registry</module>
-        <module>gateway</module>
+        <module>core/order-service</module>
+        <module>core/account-service</module>
+        <module>core/analytics-service</module>
+        <module>core/quotes-provider-service</module>
+        <module>support/auth</module>
+        <module>support/config</module>
+        <module>support/monitoring</module>
+        <module>support/registry</module>
+        <module>support/gateway</module>
+        <module>support/turbine</module>
+        <module>support/tracing</module>
     </modules>
 
     <dependencies>
