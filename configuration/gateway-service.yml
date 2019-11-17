@@ -17,8 +17,7 @@ zuul:
     account-service:
       path: /accounts/**
       serviceId: account-service
-#      url: http://localhost:8081
-#      stripPrefix: false
+      stripPrefix: false
 
 
     analytics-service:

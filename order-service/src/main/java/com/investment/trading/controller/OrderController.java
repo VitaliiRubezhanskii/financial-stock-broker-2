@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import java.io.File;
+import java.time.LocalDateTime;
+import java.util.Arrays;
 import java.util.List;
 
 @RestController
@@ -22,6 +25,11 @@ public class OrderController {
     @GetMapping("/sku/{sku}")
     public Flux<Order> getAllOrdersContainingSKU(@PathVariable("sku") String sku){
         return orderService.findAllOrdersByContainingSKU(sku);
+    }
+
+    @GetMapping("/sample")
+    public Mono<Order> getExample(){
+        return Mono.just(new Order("F4152", List.of(new OrderItem("sku_1"), new OrderItem("sku_2")), new File("Invoice"), LocalDateTime.now()));
     }
 
     @GetMapping("/{id}")

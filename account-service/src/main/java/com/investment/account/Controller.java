@@ -8,7 +8,7 @@ public class Controller {
 
 
 
-    @GetMapping("/accounts/")
+    @GetMapping("/")
     public String getHello(){
         return "Hello from Account-service through gateway";
     }
