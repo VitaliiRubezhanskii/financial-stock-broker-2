@@ -5,6 +5,7 @@ import com.investment.trading.domain.Order;
 import com.investment.trading.domain.OrderItem;
 import com.investment.trading.service.OrderService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -22,6 +23,9 @@ public class OrderController {
     private final OrderService orderService;
     private final Gson gson = new Gson();
 
+    @Value("${server.port}")
+    private String port;
+
     @GetMapping("/sku/{sku}")
     public Flux<Order> getAllOrdersContainingSKU(@PathVariable("sku") String sku){
         return orderService.findAllOrdersByContainingSKU(sku);
@@ -29,7 +33,7 @@ public class OrderController {
 
     @PatchMapping("/order/sample")
     public Mono<Order> getExample(){
-        return Mono.just(new Order("F4152", List.of(new OrderItem("sku_1"), new OrderItem("sku_2")), new File("Invoice"), LocalDateTime.now()));
+        return Mono.just(new Order(port, List.of(new OrderItem("sku_1"), new OrderItem("sku_2")), new File("Invoice"), LocalDateTime.now()));
     }
 
     @GetMapping("/{id}")
