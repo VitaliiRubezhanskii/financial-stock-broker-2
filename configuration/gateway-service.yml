@@ -27,9 +27,10 @@ zuul:
 
 
     order-service:
-       path: /order/**
-       serviceId: order-service
-       stripPrefix: false
+      uri: http://localhost:8092
+#       path: /order/**
+#       serviceId: order-service
+#       stripPrefix: false
 
 
     quotes-provider-service:
