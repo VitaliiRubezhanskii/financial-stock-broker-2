@@ -15,7 +15,7 @@ import java.util.Arrays;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/orders")
+@RequestMapping
 @RequiredArgsConstructor
 public class OrderController {
 
