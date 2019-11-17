@@ -9,7 +9,7 @@ spring:
       username: root
       password: root
       database: admin
-  profiles: default
+  profiles: dev
 
 eureka:         #tells about the Eureka server details and its refresh time
   instance:
