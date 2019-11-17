@@ -2,7 +2,7 @@ server:
   port: 5555
 
 zuul:
-#  ignoredServices: '*'
+  ignoredServices: '*'
   host:
     connect-timeout-millis: 20000
     socket-timeout-millis: 20000
@@ -17,6 +17,7 @@ zuul:
     account-service:
       path: /accounts/**
       serviceId: account-service
+      url: http://localhost:8081
       stripPrefix: false
 
 
