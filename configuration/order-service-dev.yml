@@ -2,8 +2,6 @@ server:
   port: ${PORT}
 
 spring:
-  application:
-    name: order-service
   data:
     mongodb:
       host: localhost
