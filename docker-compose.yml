@@ -115,7 +115,7 @@ services:
       ports:
        - 8888:8888
       healthcheck:
-        test: ["CMD", "curl", "-f", "http://localhost:8888"]
+        test: ["CMD", "curl", "-f", "http://localhost:8888/account-service/dev"]
         interval: 30s
         timeout: 10s
         retries: 5
