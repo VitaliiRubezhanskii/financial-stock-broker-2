@@ -41,7 +41,7 @@ services:
    mongo-replicator:
       build:
         context: ./
-        dockerfile: ../../mongodb/Dockerfile
+        dockerfile: ./mongodb/Dockerfile
       networks:
         - my-mongo-cluster
       depends_on:
@@ -52,7 +52,12 @@ services:
    order_service:
       container_name: order_service
       environment:
-        SERVER_PORT: 8081
+        PORT: 8081
+        ORDER_SERVICE_NAME: order_service
+        CONFIG_SERVICE_URI: http://config_service:8888
+        BRANCH: master
+        PROFILE: dev
+        EUREKA_URI: http://discovery_service:8761/eureka/
         URI: mongodb://mongo1:27017,mongo2:27017,mongo3:27017/orders?replicaSet=rs0
       expose:
        - 8081
@@ -65,8 +70,104 @@ services:
          retries: 5
       image: order_service:latest
       build:
-        context: ./../
+        context: ./core/order-service
         dockerfile: Dockerfile
       restart: always
       networks:
         - my-mongo-cluster
+
+   account_service:
+      container_name: account_service
+      environment:
+        PORT: 8082
+        APPLICATION_NAME: account_service
+        CONFIG_SERVICE_URI: http://config_service:8888
+        BRANCH: master
+        PROFILE: dev
+        EUREKA_URI: http://discovery_service:8761/eureka/
+      expose:
+       - 8082
+      ports:
+       - 8082:8082
+      healthcheck:
+        test: ["CMD", "curl", "-f", "http://localhost:8082"]
+        interval: 30s
+        timeout: 10s
+        retries: 5
+      image: account_service:latest
+      build:
+        context: ./core/account-service
+        dockerfile: Dockerfile
+      restart: always
+      networks:
+        - my-mongo-cluster
+
+   config_service:
+      container_name: config_service
+      environment:
+        PORT: 8888
+        CONFIG_SERVICE_NAME: config_service
+        GIT: https://github.com/VitaliiRubezhanskii/financial-stock-broker-2.git
+        FOLDER: configuration
+        BRANCH: master
+      expose:
+       - 8888
+      ports:
+       - 8888:8888
+      healthcheck:
+        test: ["CMD", "curl", "-f", "http://localhost:8888"]
+        interval: 30s
+        timeout: 10s
+        retries: 5
+      image: config_service:latest
+      build:
+        context: ./support/config
+        dockerfile: Dockerfile
+      restart: always
+      networks:
+       - my-mongo-cluster
+
+   discovery_service:
+     container_name: discovery_service
+     environment:
+       PORT: 8761
+       APPLICATION_NAME: discovery_service
+       CONFIG_SERVICE_URI: http://config_service:8888
+     expose:
+      - 8761
+     ports:
+      - 8761:8761
+     healthcheck:
+       test: ["CMD", "curl", "-f", "http://localhost:8761"]
+       interval: 30s
+       timeout: 10s
+       retries: 5
+     image: discovery_service:latest
+     build:
+       context: ./support/monitoring
+       dockerfile: Dockerfile
+     restart: always
+     networks:
+      - my-mongo-cluster
+
+
+   api_gateway_service:
+      container_name: api_gateway_service
+      environment:
+        SERVER_PORT: 5000
+      expose:
+       - 5000
+      ports:
+       - 5000:5000
+      healthcheck:
+        test: ["CMD", "curl", "-f", "http://localhost:5000"]
+        interval: 30s
+        timeout: 10s
+        retries: 5
+      image: api_gateway_service:latest
+      build:
+        context: ./support/monitoring
+        dockerfile: Dockerfile
+      restart: always
+      networks:
+       - my-mongo-cluster

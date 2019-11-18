@@ -1,13 +1,16 @@
 spring:
   application:
-    name: config-server
+    name: ${CONFIG_SERVICE_NAME}
   cloud:
     config:
       server:
         git:
-          uri: https://github.com/VitaliiRubezhanskii/financial-stock-broker-2.git
-          searchPaths: configuration
-      label: master
+          uri: ${GIT}
+          #https://github.com/VitaliiRubezhanskii/financial-stock-broker-2.git
+          searchPaths: ${FOLDER}
+          #configuration
+      label: ${BRANCH}
+      #master
 
 
 
