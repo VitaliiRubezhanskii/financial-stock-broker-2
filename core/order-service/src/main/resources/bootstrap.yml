@@ -2,6 +2,8 @@
 spring:
   application:
     name: ${ORDER_SERVICE_NAME}
+  profiles:
+    active: default
      #order-service
   cloud:
     config:

@@ -11,6 +11,7 @@ spring:
 #      database: admin
   profiles: default
 
+
 eureka:         #tells about the Eureka server details and its refresh time
   instance:
     preferIpAddress: true
