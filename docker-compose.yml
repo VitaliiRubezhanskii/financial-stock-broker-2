@@ -131,7 +131,7 @@ services:
      container_name: discovery_service
      environment:
        PORT: 8761
-       APPLICATION_NAME: discovery_service
+       APPLICATION_NAME: monitoring
        CONFIG_SERVICE_URI: http://config_service:8888
      expose:
       - 8761
