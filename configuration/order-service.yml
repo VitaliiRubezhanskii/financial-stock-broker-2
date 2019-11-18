@@ -4,11 +4,6 @@ spring:
   data:
     mongodb:
       uri: mongodb://mongo1:27017,mongo2:27017,mongo3:27017/orders?replicaSet=rs0
-#      host: localhost
-#      port: 27017
-#      username: root
-#      password: root
-#      database: admin
   profiles: default
 
 
@@ -21,7 +16,7 @@ eureka:         #tells about the Eureka server details and its refresh time
     registerWithEureka: true
     fetchRegistry: true
     serviceUrl:
-      defaultZone: http://discovery_service:8761/eureka/
+      defaultZone: http://${DOCKER_IP}:8761/eureka/
     healthcheck:
       enabled: true
     lease:
