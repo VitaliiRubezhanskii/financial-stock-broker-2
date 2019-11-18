@@ -56,7 +56,7 @@ services:
         ORDER_SERVICE_NAME: order_service
         CONFIG_SERVICE_URI: http://config_service:8888
         BRANCH: master
-        PROFILE: dev
+        PROFILE: default
         EUREKA_URI: http://discovery_service:8761/eureka/
         URI: mongodb://mongo1:27018,mongo2:27019,mongo3:27020/orders?replicaSet=rs0
       expose:
