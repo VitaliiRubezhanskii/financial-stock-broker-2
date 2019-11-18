@@ -3,7 +3,7 @@ server:
 spring:
   data:
     mongodb:
-      uri: mongodb://mongo1:27017,mongo2:27017,mongo3:27017/orders?replicaSet=rs0
+      uri: mongodb://192.168.99.100:27017,192.168.99.100:27017,192.168.99.100:27017/orders?replicaSet=rs0
   profiles: default
 
 
