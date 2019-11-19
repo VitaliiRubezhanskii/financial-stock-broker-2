@@ -49,6 +49,58 @@ services:
         - mongo2
         - mongo3
 
+   config_service:
+       container_name: config_service
+       environment:
+         PORT: 8888
+         CONFIG_SERVICE_NAME: config_service
+         GIT: https://github.com/VitaliiRubezhanskii/financial-stock-broker-2.git
+         FOLDER: configuration
+         BRANCH: master
+       expose:
+        - 8888
+       ports:
+        - 8888:8888
+       healthcheck:
+         test: ["CMD", "curl", "-f", "http://localhost:8888/account-service/dev"]
+         interval: 30s
+         timeout: 10s
+         retries: 5
+       image: config_service:latest
+       build:
+         context: ./support/config
+         dockerfile: Dockerfile
+       depends_on:
+         - mongo-replicator
+       restart: always
+       networks:
+        - my-mongo-cluster
+
+  discovery_service:
+    container_name: discovery_service
+    environment:
+      PORT: 8761
+      APPLICATION_NAME: monitoring
+      CONFIG_SERVICE_URI: http://config_service:8888
+    expose:
+     - 8761
+    ports:
+     - 8761:8761
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8761"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    image: discovery_service:latest
+    build:
+      context: ./support/monitoring
+      dockerfile: Dockerfile
+    depends_on:
+      - config_service
+    restart: always
+    networks:
+     - my-mongo-cluster
+
    order_service:
       container_name: order_service
       environment:
@@ -74,9 +126,7 @@ services:
         context: ./core/order-service
         dockerfile: Dockerfile
       depends_on:
-         - mongo1
-         - mongo2
-         - mongo3
+           - mongo-replicator
       restart: always
       networks:
         - my-mongo-cluster
@@ -103,58 +153,11 @@ services:
       build:
         context: ./core/account-service
         dockerfile: Dockerfile
+      depends_on:
+         - mongo-replicator
       restart: always
       networks:
         - my-mongo-cluster
-
-   config_service:
-      container_name: config_service
-      environment:
-        PORT: 8888
-        CONFIG_SERVICE_NAME: config_service
-        GIT: https://github.com/VitaliiRubezhanskii/financial-stock-broker-2.git
-        FOLDER: configuration
-        BRANCH: master
-      expose:
-       - 8888
-      ports:
-       - 8888:8888
-      healthcheck:
-        test: ["CMD", "curl", "-f", "http://localhost:8888/account-service/dev"]
-        interval: 30s
-        timeout: 10s
-        retries: 5
-      image: config_service:latest
-      build:
-        context: ./support/config
-        dockerfile: Dockerfile
-      restart: always
-      networks:
-       - my-mongo-cluster
-
-   discovery_service:
-     container_name: discovery_service
-     environment:
-       PORT: 8761
-       APPLICATION_NAME: monitoring
-       CONFIG_SERVICE_URI: http://config_service:8888
-     expose:
-      - 8761
-     ports:
-      - 8761:8761
-     healthcheck:
-       test: ["CMD", "curl", "-f", "http://localhost:8761"]
-       interval: 30s
-       timeout: 10s
-       retries: 5
-     image: discovery_service:latest
-     build:
-       context: ./support/monitoring
-       dockerfile: Dockerfile
-     restart: always
-     networks:
-      - my-mongo-cluster
-
 
    api_gateway_service:
       container_name: api_gateway_service
