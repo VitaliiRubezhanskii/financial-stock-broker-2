@@ -1,10 +1,10 @@
 spring:
   application:
-    name: ${APPLICATION_NAME}
+    name: monitoring
   cloud:
     config:
-      uri: ${CONFIG_SERVICE_URI}
+      uri: http://localhost:8888
 server:
-  port: ${PORT}
+  port: 8761
 
 

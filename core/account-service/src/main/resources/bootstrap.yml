@@ -1,15 +1,15 @@
 server:
-  port: ${PORT}
+  port: 8081
 spring:
   application:
-    name: ${APPLICATION_NAME}
+    name: account_service
     #account-service
   cloud:
     config:
-      uri: ${CONFIG_SERVICE_URI}
+      uri: http://localhost:8888
       #http://localhost:8888
-      label: ${BRANCH}
+      label: master
       #master
-      profile: ${PROFILE}
+      profile: dev
       #dev
 
