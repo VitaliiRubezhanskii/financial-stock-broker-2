@@ -127,7 +127,7 @@ services:
       build:
         context: ./core/account-service
         dockerfile: Dockerfile
-      depends_on:.
+      depends_on:
          - mongo-replicator
       restart: always
       networks:
