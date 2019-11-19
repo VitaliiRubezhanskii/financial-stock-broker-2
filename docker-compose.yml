@@ -8,9 +8,9 @@ services:
       command: --replSet rs0 --bind_ip_all
       ports:
         - 27018:27017
-      volumes:
-        - /etc/localtime:/etc/localtime:ro
-        - /mongo_cluster/data1:/data/db
+#      volumes:
+#        - /etc/localtime:/etc/localtime:ro
+#        - /mongo_cluster/data1:/data/db
       networks:
         - my-mongo-cluster
    mongo2:
@@ -18,9 +18,9 @@ services:
       command: --replSet rs0 --bind_ip_all
       ports:
         - 27019:27017
-      volumes:
-        - /etc/localtime:/etc/localtime:ro
-        - /mongo_cluster/data2:/data/db
+#      volumes:
+#        - /etc/localtime:/etc/localtime:ro
+#        - /mongo_cluster/data2:/data/db
       networks:
         - my-mongo-cluster
       depends_on:
@@ -30,9 +30,9 @@ services:
       command: --replSet rs0 --bind_ip_all
       ports:
         - 27020:27017
-      volumes:
-        - /etc/localtime:/etc/localtime:ro
-        - /mongo_cluster/data3:/data/db
+#      volumes:
+#        - /etc/localtime:/etc/localtime:ro
+#        - /mongo_cluster/data3:/data/db
       networks:
         - my-mongo-cluster
       depends_on:
