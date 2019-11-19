@@ -6,9 +6,9 @@ spring:
     #account-service
   cloud:
     config:
-      uri: http://localhost:8888
+      uri: http://config_service:8888
       #http://localhost:8888
-      label: master
+      label: docker
       #master
       profile: dev
       #dev

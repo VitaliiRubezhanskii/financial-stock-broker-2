@@ -51,12 +51,6 @@ services:
 
    config_service:
        container_name: config_service
-       environment:
-         PORT: 8888
-         CONFIG_SERVICE_NAME: config_service
-         GIT: https://github.com/VitaliiRubezhanskii/financial-stock-broker-2.git
-         FOLDER: configuration
-         BRANCH: master
        expose:
         - 8888
        ports:
@@ -78,10 +72,6 @@ services:
 
    discovery_service:
       container_name: discovery_service
-      environment:
-        PORT: 8761
-        APPLICATION_NAME: monitoring
-        CONFIG_SERVICE_URI: http://192.168.99.100:8888
       expose:
        - 8761
       ports:
@@ -103,12 +93,6 @@ services:
 
    order_service:
       container_name: order_service
-      environment:
-        PORT: 8081
-        ORDER_SERVICE_NAME: order_service
-        CONFIG_SERVICE_URI: http://192.168.99.100:8888
-        DOCKER_IP: 192.168.99.100
-#        BRANCH: master
         PROFILE: default
         EUREKA_URI: http://discovery_service:8761/eureka/
         URI: mongodb://mongo1:27017,mongo2:27017,mongo3:27017/orders?replicaSet=rs0

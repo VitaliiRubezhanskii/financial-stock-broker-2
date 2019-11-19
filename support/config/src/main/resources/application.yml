@@ -9,7 +9,7 @@ spring:
           #https://github.com/VitaliiRubezhanskii/financial-stock-broker-2.git
           searchPaths: configuration
           #configuration
-      label: master
+      label: docker
       #master
 
 
