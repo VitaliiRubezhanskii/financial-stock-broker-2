@@ -22,7 +22,7 @@ eureka:         #tells about the Eureka server details and its refresh time
     leaseExpirationDurationInSeconds: 2
   client:
     serviceUrl:
-      defaultZone: http://${DOCKER_IP}:8761/eureka/
+      defaultZone: http://192.168.99.100:8761/eureka/
     healthcheck:
       enabled: true
     lease:
