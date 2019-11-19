@@ -76,41 +76,41 @@ services:
        networks:
         - my-mongo-cluster
 
-  discovery_service:
-    container_name: discovery_service
-    environment:
-      PORT: 8761
-      APPLICATION_NAME: monitoring
-      CONFIG_SERVICE_URI: http://config_service:8888
-    expose:
-     - 8761
-    ports:
-     - 8761:8761
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8761"]
-      interval: 30s
-      timeout: 10s
-      retries: 5
-    image: discovery_service:latest
-    build:
-      context: ./support/monitoring
-      dockerfile: Dockerfile
-    depends_on:
-      - config_service
-    restart: always
-    networks:
-     - my-mongo-cluster
+   discovery_service:
+      container_name: discovery_service
+      environment:
+        PORT: 8761
+        APPLICATION_NAME: monitoring
+        CONFIG_SERVICE_URI: http://192.168.99.100:8888
+      expose:
+       - 8761
+      ports:
+       - 8761:8761
+      healthcheck:
+        test: ["CMD", "curl", "-f", "http://localhost:8761"]
+        interval: 30s
+        timeout: 10s
+        retries: 5
+      image: discovery_service:latest
+      build:
+        context: ./support/monitoring
+        dockerfile: Dockerfile
+      depends_on:
+        - config_service
+      restart: always
+      networks:
+       - my-mongo-cluster
 
    order_service:
       container_name: order_service
       environment:
         PORT: 8081
         ORDER_SERVICE_NAME: order_service
-        CONFIG_SERVICE_URI: http://config_service:8888
+        CONFIG_SERVICE_URI: http://192.168.99.100:8888
         DOCKER_IP: 192.168.99.100
 #        BRANCH: master
         PROFILE: default
-        EUREKA_URI: http://config_service:8761/eureka/
+        EUREKA_URI: http://discovery_service:8761/eureka/
         URI: mongodb://mongo1:27017,mongo2:27017,mongo3:27017/orders?replicaSet=rs0
       expose:
        - 8081
@@ -136,7 +136,7 @@ services:
       environment:
         PORT: 8082
         APPLICATION_NAME: account_service
-        CONFIG_SERVICE_URI: http://config_service:8888
+        CONFIG_SERVICE_URI: http://192.168.99.100:8888
         BRANCH: master
         PROFILE: dev
         EUREKA_URI: http://discovery_service:8761/eureka/
@@ -164,7 +164,7 @@ services:
       environment:
         PORT: 5000
         APPLICATION_NAME: gateway_service
-        CONFIG_SERVICE_URI: http://config_service:8888
+        CONFIG_SERVICE_URI: http://192.168.99.100:8888
       expose:
        - 5000
       ports:
