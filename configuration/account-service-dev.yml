@@ -13,7 +13,7 @@ eureka:         #tells about the Eureka server details and its refresh time
     leaseExpirationDurationInSeconds: 2
   client:
     serviceUrl:
-      defaultZone: http://discovery_service:8761/eureka/
+      defaultZone: http://discovery_service:8762/eureka/
     healthcheck:
       enabled: true
     lease:

@@ -13,10 +13,10 @@ eureka:         #tells about the Eureka server details and its refresh time
     leaseRenewalIntervalInSeconds: 1
     leaseExpirationDurationInSeconds: 2
   client:
-    registerWithEureka: false
-    fetchRegistry: false
+    registerWithEureka: true
+    fetchRegistry: true
     serviceUrl:
-      defaultZone: http://discovery_service:8761/eureka/
+      defaultZone: http://discovery_service:8762/eureka/
     healthcheck:
       enabled: true
     lease:
