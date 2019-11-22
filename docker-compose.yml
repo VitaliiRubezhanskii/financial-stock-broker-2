@@ -1,7 +1,6 @@
 version: "3.2"
 networks:
     my-mongo-cluster:
-      driver: bridge
 services:
    mongo1:
       image: mongo:4.1.13-bionic

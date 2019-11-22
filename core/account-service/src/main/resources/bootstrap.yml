@@ -5,8 +5,8 @@ spring:
     name: account_service
   cloud:
     config:
-      uri: http://config_service:8888
-      label: docker
+      uri: http://localhost:8888
+      label: master
       profile: dev
 
 

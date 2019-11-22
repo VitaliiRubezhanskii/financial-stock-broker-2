@@ -7,7 +7,7 @@ spring:
         git:
           uri: https://github.com/VitaliiRubezhanskii/financial-stock-broker-2.git
           searchPaths: configuration
-          default-label: docker
+#          default-label: docker
 
 
 

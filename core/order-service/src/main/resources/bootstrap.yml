@@ -7,9 +7,9 @@ spring:
      #order-service
   cloud:
     config:
-      uri: http://config_service:8888
+      uri: http://localhost:8888
        #http://localhost:8888
-      label: docker
+      label: master
       #master
       profile: default
       #dev
@@ -19,7 +19,7 @@ eureka:
     registerWithEureka: true
     fetchRegistry: true
     serviceUrl:
-      defaultZone: http://discovery_service:8762/eureka/
+      defaultZone: http://localhost:8762/eureka/
 server:
   port: 8082
       #http://localhost:8761/eureka/
