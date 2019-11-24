@@ -1,6 +1,6 @@
 spring:
   application:
-    name: account_service
+    name: account-service
   cloud:
    config:
      uri: ${CONFIG_SERVER:http://config_service:8888}

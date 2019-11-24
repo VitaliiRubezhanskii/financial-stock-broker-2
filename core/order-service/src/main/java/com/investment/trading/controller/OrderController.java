@@ -33,7 +33,7 @@ public class OrderController {
 
     @PatchMapping("/order/sample")
     public Mono<Order> getExample(){
-        return Mono.just(new Order(port, List.of(new OrderItem("sku_1"), new OrderItem("sku_2")), new File("Invoice"), LocalDateTime.now()));
+        return Mono.just(new Order(port, Arrays.asList(new OrderItem("sku_1"), new OrderItem("sku_2")), new File("Invoice"), LocalDateTime.now()));
     }
 
     @GetMapping("/{id}")
