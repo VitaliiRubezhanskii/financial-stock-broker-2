@@ -4,6 +4,7 @@ spring:
   cloud:
    config:
      uri: ${CONFIG_SERVER:http://config_service:8888}
+     profile: default
 eureka:
   client:
     registerWithEureka: true
