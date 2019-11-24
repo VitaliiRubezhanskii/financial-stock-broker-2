@@ -49,8 +49,8 @@ services:
         - mongo2
         - mongo3
 
-   config_service:
-       container_name: config_service
+   configservice:
+       container_name: configservice
        image: config_service:latest
 
        healthcheck:
@@ -64,10 +64,10 @@ services:
          dockerfile: Dockerfile
        depends_on:
          - mongo-replicator
-         - discovery_service
+         - discovery
        environment:
          - JAVA_OPTS=
-               -DEUREKA_SERVER=http://discovery_service:8761/eureka
+               -DEUREKA_SERVER=http://discovery:8761/eureka
                -Dspring.cloud.config.server.native.searchLocations=/var/configuration
        ports:
          - 8888:8888
@@ -75,9 +75,11 @@ services:
        networks:
         - my-mongo-cluster
 
-   discovery_service:
-      container_name: discovery_service
+   discovery:
+      container_name: discovery
       image: discovery_service:latest
+      environment:
+          CONFIG_SERVER: http://configservice:8888
       build:
         context: ./support/monitoring
         dockerfile: Dockerfile
@@ -97,8 +99,8 @@ services:
       image: order_service:latest
       container_name: order_service
       environment:
-            CONFIG_SERVER: http://config_service:8888
-            EUREKA_SERVER: http://discovery_service:8761/eureka
+            CONFIG_SERVER: http://configservice:8888
+            EUREKA_SERVER: http://discovery:8761/eureka
       ports:
        - 8082:8082
       healthcheck:
@@ -112,8 +114,8 @@ services:
         dockerfile: Dockerfile
       depends_on:
            - mongo-replicator
-           - discovery_service
-           - config_service
+           - discovery
+           - configservice
 
 
       restart: always
@@ -122,18 +124,17 @@ services:
 
    account_service:
       container_name: account_service
-
       image: account_service:latest
       build:
         context: ./core/account-service
         dockerfile: Dockerfile
       depends_on:
           - mongo-replicator
-          - discovery_service
-          - config_service
+          - discovery
+          - configservice
       environment:
          - JAVA_OPTS=
-           -DEUREKA_SERVER=http://discovery_service:8761/eureka
+           -DEUREKA_SERVER=http://discovery:8761/eureka
       ports:
              - 8081:8081
       healthcheck:

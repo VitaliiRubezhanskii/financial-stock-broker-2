@@ -8,11 +8,13 @@ spring:
     mongodb:
       uri: mongodb://mongo1:27017,mongo2:27017,mongo3:27017/orders?replicaSet=rs0
 eureka:
+  instance:
+      preferIpAddress: true
   client:
     registerWithEureka: true
     fetchRegistry: true
     service-url:
-      defaultZone: ${EUREKA_SERVER:http://discovery_service:8761/eureka}
+      defaultZone: ${EUREKA_SERVER:http://discovery-service:8761/eureka}
 server:
   port: 8081
 

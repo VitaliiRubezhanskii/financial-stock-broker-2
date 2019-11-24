@@ -1,6 +1,9 @@
 spring:
   application:
-    name: discovery-service
+    name: discovery
+  cloud:
+     config:
+       uri: ${CONFIG_SERVER}
 eureka:
   client:
     fetch-registry: false

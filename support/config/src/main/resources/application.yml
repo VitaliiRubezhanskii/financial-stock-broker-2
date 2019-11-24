@@ -6,8 +6,12 @@ spring:
   cloud:
     config:
       server:
-        native:
-          search-locations: ./configuration
+       git:
+        uri: https://github.com/VitaliiRubezhanskii/financial-stock-broker-2.git
+        searchPaths: configuration
+      label: docker
+#        native:
+#          search-locations: ./configuration
 eureka:
   client:
     serviceUrl:
