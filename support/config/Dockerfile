@@ -1,4 +1,6 @@
 FROM openjdk:12-jdk
-ADD target/config-0.0.1-SNAPSHOT.jar config-0.0.1-SNAPSHOT.jar
-ENTRYPOINT ["java","-jar","/config-0.0.1-SNAPSHOT.jar"]
-EXPOSE 8888
+VOLUME /tmp
+ADD target/*.jar app.jar
+ENV JAVA_OPTS=""
+ENTRYPOINT [ "sh", "-c", "java $JAVA_OPTS -Djava.security.egd=file:/dev/./urandom -jar /app.jar" ]
+

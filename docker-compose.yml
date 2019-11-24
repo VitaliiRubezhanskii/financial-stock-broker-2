@@ -1,4 +1,4 @@
-version: "3.2"
+version: "3"
 networks:
     my-mongo-cluster:
       driver: bridge
@@ -51,8 +51,6 @@ services:
 
    config_service:
        container_name: config_service
-       expose:
-        - 8888
        ports:
         - 8888:8888
        healthcheck:
@@ -66,18 +64,21 @@ services:
          dockerfile: Dockerfile
        depends_on:
          - mongo-replicator
+         - discovery_service
+       environment:
+             - JAVA_OPTS=
+               -DEUREKA_SERVER=http://discovery_service:8761/eureka
+               -Dspring.cloud.config.server.native.searchLocations=/var/configuration
        restart: always
        networks:
         - my-mongo-cluster
 
    discovery_service:
       container_name: discovery_service
-      expose:
-       - 8762
       ports:
-       - 8762:8762
+       - 8761:8761
       healthcheck:
-        test: ["CMD", "curl", "-f", "http://localhost:8762"]
+        test: ["CMD", "curl", "-f", "http://localhost:8761"]
         interval: 30s
         timeout: 10s
         retries: 5
@@ -85,8 +86,6 @@ services:
       build:
         context: ./support/monitoring
         dockerfile: Dockerfile
-      depends_on:
-        - config_service
       restart: always
       networks:
        - my-mongo-cluster
@@ -108,6 +107,11 @@ services:
         dockerfile: Dockerfile
       depends_on:
            - mongo-replicator
+           - discovery_service
+           - config_service
+      environment:
+           - JAVA_OPTS=
+             -DEUREKA_SERVER=http://discovery_service:8761/eureka
       restart: always
       networks:
         - my-mongo-cluster
@@ -128,7 +132,12 @@ services:
         context: ./core/account-service
         dockerfile: Dockerfile
       depends_on:
-         - mongo-replicator
+          - mongo-replicator
+          - discovery_service
+          - config_service
+      environment:
+         - JAVA_OPTS=
+           -DEUREKA_SERVER=http://discovery_service:8761/eureka
       restart: always
       networks:
         - my-mongo-cluster

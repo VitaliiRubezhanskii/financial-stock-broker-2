@@ -1,13 +1,21 @@
 spring:
   application:
-    name: config_service
+    name: CONFIGSERVER
+  profiles:
+    active: native
   cloud:
     config:
       server:
-        git:
-          uri: https://github.com/VitaliiRubezhanskii/financial-stock-broker-2.git
-          searchPaths: configuration
-          default-label: docker
+        native:
+          search-locations: .
+eureka:
+  client:
+    service-url: ${EUREKA_SERVER:http://localhost:8761/eureka}
+#        git:
+#          uri: https://github.com/VitaliiRubezhanskii/financial-stock-broker-2.git
+#          searchPaths: configuration
+#          default-label: docker
 
-
+server:
+  port: 8888
 

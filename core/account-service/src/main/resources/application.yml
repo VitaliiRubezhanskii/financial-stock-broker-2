@@ -1,0 +1,13 @@
+server:
+  port: 8081
+spring:
+  application:
+    name: account_service
+eureka:
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: ${EUREKA_SERVER:http://discovery_service:8761/eureka}
+
+
