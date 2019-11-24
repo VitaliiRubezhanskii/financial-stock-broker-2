@@ -108,9 +108,9 @@ services:
            - discovery_service
            - config_service
       environment:
-           - JAVA_OPTS=
-             -DEUREKA_SERVER=http://discovery_service:8761/eureka
-             -DCONFIG_SERVER=http://config_service:8888
+          CONFIG_SERVER: http://config_service:8888
+          EUREKA_SERVER: http://discovery_service:8761/eureka
+
       restart: always
       networks:
         - my-mongo-cluster
@@ -137,7 +137,6 @@ services:
       environment:
          - JAVA_OPTS=
            -DEUREKA_SERVER=http://discovery_service:8761/eureka
-           -DCONFIG_SERVER=http://config_service:8888
       restart: always
       networks:
         - my-mongo-cluster

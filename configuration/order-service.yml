@@ -4,7 +4,10 @@ spring:
   data:
     mongodb:
       uri: mongodb://mongo1:27017,mongo2:27017,mongo3:27017/orders?replicaSet=rs0
-  profiles: default
+
+  cloud:
+     config:
+       uri: ${CONFIG_SERVER}
 
 
 eureka:         #tells about the Eureka server details and its refresh time

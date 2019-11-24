@@ -4,6 +4,9 @@ spring:
   data:
     mongodb:
       uri: mongodb://mongo1:27017,mongo2:27017,mongo3:27017/orders?replicaSet=rs0
+  cloud:
+     config:
+       uri: ${CONFIG_SERVER:http://config_service:8888}
 
 eureka:
    client:

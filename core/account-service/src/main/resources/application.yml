@@ -1,4 +1,3 @@
-
 spring:
   application:
     name: account_service
@@ -9,7 +8,7 @@ eureka:
   client:
     registerWithEureka: true
     fetchRegistry: true
-    serviceUrl:
+    service-url:
       defaultZone: ${EUREKA_SERVER:http://discovery_service:8761/eureka}
 
 

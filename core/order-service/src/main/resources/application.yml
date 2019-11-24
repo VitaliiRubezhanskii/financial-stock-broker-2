@@ -3,14 +3,16 @@ server:
 spring:
   application:
     name: order_service
+  profiles:
+    active: default
   cloud:
    config:
-     uri: ${CONFIG_SERVER:http://config_service:8888}
+     uri: ${CONFIG_SERVER}
 eureka:
   client:
     registerWithEureka: true
     fetchRegistry: true
-    serviceUrl:
+    service-url:
       defaultZone: ${EUREKA_SERVER:http://discovery_service:8761/eureka}
 
 
