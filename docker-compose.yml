@@ -1,7 +1,6 @@
 version: "3.2"
 networks:
     my-mongo-cluster:
-      driver: bridge
 services:
    mongo1:
       image: mongo:4.1.13-bionic
@@ -51,12 +50,6 @@ services:
 
    config_service:
        container_name: config_service
-       environment:
-         PORT: 8888
-         CONFIG_SERVICE_NAME: config_service
-         GIT: https://github.com/VitaliiRubezhanskii/financial-stock-broker-2.git
-         FOLDER: configuration
-         BRANCH: master
        expose:
         - 8888
        ports:
@@ -78,10 +71,6 @@ services:
 
    discovery_service:
       container_name: discovery_service
-      environment:
-        PORT: 8761
-        APPLICATION_NAME: monitoring
-        CONFIG_SERVICE_URI: http://192.168.99.100:8888
       expose:
        - 8761
       ports:
@@ -103,19 +92,10 @@ services:
 
    order_service:
       container_name: order_service
-      environment:
-        PORT: 8081
-        ORDER_SERVICE_NAME: order_service
-        CONFIG_SERVICE_URI: http://192.168.99.100:8888
-        DOCKER_IP: 192.168.99.100
-#        BRANCH: master
-        PROFILE: default
-        EUREKA_URI: http://discovery_service:8761/eureka/
-        URI: mongodb://mongo1:27017,mongo2:27017,mongo3:27017/orders?replicaSet=rs0
       expose:
-       - 8081
+       - 8082
       ports:
-       - 8081:8081
+       - 8082:8082
       healthcheck:
          test: ["CMD", "curl", "-f", "http://localhost:8081"]
          interval: 30s
@@ -133,17 +113,10 @@ services:
 
    account_service:
       container_name: account_service
-      environment:
-        PORT: 8082
-        APPLICATION_NAME: account_service
-        CONFIG_SERVICE_URI: http://192.168.99.100:8888
-        BRANCH: master
-        PROFILE: dev
-        EUREKA_URI: http://discovery_service:8761/eureka/
       expose:
-       - 8082
+       - 8081
       ports:
-       - 8082:8082
+       - 8081:8081
       healthcheck:
         test: ["CMD", "curl", "-f", "http://localhost:8082"]
         interval: 30s
@@ -161,10 +134,6 @@ services:
 
    api_gateway_service:
       container_name: api_gateway_service
-      environment:
-        PORT: 5000
-        APPLICATION_NAME: gateway_service
-        CONFIG_SERVICE_URI: http://192.168.99.100:8888
       expose:
        - 5000
       ports:

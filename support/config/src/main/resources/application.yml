@@ -1,4 +1,3 @@
-
 spring:
   application:
     name: config_service
@@ -7,13 +6,13 @@ spring:
       server:
         git:
           uri: https://github.com/VitaliiRubezhanskii/financial-stock-broker-2.git
-          #https://github.com/VitaliiRubezhanskii/financial-stock-broker-2.git
           searchPaths: configuration
           #configuration
       label: master
 server:
   port: 8888
       #master
+#          default-label: docker
 
 
 

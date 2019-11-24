@@ -3,15 +3,13 @@ server:
 spring:
   application:
     name: account_service
-    #account-service
   cloud:
     config:
       uri: http://config_service:8888
       #http://localhost:8888
       label: master
-      #master
       profile: dev
-      #dev
+
 
 eureka:
   client:

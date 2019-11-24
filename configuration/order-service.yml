@@ -8,6 +8,7 @@ spring:
 #        username: root
 #        password: root
 #        database: orders
+
       uri: mongodb://mongo1:27017,mongo2:27017,mongo3:27017/orders?replicaSet=rs0
   profiles: default
 

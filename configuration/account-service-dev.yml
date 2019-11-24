@@ -5,11 +5,7 @@ spring:
   profiles: dev
   data:
     mongodb:
-      host: localhost
-      port: 27017
-      username: root
-      password: root
-      database: accounts
+      uri: mongodb://mongo1:27017,mongo2:27017,mongo3:27017/orders?replicaSet=rs0
 
 eureka:         #tells about the Eureka server details and its refresh time
   instance:
@@ -22,6 +18,8 @@ eureka:         #tells about the Eureka server details and its refresh time
       enabled: true
     lease:
       duration: 5
+    register-with-eureka: false
+    fetch-registry: false
 
 management:
   security:

@@ -9,7 +9,7 @@ spring:
     config:
       uri: http://config_service:8888
        #http://localhost:8888
-#      label: ${BRANCH}
+      label: master
       #master
       profile: default
       #dev

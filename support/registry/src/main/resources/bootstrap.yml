@@ -9,9 +9,13 @@ spring:
 eureka:
    instance:
      prefer-ip-address: true
+     lease-renewal-interval-in-seconds: 5
+
    client:
      registerWithEureka: false
      fetchRegistry: false
      server:
-       waitTimeInMsWhenSyncEmpty: 0
+       waitTimeInMsWhenSyncEmpty: 1
+
+
 
