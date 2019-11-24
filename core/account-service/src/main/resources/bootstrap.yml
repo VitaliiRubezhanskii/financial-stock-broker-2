@@ -6,10 +6,20 @@ spring:
     #account-service
   cloud:
     config:
-      uri: http://localhost:8888
+      uri: http://config_service:8888
       #http://localhost:8888
       label: master
       #master
       profile: dev
       #dev
 
+eureka:
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: http://discovery_service:8761/eureka/
+  instance:
+    hostname: discovery_service
+server:
+  port: 8082
