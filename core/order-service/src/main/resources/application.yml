@@ -5,7 +5,11 @@ spring:
     name: order-service
   cloud:
      config:
-       uri: ${CONFIG_SERVER}
+       uri: ${CONFIG_SERVER:http://configservice:8888}
+       label: docker
+       profile: default
+
+
   data:
     mongodb:
       uri: mongodb://mongo1:27017,mongo2:27017,mongo3:27017/orders?replicaSet=rs0
@@ -17,7 +21,7 @@ eureka:
     registerWithEureka: true
     fetchRegistry: true
     serviceUrl:
-      defaultZone: ${EUREKA_SERVER:http://discovery-service:8761/eureka}
+      defaultZone: ${EUREKA_SERVER:http://discovery:8761/eureka}
 
 
 
