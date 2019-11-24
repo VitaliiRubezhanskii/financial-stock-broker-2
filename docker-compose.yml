@@ -99,7 +99,6 @@ services:
       image: order_service:latest
       container_name: order_service
       environment:
-            CONFIG_SERVER: http://configservice:8888
             EUREKA_SERVER: http://discovery:8761/eureka
       ports:
        - 8082:8082

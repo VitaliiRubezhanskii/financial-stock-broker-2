@@ -3,9 +3,12 @@ spring:
     name: account-service
   cloud:
     config:
-      uri: ${CONFIG_SERVER:http://configservice:8888}
+      uri: http://configservice:8888
       label: docker
       profile: default
+      discovery:
+        enabled: true
+        service-id: configserver
   data:
     mongodb:
       uri: mongodb://mongo1:27017,mongo2:27017,mongo3:27017/orders?replicaSet=rs0

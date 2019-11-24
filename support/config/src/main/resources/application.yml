@@ -1,6 +1,6 @@
 spring:
   application:
-    name: configservice
+    name: configserver
   profiles:
     active: native
   cloud:
@@ -16,6 +16,10 @@ eureka:
   client:
     serviceUrl:
       defaultZone: ${EUREKA_SERVER:http://localhost:8761/eureka}
+
+
+    registerWithEureka: true
+    fetchRegistry: true
 #        git:
 #          uri: https://github.com/VitaliiRubezhanskii/financial-stock-broker-2.git
 #          searchPaths: configuration

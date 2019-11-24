@@ -5,9 +5,12 @@ spring:
     name: order-service
   cloud:
      config:
-       uri: ${CONFIG_SERVER:http://configservice:8888}
+       uri: http://configservice:8888
        label: docker
        profile: default
+       discovery:
+          enabled: true
+          service-id: configserver
 
 
   data:
