@@ -3,12 +3,13 @@ server:
 spring:
   application:
     name: order-service
-  profiles:
-    active: default
   cloud:
-   config:
-     uri: ${CONFIG_SERVER}
-     profile: default
+     config:
+       uri: ${CONFIG_SERVER}
+  data:
+    mongodb:
+      uri: mongodb://mongo1:27017,mongo2:27017,mongo3:27017/orders?replicaSet=rs0
+
 eureka:
   client:
     registerWithEureka: true

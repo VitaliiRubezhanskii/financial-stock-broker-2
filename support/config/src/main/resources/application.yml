@@ -1,13 +1,13 @@
 spring:
   application:
-    name: config_service
+    name: configservice
   profiles:
     active: native
   cloud:
     config:
       server:
         native:
-          search-locations: .
+          search-locations: ./configuration
 eureka:
   client:
     serviceUrl:

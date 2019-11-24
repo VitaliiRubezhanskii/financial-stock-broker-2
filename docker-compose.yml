@@ -51,31 +51,36 @@ services:
 
    config_service:
        container_name: config_service
-       environment:
-            - JAVA_OPTS=
-                  -DEUREKA_SERVER=http://discovery_service:8761/eureka
-                  -Dspring.cloud.config.server.native.searchLocations=/var/configuration
-       ports:
-        - 8888:8888
+       image: config_service:latest
+
        healthcheck:
          test: ["CMD", "curl", "-f", "http://localhost:8888/account-service/dev"]
          interval: 30s
          timeout: 10s
          retries: 5
-       image: config_service:latest
+
        build:
          context: ./support/config
          dockerfile: Dockerfile
        depends_on:
          - mongo-replicator
          - discovery_service
-
+       environment:
+         - JAVA_OPTS=
+               -DEUREKA_SERVER=http://discovery_service:8761/eureka
+               -Dspring.cloud.config.server.native.searchLocations=/var/configuration
+       ports:
+         - 8888:8888
        restart: always
        networks:
         - my-mongo-cluster
 
    discovery_service:
       container_name: discovery_service
+      image: discovery_service:latest
+      build:
+        context: ./support/monitoring
+        dockerfile: Dockerfile
       ports:
        - 8761:8761
       healthcheck:
@@ -83,15 +88,13 @@ services:
         interval: 30s
         timeout: 10s
         retries: 5
-      image: discovery_service:latest
-      build:
-        context: ./support/monitoring
-        dockerfile: Dockerfile
+
       restart: always
       networks:
        - my-mongo-cluster
 
    order_service:
+      image: order_service:latest
       container_name: order_service
       environment:
             CONFIG_SERVER: http://config_service:8888
@@ -103,7 +106,7 @@ services:
          interval: 30s
          timeout: 10s
          retries: 5
-      image: order_service:latest
+
       build:
         context: ./core/order-service
         dockerfile: Dockerfile
@@ -119,15 +122,7 @@ services:
 
    account_service:
       container_name: account_service
-      expose:
-       - 8081
-      ports:
-       - 8081:8081
-      healthcheck:
-        test: ["CMD", "curl", "-f", "http://localhost:8082"]
-        interval: 30s
-        timeout: 10s
-        retries: 5
+
       image: account_service:latest
       build:
         context: ./core/account-service
@@ -139,6 +134,13 @@ services:
       environment:
          - JAVA_OPTS=
            -DEUREKA_SERVER=http://discovery_service:8761/eureka
+      ports:
+             - 8081:8081
+      healthcheck:
+          test: ["CMD", "curl", "-f", "http://localhost:8082"]
+          interval: 30s
+          timeout: 10s
+          retries: 5
       restart: always
       networks:
         - my-mongo-cluster
