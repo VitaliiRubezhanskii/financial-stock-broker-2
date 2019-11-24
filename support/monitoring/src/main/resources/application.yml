@@ -1,6 +1,6 @@
 spring:
   application:
-    name: monitoring
+    name: discovery_service
 eureka:
   client:
     fetch-registry: false

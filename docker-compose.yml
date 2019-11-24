@@ -51,6 +51,10 @@ services:
 
    config_service:
        container_name: config_service
+       environment:
+            - JAVA_OPTS=
+                  -DEUREKA_SERVER=http://discovery_service:8761/eureka
+                  -Dspring.cloud.config.server.native.searchLocations=/var/configuration
        ports:
         - 8888:8888
        healthcheck:
@@ -65,10 +69,7 @@ services:
        depends_on:
          - mongo-replicator
          - discovery_service
-       environment:
-             - JAVA_OPTS=
-               -DEUREKA_SERVER=http://discovery_service:8761/eureka
-               -Dspring.cloud.config.server.native.searchLocations=/var/configuration
+
        restart: always
        networks:
         - my-mongo-cluster
@@ -92,6 +93,9 @@ services:
 
    order_service:
       container_name: order_service
+      environment:
+            CONFIG_SERVER: http://config_service:8888
+            EUREKA_SERVER: http://discovery_service:8761/eureka
       ports:
        - 8082:8082
       healthcheck:
@@ -107,9 +111,7 @@ services:
            - mongo-replicator
            - discovery_service
            - config_service
-      environment:
-          CONFIG_SERVER: http://config_service:8888
-          EUREKA_SERVER: http://discovery_service:8761/eureka
+
 
       restart: always
       networks:
