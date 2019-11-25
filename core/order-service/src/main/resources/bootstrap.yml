@@ -1,29 +1,30 @@
 
-spring:
-  application:
-    name: order_service
-  profiles:
-    active: default
-     #order-service
-  cloud:
-    config:
-      uri: http://localhost:8888
-       #http://localhost:8888
-      label: master
-      #master
-      profile: default
-      #dev
-
-eureka:
-  client:
-    registerWithEureka: true
-    fetchRegistry: true
-    serviceUrl:
-      defaultZone: http://localhost:8761/eureka/
 server:
   port: 8082
-      #http://localhost:8761/eureka/
 
+
+spring:
+  application:
+    name: order-service
+  cloud:
+    config:
+      uri: http://configserver:8888
+      discovery:
+        enabled: true
+
+  data:
+    mongodb:
+      uri: mongodb://mongo1:27017,mongo2:27017,mongo3:27017/orders?replicaSet=rs0
+
+
+eureka:         #tells about the Eureka server details and its refresh time
+  client:
+    service-url:
+      defaultZone: http://discovery:8761/eureka/
+    healthcheck:
+      enabled: true
+    register-with-eureka: true
+    fetch-registry: true
 
 
 

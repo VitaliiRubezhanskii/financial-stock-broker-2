@@ -3,7 +3,20 @@ spring:
     name: analytics-service
   cloud:
     config:
-      uri: http://localhost:8888
-      label: master
-      profile: default
+      uri: http://configserver:8888
 
+
+
+  data:
+    mongodb:
+      uri: mongodb://mongo1:27017,mongo2:27017,mongo3:27017/orders?replicaSet=rs0
+
+
+eureka:         #tells about the Eureka server details and its refresh time
+  client:
+    service-url:
+      defaultZone: http://discovery:8761/eureka/
+    healthcheck:
+      enabled: true
+    register-with-eureka: true
+    fetch-registry: true

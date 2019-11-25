@@ -48,8 +48,8 @@ services:
         - mongo2
         - mongo3
 
-   config_service:
-       container_name: config_service
+   configserver:
+       container_name: configserver
        expose:
         - 8888
        ports:
@@ -69,8 +69,8 @@ services:
        networks:
         - my-mongo-cluster
 
-   discovery_service:
-      container_name: discovery_service
+   discovery:
+      container_name: discovery
       expose:
        - 8761
       ports:
@@ -85,7 +85,7 @@ services:
         context: ./support/monitoring
         dockerfile: Dockerfile
       depends_on:
-        - config_service
+        - configserver
       restart: always
       networks:
        - my-mongo-cluster
