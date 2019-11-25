@@ -20,7 +20,7 @@ public class Order {
     @Id
     private String id;
     private List<OrderItem> items;
-    private File invoice;
+    private String invoice;
     @CreatedDate
     private LocalDateTime createdDate;
 }

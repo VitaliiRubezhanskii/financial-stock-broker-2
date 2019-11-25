@@ -1,11 +1,9 @@
 
 server:
   port: 8082
-
-
 spring:
   application:
-    name: order-service
+    name: order
   cloud:
     config:
       uri: http://configserver:8888

@@ -12,15 +12,15 @@ import reactor.core.publisher.Mono;
 
 import java.io.File;
 import java.time.LocalDateTime;
-import java.util.Arrays;
 import java.util.List;
 
 @RestController
-@RequestMapping
+@RequestMapping(value = "/order")
 @RequiredArgsConstructor
 public class OrderController {
 
     private final OrderService orderService;
+
     private final Gson gson = new Gson();
 
     @Value("${server.port}")
@@ -47,7 +47,7 @@ public class OrderController {
 
         return orderService.newOrder(order);
     }
-//
+
     @DeleteMapping("/{id}")
     public Mono<Void> delete(@PathVariable("id") String id) {
         return orderService.deleteById(id);

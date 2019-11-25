@@ -91,7 +91,7 @@ services:
       networks:
        - my-mongo-cluster
 
-   order_service:
+   order:
       container_name: order_service
       expose:
        - 8082
@@ -114,7 +114,7 @@ services:
       networks:
         - my-mongo-cluster
 
-   account_service:
+   account:
       container_name: account_service
       expose:
        - 8081
