@@ -65,6 +65,7 @@ services:
          dockerfile: Dockerfile
        depends_on:
          - mongo-replicator
+         - discovery
        restart: always
        networks:
         - my-mongo-cluster
@@ -85,7 +86,7 @@ services:
         context: ./support/monitoring
         dockerfile: Dockerfile
       depends_on:
-        - configserver
+        - mongo-replicator
       restart: always
       networks:
        - my-mongo-cluster
@@ -107,6 +108,8 @@ services:
         dockerfile: Dockerfile
       depends_on:
            - mongo-replicator
+           - configserver
+           - discovery
       restart: always
       networks:
         - my-mongo-cluster
@@ -128,6 +131,8 @@ services:
         dockerfile: Dockerfile
       depends_on:
          - mongo-replicator
+         - configserver
+         - discovery
       restart: always
       networks:
         - my-mongo-cluster
@@ -145,8 +150,12 @@ services:
         retries: 5
       image: api_gateway_service:latest
       build:
-        context: ./support/monitoring
+        context: ./support/gateway
         dockerfile: Dockerfile
+      depends_on:
+        - mongo-replicator
+        - configserver
+        - discovery
       restart: always
       networks:
        - my-mongo-cluster
