@@ -1,10 +1,10 @@
-package com.investment.registry;
+package com.investment.feign_hystrix;
 
 
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class RegistryApplicationTests {
+class FeignHystrixApplicationTests {
 
 
 

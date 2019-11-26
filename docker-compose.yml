@@ -94,11 +94,11 @@ services:
    order:
       container_name: order_service
       expose:
-       - 8082
+        - 8082
       ports:
        - 8082:8082
       healthcheck:
-         test: ["CMD", "curl", "-f", "http://localhost:8081"]
+         test: ["CMD", "curl", "-f", "http://localhost:8082"]
          interval: 30s
          timeout: 10s
          retries: 5
@@ -106,6 +106,8 @@ services:
       build:
         context: ./core/order-service
         dockerfile: Dockerfile
+      environment:
+        PORT: 8082
       depends_on:
            - mongo-replicator
            - configserver
@@ -114,6 +116,31 @@ services:
       networks:
         - my-mongo-cluster
 
+   order2:
+     container_name: order_service2
+     expose:
+       - 8092
+     ports:
+       - 8092:8092
+     healthcheck:
+       test: ["CMD", "curl", "-f", "http://localhost:8092"]
+       interval: 30s
+       timeout: 10s
+       retries: 5
+     image: order_service:latest
+     build:
+       context: ./core/order-service
+       dockerfile: Dockerfile
+     environment:
+       PORT: 8092
+     depends_on:
+       - mongo-replicator
+       - configserver
+       - discovery
+     restart: always
+     networks:
+       - my-mongo-cluster
+
    account:
       container_name: account_service
       expose:
@@ -121,7 +148,7 @@ services:
       ports:
        - 8081:8081
       healthcheck:
-        test: ["CMD", "curl", "-f", "http://localhost:8082"]
+        test: ["CMD", "curl", "-f", "http://localhost:8081"]
         interval: 30s
         timeout: 10s
         retries: 5
@@ -137,7 +164,7 @@ services:
       networks:
         - my-mongo-cluster
 
-   api_gateway_service:
+   gateway:
       container_name: api_gateway_service
       expose:
        - 5000
@@ -159,3 +186,19 @@ services:
       restart: always
       networks:
        - my-mongo-cluster
+
+   feign:
+       container_name: feign-hystrix-service
+       ports:
+         - 8099:8099
+       image: feign-hystrix-service:latest
+       build:
+         context: ./support/feign-hystrix-client
+         dockerfile: Dockerfile
+       depends_on:
+         - mongo-replicator
+         - configserver
+         - discovery
+       restart: always
+       networks:
+         - my-mongo-cluster

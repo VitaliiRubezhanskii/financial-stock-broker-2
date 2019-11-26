@@ -1,6 +1,6 @@
 spring:
   application:
-    name: api_gateway_service
+    name: gateway
   cloud:
     config:
       uri: http://configserver:8888
@@ -13,6 +13,7 @@ zuul:
   routes:
     account: /account/**
     order: /order/**
+    feign: /feign/**
 
 eureka:
   instance:
@@ -22,7 +23,22 @@ eureka:
     fetchRegistry: true
     serviceUrl:
       defaultZone: http://discovery:8761/eureka/
-hystrix.command.default.execution.isolation.thread.timeoutInMilliseconds: 60000
+hystrix.command.default.execution.isolation.thread.timeoutInMilliseconds: 138000
 ribbon:
   ConnectTimeout: 3000
   ReadTimeout: 60000
+
+hystrix:
+  metrics:
+    enabled: true
+  enabled: true
+
+management:
+  endpoint:
+    hystrix:
+      stream:
+        enabled: true
+  endpoints:
+    web:
+        exposure:
+          include: routes
