@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 @FeignClient(name = "order",  url = "http://order:8082")
 public interface OrderServiceClient {
 
-    @GetMapping(value = "/order/sample")
+    @GetMapping(value = "/order/sample") //+order
     Order getExample();
 
     @GetMapping(value = "/{id}")
