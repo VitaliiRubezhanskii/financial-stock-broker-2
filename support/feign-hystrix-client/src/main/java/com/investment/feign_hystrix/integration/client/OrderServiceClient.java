@@ -8,10 +8,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 
-@FeignClient(name = "order",  url = "http://gateway:5000")
+@FeignClient(name = "order",  url = "http://order:8082")
 public interface OrderServiceClient {
 
-    @GetMapping(value = "/order/order/sample")
+    @GetMapping(value = "/order/sample")
     Order getExample();
 
     @GetMapping(value = "/{id}")
