@@ -8,10 +8,16 @@ spring:
       uri: http://configserver:8888
       discovery:
         enabled: true
-
   data:
     mongodb:
       uri: mongodb://mongo1:27017,mongo2:27017,mongo3:27017/orders?replicaSet=rs0
+  zipkin:
+    enabled: true
+    baseUrl: http://tracing:9411
+
+  sleuth:
+    sampler:
+      probability: 100
 
 
 eureka:         #tells about the Eureka server details and its refresh time
@@ -22,6 +28,10 @@ eureka:         #tells about the Eureka server details and its refresh time
       enabled: true
     register-with-eureka: true
     fetch-registry: true
+
+microservice:
+  client:
+    url: http://feign:8099
 
 
 

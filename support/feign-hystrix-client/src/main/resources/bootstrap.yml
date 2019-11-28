@@ -1,5 +1,5 @@
 server:
-  port: {PORT}
+  port: 8099
 spring:
   application:
     name: feign
@@ -7,6 +7,13 @@ spring:
      config:
        uri: http://configserver:8888
        fail-fast: true
+  zipkin:
+    enabled: true
+    base-url: http://tracing:9411
+
+  sleuth:
+    sampler:
+      probability: 100
 
 eureka:
    instance:

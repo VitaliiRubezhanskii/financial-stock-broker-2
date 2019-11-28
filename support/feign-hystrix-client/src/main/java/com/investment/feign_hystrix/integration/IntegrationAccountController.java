@@ -11,7 +11,7 @@ public class IntegrationAccountController {
 
     private final IntegrationClient integrationClient;
 
-    @GetMapping(name = "/accounts/account/mine")
+    @GetMapping(name = "/account/mine")
     @HystrixCommand(fallbackMethod = "getDefaultHello")
     public String getHello(){
         return integrationClient.getHello();

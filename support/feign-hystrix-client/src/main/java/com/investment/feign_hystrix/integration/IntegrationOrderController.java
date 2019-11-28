@@ -23,7 +23,7 @@ public class IntegrationOrderController {
         return integrationClient.getExample();
     }
 
-    @GetMapping(value = "/{id}")
+    @GetMapping(value = "/order/{id}")
     @HystrixCommand(fallbackMethod = "getDef")
     public Order getOrders(@PathVariable("id") String id){
         return integrationClient.getOrders(id);
@@ -33,22 +33,22 @@ public class IntegrationOrderController {
 
     public Order getDef(String id){
         List<OrderItem> items = new ArrayList<>();
-        items.add(new OrderItem("sku_1-default"));
-        items.add(new OrderItem("sku_2-default"));
+        items.add(new OrderItem("sku_1-default", "default-port"));
+        items.add(new OrderItem("sku_2-default", "default-port"));
         return Mono.just(new Order(items, "Invoice", LocalDateTime.now())).block();
     }
 
     public Order getDefaultExample(){
         List<OrderItem>  items = new ArrayList<>();
-        items.add(new OrderItem("sku_1-samples"));
-        items.add(new OrderItem("sku_2-samples"));
+        items.add(new OrderItem("sku_1-samples", "default-port"));
+        items.add(new OrderItem("sku_2-samples", "default-port"));
         return Mono.just(new Order(items,"Invoice", LocalDateTime.now())).block();
     }
 
     public Order createDefault(Order order){
         List<OrderItem>  items = new ArrayList<>();
-        items.add(new OrderItem("sku_1-error"));
-        items.add(new OrderItem("sku_2-error"));
+        items.add(new OrderItem("sku_1-error", "default-port"));
+        items.add(new OrderItem("sku_2-error", "default-port"));
         return Mono.just(new Order(items,"Invoice", LocalDateTime.now())).block();
     }
 }

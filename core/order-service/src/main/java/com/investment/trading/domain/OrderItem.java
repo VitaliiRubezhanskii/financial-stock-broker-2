@@ -10,4 +10,5 @@ import lombok.*;
 public class OrderItem {
 
     private String sku;
+    private String port;
 }

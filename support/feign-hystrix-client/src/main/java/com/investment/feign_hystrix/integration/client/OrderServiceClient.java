@@ -8,13 +8,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 
-@FeignClient(name = "order",  url = "http://order:8082")
+@FeignClient(name = "order")
 public interface OrderServiceClient {
 
-    @GetMapping(value = "/order/sample") //+order
+    @GetMapping(value = "/order/sample")
     Order getExample();
 
-    @GetMapping(value = "/{id}")
+    @GetMapping(value = "/order/{id}")
     Order get(@PathVariable("id") String id);
 
     @PostMapping(value = "/order")

@@ -29,8 +29,8 @@ public class OrderController {
     @GetMapping("/order/sample")
     public Order getExample(){
             List<OrderItem> items = new ArrayList<>();
-            items.add(new OrderItem("sku_1-real"));
-            items.add(new OrderItem("sku_2-real"));
+            items.add(new OrderItem("sku_1-real", port));
+            items.add(new OrderItem("sku_2-real", port));
             return Mono.just(new Order(items,"Invoice", LocalDateTime.now())).block();
 
     }
