@@ -4,6 +4,8 @@ import com.investment.trading.domain.Order;
 import com.investment.trading.domain.OrderItem;
 import com.investment.trading.service.OrderService;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
@@ -21,6 +23,9 @@ public class OrderController {
     @Value("${server.port}")
     private String port;
 
+    private static final Logger log = LoggerFactory.getLogger(OrderController.class);
+
+
     @GetMapping("/sku/{sku}")
     public Order getAllOrdersContainingSKU(@PathVariable("sku") String sku){
         return orderService.findAllOrdersByContainingSKU(sku).blockFirst();
@@ -31,8 +36,10 @@ public class OrderController {
             List<OrderItem> items = new ArrayList<>();
             items.add(new OrderItem("sku_1-real", port));
             items.add(new OrderItem("sku_2-real", port));
-            return Mono.just(new Order(items,"Invoice", LocalDateTime.now())).block();
-
+            log.info("Request from the port =[" + port + "]");
+            Order o = new Order(items,"Invoice", LocalDateTime.now());
+            log.info(String.format("invoice=[%s] firstItem=[%s] ", o.getInvoice(), o.getItems().get(0)));
+            return Mono.just(o).block();
     }
 
     @GetMapping("/{id}")

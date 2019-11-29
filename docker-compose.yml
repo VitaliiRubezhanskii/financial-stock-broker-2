@@ -109,6 +109,9 @@ services:
       depends_on:
         - mongo-replicator
       restart: always
+      labels:
+        collect_logs_with_filebeat: "true"
+        decode_log_event_to_json_object: "true"
       networks:
        - my-mongo-cluster
 
@@ -134,6 +137,9 @@ services:
            - configserver
            - discovery
       restart: always
+      labels:
+        collect_logs_with_filebeat: "true"
+        decode_log_event_to_json_object: "true"
       networks:
         - my-mongo-cluster
 
@@ -159,6 +165,9 @@ services:
        - configserver
        - discovery
      restart: always
+     labels:
+       collect_logs_with_filebeat: "true"
+       decode_log_event_to_json_object: "true"
      networks:
        - my-mongo-cluster
 
@@ -182,6 +191,9 @@ services:
          - configserver
          - discovery
       restart: always
+      labels:
+        collect_logs_with_filebeat: "true"
+        decode_log_event_to_json_object: "true"
       networks:
         - my-mongo-cluster
 
@@ -205,6 +217,9 @@ services:
         - configserver
         - discovery
       restart: always
+      labels:
+        collect_logs_with_filebeat: "true"
+        decode_log_event_to_json_object: "true"
       networks:
        - my-mongo-cluster
 
@@ -221,6 +236,49 @@ services:
          - configserver
          - discovery
        restart: always
+       labels:
+         collect_logs_with_filebeat: "true"
+         decode_log_event_to_json_object: "true"
        networks:
          - my-mongo-cluster
 
+ # ELK
+   elasticsearch:
+     image: docker.elastic.co/elasticsearch/elasticsearch:7.2.0
+     ports:
+       - 9200:9200
+     environment:
+       - "discovery.type=single-node"
+#     volumes:
+#       - ./elasticsearch/data:/usr/share/elasticsearch/data:rw              # Persistence data
+
+   logstash:
+     image: docker.elastic.co/logstash/logstash:7.2.0
+     ports:
+       - 25826:25826
+       - 5044:5044
+     volumes:
+         - ./logstash:/usr/share/logstash/pipeline:ro                # Pipeline configuration
+     restart: on-failure
+     depends_on:
+       - elasticsearch
+
+   kibana:
+     image: docker.elastic.co/kibana/kibana:7.2.0
+     ports:
+        - 5601:5601
+     restart: on-failure
+     depends_on:
+        - elasticsearch
+
+   filebeat:
+     image: docker.elastic.co/beats/filebeat:7.2.0
+     volumes:
+       - ./filebeat/filebeat.docker.yml:/usr/share/filebeat/filebeat.docker.yml:ro # Configuration file
+       - /var/lib/docker/containers:/var/lib/docker/containers:ro           # Docker logs
+       - /var/run/docker.sock:/var/run/docker.sock:ro                       # Additional information about containers
+       - ./filebeat/data:/usr/share/filebeat/data:rw                        # Persistence data
+     user: root
+     restart: on-failure
+     depends_on:
+        - logstash
