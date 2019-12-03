@@ -1,7 +1,8 @@
 spring:
   application:
     name: configserver
-
+  profiles:
+    active: docker
 
 
 #  cloud:
