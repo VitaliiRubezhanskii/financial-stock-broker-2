@@ -22,51 +22,51 @@ services:
       restart: always
       networks:
          - my-mongo-cluster
-   mongo1:
-      image: mongo:4.1.13-bionic
-      command: --replSet rs0 --bind_ip_all
-      ports:
-        - 27018:27017
-#      volumes:
-#        - /etc/localtime:/etc/localtime:ro
-#        - /mongo_cluster/data1:/data/db
-      networks:
-        - my-mongo-cluster
-   mongo2:
-      image: mongo:4.1.13-bionic
-      command: --replSet rs0 --bind_ip_all
-      ports:
-        - 27019:27017
-#      volumes:
-#        - /etc/localtime:/etc/localtime:ro
-#        - /mongo_cluster/data2:/data/db
-      networks:
-        - my-mongo-cluster
-      depends_on:
-        - mongo1
-   mongo3:
-      image: mongo:4.1.13-bionic
-      command: --replSet rs0 --bind_ip_all
-      ports:
-        - 27020:27017
-#      volumes:
-#        - /etc/localtime:/etc/localtime:ro
-#        - /mongo_cluster/data3:/data/db
-      networks:
-        - my-mongo-cluster
-      depends_on:
-       - mongo1
-       - mongo2
-   mongo-replicator:
-      build:
-        context: ./
-        dockerfile: ./mongodb/Dockerfile
-      networks:
-        - my-mongo-cluster
-      depends_on:
-        - mongo1
-        - mongo2
-        - mongo3
+#   mongo1:
+#      image: mongo:4.1.13-bionic
+#      command: --replSet rs0 --bind_ip_all
+#      ports:
+#        - 27018:27017
+##      volumes:
+##        - /etc/localtime:/etc/localtime:ro
+##        - /mongo_cluster/data1:/data/db
+#      networks:
+#        - my-mongo-cluster
+#   mongo2:
+#      image: mongo:4.1.13-bionic
+#      command: --replSet rs0 --bind_ip_all
+#      ports:
+#        - 27019:27017
+##      volumes:
+##        - /etc/localtime:/etc/localtime:ro
+##        - /mongo_cluster/data2:/data/db
+#      networks:
+#        - my-mongo-cluster
+#      depends_on:
+#        - mongo1
+#   mongo3:
+#      image: mongo:4.1.13-bionic
+#      command: --replSet rs0 --bind_ip_all
+#      ports:
+#        - 27020:27017
+##      volumes:
+##        - /etc/localtime:/etc/localtime:ro
+##        - /mongo_cluster/data3:/data/db
+#      networks:
+#        - my-mongo-cluster
+#      depends_on:
+#       - mongo1
+#       - mongo2
+#   mongo-replicator:
+#      build:
+#        context: ./
+#        dockerfile: ./mongodb/Dockerfile
+#      networks:
+#        - my-mongo-cluster
+#      depends_on:
+#        - mongo1
+#        - mongo2
+#        - mongo3
 
    configserver:
        container_name: configserver
