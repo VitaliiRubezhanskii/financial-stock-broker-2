@@ -2,6 +2,8 @@ spring:
   data:
     mongodb:
       uri: mongodb://mongo1:27017,mongo2:27017,mongo3:27017/account?replicaSet=rs0
+  profiles:
+    active: docker
 
   zipkin:
     enabled: true
