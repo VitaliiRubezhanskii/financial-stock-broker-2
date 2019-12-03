@@ -26,12 +26,14 @@ microservice:
     url: http://localhost:8099
 ---
 
-
+spring:
+  profiles:
+    active: docker
+---
 
 spring:
   profiles: docker
-  profiles:
-      active: docker
+
   data:
     mongodb:
       uri: mongodb://mongo1:27017,mongo2:27017,mongo3:27017/account?replicaSet=rs0
