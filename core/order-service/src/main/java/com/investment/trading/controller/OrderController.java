@@ -4,6 +4,7 @@ import com.investment.trading.domain.Order;
 import com.investment.trading.domain.OrderItem;
 import com.investment.trading.service.OrderService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -16,6 +17,7 @@ import java.util.List;
 
 @RestController(value = "/order")
 @RequiredArgsConstructor
+@Slf4j
 public class OrderController {
 
     private final OrderService orderService;
@@ -23,7 +25,7 @@ public class OrderController {
     @Value("${server.port}")
     private String port;
 
-    private static final Logger log = LoggerFactory.getLogger(OrderController.class);
+
 
 
     @GetMapping("/sku/{sku}")
