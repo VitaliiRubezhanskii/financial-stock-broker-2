@@ -1,60 +1,62 @@
 package com.investment.trading.controller;
 
-import com.google.gson.Gson;
 import com.investment.trading.domain.Order;
 import com.investment.trading.domain.OrderItem;
 import com.investment.trading.service.OrderService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
-import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-import java.io.File;
 import java.time.LocalDateTime;
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 
-@RestController
-@RequestMapping
+@RestController(value = "/order")
 @RequiredArgsConstructor
+@Slf4j
 public class OrderController {
 
     private final OrderService orderService;
-    private final Gson gson = new Gson();
 
     @Value("${server.port}")
     private String port;
 
+
+
+
     @GetMapping("/sku/{sku}")
-    public Flux<Order> getAllOrdersContainingSKU(@PathVariable("sku") String sku){
-        return orderService.findAllOrdersByContainingSKU(sku);
+    public Order getAllOrdersContainingSKU(@PathVariable("sku") String sku){
+        return orderService.findAllOrdersByContainingSKU(sku).blockFirst();
     }
 
-    @PatchMapping("/order/sample")
-    public Mono<Order> getExample(){
-        return Mono.just(new Order(port, Arrays.asList(new OrderItem("sku_1"), new OrderItem("sku_2")), new File("Invoice"), LocalDateTime.now()));
+    @GetMapping("/order/sample")
+    public Order getExample(){
+            List<OrderItem> items = new ArrayList<>();
+            items.add(new OrderItem("sku_1-real", port));
+            items.add(new OrderItem("sku_2-real", port));
+            log.info("Request from the port =[" + port + "]");
+            Order o = new Order(items,"Invoice", LocalDateTime.now());
+            log.info(String.format("invoice=[%s] firstItem=[%s] ", o.getInvoice(), o.getItems().get(0)));
+            return Mono.just(o).block();
     }
 
     @GetMapping("/{id}")
-    public Mono<Order> get(@PathVariable("id") String id) throws Exception {
-       return orderService.findOrderById(id);
+    public Order get(@PathVariable("id") String id) throws Exception {
+       return orderService.findOrderById(id).block();
 
     }
 
     @PostMapping
-    public Mono<Order> create(@RequestBody Order order) {
-
-        return orderService.newOrder(order);
-    }
-//
-    @DeleteMapping("/{id}")
-    public Mono<Void> delete(@PathVariable("id") String id) {
-        return orderService.deleteById(id);
+    public Order create(@RequestBody Order order) {
+        return orderService.newOrder(order).block();
     }
 
     @PutMapping("/{id}/{operation}")
-    public Mono<Order> update(@PathVariable("id") String id, @PathVariable("operation") OrderUpdationOperation operation,  @RequestBody List<OrderItem> orderItems) {
+    public Order update(@PathVariable("id") String id, @PathVariable("operation") OrderUpdationOperation operation,  @RequestBody List<OrderItem> orderItems) {
         return orderService.findOrderById(id)
                 .map(p -> {
                     if (p.getItems() != null && !p.getItems().isEmpty() && operation == OrderUpdationOperation.ADD){
@@ -72,7 +74,7 @@ public class OrderController {
                     }
                     return p;
                 })
-                .flatMap(orderService::newOrder);
+                .flatMap(orderService::newOrder).block();
     }
 //
 

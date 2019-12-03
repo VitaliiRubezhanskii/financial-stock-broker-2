@@ -1,23 +1,44 @@
-server:
-  port: 8081
 spring:
+  profiles:
+    active: docker
   application:
-    name: account_service
+    name: account
+
   cloud:
     config:
-      uri: http://config_service:8888
-      #http://localhost:8888
-      label: master
-      profile: dev
-
-
-eureka:
-  client:
-    registerWithEureka: true
-    fetchRegistry: true
-    serviceUrl:
-      defaultZone: http://discovery_service:8761/eureka/
-  instance:
-    hostname: discovery_service
+      uri: ${CONFIGSERVER_URI}   #http://configserver:8888
+      discovery:
+        enabled: true
 server:
-  port: 8082
+  port: 8081
+
+
+
+#  data:
+#    mongodb:
+#      uri: mongodb://mongo1:27017,mongo2:27017,mongo3:27017/orders?replicaSet=rs0
+#
+#  zipkin:
+#    enabled: true
+#    baseUrl: http://tracing:9411
+#  sleuth:
+#    sampler:
+#      probability: 100
+#
+#
+#eureka:         #tells about the Eureka server details and its refresh time
+#  client:
+#    service-url:
+#      defaultZone: http://discovery:8761/eureka/
+#    healthcheck:
+#      enabled: true
+#    register-with-eureka: true
+#    fetch-registry: true
+#
+#microservice:
+#          client:
+#              url: http://feign:8099
+#
+
+
+

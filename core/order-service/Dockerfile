@@ -1,4 +1,4 @@
-FROM openjdk:8-jdk-alpine
+FROM openjdk:12-jdk
 ADD target/order-service-0.0.1-SNAPSHOT.jar order-service-0.0.1-SNAPSHOT.jar
 ENTRYPOINT ["java","-jar","/order-service-0.0.1-SNAPSHOT.jar"]
-EXPOSE 8081
+#EXPOSE 8082

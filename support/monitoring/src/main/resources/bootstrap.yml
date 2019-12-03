@@ -1,15 +1,13 @@
 spring:
   application:
-    name: discovery_service
+    name: monitoring
   cloud:
     config:
-      uri: http://config_service:8888
-eureka:
-  client:
-    registerWithEureka: false
-    fetchRegistry: false
+      uri: http://configserver:8888
 server:
   port: 8761
 
-
-
+eureka:
+  client:
+    register-with-eureka: false
+    fetch-registry: false

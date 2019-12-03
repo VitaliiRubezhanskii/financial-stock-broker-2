@@ -2,6 +2,26 @@ version: "3.2"
 networks:
     my-mongo-cluster:
 services:
+
+   tracing:
+      image: openzipkin/zipkin
+      ports:
+        - 9411:9411
+      build:
+        context: ./support/tracing
+        dockerfile: Dockerfile
+      depends_on:
+        - mongo-replicator
+        - configserver
+        - discovery
+      healthcheck:
+        test: ["CMD", "curl", "-f", "http://localhost:9411/zipkin/"]
+        interval: 30s
+        timeout: 10s
+        retries: 5
+      restart: always
+      networks:
+         - my-mongo-cluster
    mongo1:
       image: mongo:4.1.13-bionic
       command: --replSet rs0 --bind_ip_all
@@ -48,8 +68,8 @@ services:
         - mongo2
         - mongo3
 
-   config_service:
-       container_name: config_service
+   configserver:
+       container_name: configserver
        expose:
         - 8888
        ports:
@@ -63,14 +83,19 @@ services:
        build:
          context: ./support/config
          dockerfile: Dockerfile
+       environment:
+         SPRING_PROFILES_ACTIVE: docker
+       volumes:
+         - /home/user/Documents/03. Education/financial-stock-broker-2/configuration:/var/lib/financial-stock-broker-2/configuration
        depends_on:
          - mongo-replicator
+         - discovery
        restart: always
        networks:
         - my-mongo-cluster
 
-   discovery_service:
-      container_name: discovery_service
+   discovery:
+      container_name: discovery
       expose:
        - 8761
       ports:
@@ -85,19 +110,22 @@ services:
         context: ./support/monitoring
         dockerfile: Dockerfile
       depends_on:
-        - config_service
+        - mongo-replicator
       restart: always
+#      labels:
+#        collect_logs_with_filebeat: "true"
+#        decode_log_event_to_json_object: "true"
       networks:
        - my-mongo-cluster
 
-   order_service:
+   order:
       container_name: order_service
       expose:
-       - 8082
+        - 8082
       ports:
        - 8082:8082
       healthcheck:
-         test: ["CMD", "curl", "-f", "http://localhost:8081"]
+         test: ["CMD", "curl", "-f", "http://localhost:8082"]
          interval: 30s
          timeout: 10s
          retries: 5
@@ -105,20 +133,65 @@ services:
       build:
         context: ./core/order-service
         dockerfile: Dockerfile
+      environment:
+        PORT: 8082
+        SPRING_PROFILES_ACTIVE: docker
+        CONFIGSERVER_URI: http://configserver:8888
+        PROFILE: docker
       depends_on:
            - mongo-replicator
+           - configserver
+           - discovery
       restart: always
+      labels:
+        collect_logs_with_filebeat: "true"
+        decode_log_event_to_json_object: "true"
       networks:
         - my-mongo-cluster
 
-   account_service:
+   order2:
+     container_name: order_service2
+     expose:
+       - 8092
+     ports:
+       - 8092:8092
+     healthcheck:
+       test: ["CMD", "curl", "-f", "http://localhost:8092"]
+       interval: 30s
+       timeout: 10s
+       retries: 5
+     image: order_service:latest
+     build:
+       context: ./core/order-service
+       dockerfile: Dockerfile
+     environment:
+       PORT: 8092
+       SPRING_PROFILES_ACTIVE: docker
+       CONFIGSERVER_URI: http://configserver:8888
+       PROFILE: docker
+     depends_on:
+       - mongo-replicator
+       - configserver
+       - discovery
+     restart: always
+     labels:
+       collect_logs_with_filebeat: "true"
+       decode_log_event_to_json_object: "true"
+     networks:
+       - my-mongo-cluster
+
+   account:
       container_name: account_service
       expose:
        - 8081
       ports:
        - 8081:8081
+      environment:
+        SPRING_PROFILES_ACTIVE: docker
+        CONFIGSERVER_URI: http://configserver:8888
+        PROFILE: docker
       healthcheck:
-        test: ["CMD", "curl", "-f", "http://localhost:8082"]
+        test: ["CMD", "curl", "-f", "http://localhost:8081"]
         interval: 30s
         timeout: 10s
         retries: 5
@@ -128,11 +201,16 @@ services:
         dockerfile: Dockerfile
       depends_on:
          - mongo-replicator
+         - configserver
+         - discovery
       restart: always
+      labels:
+        collect_logs_with_filebeat: "true"
+        decode_log_event_to_json_object: "true"
       networks:
         - my-mongo-cluster
 
-   api_gateway_service:
+   gateway:
       container_name: api_gateway_service
       expose:
        - 5000
@@ -145,8 +223,96 @@ services:
         retries: 5
       image: api_gateway_service:latest
       build:
-        context: ./support/monitoring
+        context: ./support/gateway
         dockerfile: Dockerfile
+      depends_on:
+        - mongo-replicator
+        - configserver
+        - discovery
       restart: always
+#      labels:
+#        collect_logs_with_filebeat: "true"
+#        decode_log_event_to_json_object: "true"
       networks:
+       - my-mongo-cluster
+
+   feign:
+       container_name: feign-hystrix-service
+       ports:
+         - 8099:8099
+       image: feign-hystrix-service:latest
+       build:
+         context: ./support/feign-hystrix-client
+         dockerfile: Dockerfile
+       depends_on:
+         - mongo-replicator
+         - configserver
+         - discovery
+       restart: always
+       labels:
+         collect_logs_with_filebeat: "true"
+         decode_log_event_to_json_object: "true"
+       networks:
+         - my-mongo-cluster
+
+   filebeat:
+     hostname: filebeat
+     image: docker-logs-elk/filebeat:1.0.0
+     build:
+       context: filebeat
+       dockerfile: Dockerfile
+     volumes:
+       # needed to access all docker logs (read only) :
+       - "/var/lib/docker/containers:/usr/share/dockerlogs/data:ro"
+       # needed to access additional informations about containers
+       - "/var/run/docker.sock:/var/run/docker.sock"
+     links:
+       - logstash
+     networks:
+       - my-mongo-cluster
+
+   kibana:
+     image: kibana:6.5.2
+     environment:
+       - "LOGGING_QUIET=true"
+     links:
+       - elasticsearch
+     ports:
+       - 5601:5601
+     networks:
+       - my-mongo-cluster
+
+   logstash:
+     hostname: logstash
+     image: docker-logs-elk/logstash:1.0.0
+     build:
+       context: logstash
+       dockerfile: Dockerfile
+     ports:
+       - 5044:5044
+     environment:
+       LOG_LEVEL: info
+     links:
+       - elasticsearch
+     networks:
+       - my-mongo-cluster
+
+
+   elasticsearch:
+     hostname: elasticsearch
+     image: docker-logs-elk/elasticsearch:1.0.0
+     build:
+       context: elasticsearch
+       dockerfile: Dockerfile
+     environment:
+       - cluster.name=docker-logs-elk-cluster
+       - bootstrap.memory_lock=true
+       - "ES_JAVA_OPTS=-Xms256m -Xmx256m"
+     ulimits:
+       memlock:
+         soft: -1
+         hard: -1
+     ports:
+       - 9200:9200
+     networks:
        - my-mongo-cluster

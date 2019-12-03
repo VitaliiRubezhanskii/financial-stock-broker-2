@@ -5,7 +5,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.2.1.RELEASE</version>
+        <version>2.1.6.RELEASE</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.investment</groupId>
@@ -15,8 +15,8 @@
     <description>Demo project for Spring Boot</description>
 
     <properties>
-        <java.version>1.8</java.version>
-        <spring-cloud.version>Hoxton.RC2</spring-cloud.version>
+        <java.version>12</java.version>
+        <spring-cloud.version>Greenwich.RELEASE</spring-cloud.version>
     </properties>
 
     <dependencies>
@@ -30,20 +30,43 @@
         </dependency>
         <dependency>
             <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
+
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-zipkin</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+<!--        &lt;!&ndash; https://mvnrepository.com/artifact/com.linecorp.armeria/armeria &ndash;&gt;-->
+        <dependency>
+            <groupId>com.linecorp.armeria</groupId>
+            <artifactId>armeria</artifactId>
+            <version>0.96.0</version>
+        </dependency>
+        <dependency>
+            <groupId>io.zipkin.java</groupId>
+            <artifactId>zipkin-server</artifactId>
+            <version>2.3.1</version>
         </dependency>
 
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.junit.vintage</groupId>
-                    <artifactId>junit-vintage-engine</artifactId>
-                </exclusion>
-            </exclusions>
+            <groupId>io.zipkin.java</groupId>
+            <artifactId>zipkin-autoconfigure-ui</artifactId>
+            <version>2.3.1</version>
+            <scope>runtime</scope>
         </dependency>
+
+
+
     </dependencies>
 
     <dependencyManagement>

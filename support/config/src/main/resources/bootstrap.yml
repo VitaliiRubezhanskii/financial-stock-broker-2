@@ -1,0 +1,13 @@
+server:
+  port: 8888
+spring:
+  profiles:
+    active: native
+  cloud:
+    config:
+      #      uri: http://configserver:8888
+      server:
+          git:
+            uri: https://github.com/VitaliiRubezhanskii/financial-stock-broker-2.git
+            search-paths: configuration
+
