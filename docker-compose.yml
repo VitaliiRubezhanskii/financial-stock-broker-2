@@ -83,6 +83,8 @@ services:
        build:
          context: ./support/config
          dockerfile: Dockerfile
+       environment:
+         SPRING_PROFILES_ACTIVE: docker
        volumes:
          - /home/user/Documents/03. Education/financial-stock-broker-2/configuration:/var/lib/financial-stock-broker-2/configuration
        depends_on:
@@ -133,6 +135,7 @@ services:
         dockerfile: Dockerfile
       environment:
         PORT: 8082
+        SPRING_PROFILES_ACTIVE: docker
         CONFIGSERVER_URI: http://configserver:8888
         PROFILE: docker
       depends_on:
@@ -163,6 +166,7 @@ services:
        dockerfile: Dockerfile
      environment:
        PORT: 8092
+       SPRING_PROFILES_ACTIVE: docker
        CONFIGSERVER_URI: http://configserver:8888
        PROFILE: docker
      depends_on:
@@ -183,6 +187,7 @@ services:
       ports:
        - 8081:8081
       environment:
+        SPRING_PROFILES_ACTIVE: docker
         CONFIGSERVER_URI: http://configserver:8888
         PROFILE: docker
       healthcheck:

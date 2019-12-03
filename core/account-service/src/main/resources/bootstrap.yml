@@ -1,15 +1,16 @@
-server:
-  port: 8081
 spring:
-  application:
-    name: account
   profiles:
     active: docker
+  application:
+    name: account
+
   cloud:
     config:
       uri: ${CONFIGSERVER_URI}   #http://configserver:8888
       discovery:
         enabled: true
+server:
+  port: 8081
 
 
 
