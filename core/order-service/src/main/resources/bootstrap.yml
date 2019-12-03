@@ -5,33 +5,37 @@ spring:
     name: order
   cloud:
     config:
-      uri: http://configserver:8888
+      uri: ${CONFIGSERVER_URI} #http://configserver:8888
       discovery:
         enabled: true
-  data:
-    mongodb:
-      uri: mongodb://mongo1:27017,mongo2:27017,mongo3:27017/orders?replicaSet=rs0
-  zipkin:
-    enabled: true
-    baseUrl: http://tracing:9411
-
-  sleuth:
-    sampler:
-      probability: 100
+  profiles:
+    active: ${PROFILE}
 
 
-eureka:         #tells about the Eureka server details and its refresh time
-  client:
-    service-url:
-      defaultZone: http://discovery:8761/eureka/
-    healthcheck:
-      enabled: true
-    register-with-eureka: true
-    fetch-registry: true
-
-microservice:
-  client:
-    url: http://feign:8099
+#  data:
+#    mongodb:
+#      uri: mongodb://mongo1:27017,mongo2:27017,mongo3:27017/orders?replicaSet=rs0
+#  zipkin:
+#    enabled: true
+#    baseUrl: http://tracing:9411
+#
+#  sleuth:
+#    sampler:
+#      probability: 100
+#
+#
+#eureka:         #tells about the Eureka server details and its refresh time
+#  client:
+#    service-url:
+#      defaultZone: http://discovery:8761/eureka/
+#    healthcheck:
+#      enabled: true
+#    register-with-eureka: true
+#    fetch-registry: true
+#
+#microservice:
+#  client:
+#    url: http://feign:8099
 
 
 

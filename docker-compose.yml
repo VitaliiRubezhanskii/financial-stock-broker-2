@@ -131,6 +131,8 @@ services:
         dockerfile: Dockerfile
       environment:
         PORT: 8082
+        CONFIGSERVER_URI: http://configserver:8888
+        PROFILE: docker
       depends_on:
            - mongo-replicator
            - configserver
@@ -159,6 +161,8 @@ services:
        dockerfile: Dockerfile
      environment:
        PORT: 8092
+       CONFIGSERVER_URI: http://configserver:8888
+       PROFILE: docker
      depends_on:
        - mongo-replicator
        - configserver
@@ -176,6 +180,9 @@ services:
        - 8081
       ports:
        - 8081:8081
+      environment:
+        CONFIGSERVER_URI: http://configserver:8888
+        PROFILE: docker
       healthcheck:
         test: ["CMD", "curl", "-f", "http://localhost:8081"]
         interval: 30s
