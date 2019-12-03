@@ -2,11 +2,11 @@ spring:
   profiles: dev
   data:
     mongodb:
-      uri: mongodb://root:root@localhost:27017/order
+      uri: mongodb://root:root@localhost:27017/account
+
   zipkin:
     enabled: true
     baseUrl: http://localhost:9411
-
   sleuth:
     sampler:
       probability: 100
@@ -24,20 +24,20 @@ eureka:         #tells about the Eureka server details and its refresh time
 microservice:
   client:
     url: http://localhost:8099
-
 ---
+
 spring:
   profiles: docker
   profiles:
       active: docker
   data:
     mongodb:
-      uri: mongodb://mongo1:27017,mongo2:27017,mongo3:27017/order?replicaSet=rs0
+      uri: mongodb://mongo1:27017,mongo2:27017,mongo3:27017/account?replicaSet=rs0
+
 
   zipkin:
     enabled: true
     baseUrl: http://tracing:9411
-
   sleuth:
     sampler:
       probability: 100
@@ -55,3 +55,4 @@ eureka:         #tells about the Eureka server details and its refresh time
 microservice:
   client:
     url: http://feign:8099
+
