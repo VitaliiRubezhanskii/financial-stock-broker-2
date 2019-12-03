@@ -1,2 +1,26 @@
 server:
   port: 8888
+spring:
+  application:
+    name: configserver
+  profiles:
+    active: docker
+    include: native
+  cloud:
+    config:
+      #      uri: http://configserver:8888
+      server:
+        git:
+          uri: https://github.com/VitaliiRubezhanskii/financial-stock-broker-2.git
+          search-paths: configuration
+          clone-on-start: true
+        native:
+          default-label: master
+eureka:         #tells about the Eureka server details and its refresh time
+  client:
+    service-url:
+      defaultZone: http://discovery:8761/eureka/
+    healthcheck:
+      enabled: true
+    register-with-eureka: true
+    fetch-registry: true
