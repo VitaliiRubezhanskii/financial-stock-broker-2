@@ -86,4 +86,9 @@ public class OauthClientDetails implements ClientDetails {
     public boolean isAutoApprove(String s) {
         return true;
     }
+
+    @Override
+    public Map<String, Object> getAdditionalInformation() {
+        return null;
+    }
 }
