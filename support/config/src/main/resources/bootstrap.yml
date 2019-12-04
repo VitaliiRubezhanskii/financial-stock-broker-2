@@ -4,8 +4,8 @@ server:
 spring:
   application:
     name: configserver
-  profiles:
-    active: docker
+#  profiles:
+#    active: docker
   cloud:
     config:
        discovery:
