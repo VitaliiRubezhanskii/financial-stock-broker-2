@@ -75,7 +75,7 @@ services:
        ports:
         - 8888:8888
        healthcheck:
-         test: ["CMD", "curl", "-f", "http://localhost:8888/account-service/dev"]
+         test: ["CMD", "curl", "-f", "http://localhost:8888"]
          interval: 30s
          timeout: 10s
          retries: 5
@@ -100,7 +100,7 @@ services:
       ports:
        - 8761:8761
       healthcheck:
-        test: ["CMD", "curl", "-f", "http://localhost:8761"]
+        test: ["CMD", "curl", "-f", "http://localhost:8761/eureka/"]
         interval: 30s
         timeout: 10s
         retries: 5
