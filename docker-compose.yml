@@ -190,7 +190,7 @@ services:
         CONFIGSERVER_URI: http://configserver:8888
         PROFILE: docker
       healthcheck:
-        test: ["CMD", "curl", "-f", "http://localhost:8081"]
+        test: ["CMD", "curl", "-f", "http://configserver:8888/account/docker"]
         interval: 30s
         timeout: 10s
         retries: 5

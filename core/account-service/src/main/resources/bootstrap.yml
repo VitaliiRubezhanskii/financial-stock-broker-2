@@ -6,7 +6,7 @@ spring:
 
   cloud:
     config:
-      uri: ${CONFIGSERVER_URI}   #http://configserver:8888
+      uri: http://configserver:8888
       discovery:
         enabled: true
 server:
