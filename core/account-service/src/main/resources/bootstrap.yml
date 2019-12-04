@@ -7,8 +7,8 @@ spring:
   cloud:
     config:
       uri: http://configserver:8888
-      discovery:
-        enabled: true
+#      discovery:
+#        enabled: true
 server:
   port: 8081
 
