@@ -1,18 +1,27 @@
 server:
   port: 8888
+
 spring:
-    application:
-      name: configserver
+  application:
+    name: configserver
 #  profiles:
 #    active: docker
   cloud:
     config:
        uri: http://configserver:8888
-      server:
+       server:
           git:
             uri: https://github.com/VitaliiRubezhanskii/financial-stock-broker-2.git
             search-paths: configuration
             username: vitalii.rubezhanskii@gmail.com
             password: Vitalik@1992
-      label: master
+       label: master
 #      profile: docker
+eureka:         #tells about the Eureka server details and its refresh time
+  client:
+    service-url:
+      defaultZone: http://discovery:8761/eureka/
+    healthcheck:
+      enabled: true
+    register-with-eureka: true
+    fetch-registry: true
