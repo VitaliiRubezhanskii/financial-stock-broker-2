@@ -19,11 +19,11 @@ spring:
             password: Vitalik@1992
        label: master
 #      profile: docker
-eureka:         #tells about the Eureka server details and its refresh time
-  client:
-    service-url:
-      defaultZone: http://discovery:8761/eureka/
-    healthcheck:
-      enabled: true
-    register-with-eureka: true
-    fetch-registry: true
+#eureka:         #tells about the Eureka server details and its refresh time
+#  client:
+#    service-url:
+#      defaultZone: http://discovery:8761/eureka/
+#    healthcheck:
+#      enabled: true
+#    register-with-eureka: true
+#    fetch-registry: true
