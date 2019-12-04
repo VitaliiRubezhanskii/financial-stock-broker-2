@@ -8,6 +8,8 @@ spring:
     active: docker
   cloud:
     config:
+       discovery:
+         enabled: true
        uri: http://configserver:8888
        server:
           git:
