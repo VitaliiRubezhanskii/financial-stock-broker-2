@@ -25,10 +25,10 @@ microservice:
   client:
     url: http://localhost:8099
 
-#---
-#spring:
-#  profiles:
-#    active: docker
+---
+spring:
+  profiles:
+    active: docker
 ---
 
 spring:
