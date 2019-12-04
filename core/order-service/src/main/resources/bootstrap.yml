@@ -10,6 +10,7 @@ spring:
       uri: ${CONFIGSERVER_URI} #http://configserver:8888
       discovery:
         enabled: true
+      fail-fast: true
 
 
 
