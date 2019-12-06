@@ -1,5 +1,4 @@
 spring:
-#  profiles: dev
   data:
     mongodb:
       uri: mongodb://root:root@localhost:27017/account
@@ -11,8 +10,7 @@ spring:
     sampler:
       probability: 100
 
-
-eureka:         #tells about the Eureka server details and its refresh time
+eureka:
   client:
     service-url:
       defaultZone: http://localhost:8761/eureka/

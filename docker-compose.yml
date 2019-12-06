@@ -148,6 +148,36 @@ services:
       networks:
         - my-mongo-cluster
 
+   auth:
+     container_name: auth
+     expose:
+       - 8084
+     ports:
+       - 8084:8084
+     healthcheck:
+       test: ["CMD", "curl", "-f", "http://localhost:8084"]
+       interval: 30s
+       timeout: 10s
+       retries: 5
+     image: auth:latest
+     build:
+       context: ./support/auth
+       dockerfile: Dockerfile
+     environment:
+       SPRING_PROFILES_ACTIVE: docker
+       CONFIGSERVER_URI: http://configserver:8888
+       PROFILE: docker
+     depends_on:
+       - mongo-replicator
+       - configserver
+       - discovery
+     restart: always
+     labels:
+       collect_logs_with_filebeat: "true"
+       decode_log_event_to_json_object: "true"
+     networks:
+       - my-mongo-cluster
+
    order2:
      container_name: order_service2
      expose:
