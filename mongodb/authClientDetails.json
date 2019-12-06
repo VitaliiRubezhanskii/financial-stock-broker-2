@@ -1,0 +1,16 @@
+[{"_id":{"$oid":"5de7d2f10af6406a6a6d8b69"},
+  "clientId":"browser",
+  "clientSecret":"$2a$10$fWNTd3H.u7G/aNROVQSifebOkZ2xzU5nUPOCI2Ld42M8E25/ljJqK",
+  "grantTypes":"refresh_token,password",
+  "scopes":"ui",
+  "_class":"com.marcusdacoregio.authservice.domain.AuthClientDetails"},
+
+
+
+{"_id":{"$oid":"5de7d2f10af6406a6a6d8b6d"},
+  "clientId":"account-service",
+  "clientSecret":"$2a$10$fWNTd3H.u7G/aNROVQSifebOkZ2xzU5nUPOCI2Ld42M8E25/ljJqK",
+  "grantTypes":"refresh_token,client_credentials",
+  "scopes":"server",
+  "_class":"com.marcusdacoregio.authservice.domain.AuthClientDetails"}
+]
