@@ -1,9 +1,12 @@
 spring:
   data:
     mongodb:
-      uri: mongodb://mongo1:27017,mongo2:27017,mongo3:27017/account?replicaSet=rs0
+      uri: mongodb://mongo1:27017,mongo2:27017,mongo3:27017/auth?replicaSet=rs0
 
-server:
-  servlet:
-    context-path: /uaa
-  port: 8084
+custom:
+  oauth:
+    tokenId: tokenId
+    refresh-token: refreshToken
+    authId: authenticationId
+    clientId: clientId
+    username: username
