@@ -1,36 +1,9 @@
 zuul:
-  ignoredServices: '*'
-  host:
-    connect-timeout-millis: 20000
-    socket-timeout-millis: 20000
-
+  ignored-services: '*'
   routes:
-    auth:
-      path: /uaa/**
-      url: auth-service
-      stripPrefix: false
-
-    account:
-      path: /accounts/**
-      serviceId: account-service
-      stripPrefix: false
-
-
-    analytics-service:
-       path: /analytics/**
-       serviceId: analytics-service
-       stripPrefix: false
-
-    order:
-      path: /order/**
-      serviceId: order-service
-      stripPrefix: false
-
-    quotes-provider-service:
-       path: /quotes/**
-       serviceId: quotes-provider-service
-       stripPrefix: false
-
+    account: /account/**
+    order: /order/**
+    feign: /feign/**
 
 eureka:
   instance:
