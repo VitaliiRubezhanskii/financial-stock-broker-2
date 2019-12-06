@@ -1,7 +1,7 @@
-spring:
-  profiles:
-    active: docker
----
+#spring:
+#  profiles:
+#    active: docker
+#---
 spring:
   profiles: docker
   data:

@@ -2,20 +2,17 @@ spring:
   application:
     name: configserver
 
-
-
   cloud:
     config:
       discovery:
         enabled: true
-      #      uri: http://configserver:8888
       server:
         git:
           uri: https://github.com/VitaliiRubezhanskii/financial-stock-broker-2.git
           search-paths: configuration
           clone-on-start: true
 
-eureka:         #tells about the Eureka server details and its refresh time
+eureka:
   client:
     service-url:
       defaultZone: http://discovery:8761/eureka/
