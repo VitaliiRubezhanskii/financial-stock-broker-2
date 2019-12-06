@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: gateway
+  cloud:
+    config:
+      uri: ${CONFIGSERVER_URI}
+
+server:
+  port: ${PORT}
