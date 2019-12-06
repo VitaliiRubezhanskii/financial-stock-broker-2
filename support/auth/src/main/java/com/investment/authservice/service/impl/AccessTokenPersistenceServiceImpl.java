@@ -3,6 +3,7 @@ package com.investment.authservice.service.impl;
 import com.investment.authservice.domain.AccessToken;
 import com.investment.authservice.domain.RefreshToken;
 import com.investment.authservice.service.AccessTokenPersistenceService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -12,6 +13,7 @@ import org.springframework.security.oauth2.common.OAuth2RefreshToken;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.security.oauth2.provider.token.AuthenticationKeyGenerator;
 import org.springframework.security.oauth2.provider.token.DefaultAuthenticationKeyGenerator;
+import org.springframework.stereotype.Service;
 
 import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
@@ -22,12 +24,13 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+@Service
+@RequiredArgsConstructor
 public class AccessTokenPersistenceServiceImpl implements AccessTokenPersistenceService {
 
     private AuthenticationKeyGenerator authenticationKeyGenerator = new DefaultAuthenticationKeyGenerator();
 
-    @Autowired
-    private MongoTemplate mongoTemplate;
+    private final MongoTemplate mongoTemplate;
 
     @Override
     public OAuth2Authentication readAuthentication(OAuth2AccessToken accessToken) {
