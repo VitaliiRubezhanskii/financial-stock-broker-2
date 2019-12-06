@@ -150,8 +150,10 @@ services:
      container_name: auth
      expose:
        - 8084
+       - 8000
      ports:
        - 8084:8084
+       - 8000:8000
      healthcheck:
        test: ["CMD", "curl", "-f", "http://localhost:8084"]
        interval: 30s
