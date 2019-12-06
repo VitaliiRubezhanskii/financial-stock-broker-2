@@ -10,7 +10,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.security.oauth2.common.OAuth2RefreshToken;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
 
-@Document
+@Document(value = "mongoRefreshToken")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

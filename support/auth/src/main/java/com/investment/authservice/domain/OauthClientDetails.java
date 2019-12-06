@@ -10,7 +10,7 @@ import org.springframework.security.oauth2.provider.ClientDetails;
 
 import java.util.*;
 
-@Document
+@Document(value = "authClientDetails")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
