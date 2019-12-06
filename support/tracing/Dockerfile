@@ -5,3 +5,5 @@ ADD /zipkin.jar zipkin.jar
 ADD /setup.sh setup.sh
 ADD target/tracing-0.0.1-SNAPSHOT.jar tracing-0.0.1-SNAPSHOT.jar
 ENTRYPOINT ["/setup.sh"]
+
+
