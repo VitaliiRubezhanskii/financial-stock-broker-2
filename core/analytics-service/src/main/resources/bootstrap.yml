@@ -1,6 +1,6 @@
 spring:
   application:
-    name: analytics-service
+    name: analytics
   cloud:
     config:
       uri: http://configserver:8888

@@ -136,7 +136,6 @@ services:
         PORT: 8082
         SPRING_PROFILES_ACTIVE: docker
         CONFIGSERVER_URI: http://configserver:8888
-        PROFILE: docker
       depends_on:
            - mongo-replicator
            - configserver
@@ -164,9 +163,9 @@ services:
        context: ./support/auth
        dockerfile: Dockerfile
      environment:
+       PORT: 8084
        SPRING_PROFILES_ACTIVE: docker
        CONFIGSERVER_URI: http://configserver:8888
-       PROFILE: docker
      depends_on:
        - mongo-replicator
        - configserver
@@ -197,7 +196,6 @@ services:
        PORT: 8092
        SPRING_PROFILES_ACTIVE: docker
        CONFIGSERVER_URI: http://configserver:8888
-       PROFILE: docker
      depends_on:
        - mongo-replicator
        - configserver
@@ -218,7 +216,7 @@ services:
       environment:
         SPRING_PROFILES_ACTIVE: docker
         CONFIGSERVER_URI: http://configserver:8888
-        PROFILE: docker
+
       healthcheck:
         test: ["CMD", "curl", "-f", "http://configserver:8888/account/docker"]
         interval: 30s

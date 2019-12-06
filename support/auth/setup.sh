@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 
-sleep 1m
+sleep 2m
 java -jar auth-0.0.1-SNAPSHOT.jar

@@ -6,6 +6,7 @@ spring:
   zipkin:
     enabled: true
     baseUrl: http://tracing:9411
+
   sleuth:
     sampler:
       probability: 100
