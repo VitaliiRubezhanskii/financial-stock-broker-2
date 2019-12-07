@@ -1,10 +1,33 @@
 zuul:
   ignored-services: '*'
   routes:
-    account: /account/**
-    order: /order/**
-    feign: /feign/**
-    auth: /auth/**
+#    account: /account/**
+#    order: /order/**
+#    feign: /feign/**
+#    auth: /auth/**
+     account:
+        path: /account/** #path that will be intercepted
+        url: account #which url the request will be mapped to
+        stripPrefix: false #if zuul should replace the "/uaa/" segment
+        sensitiveHeaders:
+
+     order:
+        path: /order/**
+        serviceId: order
+        stripPrefix: false
+        sensitiveHeaders:
+
+     feign:
+        path: /feign/**
+        serviceId: feign
+        stripPrefix: false
+        sensitiveHeaders:
+
+     auth:
+        path: /uaa/**
+        serviceId: auth
+        stripPrefix: false
+        sensitiveHeaders:
 
 eureka:
   instance:
