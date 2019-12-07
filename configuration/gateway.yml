@@ -4,7 +4,7 @@ zuul:
     account: /account/**
     order: /order/**
     feign: /feign/**
-    auth: /uaa/**
+    auth: /auth/**
 
 eureka:
   instance:
