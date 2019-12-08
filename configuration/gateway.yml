@@ -4,7 +4,7 @@ zuul:
     account: /account/**
     order: /order/**
     feign: /feign/**
-    auth: /auth/**
+    auth: /uaa/**
 #     account:
 #        path: /account/** #path that will be intercepted
 #        url: account #which url the request will be mapped to
