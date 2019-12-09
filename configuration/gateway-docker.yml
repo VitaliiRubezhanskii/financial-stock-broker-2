@@ -56,7 +56,7 @@ ribbon:
 security:
   oauth2:
     client:
-      clientId: gateway
+      clientId: feign
       clientSecret: 1234
       accessTokenUri: http://auth:8084/uaa/oauth/token
       grant-type: client_credentials
