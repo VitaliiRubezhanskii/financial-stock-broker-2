@@ -1,11 +1,11 @@
-package com.investment.authservice.configuration;
+package com.marcusdacoregio.authservice.config;
 
-
-import com.investment.authservice.service.AccessTokenPersistenceService;
-import com.investment.authservice.service.CustomUserDetailsService;
-import com.investment.authservice.service.Oauth2ClientDetailsService;
-import lombok.RequiredArgsConstructor;
+import com.marcusdacoregio.authservice.config.mongodb.MongoTokenStore;
+import com.marcusdacoregio.authservice.service.AuthClientDetailsService;
+import com.marcusdacoregio.authservice.service.CustomUserDetailsService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -14,32 +14,39 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.A
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
+import org.springframework.security.oauth2.provider.token.TokenStore;
 
 @Configuration
 @EnableAuthorizationServer
-@RequiredArgsConstructor
 public class OAuth2AuthorizationConfig extends AuthorizationServerConfigurerAdapter {
 
+    @Autowired
     @Qualifier("authenticationManagerBean")
-    private final AuthenticationManager authenticationManager;
+    private AuthenticationManager authenticationManager;
 
-    private final AccessTokenPersistenceService accessTokenPersistenceService;
+    @Autowired
+    private CustomUserDetailsService userDetailsService;
 
-    private final CustomUserDetailsService userDetailsService;
+    @Autowired
+    private AuthClientDetailsService authClientDetailsService;
 
-    private final Oauth2ClientDetailsService oauth2ClientDetailsService;
-
-    private final PasswordEncoder passwordEncoder;
+    @Autowired
+    private PasswordEncoder encoder;
 
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-        clients.withClientDetails(oauth2ClientDetailsService);
+        clients.withClientDetails(authClientDetailsService);
+    }
+
+    @Bean
+    public TokenStore tokenStore() {
+        return new MongoTokenStore();
     }
 
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
         endpoints
-                .tokenStore(accessTokenPersistenceService)
+                .tokenStore(tokenStore())
                 .authenticationManager(authenticationManager)
                 .userDetailsService(userDetailsService);
     }
@@ -49,7 +56,8 @@ public class OAuth2AuthorizationConfig extends AuthorizationServerConfigurerAdap
         oauthServer
                 .tokenKeyAccess("permitAll()")
                 .checkTokenAccess("isAuthenticated()")
-                .passwordEncoder(passwordEncoder)
+                .passwordEncoder(encoder)
                 .allowFormAuthenticationForClients();
     }
+
 }
