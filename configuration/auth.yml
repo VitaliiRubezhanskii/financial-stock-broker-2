@@ -1,7 +1,17 @@
 spring:
   data:
     mongodb:
-      uri: mongodb://mongo1:27017,mongo2:27017,mongo3:27017/auth?replicaSet=rs0
-server:
-  servlet:
-    context-path: /uaa
+      host: localhost
+      port: 27017
+      username: root
+      password: root
+      database: oauth-db
+
+
+#spring:
+#  data:
+#    mongodb:
+#      uri: mongodb://mongo1:27017,mongo2:27017,mongo3:27017/auth?replicaSet=rs0
+#server:
+#  servlet:
+#    context-path: /uaa
