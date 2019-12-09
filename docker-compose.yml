@@ -274,8 +274,14 @@ services:
 
    feign:
        container_name: feign-hystrix-service
+       expose:
+         - 8099
        ports:
          - 8099:8099
+       environment:
+         PORT: 8099
+         SPRING_PROFILES_ACTIVE: docker
+         CONFIGSERVER_URI: http://configserver:8888
        image: feign-hystrix-service:latest
        build:
          context: ./support/feign-hystrix-client

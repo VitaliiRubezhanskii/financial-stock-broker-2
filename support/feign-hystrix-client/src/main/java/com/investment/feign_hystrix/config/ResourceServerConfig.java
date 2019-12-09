@@ -1,4 +1,4 @@
-package com.investment.trading.configuration;
+package com.investment.feign_hystrix.config;
 
 
 import feign.RequestInterceptor;

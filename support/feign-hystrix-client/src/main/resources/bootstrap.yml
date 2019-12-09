@@ -1,37 +1,16 @@
 server:
-  port: 8099
+  port: ${PORT}
 spring:
   application:
     name: feign
+  spring:
+    profiles:
+      active: ${SPRING_PROFILES_ACTIVE}
   cloud:
      config:
-       uri: http://configserver:8888
-       fail-fast: true
-  zipkin:
-    enabled: true
-    base-url: http://tracing:9411
+       uri: ${CONFIGSERVER_URI}
 
-  sleuth:
-    sampler:
-      probability: 100
 
-eureka:
-   instance:
-     prefer-ip-address: true
-     lease-renewal-interval-in-seconds: 5
 
-   client:
-     registerWithEureka: true
-     fetchRegistry: true
-     server:
-       waitTimeInMsWhenSyncEmpty: 1
-     serviceUrl:
-        defaultZone: http://discovery:8761/eureka/
-feign:
-  hystrix:
-    enabled: true
-hystrix.command.default.execution.isolation.thread.timeoutInMilliseconds: 138000
-ribbon:
-  ConnectTimeout: 3000
-  ReadTimeout: 60000
+
 

@@ -8,7 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.access.prepost.PreAuthorize;
+//import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
 
@@ -35,7 +35,7 @@ public class OrderController {
     }
 
     @GetMapping("/order/sample")
-    @PreAuthorize("hasRole('ROLE_USER')")
+//    @PreAuthorize("hasRole('ROLE_USER')")
     public Order getExample(){
             List<OrderItem> items = new ArrayList<>();
             items.add(new OrderItem("sku_1-real", port));
@@ -47,7 +47,7 @@ public class OrderController {
     }
 
     @GetMapping("/{id}")
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+//    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public Order get(@PathVariable("id") String id) throws Exception {
        return orderService.findOrderById(id).block();
 
