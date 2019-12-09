@@ -4,4 +4,4 @@
   "password":"$2a$10$fWNTd3H.u7G/aNROVQSifebOkZ2xzU5nUPOCI2Ld42M8E25/ljJqK",
   "activated":true,
   "authorities":["ROLE_USER"],
-  "_class":"com.marcusdacoregio.authservice.domain.User"}
+  "_class":"com.investment.auth.domain.User"}
