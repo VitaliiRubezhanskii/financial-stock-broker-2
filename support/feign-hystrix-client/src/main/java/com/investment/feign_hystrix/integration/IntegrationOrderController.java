@@ -20,7 +20,7 @@ public class IntegrationOrderController {
     private final IntegrationClient integrationClient;
 
     @GetMapping(value = "/order/samples")
-    @PreAuthorize("hasRole('ROLE_USER')")
+//    @PreAuthorize("hasRole('ROLE_USER')")
     @HystrixCommand(fallbackMethod = "getDefaultExample")
     public Order getExample() {
         return integrationClient.getExample();
@@ -28,7 +28,7 @@ public class IntegrationOrderController {
 
     @GetMapping(value = "/order/{id}")
     @HystrixCommand(fallbackMethod = "getDef")
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+//    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public Order getOrders(@PathVariable("id") String id){
         return integrationClient.getOrders(id);
     }

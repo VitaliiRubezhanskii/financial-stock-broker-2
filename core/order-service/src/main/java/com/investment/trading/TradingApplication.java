@@ -8,8 +8,8 @@ import org.springframework.boot.autoconfigure.security.oauth2.client.EnableOAuth
 
 @SpringBootApplication
 @EnableEurekaClient
-@EnableOAuth2Sso
-@EnableGlobalMethodSecurity(prePostEnabled = true)
+//@EnableOAuth2Sso
+//@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class TradingApplication {
 
     public static void main(String[] args) {
