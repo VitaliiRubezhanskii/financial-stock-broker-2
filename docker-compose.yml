@@ -251,6 +251,7 @@ services:
        - 5000:5000
       environment:
         PORT: 5000
+        SPRING_PROFILES_ACTIVE: docker
         CONFIGSERVER_URI: http://configserver:8888
       healthcheck:
         test: ["CMD", "curl", "-f", "http://localhost:5000"]
