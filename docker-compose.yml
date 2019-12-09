@@ -2,25 +2,26 @@ version: "3.2"
 networks:
     my-mongo-cluster:
 services:
-   tracing:
-      image: openzipkin/zipkin
-      ports:
-        - 9411:9411
-      build:
-        context: ./support/tracing
-        dockerfile: Dockerfile
-      depends_on:
-        - mongo-replicator
-        - configserver
-        - discovery
-      healthcheck:
-        test: ["CMD", "curl", "-f", "http://localhost:9411/zipkin/"]
-        interval: 30s
-        timeout: 10s
-        retries: 5
-      restart: always
-      networks:
-         - my-mongo-cluster
+#   tracing:
+#      image: openzipkin/zipkin
+#      ports:
+#        - 9411:9411
+#      build:
+#        context: ./support/tracing
+#        dockerfile: Dockerfile
+#      depends_on:
+#        - mongo-replicator
+#        - configserver
+#        - discovery
+#      healthcheck:
+#        test: ["CMD", "curl", "-f", "http://localhost:9411/zipkin/"]
+#        interval: 30s
+#        timeout: 10s
+#        retries: 5
+#      restart: always
+#      networks:
+#         - my-mongo-cluster
+
    mongo1:
       image: mongo:4.1.13-bionic
       command: --replSet rs0 --bind_ip_all
@@ -56,6 +57,7 @@ services:
       depends_on:
        - mongo1
        - mongo2
+
    mongo-replicator:
       build:
         context: ./
