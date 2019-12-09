@@ -7,3 +7,5 @@ spring:
 #      fail-fast: true
 #      password: 1234
 #      username: user
+server:
+  port: 8084

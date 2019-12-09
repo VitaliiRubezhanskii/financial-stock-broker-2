@@ -193,7 +193,7 @@ services:
        retries: 5
      image: auth:latest
      build:
-       context: ./support/auth
+       context: ./support/auth-service
        dockerfile: Dockerfile
      environment:
        PORT: 8084
