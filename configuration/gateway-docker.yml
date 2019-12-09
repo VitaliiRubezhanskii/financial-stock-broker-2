@@ -1,10 +1,10 @@
 zuul:
   ignored-services: '*'
   routes:
-#    account: /account/**
-#    order: /order/**
-#    feign: /feign/**
-#    auth: /uaa/**
+    account: /account/**
+    order: /order/**
+    feign: /feign/**
+    auth: /uaa/**
   sensitiveHeaders:
 #     account:
 #        path: /account/** #path that will be intercepted
