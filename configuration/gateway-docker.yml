@@ -65,6 +65,7 @@ security:
     resource:
       user-info-uri: http://auth:8084/uaa/user/current
       token-info-uri: http://auth:8084/uaa/oauth/check_token
+  sessions: ALWAYS
 
 
 
