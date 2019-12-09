@@ -62,6 +62,9 @@ security:
       grant-type: client_credentials
       scope: server
 
+    resource:
+      user-info-uri: http://auth:8084/uaa/user/current
+      token-info-uri: http://auth:8084/uaa/oauth/check_token
 
 
 
