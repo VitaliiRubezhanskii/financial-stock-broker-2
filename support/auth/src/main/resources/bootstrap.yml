@@ -1,10 +1,12 @@
 spring:
   application:
     name: auth
+  profiles:
+    active: ${SPRING_PROFILES_ACTIVE}
   cloud:
     config:
-      uri: http://configserver:8888
-#      fail-fast: true
-#      password: 1234
-#      username: user
+      uri: ${CONFIGSERVER_URI}
+
+server:
+  port: ${PORT}
 
