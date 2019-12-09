@@ -3,26 +3,26 @@ spring:
     mongodb:
       uri: mongodb://mongo1:27017,mongo2:27017,mongo3:27017/auth?replicaSet=rs0
 
-  zipkin:
-    enabled: true
-    baseUrl: http://tracing:9411
-
-  sleuth:
-    sampler:
-      probability: 100
-
-eureka:
-  client:
-    service-url:
-      defaultZone: http://discovery:8761/eureka/
-    healthcheck:
-      enabled: true
-    register-with-eureka: true
-    fetch-registry: true
-
-microservice:
-  client:
-    url: http://feign:8099
+#  zipkin:
+#    enabled: true
+#    baseUrl: http://tracing:9411
+#
+#  sleuth:
+#    sampler:
+#      probability: 100
+#
+#eureka:
+#  client:
+#    service-url:
+#      defaultZone: http://discovery:8761/eureka/
+#    healthcheck:
+#      enabled: true
+#    register-with-eureka: true
+#    fetch-registry: true
+#
+#microservice:
+#  client:
+#    url: http://feign:8099
 
 custom:
   oauth:

@@ -1,0 +1,20 @@
+zipkin:
+  enabled: true
+  baseUrl: http://tracing:9411
+
+  sleuth:
+    sampler:
+      probability: 100
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://discovery:8761/eureka/
+    healthcheck:
+      enabled: true
+    register-with-eureka: true
+    fetch-registry: true
+
+microservice:
+  client:
+    url: http://feign:8099
