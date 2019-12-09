@@ -5,7 +5,7 @@ spring:
       port: 27017
       username: root
       password: root
-      database: oauth-db
+      database: auth
 
 
 #spring:
