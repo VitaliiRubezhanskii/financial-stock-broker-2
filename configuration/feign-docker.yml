@@ -25,6 +25,8 @@
 #ribbon:
 #  ConnectTimeout: 3000
 #  ReadTimeout: 60000
+main:
+  allow-bean-definition-overriding: true
 
 security:
   oauth2:
