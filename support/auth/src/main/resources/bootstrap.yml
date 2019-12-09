@@ -9,8 +9,7 @@ spring:
 
 server:
   port: ${PORT}
-  servlet:
-    context-path: /uaa
+
 
 
 
