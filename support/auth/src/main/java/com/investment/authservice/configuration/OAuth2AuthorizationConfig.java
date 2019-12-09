@@ -33,7 +33,8 @@ public class OAuth2AuthorizationConfig extends AuthorizationServerConfigurerAdap
 
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-        clients.withClientDetails(oauth2ClientDetailsService);
+        clients.
+                withClientDetails(oauth2ClientDetailsService);
     }
 
     @Override

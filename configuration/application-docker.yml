@@ -18,3 +18,9 @@ eureka:
 microservice:
   client:
     url: http://feign:8099
+
+security:
+  oauth2:
+    resource:
+      user-info-uri: http://auth:8084/uaa/user/current
+      token-info-uri: http://auth:8084/uaa/oauth/check_token
