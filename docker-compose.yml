@@ -2,34 +2,34 @@ version: "3.2"
 networks:
     my-mongo-cluster:
 services:
-#   tracing:
-#      image: openzipkin/zipkin
-#      ports:
-#        - 9411:9411
-#      build:
-#        context: ./support/tracing
-#        dockerfile: Dockerfile
-#      depends_on:
-#        - mongo-replicator
-#        - configserver
-#        - discovery
-#      healthcheck:
-#        test: ["CMD", "curl", "-f", "http://localhost:9411/zipkin/"]
-#        interval: 30s
-#        timeout: 10s
-#        retries: 5
-#      restart: always
-#      networks:
-#         - my-mongo-cluster
+   tracing:
+      image: openzipkin/zipkin
+      ports:
+        - 9411:9411
+      build:
+        context: ./support/tracing
+        dockerfile: Dockerfile
+      depends_on:
+        - mongo-replicator
+        - configserver
+        - discovery
+      healthcheck:
+        test: ["CMD", "curl", "-f", "http://localhost:9411/zipkin/"]
+        interval: 30s
+        timeout: 10s
+        retries: 5
+      restart: always
+      networks:
+         - my-mongo-cluster
 
    mongo1:
       image: mongo:4.1.13-bionic
       command: --replSet rs0 --bind_ip_all
       ports:
         - 27018:27017
-      volumes:
-        - /etc/localtime:/etc/localtime:ro
-        - /mongo_cluster/data1:/data/db
+#      volumes:
+#        - /etc/localtime:/etc/localtime:ro
+#        - /mongo_cluster/data1:/data/db
       networks:
         - my-mongo-cluster
    mongo2:
@@ -37,9 +37,9 @@ services:
       command: --replSet rs0 --bind_ip_all
       ports:
         - 27019:27017
-      volumes:
-        - /etc/localtime:/etc/localtime:ro
-        - /mongo_cluster/data2:/data/db
+#      volumes:
+#        - /etc/localtime:/etc/localtime:ro
+#        - /mongo_cluster/data2:/data/db
       networks:
         - my-mongo-cluster
       depends_on:
@@ -49,9 +49,9 @@ services:
       command: --replSet rs0 --bind_ip_all
       ports:
         - 27020:27017
-      volumes:
-        - /etc/localtime:/etc/localtime:ro
-        - /mongo_cluster/data3:/data/db
+#      volumes:
+#        - /etc/localtime:/etc/localtime:ro
+#        - /mongo_cluster/data3:/data/db
       networks:
         - my-mongo-cluster
       depends_on:
