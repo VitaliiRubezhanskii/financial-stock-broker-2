@@ -41,5 +41,5 @@ security:
       scope: server
 
     resource:
-      user-info-uri: http://auth-service.default.svc.cluster.local/uaa/user/current
-      token-info-uri: http://auth-service.default.svc.cluster.local/uaa/oauth/check_token
+      user-info-uri: http://auth-service:8084/uaa/user/current
+      token-info-uri: http://auth-service:8084/uaa/oauth/check_token
