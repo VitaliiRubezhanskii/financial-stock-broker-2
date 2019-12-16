@@ -14,14 +14,14 @@ spec:
     spec:
       containers:
         - name: order
-          image: ${REPOSITORY_TAG}
+          image: order #${REPOSITORY_TAG}
           env:
             - name: SPRING_PROFILES_ACTIVE
               value: deployment
             - name: PORT
               value: 8092
             - name: CONFIGSERVER_URI
-              value: http://configserver:8888
+              value: http://configserver-service:8888
           imagePullPolicy: Never
           readinessProbe:
             httpGet:

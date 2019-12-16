@@ -14,34 +14,31 @@ spec:
     spec:
       containers:
         - name: feign
-          image: ${REPOSITORY_TAG}
+          image: feign #${REPOSITORY_TAG}
           env:
             - name: SPRING_PROFILES_ACTIVE
               value: deployment
             - name: PORT
-              value: 8084
+              value: 8099
             - name: CONFIGSERVER_URI
-              value: http://configserver:8888
+              value: http://configserver-service:8888
           imagePullPolicy: Never
-          readinessProbe:
-            httpGet:
-              path: /healthz
-              port: 8080
+
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: fleetman-position-tracker
+  name: feign-service
 
 spec:
   # This defines which pods are going to be represented by this Service
   # The service becomes a network endpoint for either other services
   # or maybe external users to connect to (eg browser)
   selector:
-    app: position-tracker
+    app: feign
 
   ports:
     - name: http
-      port: 8080
+      port: 8099
 
   type: ClusterIP
