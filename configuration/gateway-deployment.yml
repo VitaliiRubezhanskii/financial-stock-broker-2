@@ -3,7 +3,7 @@ zuul:
   routes:
     account-b6b5c9569-6x8c8: /account/**
     order-5894567c87-8dw5j: /order/**
-    feign-59f9f98d69-kw5c9: /feign/**
+    feign-59f9f98d69-kw5c9: /feign-59f9f98d69-kw5c9/**
     auth-65ccd549b4-2fpbm: /uaa/**
   sensitiveHeaders:
 
