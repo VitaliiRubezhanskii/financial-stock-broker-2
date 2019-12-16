@@ -14,7 +14,7 @@ eureka:
     registerWithEureka: true
     fetchRegistry: true
     serviceUrl:
-      defaultZone: http://discovery:8761/eureka/
+      defaultZone: http://monitoring-service.default.svc.cluster.local:8761/eureka/
     healthcheck:
       enabled: true
     lease:
@@ -36,16 +36,10 @@ security:
     client:
       clientId: gateway
       clientSecret: 1234
-      accessTokenUri: http://auth:8084/uaa/oauth/token
+      accessTokenUri: http://auth-service.default.svc.cluster.local/uaa/oauth/token
       grant-type: client_credentials
       scope: server
 
     resource:
-      user-info-uri: http://auth:8084/uaa/user/current
-      token-info-uri: http://auth:8084/uaa/oauth/check_token
-
-
-
-
-
-
+      user-info-uri: http://auth-service.default.svc.cluster.local/uaa/user/current
+      token-info-uri: http://auth-service.default.svc.cluster.local/uaa/oauth/check_token

@@ -14,6 +14,7 @@ eureka:         #tells about the Eureka server details and its refresh time
   instance:
     leaseRenewalIntervalInSeconds: 1
     leaseExpirationDurationInSeconds: 2
+
   client:
     serviceUrl:
       defaultZone: http://dicovery_service:8761/eureka/

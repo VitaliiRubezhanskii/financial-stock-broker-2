@@ -1,0 +1,22 @@
+sleuth:
+  sampler:
+    probability: 100
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://monitoring-service.default.svc.cluster.local/eureka/
+    healthcheck:
+      enabled: true
+    register-with-eureka: true
+    fetch-registry: true
+
+microservice:
+  client:
+    url: http://feign-service.default.svc.cluster.local:8099
+
+security:
+  oauth2:
+    resource:
+      user-info-uri: http://auth-service.default.svc.cluster.local/uaa/user/current
+      token-info-uri: http://auth-service.default.svc.cluster.local/uaa/oauth/check_token

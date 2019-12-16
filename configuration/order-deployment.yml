@@ -1,0 +1,17 @@
+spring:
+  data:
+    mongodb:
+      uri: mongodb://mongodb.default.svc.cluster.local/order
+
+security:
+  oauth2:
+    client:
+      clientId: account
+      clientSecret: 1234
+      accessTokenUri: http://auth-service.default.svc.cluster.local/uaa/oauth/token
+      grant-type: client_credentials
+      scope: server
+
+    resource:
+      user-info-uri: http://auth-service.default.svc.cluster.local/uaa/user/current
+      token-info-uri: http://auth-service.default.svc.cluster.local/uaa/oauth/check_token
