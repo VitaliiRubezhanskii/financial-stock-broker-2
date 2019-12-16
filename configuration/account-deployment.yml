@@ -1,9 +1,7 @@
 spring:
   data:
     mongodb:
-      host: mongodb
-      port: 27017
-      database: account
+      uri: mongodb://mongodb/account
 
 security:
   oauth2:
