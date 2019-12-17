@@ -1,18 +1,11 @@
 zuul:
   ignored-services: '*'
   routes:
-    account:
-      path: /account/**
-      sensitiveHeaders:
-    order:
-      path: /order/**
-      sensitiveHeaders:
-    feign:
-      path: /feign/**
-      sensitiveHeaders:
-    auth:
-      path: /uaa/**
-      sensitiveHeaders:
+    account: /account/**
+    order: /order/**
+    feign: /feign/**
+    auth: /uaa/**
+  sensitiveHeaders:
 
 
 eureka:

@@ -12,18 +12,27 @@ spec:
     - host: microservices.info
       http:
         paths:
+
           - path: /uaa
             backend:
               serviceName: auth
               servicePort: 8084
+
+          - path: /
+            backend:
+              serviceName: gateway
+              servicePort: 5000
+
           - path: /account
             backend:
               serviceName: account
               servicePort: 8081
+
           - path: /order
             backend:
               serviceName: order
               servicePort: 8092
+
           - path: /feign
             backend:
               serviceName: feign
