@@ -3,16 +3,16 @@ zuul:
   routes:
     account:
       path: /account/**
-      sensitiveHeaders: Cookie,Set-Cookie
+      sensitiveHeaders:
     order:
       path: /order/**
-      sensitiveHeaders: Cookie,Set-Cookie
+      sensitiveHeaders:
     feign:
       path: /feign/**
-      sensitiveHeaders: Cookie,Set-Cookie
+      sensitiveHeaders:
     auth:
       path: /uaa/**
-      sensitiveHeaders: Cookie,Set-Cookie
+      sensitiveHeaders:
 
 
 eureka:
