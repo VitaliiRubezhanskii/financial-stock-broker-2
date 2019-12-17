@@ -16,7 +16,7 @@ spec:
         - name: order
           image: order #${REPOSITORY_TAG}
           ports:
-            - containerPort: '8092'
+            - containerPort: 8092
           env:
             - name: SPRING_PROFILES_ACTIVE
               value: deployment
