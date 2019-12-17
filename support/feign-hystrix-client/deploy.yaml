@@ -7,7 +7,7 @@ spec:
     matchLabels:
       app: feign
   replicas: 1
-  template: # template for the pods
+  template:
     metadata:
       labels:
         app: feign
@@ -15,30 +15,26 @@ spec:
       containers:
         - name: feign
           image: feign #${REPOSITORY_TAG}
+          ports:
+            - containerPort: 8099
           env:
             - name: SPRING_PROFILES_ACTIVE
               value: deployment
             - name: PORT
               value: '8099'
             - name: CONFIGSERVER_URI
-              value: http://configserver-service:8888
+              value: http://configserver:8888
           imagePullPolicy: Never
 
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: feign-service
-
+  name: feign
 spec:
-  # This defines which pods are going to be represented by this Service
-  # The service becomes a network endpoint for either other services
-  # or maybe external users to connect to (eg browser)
   selector:
     app: feign
-
   ports:
-    - name: http
-      port: 8099
-
-  type: ClusterIP
+    - port: 8099
+      protocol: TCP
+  type: NodePort

@@ -7,7 +7,7 @@ spec:
     matchLabels:
       app: monitoring
   replicas: 1
-  template: # template for the pods
+  template:
     metadata:
       labels:
         app: monitoring
@@ -15,7 +15,10 @@ spec:
       containers:
         - name: monitoring
           image: discovery #${REPOSITORY_TAG}
+          ports:
+            - containerPort: 8761
           imagePullPolicy: Never
+
 #          readinessProbe:
 #            httpGet:
 #              path: /eureka
@@ -24,17 +27,12 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: monitoring-service
+  name: monitoring
 
 spec:
-  # This defines which pods are going to be represented by this Service
-  # The service becomes a network endpoint for either other services
-  # or maybe external users to connect to (eg browser)
   selector:
     app: monitoring
-
   ports:
-    - name: http
-      port: 8761
-
-  type: ClusterIP
+    - port: 8761
+      protocol: TCP
+  type: NodePort

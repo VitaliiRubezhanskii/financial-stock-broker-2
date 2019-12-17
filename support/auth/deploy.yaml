@@ -7,7 +7,7 @@ spec:
     matchLabels:
       app: auth
   replicas: 1
-  template: # template for the pods
+  template:
     metadata:
       labels:
         app: auth
@@ -15,31 +15,28 @@ spec:
       containers:
         - name: auth
           image: auth #${REPOSITORY_TAG}
+          ports:
+            - containerPort: 8084
           env:
             - name: SPRING_PROFILES_ACTIVE
               value: deployment
             - name: PORT
               value: '8084'
             - name: CONFIGSERVER_URI
-              value: http://configserver-service:8888
+              value: http://configserver:8888
           imagePullPolicy: Never
 
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: auth-service
+  name: auth
 
 spec:
-  # This defines which pods are going to be represented by this Service
-  # The service becomes a network endpoint for either other services
-  # or maybe external users to connect to (eg browser)
+  ports:
+    - port: 8084
+      protocol: TCP
   selector:
     app: auth
-
-  ports:
-    - name: http
-      port: 8084
-
-  type: ClusterIP
+  type: NodePort
 

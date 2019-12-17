@@ -7,7 +7,7 @@ spec:
     matchLabels:
       app: gateway
   replicas: 1
-  template: # template for the pods
+  template:
     metadata:
       labels:
         app: gateway
@@ -15,30 +15,30 @@ spec:
       containers:
         - name: gateway
           image: gateway #${REPOSITORY_TAG}
+          ports:
+            - containerPort: 5000
           env:
             - name: SPRING_PROFILES_ACTIVE
               value: deployment
             - name: PORT
               value: '5000'
             - name: CONFIGSERVER_URI
-              value: http://configserver-service:8888
+              value: http://configserver:8888
           imagePullPolicy: Never
 
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: gateway-service
+  name: gateway
 
 spec:
-  # This defines which pods are going to be represented by this Service
-  # The service becomes a network endpoint for either other services
-  # or maybe external users to connect to (eg browser)
+
   selector:
     app: gateway
 
   ports:
-    - name: http
-      port: 5000
+    - port: 5000
+      protocol: TCP
 
-  type: ClusterIP
+  type: NodePort

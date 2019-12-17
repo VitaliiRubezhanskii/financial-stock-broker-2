@@ -7,7 +7,7 @@ spec:
     matchLabels:
       app: order
   replicas: 1
-  template: # template for the pods
+  template:
     metadata:
       labels:
         app: order
@@ -15,30 +15,27 @@ spec:
       containers:
         - name: order
           image: order #${REPOSITORY_TAG}
+          ports:
+            - containerPort: '8092'
           env:
             - name: SPRING_PROFILES_ACTIVE
               value: deployment
             - name: PORT
               value: '8092'
             - name: CONFIGSERVER_URI
-              value: http://configserver-service:8888
+              value: http://configserver:8888
           imagePullPolicy: Never
 
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: order-service
+  name: order
 
 spec:
-  # This defines which pods are going to be represented by this Service
-  # The service becomes a network endpoint for either other services
-  # or maybe external users to connect to (eg browser)
+  ports:
+    - port: 8092
+      protocol: TCP
   selector:
     app: order
-
-  ports:
-    - name: http
-      port: 8092
-
-  type: ClusterIP
+  type: NodePort

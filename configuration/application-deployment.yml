@@ -5,7 +5,7 @@ sleuth:
 eureka:
   client:
     service-url:
-      defaultZone: http://monitoring-service:8761/eureka/
+      defaultZone: http://monitoring:8761/eureka/
     healthcheck:
       enabled: true
     register-with-eureka: true
@@ -13,10 +13,10 @@ eureka:
 
 microservice:
   client:
-    url: http://feign-service:8099
+    url: http://feign:8099
 
 security:
   oauth2:
     resource:
-      user-info-uri: http://auth-service:8084/uaa/user/current
-      token-info-uri: http://auth-service:8084/uaa/oauth/check_token
+      user-info-uri: http://auth:8084/uaa/user/current
+      token-info-uri: http://auth:8084/uaa/oauth/check_token

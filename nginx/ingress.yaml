@@ -1,0 +1,30 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: gateway-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  backend:
+    serviceName: default-http-backend
+    servicePort: 80
+  rules:
+    - host: microservices.info
+      http:
+        paths:
+          - path: /uaa
+            backend:
+              serviceName: auth
+              servicePort: 8084
+          - path: /account
+            backend:
+              serviceName: account
+              servicePort: 8081
+          - path: /order
+            backend:
+              serviceName: order
+              servicePort: 8092
+          - path: /feign
+            backend:
+              serviceName: feign
+              servicePort: 8099
