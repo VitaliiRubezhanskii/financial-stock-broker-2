@@ -1,8 +1,8 @@
 spring:
   application:
     name: gateway
-#  profiles:
-#    active: ${SPRING_PROFILES_ACTIVE}
+  profiles:
+    active: docker #${SPRING_PROFILES_ACTIVE}
   cloud:
     config:
       uri: ${CONFIGSERVER_URI}
