@@ -44,8 +44,8 @@ ribbon:
   ConnectTimeout: 3000
   ReadTimeout: 60000
 
-#  eureka:
-#    enabled: false
+  eureka:
+    enabled: false
 
 security:
   oauth2:
