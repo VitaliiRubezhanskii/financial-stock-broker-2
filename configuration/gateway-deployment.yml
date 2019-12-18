@@ -4,19 +4,19 @@ zuul:
     account:
       path: /account/**
       ribbon:
-        listOfServers: account
+        listOfServers: http://account:8081
     order:
       path: /order/**
       ribbon:
-        listOfServers: order
+        listOfServers: http://order:8092
     feign:
       path: /feign/**
       ribbon:
-        listOfServers: feign
+        listOfServers: http://feign:8099
     auth:
       path: /uaa/**
       ribbon:
-        listOfServers: auth
+        listOfServers: http://auth:8084
   sensitiveHeaders:
 
 
