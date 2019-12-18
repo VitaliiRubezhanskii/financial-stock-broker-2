@@ -6,7 +6,7 @@ spring:
 security:
   oauth2:
     client:
-      clientId: account
+      clientId: order
       clientSecret: 1234
       accessTokenUri: http://auth:8084/uaa/oauth/token
       grant-type: client_credentials

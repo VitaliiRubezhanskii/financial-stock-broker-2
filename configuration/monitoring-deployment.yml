@@ -5,6 +5,6 @@ eureka:
     prefer-ip-address: true
   client:
     register-with-eureka: false
-    fetch-registry: true
+    fetch-registry: false
   server:
     waitTimeInMsWhenSyncEmpty: 0

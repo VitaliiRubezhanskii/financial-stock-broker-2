@@ -4,6 +4,6 @@ server:
 spring:
   application:
     name: configserver
-#  profiles:
-#    active: deployment
+  profiles:
+    active: deployment
 
