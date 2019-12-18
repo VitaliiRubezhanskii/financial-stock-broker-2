@@ -1,10 +1,22 @@
 zuul:
   ignored-services: '*'
   routes:
-    account: /account/**
-    order: /order/**
-    feign: /feign/**
-    auth: /uaa/**
+    account:
+      path: /account/**
+      ribbon:
+        listOfServers: account
+    order:
+      path: /order/**
+      ribbon:
+        listOfServers: order
+    feign:
+      path: /feign/**
+      ribbon:
+        listOfServers: feign
+    auth:
+      path: /uaa/**
+      ribbon:
+        listOfServers: auth
   sensitiveHeaders:
 
 
@@ -31,6 +43,9 @@ hystrix.command.default.execution.isolation.thread.timeoutInMilliseconds: 60000
 ribbon:
   ConnectTimeout: 3000
   ReadTimeout: 60000
+
+  eureka:
+    enabled: false
 
 security:
   oauth2:
