@@ -2,3 +2,7 @@ spring:
   data:
     mongodb:
       uri: mongodb://mongodb/auth
+
+server:
+  servlet:
+    context-path: /uaa
