@@ -1,35 +1,30 @@
-FROM docker:18-dind
-MAINTAINER Piotr Minkowski <piotr.minkowski@gmail.com>
-ENV JENKINS_MASTER http://localhost:8080
-ENV JENKINS_SLAVE_NAME dind-node
-ENV JENKINS_SLAVE_SECRET ""
-ENV JENKINS_HOME /home/jenkins
-ENV JENKINS_REMOTING_VERSION 3.17
-ENV DOCKER_HOST tcp://0.0.0.0:2375
-RUN apk --update add curl tar git bash openjdk8 sudo
+FROM jenkins/jenkins:lts-alpine
+USER root
 
-ARG MAVEN_VERSION=3.5.2
-ARG USER_HOME_DIR="/root"
-ARG SHA=707b1f6e390a65bde4af4cdaf2a24d45fc19a6ded00fff02e91626e3e42ceaff
-ARG BASE_URL=https://apache.osuosl.org/maven/maven-3/${MAVEN_VERSION}/binaries
+# Pipeline
+RUN /usr/local/bin/install-plugins.sh workflow-aggregator && \
+    /usr/local/bin/install-plugins.sh github && \
+    /usr/local/bin/install-plugins.sh ws-cleanup && \
+    /usr/local/bin/install-plugins.sh greenballs && \
+    /usr/local/bin/install-plugins.sh simple-theme-plugin && \
+    /usr/local/bin/install-plugins.sh kubernetes && \
+    /usr/local/bin/install-plugins.sh docker-workflow && \
+    /usr/local/bin/install-plugins.sh kubernetes-cli && \
+    /usr/local/bin/install-plugins.sh github-branch-source
 
-RUN mkdir -p /usr/share/maven /usr/share/maven/ref \
-  && curl -fsSL -o /tmp/apache-maven.tar.gz ${BASE_URL}/apache-maven-${MAVEN_VERSION}-bin.tar.gz \
-  && echo "${SHA}  /tmp/apache-maven.tar.gz" | sha256sum -c - \
-  && tar -xzf /tmp/apache-maven.tar.gz -C /usr/share/maven --strip-components=1 \
-  && rm -f /tmp/apache-maven.tar.gz \
-  && ln -s /usr/share/maven/bin/mvn /usr/bin/mvn
+# install Maven, Java, Docker, AWS
+RUN apk add --no-cache maven \
+    openjdk8 \
+    docker \
+    gettext
 
-ENV MAVEN_HOME /usr/share/maven
-ENV MAVEN_CONFIG "$USER_HOME_DIR/.m2"
+# Kubectl
+RUN  wget https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl && chmod +x ./kubectl && mv ./kubectl /usr/local/bin/kubectl
 
-RUN adduser -D -h $JENKINS_HOME -s /bin/sh jenkins jenkins && chmod a+rwx $JENKINS_HOME
-RUN echo "jenkins ALL=(ALL) NOPASSWD: /usr/local/bin/dockerd" > /etc/sudoers.d/00jenkins && chmod 440 /etc/sudoers.d/00jenkins
-RUN echo "jenkins ALL=(ALL) NOPASSWD: /usr/local/bin/docker" > /etc/sudoers.d/01jenkins && chmod 440 /etc/sudoers.d/01jenkins
-RUN curl --create-dirs -sSLo /usr/share/jenkins/slave.jar http://repo.jenkins-ci.org/public/org/jenkins-ci/main/remoting/$JENKINS_REMOTING_VERSION/remoting-$JENKINS_REMOTING_VERSION.jar && chmod 755 /usr/share/jenkins && chmod 644 /usr/share/jenkins/slave.jar
+# Need to ensure the gid here matches the gid on the host node. We ASSUME (hah!) this
+# will be stable....keep an eye out for unable to connect to docker.sock in the builds
+# RUN delgroup ping && delgroup docker && addgroup -g 999 docker && addgroup jenkins docker
 
-COPY entrypoint.sh /usr/local/bin/entrypoint
-VOLUME $JENKINS_HOME
-WORKDIR $JENKINS_HOME
-USER jenkins
-ENTRYPOINT ["/usr/local/bin/entrypoint"]
+# See https://github.com/kubernetes/minikube/issues/956.
+# THIS IS FOR MINIKUBE TESTING ONLY - it is not production standard (we're running as root!)
+RUN chown -R root "$JENKINS_HOME" /usr/share/jenkins/ref
