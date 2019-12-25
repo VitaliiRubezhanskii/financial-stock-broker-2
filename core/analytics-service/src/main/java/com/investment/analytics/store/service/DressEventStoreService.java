@@ -22,11 +22,11 @@ import java.util.OptionalDouble;
 
 @Service
 @Transactional
-@RequiredArgsConstructor
 public class DressEventStoreService {
 
 
-    private final DressRepository dressRepository;
+    @Autowired
+    private DressRepository dressRepository;
 
     @Autowired
     private BrandRepository brandRepository;
