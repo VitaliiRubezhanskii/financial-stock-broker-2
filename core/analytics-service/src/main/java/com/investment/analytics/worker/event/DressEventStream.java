@@ -1,40 +1,39 @@
 package com.investment.analytics.worker.event;
 
 
-import com.investment.analytics.DressStatus;
-import com.investment.analytics.worker.domain.Dress;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.kafka.streams.KeyValue;
+import org.apache.kafka.streams.kstream.KStream;
 import org.springframework.cloud.stream.annotation.EnableBinding;
 import org.springframework.cloud.stream.annotation.StreamListener;
+import org.springframework.cloud.stream.binder.kstream.annotations.KStreamProcessor;
 import org.springframework.context.annotation.Profile;
-import org.springframework.scheduling.annotation.EnableScheduling;
-import org.springframework.stereotype.Component;
+import org.springframework.messaging.handler.annotation.SendTo;
 
-import java.util.UUID;
-
-@EnableBinding(DressInboundChannels.class)
+@EnableBinding(KStreamProcessor.class)
 @Profile({"development", "docker", "test"})
 @Slf4j
 public class DressEventStream {
 
-//    @Autowired
-//    private DressEventStoreService dressEventStoreService;
-
-//    @Autowired
-//    private RatingEventStoreService ratingEventStoreService;
-
     private static final String LOG_RECEIVED = "Received: ";
 
-    @StreamListener(target = DressInboundChannels.INBOUND_DRESSES)
-    public void receiveDressMessageEvent(DressMessageEvent dressMessageEvent) {
-        log.info(LOG_RECEIVED + dressMessageEvent.toString());
-//        dressEventStoreService.apply(dressMessageEvent);
+    @StreamListener("input")
+    public void receiveDressMessageEvent(KStream<?, DressMessageEvent> incomingStream) {
+        incomingStream.map((k, v) ->  KeyValue.pair(k, v.getPayload().getColor().toLowerCase())).foreach((k, v) -> log.info("key = {} | value = {} ", k, v));
     }
+
+//    @StreamListener(target = DressInboundChannels.INBOUND_DRESSES)
+//    public void receiveDressMessageEvent(DressMessageEvent dressMessageEvent) {
+//        KStreamBuilder builder = new KStreamBuilder();
+//        builder.stream(dressMessageEvent.getPayload().getColor()).map(KeyValue::pair).foreach((k, v) -> log.info("key = {} | value = {} ", k, v));
+//        log.info(LOG_RECEIVED + " event {} ", dressMessageEvent.toString());
+//
+//    }
 
     @StreamListener(target = DressInboundChannels.INBOUND_RATINGS)
     public void receiveRatingMessageEvent(RatingMessageEvent ratingMessageEvent) {
         log.info(LOG_RECEIVED + ratingMessageEvent.toString());
-//        ratingEventStoreService.apply(ratingMessageEvent);
+
     }
 
 }

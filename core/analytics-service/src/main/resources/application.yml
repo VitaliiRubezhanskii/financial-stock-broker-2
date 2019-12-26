@@ -77,8 +77,10 @@ spring:
         binder:
           brokers: kafka
       bindings:
-        output:
+        input:
           destination: dresses
+          consumer:
+            partitioned: false
         idresses:
           destination: dresses
           group: dresses-group
@@ -93,6 +95,24 @@ spring:
           consumer:
             durableSubscription: true
             concurrency: 20
+#        input:
+#          destination: ratings
+      streams:
+        binder:
+         application-id: splitter
+         brokers: localhost:9092
+         configuration.default:
+            key.serde: org.apache.kafka.common.serialization.Serdes$StringSerde
+            value.serde: org.springframework.kafka.support.serializer.JsonSerde
+            spring:
+             json:
+               key:
+                 default:
+                   type: java.lang.String
+               default:
+                 value:
+                   type: com.investment.analytics.worker.event.DressMessageEvent
+
 
   jpa:
     properties:
