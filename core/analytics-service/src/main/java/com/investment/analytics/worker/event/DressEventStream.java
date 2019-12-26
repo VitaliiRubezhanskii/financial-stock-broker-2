@@ -1,10 +1,16 @@
 package com.investment.analytics.worker.event;
 
 
+import com.investment.analytics.DressStatus;
+import com.investment.analytics.worker.domain.Dress;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.stream.annotation.EnableBinding;
 import org.springframework.cloud.stream.annotation.StreamListener;
 import org.springframework.context.annotation.Profile;
+import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.stereotype.Component;
+
+import java.util.UUID;
 
 @EnableBinding(DressInboundChannels.class)
 @Profile({"development", "docker", "test"})
@@ -32,3 +38,6 @@ public class DressEventStream {
     }
 
 }
+
+
+

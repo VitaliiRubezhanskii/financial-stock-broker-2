@@ -77,6 +77,8 @@ spring:
         binder:
           brokers: kafka
       bindings:
+        output:
+          destination: dresses
         idresses:
           destination: dresses
           group: dresses-group
@@ -91,6 +93,7 @@ spring:
           consumer:
             durableSubscription: true
             concurrency: 20
+
   jpa:
     properties:
       hibernate:
