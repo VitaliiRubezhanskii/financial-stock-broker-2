@@ -16,8 +16,6 @@ import org.springframework.scheduling.annotation.Scheduled;
 @AllArgsConstructor
 public class DressEventOutputStream {
 
-    private static final String LOG_SENT = "Sent: ";
-
     private final Source source;
 
     private final SpamGenerator spamGenerator;
