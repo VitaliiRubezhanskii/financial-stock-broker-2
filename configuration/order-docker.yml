@@ -3,13 +3,8 @@ spring:
     mongodb:
       uri: mongodb://mongo1:27017,mongo2:27017,mongo3:27017/order?replicaSet=rs0
 
-
-
-
-
   cloud:
     stream:
-      bro
 #      default:
 #        producer:
 #          useNativeEncoding: true
