@@ -1,0 +1,16 @@
+{
+	"type": "record",
+	"name": "Order",
+	"namespace": "com.investment.trading.avro",
+	"fields": [
+	 {
+		"name": "id",
+		"type": "int"
+	},
+	{
+		"name": "ticket",
+		"type": "string"
+	},
+	{   "name":"batch",
+	    "type": "int"}]
+}

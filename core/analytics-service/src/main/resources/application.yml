@@ -12,7 +12,7 @@ management:
     enabled-by-default: true
     web.exposure.include: health,flyway,metrics
   server:
-    port: 8081
+    port: 8181
     servlet:
       context-path: /admin
 logging:
@@ -22,20 +22,7 @@ logging:
 ---
 spring:
   profiles: development
-  flyway:
-    baseline-on-migrate: true
-    locations: classpath:migration
-  datasource:
-    url: jdbc:postgresql://localhost:5432/dresses
-    driverClassName: org.postgresql.Driver
-    username: ${POSTGRES_USER}
-    password: ${POSTGRES_PASSWORD}
-    hikari:
-      maximumPoolSize: 10
-      connectionTimeout: 1500
-  data:
-    rest:
-      detection-strategy: annotated
+
   cloud:
     stream:
       bindings:
@@ -43,75 +30,66 @@ spring:
           destination: dresses
           group: dresses-group
           contentType: application/json
-          consumer:
-            durableSubscription: true
-            concurrency: 10
-        iratings:
-          destination: ratings
-          concurrency: 10
-          group: ratings-group
-          content-type: application/json
-          consumer:
-            durableSubscription: true
-            concurrency: 10
+#          consumer:
+#            durableSubscription: true
+#            concurrency: 10
+#        iratings:
+#          destination: ratings
+#          concurrency: 10
+#          group: ratings-group
+#          content-type: application/json
+#          consumer:
+#            durableSubscription: true
+#            concurrency: 10
 ---
 spring:
   profiles: docker
-  flyway:
-    baseline-on-migrate: true
-    locations: classpath:migration
-  datasource:
-    url: jdbc:postgresql://postgresdb:5432/postgres
-    driverClassName: org.postgresql.Driver
-    username: postgres
-    password: demo
-    hikari:
-      maximumPoolSize: 10
-      connectionTimeout: 1500
-  data:
-    rest:
-      detection-strategy: annotated
+
   cloud:
     stream:
+      default-binder: kafka
       kafka:
         binder:
           brokers: kafka
       bindings:
-        input:
-          destination: dresses
-          consumer:
-            partitioned: false
+#        input:
+#          binder: kafka
+#          destination: dresses
+#          consumer:
+#            partitioned: false
         idresses:
+          binder: kafka
           destination: dresses
           group: dresses-group
           contentType: application/json
           consumer:
             durableSubscription: true
             concurrency: 20
-        iratings:
-          destination: ratings
-          group: ratings-group
-          contentType: application/json
-          consumer:
-            durableSubscription: true
-            concurrency: 20
+#        iratings:
+#          destination: ratings
+#          group: ratings-group
+#          contentType: application/json
+#          consumer:
+#            durableSubscription: true
+#            concurrency: 20
 #        input:
 #          destination: ratings
-      streams:
-        binder:
-         application-id: splitter
-         brokers: localhost:9092
-         configuration.default:
-            key.serde: org.apache.kafka.common.serialization.Serdes$StringSerde
-            value.serde: org.springframework.kafka.support.serializer.JsonSerde
-            spring:
-             json:
-               key:
+        streams:
+          binder:
+           application-id: splitter
+           brokers: kafka
+           configuration.default:
+              key.serde: org.apache.kafka.common.serialization.Serdes$StringSerde
+              value.serde: org.springframework.kafka.support.serializer.JsonSerde
+              spring:
+               json:
+                 key:
+                   default:
+                     type: java.lang.String
                  default:
-                   type: java.lang.String
-               default:
-                 value:
-                   type: com.investment.analytics.worker.event.DressMessageEvent
+                   value:
+                     type: com.investment.analytics.worker.event.DressMessageEvent
+
 
 
   jpa:

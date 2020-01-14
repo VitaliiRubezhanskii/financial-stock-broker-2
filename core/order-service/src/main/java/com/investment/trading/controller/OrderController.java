@@ -2,6 +2,7 @@ package com.investment.trading.controller;
 
 import com.investment.trading.domain.Order;
 import com.investment.trading.domain.OrderItem;
+import com.investment.trading.dto.OrderCreationDto;
 import com.investment.trading.service.OrderService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -9,6 +10,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 //import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.cloud.stream.messaging.Processor;
+import org.springframework.kafka.support.KafkaHeaders;
+import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
 
@@ -23,10 +27,23 @@ public class OrderController {
 
     private final OrderService orderService;
 
+    private final Processor processor;
+
     @Value("${server.port}")
     private String port;
 
-
+    @PostMapping
+    public void create(@RequestBody com.investment.trading.avro.Order orderData) {
+        processor.output()
+                    .send(MessageBuilder
+                            .withPayload(com.investment.trading.avro.Order.newBuilder()
+                                    .setId(1)
+                                    .setBatch(Integer.valueOf(port))
+                                    .setTicket(orderData.getTicket())
+                                    .build())
+                            .setHeader(KafkaHeaders.MESSAGE_KEY, 1)
+                            .build());
+    }
 
 
     @GetMapping("/sku/{sku}")
@@ -53,10 +70,7 @@ public class OrderController {
 
     }
 
-    @PostMapping
-    public Order create(@RequestBody Order order) {
-        return orderService.newOrder(order).block();
-    }
+
 
     @PutMapping("/{id}/{operation}")
     public Order update(@PathVariable("id") String id, @PathVariable("operation") OrderUpdationOperation operation,  @RequestBody List<OrderItem> orderItems) {
