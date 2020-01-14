@@ -17,16 +17,16 @@ security.oauth2:
 spring:
   cloud:
     stream:
-      default:
-        producer:
-          useNativeEncoding: true
-        consumer:
-          useNativeEncoding: true
+#      default:
+#        producer:
+#          useNativeEncoding: true
+#        consumer:
+#          useNativeEncoding: true
       bindings:
-        process-in-0:
+        input:
           destination: orders
           content-type: application/*+avro
-        process-out-0:
+        output:
           destination: orders
           content-type: application/*+avro
           group: group-1
