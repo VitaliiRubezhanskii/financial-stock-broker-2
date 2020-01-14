@@ -30,10 +30,10 @@ spring:
              value.deserializer: io.confluent.kafka.serializers.KafkaAvroDeserializer
              schema.registry.url: http://schema-registry:8081
              specific.avro.reader: true
-           brokers: 192.168.96.3
+           brokers: broker
            streams:
                binder:
-                 brokers: 192.168.96.3
+                 brokers: broker
 
 security.oauth2:
     client:
