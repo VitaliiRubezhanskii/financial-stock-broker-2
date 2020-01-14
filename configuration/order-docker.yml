@@ -1,22 +1,15 @@
-spring.data.mongodb.uri: mongodb://mongo1:27017,mongo2:27017,mongo3:27017/order?replicaSet=rs0
-
-security.oauth2:
-
-    client:
-      clientId: order
-      clientSecret: 1234
-      accessTokenUri: http://auth:8084/uaa/oauth/token
-      grant-type: client_credentials
-      scope: server
-
-    resource:
-      user-info-uri: http://auth:8084/uaa/user/current
-      token-info-uri: http://auth:8084/uaa/oauth/check_token
-
-
 spring:
+  data:
+    mongodb:
+      uri: mongodb://mongo1:27017,mongo2:27017,mongo3:27017/order?replicaSet=rs0
+
+
+
+
+
   cloud:
     stream:
+      bro
 #      default:
 #        producer:
 #          useNativeEncoding: true
@@ -43,3 +36,18 @@ spring:
              schema.registry.url: http://schema-registry:8081
              specific.avro.reader: true
            brokers: broker:9092
+           streams:
+               binder:
+                 brokers: broker:9092
+
+security.oauth2:
+    client:
+      clientId: order
+      clientSecret: 1234
+      accessTokenUri: http://auth:8084/uaa/oauth/token
+      grant-type: client_credentials
+      scope: server
+
+    resource:
+      user-info-uri: http://auth:8084/uaa/user/current
+      token-info-uri: http://auth:8084/uaa/oauth/check_token
