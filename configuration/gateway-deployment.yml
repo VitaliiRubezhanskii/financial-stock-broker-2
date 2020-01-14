@@ -4,7 +4,7 @@ zuul:
     account:
       path: /account/**
       ribbon:
-        listOfServers: http://account:8081
+        listOfServers: http://account:8091
     order:
       path: /order/**
       ribbon:
