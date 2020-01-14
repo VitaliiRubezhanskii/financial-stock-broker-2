@@ -17,9 +17,10 @@ security.oauth2:
 spring:
   cloud:
     stream:
-         producer:
+      default:
+        producer:
           useNativeEncoding: true
-         consumer:
+        consumer:
           useNativeEncoding: true
       bindings:
         process-in-0:
