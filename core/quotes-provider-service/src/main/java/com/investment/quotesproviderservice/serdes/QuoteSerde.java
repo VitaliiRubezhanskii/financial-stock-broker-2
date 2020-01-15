@@ -1,6 +1,7 @@
 package com.investment.quotesproviderservice.serdes;
 
-import com.investment.quotesproviderservice.avro.Quote;
+
+import avro.Quote;
 import io.confluent.kafka.serializers.AbstractKafkaAvroSerDeConfig;
 import io.confluent.kafka.streams.serdes.avro.SpecificAvroSerializer;
 

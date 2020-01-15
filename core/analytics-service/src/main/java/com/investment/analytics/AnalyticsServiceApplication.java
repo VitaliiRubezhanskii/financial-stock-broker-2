@@ -34,7 +34,7 @@ public class AnalyticsServiceApplication {
 
     @StreamListener("input")
     @SendTo("output")
-    public KStream<String, Long> process(KStream<Object, Quote> input) {
+    public KStream<String, String> process(KStream<Object, Quote> input) {
 
         final Map<String, String> serdeConfig = Collections.singletonMap(
                 AbstractKafkaAvroSerDeConfig.SCHEMA_REGISTRY_URL_CONFIG, "http://schema-registry:8081");
@@ -48,13 +48,13 @@ public class AnalyticsServiceApplication {
                     if (value.getId().toString().endsWith("v2")) {
                         newKey = "v2";
                     }
-                    return new KeyValue<>(newKey, value);
-                })
-                .groupByKey()
-                .count(Materialized.<String, Long, KeyValueStore<Bytes, byte[]>>as(STORE_NAME)
-                        .withKeySerde(Serdes.String())
-                        .withValueSerde(Serdes.Long()))
-                .toStream();
+                    return new KeyValue<String, String>(newKey, value.getTicket().toString());
+                });
+//                .groupByKey()
+//                .count(Materialized.<String, String, KeyValueStore<Bytes, byte[]>>as(STORE_NAME)
+//                        .withKeySerde(Serdes.String())
+//                        .withValueSerde(Serdes.String()))
+//                .toStream();
 
     }
 }
