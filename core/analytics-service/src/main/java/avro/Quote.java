@@ -3,7 +3,7 @@
  *
  * DO NOT EDIT DIRECTLY
  */
-package com.investment.analytics.avro;
+package avro;
 
 import org.apache.avro.specific.SpecificData;
 import org.apache.avro.message.BinaryMessageEncoder;
@@ -13,8 +13,8 @@ import org.apache.avro.message.SchemaStore;
 @SuppressWarnings("all")
 @org.apache.avro.specific.AvroGenerated
 public class Quote extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  private static final long serialVersionUID = -8295387522643336276L;
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"Quote\",\"namespace\":\"com.investment.analytics.avro\",\"fields\":[{\"name\":\"id\",\"type\":\"string\"},{\"name\":\"ticket\",\"type\":\"string\",\"aliases\":[\"ticket\"]},{\"name\":\"open\",\"type\":\"float\"},{\"name\":\"high\",\"type\":\"float\"},{\"name\":\"low\",\"type\":\"float\"},{\"name\":\"close\",\"type\":\"float\"},{\"name\":\"volume\",\"type\":\"long\"}]}");
+  private static final long serialVersionUID = 1579691468931555366L;
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"Quote\",\"namespace\":\"avro\",\"fields\":[{\"name\":\"id\",\"type\":\"string\"},{\"name\":\"ticket\",\"type\":\"string\",\"aliases\":[\"ticket\"]},{\"name\":\"open\",\"type\":\"float\"},{\"name\":\"high\",\"type\":\"float\"},{\"name\":\"low\",\"type\":\"float\"},{\"name\":\"close\",\"type\":\"float\"},{\"name\":\"volume\",\"type\":\"long\"}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 
   private static SpecificData MODEL$ = new SpecificData();
@@ -232,8 +232,8 @@ public class Quote extends org.apache.avro.specific.SpecificRecordBase implement
    * Creates a new Quote RecordBuilder.
    * @return A new Quote RecordBuilder
    */
-  public static com.investment.analytics.avro.Quote.Builder newBuilder() {
-    return new com.investment.analytics.avro.Quote.Builder();
+  public static avro.Quote.Builder newBuilder() {
+    return new avro.Quote.Builder();
   }
 
   /**
@@ -241,8 +241,8 @@ public class Quote extends org.apache.avro.specific.SpecificRecordBase implement
    * @param other The existing builder to copy.
    * @return A new Quote RecordBuilder
    */
-  public static com.investment.analytics.avro.Quote.Builder newBuilder(com.investment.analytics.avro.Quote.Builder other) {
-    return new com.investment.analytics.avro.Quote.Builder(other);
+  public static avro.Quote.Builder newBuilder(avro.Quote.Builder other) {
+    return new avro.Quote.Builder(other);
   }
 
   /**
@@ -250,8 +250,8 @@ public class Quote extends org.apache.avro.specific.SpecificRecordBase implement
    * @param other The existing instance to copy.
    * @return A new Quote RecordBuilder
    */
-  public static com.investment.analytics.avro.Quote.Builder newBuilder(com.investment.analytics.avro.Quote other) {
-    return new com.investment.analytics.avro.Quote.Builder(other);
+  public static avro.Quote.Builder newBuilder(avro.Quote other) {
+    return new avro.Quote.Builder(other);
   }
 
   /**
@@ -277,7 +277,7 @@ public class Quote extends org.apache.avro.specific.SpecificRecordBase implement
      * Creates a Builder by copying an existing Builder.
      * @param other The existing Builder to copy.
      */
-    private Builder(com.investment.analytics.avro.Quote.Builder other) {
+    private Builder(avro.Quote.Builder other) {
       super(other);
       if (isValidValue(fields()[0], other.id)) {
         this.id = data().deepCopy(fields()[0].schema(), other.id);
@@ -313,7 +313,7 @@ public class Quote extends org.apache.avro.specific.SpecificRecordBase implement
      * Creates a Builder by copying an existing Quote instance
      * @param other The existing instance to copy.
      */
-    private Builder(com.investment.analytics.avro.Quote other) {
+    private Builder(avro.Quote other) {
             super(SCHEMA$);
       if (isValidValue(fields()[0], other.id)) {
         this.id = data().deepCopy(fields()[0].schema(), other.id);
@@ -358,7 +358,7 @@ public class Quote extends org.apache.avro.specific.SpecificRecordBase implement
       * @param value The value of 'id'.
       * @return This builder.
       */
-    public com.investment.analytics.avro.Quote.Builder setId(java.lang.CharSequence value) {
+    public avro.Quote.Builder setId(java.lang.CharSequence value) {
       validate(fields()[0], value);
       this.id = value;
       fieldSetFlags()[0] = true;
@@ -378,7 +378,7 @@ public class Quote extends org.apache.avro.specific.SpecificRecordBase implement
       * Clears the value of the 'id' field.
       * @return This builder.
       */
-    public com.investment.analytics.avro.Quote.Builder clearId() {
+    public avro.Quote.Builder clearId() {
       id = null;
       fieldSetFlags()[0] = false;
       return this;
@@ -397,7 +397,7 @@ public class Quote extends org.apache.avro.specific.SpecificRecordBase implement
       * @param value The value of 'ticket'.
       * @return This builder.
       */
-    public com.investment.analytics.avro.Quote.Builder setTicket(java.lang.CharSequence value) {
+    public avro.Quote.Builder setTicket(java.lang.CharSequence value) {
       validate(fields()[1], value);
       this.ticket = value;
       fieldSetFlags()[1] = true;
@@ -417,7 +417,7 @@ public class Quote extends org.apache.avro.specific.SpecificRecordBase implement
       * Clears the value of the 'ticket' field.
       * @return This builder.
       */
-    public com.investment.analytics.avro.Quote.Builder clearTicket() {
+    public avro.Quote.Builder clearTicket() {
       ticket = null;
       fieldSetFlags()[1] = false;
       return this;
@@ -436,7 +436,7 @@ public class Quote extends org.apache.avro.specific.SpecificRecordBase implement
       * @param value The value of 'open'.
       * @return This builder.
       */
-    public com.investment.analytics.avro.Quote.Builder setOpen(float value) {
+    public avro.Quote.Builder setOpen(float value) {
       validate(fields()[2], value);
       this.open = value;
       fieldSetFlags()[2] = true;
@@ -456,7 +456,7 @@ public class Quote extends org.apache.avro.specific.SpecificRecordBase implement
       * Clears the value of the 'open' field.
       * @return This builder.
       */
-    public com.investment.analytics.avro.Quote.Builder clearOpen() {
+    public avro.Quote.Builder clearOpen() {
       fieldSetFlags()[2] = false;
       return this;
     }
@@ -474,7 +474,7 @@ public class Quote extends org.apache.avro.specific.SpecificRecordBase implement
       * @param value The value of 'high'.
       * @return This builder.
       */
-    public com.investment.analytics.avro.Quote.Builder setHigh(float value) {
+    public avro.Quote.Builder setHigh(float value) {
       validate(fields()[3], value);
       this.high = value;
       fieldSetFlags()[3] = true;
@@ -494,7 +494,7 @@ public class Quote extends org.apache.avro.specific.SpecificRecordBase implement
       * Clears the value of the 'high' field.
       * @return This builder.
       */
-    public com.investment.analytics.avro.Quote.Builder clearHigh() {
+    public avro.Quote.Builder clearHigh() {
       fieldSetFlags()[3] = false;
       return this;
     }
@@ -512,7 +512,7 @@ public class Quote extends org.apache.avro.specific.SpecificRecordBase implement
       * @param value The value of 'low'.
       * @return This builder.
       */
-    public com.investment.analytics.avro.Quote.Builder setLow(float value) {
+    public avro.Quote.Builder setLow(float value) {
       validate(fields()[4], value);
       this.low = value;
       fieldSetFlags()[4] = true;
@@ -532,7 +532,7 @@ public class Quote extends org.apache.avro.specific.SpecificRecordBase implement
       * Clears the value of the 'low' field.
       * @return This builder.
       */
-    public com.investment.analytics.avro.Quote.Builder clearLow() {
+    public avro.Quote.Builder clearLow() {
       fieldSetFlags()[4] = false;
       return this;
     }
@@ -550,7 +550,7 @@ public class Quote extends org.apache.avro.specific.SpecificRecordBase implement
       * @param value The value of 'close'.
       * @return This builder.
       */
-    public com.investment.analytics.avro.Quote.Builder setClose(float value) {
+    public avro.Quote.Builder setClose(float value) {
       validate(fields()[5], value);
       this.close = value;
       fieldSetFlags()[5] = true;
@@ -570,7 +570,7 @@ public class Quote extends org.apache.avro.specific.SpecificRecordBase implement
       * Clears the value of the 'close' field.
       * @return This builder.
       */
-    public com.investment.analytics.avro.Quote.Builder clearClose() {
+    public avro.Quote.Builder clearClose() {
       fieldSetFlags()[5] = false;
       return this;
     }
@@ -588,7 +588,7 @@ public class Quote extends org.apache.avro.specific.SpecificRecordBase implement
       * @param value The value of 'volume'.
       * @return This builder.
       */
-    public com.investment.analytics.avro.Quote.Builder setVolume(long value) {
+    public avro.Quote.Builder setVolume(long value) {
       validate(fields()[6], value);
       this.volume = value;
       fieldSetFlags()[6] = true;
@@ -608,7 +608,7 @@ public class Quote extends org.apache.avro.specific.SpecificRecordBase implement
       * Clears the value of the 'volume' field.
       * @return This builder.
       */
-    public com.investment.analytics.avro.Quote.Builder clearVolume() {
+    public avro.Quote.Builder clearVolume() {
       fieldSetFlags()[6] = false;
       return this;
     }

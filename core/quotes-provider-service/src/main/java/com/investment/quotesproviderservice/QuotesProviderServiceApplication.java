@@ -1,6 +1,6 @@
 package com.investment.quotesproviderservice;
 
-import com.investment.quotesproviderservice.avro.Quote;
+import avro.Quote;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Random;
-import java.util.UUID;
 
 @SpringBootApplication
 @EnableDiscoveryClient
