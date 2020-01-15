@@ -333,7 +333,7 @@ services:
          - my-mongo-cluster
 
    finprovider:
-      container_name: finprovider
+      container_name: quotes-provider-service
       expose:
         - 9010
       ports:
@@ -342,7 +342,7 @@ services:
         PORT: 9010
         SPRING_PROFILES_ACTIVE: docker
         CONFIGSERVER_URI: http://configserver:8888
-      image: finprovider
+      image: quotes-provider-service
       build:
         context: ./core/quotes-provider-service
         dockerfile: Dockerfile

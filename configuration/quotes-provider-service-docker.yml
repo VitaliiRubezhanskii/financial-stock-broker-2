@@ -14,7 +14,7 @@ server.port: 9010
 spring.cloud.stream.kafka.binder.configuration:
     schema.registry.url: http://schema-registry:8081
     key.serializer: org.apache.kafka.common.serialization.ByteArraySerializer
-    value.serializer: sample.producer2.FooSerde
+    value.serializer: com.investment.quotesproviderservice.serdes.QuoteSerde
 
 
 eureka:
