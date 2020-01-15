@@ -17,3 +17,20 @@ spring.cloud.stream.kafka.streams.bindings.input:
   consumer:
     keySerde: org.apache.kafka.common.serialization.Serdes$StringSerde
     valueSerde: io.confluent.kafka.streams.serdes.avro.SpecificAvroSerde
+
+eureka:
+  instance:
+    leaseRenewalIntervalInSeconds: 1
+    leaseExpirationDurationInSeconds: 2
+
+  client:
+    serviceUrl:
+      defaultZone: http://dicovery_service:8761/eureka/
+    healthcheck:
+      enabled: true
+    lease:
+      duration: 5
+
+management:
+  security:
+    enabled: false

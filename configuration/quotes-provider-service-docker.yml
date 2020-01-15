@@ -1,0 +1,37 @@
+spring:
+  cloud:
+    stream:
+      bindings:
+        output:
+          producer:
+            useNativeEncoding: true
+          destination: quote
+      kafka:
+        binder:
+          brokers: broker
+server.port: 9010
+
+spring.cloud.stream.kafka.binder.configuration:
+    schema.registry.url: http://schema-registry:8081
+    key.serializer: org.apache.kafka.common.serialization.ByteArraySerializer
+    value.serializer: sample.producer2.FooSerde
+
+
+eureka:
+  instance:
+    leaseRenewalIntervalInSeconds: 1
+    leaseExpirationDurationInSeconds: 2
+
+  client:
+    serviceUrl:
+      defaultZone: http://dicovery_service:8761/eureka/
+    healthcheck:
+      enabled: true
+    lease:
+      duration: 5
+
+management:
+  security:
+    enabled: false
+
+

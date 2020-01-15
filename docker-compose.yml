@@ -173,6 +173,9 @@ services:
        - mongo-replicator
        - configserver
        - discovery
+       - zookeeper
+       - broker
+       - schema-registry
      restart: always
      labels:
        collect_logs_with_filebeat: "true"
@@ -203,6 +206,9 @@ services:
        - mongo-replicator
        - configserver
        - discovery
+       - zookeeper
+       - broker
+       - schema-registry
      restart: always
      labels:
        collect_logs_with_filebeat: "true"
@@ -297,6 +303,62 @@ services:
          decode_log_event_to_json_object: "true"
        networks:
          - my-mongo-cluster
+
+   analytics:
+       container_name: analytics
+       expose:
+         - 9998
+       ports:
+         - 9998:9998
+       environment:
+         PORT: 9998
+         SPRING_PROFILES_ACTIVE: docker
+         CONFIGSERVER_URI: http://configserver:8888
+       image: analytics
+       build:
+         context: ./core/analytics-service
+         dockerfile: Dockerfile
+       depends_on:
+         - mongo-replicator
+         - configserver
+         - discovery
+         - zookeeper
+         - broker
+         - schema-registry
+       restart: always
+       labels:
+         collect_logs_with_filebeat: "true"
+         decode_log_event_to_json_object: "true"
+       networks:
+         - my-mongo-cluster
+
+   finprovider:
+      container_name: finprovider
+      expose:
+        - 9010
+      ports:
+        - 9010:9010
+      environment:
+        PORT: 9010
+        SPRING_PROFILES_ACTIVE: docker
+        CONFIGSERVER_URI: http://configserver:8888
+      image: finprovider
+      build:
+        context: ./core/quotes-provider-service
+        dockerfile: Dockerfile
+      depends_on:
+        - mongo-replicator
+        - configserver
+        - discovery
+        - zookeeper
+        - broker
+        - schema-registry
+      restart: always
+      labels:
+        collect_logs_with_filebeat: "true"
+        decode_log_event_to_json_object: "true"
+      networks:
+        - my-mongo-cluster
 
    zookeeper:
        image: confluentinc/cp-zookeeper:latest

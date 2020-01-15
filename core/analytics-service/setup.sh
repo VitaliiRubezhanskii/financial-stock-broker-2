@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 
-#sleep 15s
+sleep 1m
 java -jar analytics-service-0.0.1-SNAPSHOT.jar
