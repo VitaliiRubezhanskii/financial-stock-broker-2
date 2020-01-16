@@ -1,0 +1,17 @@
+name=CassandraSinkConnector
+connector.class=com.datamountaineer.streamreactor.connect.cassandra.sink.CassandraSinkConnector
+connect.cassandra.key.space=mykeyspace
+topics=quote
+tasks.max=1
+connect.cassandra.kcql=INSERT INTO cassandra_table_1 SELECT * FROM quote
+internal.key.converter.schemas.enable=false
+value.converter.schema.registry.url=http://schema-registry:8081
+internal.key.converter=io.confluent.connect.avro.AvroConverter
+key.converter.schemas.enable=false
+connect.cassandra.contact.points=cassandra
+connect.cassandra.port=9042
+internal.value.converter=io.confluent.connect.avro.AvroConverter
+value.converter.schemas.enable=false
+value.converter=io.confluent.connect.avro.AvroConverter
+key.converter.schema.registry.url=http://schema-registry:8081
+key.converter=io.confluent.connect.avro.AvroConverter
