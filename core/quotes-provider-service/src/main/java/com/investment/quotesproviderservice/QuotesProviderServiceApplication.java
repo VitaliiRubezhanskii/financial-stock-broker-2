@@ -38,10 +38,10 @@ public class QuotesProviderServiceApplication {
     private Quote randomSensor() {
         Quote quote = new Quote();
         quote.setId("1");
-        quote.setOpen(54.0f);
-        quote.setClose(54.0f);
-        quote.setHigh(59.0f);
-        quote.setLow(50.9f);
+//        quote.setOpen(54.0f);
+//        quote.setClose(54.0f);
+//        quote.setHigh(59.0f);
+//        quote.setLow(50.9f);
         quote.setTicket("MSFT");
         return quote;
     }

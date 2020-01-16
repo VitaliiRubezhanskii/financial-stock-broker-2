@@ -4,11 +4,6 @@
   "name" : "Quote",
   "fields" : [
     {"name":"id","type":"string"},
-    {"name":"ticket", "type":"string", "aliases":["ticket"]},
-    {"name":"open", "type":"float"},
-    {"name":"high", "type":"float"},
-    {"name":"low","type":"float"},
-    {"name":"close","type":"float"},
-    {"name":"volume","type":"long"}
+    {"name":"ticket", "type":"string", "aliases":["ticket"]}
   ]
 }
