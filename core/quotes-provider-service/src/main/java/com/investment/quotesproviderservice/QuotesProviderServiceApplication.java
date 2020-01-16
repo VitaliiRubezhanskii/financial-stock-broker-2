@@ -2,15 +2,19 @@ package com.investment.quotesproviderservice;
 
 import avro.Quote;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.stream.annotation.EnableBinding;
 import org.springframework.cloud.stream.messaging.Source;
+import org.springframework.context.annotation.Bean;
+import org.springframework.http.MediaType;
 import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.reactive.function.client.WebClient;
 
 import java.util.Random;
 
@@ -23,11 +27,28 @@ public class QuotesProviderServiceApplication {
     @Autowired
     private Source source;
 
-    private Random random = new Random();
-
     public static void main(String[] args) {
         SpringApplication.run(QuotesProviderServiceApplication.class, args);
     }
+
+    @Bean
+    public WebClient client() {
+        return WebClient.create("http://localhost:9010");
+    }
+
+    @Bean
+    public CommandLineRunner demo(WebClient client) {
+        return args -> {
+            client.get()
+                    .uri("/events")
+                    .accept(MediaType.TEXT_EVENT_STREAM)
+                    .exchange()
+                    .flatMapMany(cr -> cr.bodyToFlux(Quote.class))
+                    .subscribe(System.out::println);
+        };
+    }
+
+
 
     @RequestMapping(value = "/messages", method = RequestMethod.POST)
     public String sendMessage() {
