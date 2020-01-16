@@ -15,3 +15,10 @@ value.converter.schemas.enable=false
 value.converter=io.confluent.connect.avro.AvroConverter
 key.converter.schema.registry.url=http://schema-registry:8081
 key.converter=io.confluent.connect.avro.AvroConverter
+
+
+
+create keyspace mykeyspace WITH replication = {'class':'SimpleStrategy', 'replication_factor' : 1};
+use mykeyspace;
+create table cassandra_table_1(id text, date text, open text, high text, low text, close text, volume text, ticket text);
+select * from cassandra_table_1;

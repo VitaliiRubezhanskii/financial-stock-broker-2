@@ -44,26 +44,26 @@ public class QuotesProviderServiceApplication {
                     .accept(MediaType.TEXT_EVENT_STREAM)
                     .exchange()
                     .flatMapMany(cr -> cr.bodyToFlux(Quote.class))
-                    .subscribe(System.out::println);
+                    .subscribe(quote -> source.output().send(MessageBuilder.withPayload(quote).build()));
         };
     }
 
 
 
-    @RequestMapping(value = "/messages", method = RequestMethod.POST)
-    public String sendMessage() {
-        source.output().send(MessageBuilder.withPayload(randomSensor()).build());
-        return "ok, have fun with v2 payload!";
-    }
-
-    private Quote randomSensor() {
-        Quote quote = new Quote();
-        quote.setId("1");
-//        quote.setOpen(54.0f);
-//        quote.setClose(54.0f);
-//        quote.setHigh(59.0f);
-//        quote.setLow(50.9f);
-        quote.setTicket("MSFT");
-        return quote;
-    }
+//    @RequestMapping(value = "/messages", method = RequestMethod.POST)
+//    public String sendMessage() {
+//        source.output().send(MessageBuilder.withPayload(randomSensor()).build());
+//        return "ok, have fun with v2 payload!";
+//    }
+//
+//    private Quote randomSensor() {
+//        Quote quote = new Quote();
+//        quote.setId("1");
+////        quote.setOpen(54.0f);
+////        quote.setClose(54.0f);
+////        quote.setHigh(59.0f);
+////        quote.setLow(50.9f);
+//        quote.setTicket("MSFT");
+//        return quote;
+//    }
 }

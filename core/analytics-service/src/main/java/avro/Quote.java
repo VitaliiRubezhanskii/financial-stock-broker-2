@@ -13,8 +13,8 @@ import org.apache.avro.message.SchemaStore;
 @SuppressWarnings("all")
 @org.apache.avro.specific.AvroGenerated
 public class Quote extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  private static final long serialVersionUID = -1338828737994128440L;
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"Quote\",\"namespace\":\"avro\",\"fields\":[{\"name\":\"id\",\"type\":\"string\"},{\"name\":\"ticket\",\"type\":\"string\",\"aliases\":[\"ticket\"]}]}");
+  private static final long serialVersionUID = -8038664966901552948L;
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"Quote\",\"namespace\":\"avro\",\"fields\":[{\"name\":\"id\",\"type\":\"string\"},{\"name\":\"date\",\"type\":\"string\"},{\"name\":\"ticket\",\"type\":\"string\"},{\"name\":\"open\",\"type\":\"string\"},{\"name\":\"high\",\"type\":\"string\"},{\"name\":\"close\",\"type\":\"string\"},{\"name\":\"volume\",\"type\":\"string\"}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 
   private static SpecificData MODEL$ = new SpecificData();
@@ -52,7 +52,12 @@ public class Quote extends org.apache.avro.specific.SpecificRecordBase implement
   }
 
   @Deprecated public java.lang.CharSequence id;
+  @Deprecated public java.lang.CharSequence date;
   @Deprecated public java.lang.CharSequence ticket;
+  @Deprecated public java.lang.CharSequence open;
+  @Deprecated public java.lang.CharSequence high;
+  @Deprecated public java.lang.CharSequence close;
+  @Deprecated public java.lang.CharSequence volume;
 
   /**
    * Default constructor.  Note that this does not initialize fields
@@ -64,11 +69,21 @@ public class Quote extends org.apache.avro.specific.SpecificRecordBase implement
   /**
    * All-args constructor.
    * @param id The new value for id
+   * @param date The new value for date
    * @param ticket The new value for ticket
+   * @param open The new value for open
+   * @param high The new value for high
+   * @param close The new value for close
+   * @param volume The new value for volume
    */
-  public Quote(java.lang.CharSequence id, java.lang.CharSequence ticket) {
+  public Quote(java.lang.CharSequence id, java.lang.CharSequence date, java.lang.CharSequence ticket, java.lang.CharSequence open, java.lang.CharSequence high, java.lang.CharSequence close, java.lang.CharSequence volume) {
     this.id = id;
+    this.date = date;
     this.ticket = ticket;
+    this.open = open;
+    this.high = high;
+    this.close = close;
+    this.volume = volume;
   }
 
   public org.apache.avro.Schema getSchema() { return SCHEMA$; }
@@ -76,7 +91,12 @@ public class Quote extends org.apache.avro.specific.SpecificRecordBase implement
   public java.lang.Object get(int field$) {
     switch (field$) {
     case 0: return id;
-    case 1: return ticket;
+    case 1: return date;
+    case 2: return ticket;
+    case 3: return open;
+    case 4: return high;
+    case 5: return close;
+    case 6: return volume;
     default: throw new org.apache.avro.AvroRuntimeException("Bad index");
     }
   }
@@ -86,7 +106,12 @@ public class Quote extends org.apache.avro.specific.SpecificRecordBase implement
   public void put(int field$, java.lang.Object value$) {
     switch (field$) {
     case 0: id = (java.lang.CharSequence)value$; break;
-    case 1: ticket = (java.lang.CharSequence)value$; break;
+    case 1: date = (java.lang.CharSequence)value$; break;
+    case 2: ticket = (java.lang.CharSequence)value$; break;
+    case 3: open = (java.lang.CharSequence)value$; break;
+    case 4: high = (java.lang.CharSequence)value$; break;
+    case 5: close = (java.lang.CharSequence)value$; break;
+    case 6: volume = (java.lang.CharSequence)value$; break;
     default: throw new org.apache.avro.AvroRuntimeException("Bad index");
     }
   }
@@ -108,6 +133,22 @@ public class Quote extends org.apache.avro.specific.SpecificRecordBase implement
   }
 
   /**
+   * Gets the value of the 'date' field.
+   * @return The value of the 'date' field.
+   */
+  public java.lang.CharSequence getDate() {
+    return date;
+  }
+
+  /**
+   * Sets the value of the 'date' field.
+   * @param value the value to set.
+   */
+  public void setDate(java.lang.CharSequence value) {
+    this.date = value;
+  }
+
+  /**
    * Gets the value of the 'ticket' field.
    * @return The value of the 'ticket' field.
    */
@@ -121,6 +162,70 @@ public class Quote extends org.apache.avro.specific.SpecificRecordBase implement
    */
   public void setTicket(java.lang.CharSequence value) {
     this.ticket = value;
+  }
+
+  /**
+   * Gets the value of the 'open' field.
+   * @return The value of the 'open' field.
+   */
+  public java.lang.CharSequence getOpen() {
+    return open;
+  }
+
+  /**
+   * Sets the value of the 'open' field.
+   * @param value the value to set.
+   */
+  public void setOpen(java.lang.CharSequence value) {
+    this.open = value;
+  }
+
+  /**
+   * Gets the value of the 'high' field.
+   * @return The value of the 'high' field.
+   */
+  public java.lang.CharSequence getHigh() {
+    return high;
+  }
+
+  /**
+   * Sets the value of the 'high' field.
+   * @param value the value to set.
+   */
+  public void setHigh(java.lang.CharSequence value) {
+    this.high = value;
+  }
+
+  /**
+   * Gets the value of the 'close' field.
+   * @return The value of the 'close' field.
+   */
+  public java.lang.CharSequence getClose() {
+    return close;
+  }
+
+  /**
+   * Sets the value of the 'close' field.
+   * @param value the value to set.
+   */
+  public void setClose(java.lang.CharSequence value) {
+    this.close = value;
+  }
+
+  /**
+   * Gets the value of the 'volume' field.
+   * @return The value of the 'volume' field.
+   */
+  public java.lang.CharSequence getVolume() {
+    return volume;
+  }
+
+  /**
+   * Sets the value of the 'volume' field.
+   * @param value the value to set.
+   */
+  public void setVolume(java.lang.CharSequence value) {
+    this.volume = value;
   }
 
   /**
@@ -156,7 +261,12 @@ public class Quote extends org.apache.avro.specific.SpecificRecordBase implement
     implements org.apache.avro.data.RecordBuilder<Quote> {
 
     private java.lang.CharSequence id;
+    private java.lang.CharSequence date;
     private java.lang.CharSequence ticket;
+    private java.lang.CharSequence open;
+    private java.lang.CharSequence high;
+    private java.lang.CharSequence close;
+    private java.lang.CharSequence volume;
 
     /** Creates a new Builder */
     private Builder() {
@@ -173,9 +283,29 @@ public class Quote extends org.apache.avro.specific.SpecificRecordBase implement
         this.id = data().deepCopy(fields()[0].schema(), other.id);
         fieldSetFlags()[0] = true;
       }
-      if (isValidValue(fields()[1], other.ticket)) {
-        this.ticket = data().deepCopy(fields()[1].schema(), other.ticket);
+      if (isValidValue(fields()[1], other.date)) {
+        this.date = data().deepCopy(fields()[1].schema(), other.date);
         fieldSetFlags()[1] = true;
+      }
+      if (isValidValue(fields()[2], other.ticket)) {
+        this.ticket = data().deepCopy(fields()[2].schema(), other.ticket);
+        fieldSetFlags()[2] = true;
+      }
+      if (isValidValue(fields()[3], other.open)) {
+        this.open = data().deepCopy(fields()[3].schema(), other.open);
+        fieldSetFlags()[3] = true;
+      }
+      if (isValidValue(fields()[4], other.high)) {
+        this.high = data().deepCopy(fields()[4].schema(), other.high);
+        fieldSetFlags()[4] = true;
+      }
+      if (isValidValue(fields()[5], other.close)) {
+        this.close = data().deepCopy(fields()[5].schema(), other.close);
+        fieldSetFlags()[5] = true;
+      }
+      if (isValidValue(fields()[6], other.volume)) {
+        this.volume = data().deepCopy(fields()[6].schema(), other.volume);
+        fieldSetFlags()[6] = true;
       }
     }
 
@@ -189,9 +319,29 @@ public class Quote extends org.apache.avro.specific.SpecificRecordBase implement
         this.id = data().deepCopy(fields()[0].schema(), other.id);
         fieldSetFlags()[0] = true;
       }
-      if (isValidValue(fields()[1], other.ticket)) {
-        this.ticket = data().deepCopy(fields()[1].schema(), other.ticket);
+      if (isValidValue(fields()[1], other.date)) {
+        this.date = data().deepCopy(fields()[1].schema(), other.date);
         fieldSetFlags()[1] = true;
+      }
+      if (isValidValue(fields()[2], other.ticket)) {
+        this.ticket = data().deepCopy(fields()[2].schema(), other.ticket);
+        fieldSetFlags()[2] = true;
+      }
+      if (isValidValue(fields()[3], other.open)) {
+        this.open = data().deepCopy(fields()[3].schema(), other.open);
+        fieldSetFlags()[3] = true;
+      }
+      if (isValidValue(fields()[4], other.high)) {
+        this.high = data().deepCopy(fields()[4].schema(), other.high);
+        fieldSetFlags()[4] = true;
+      }
+      if (isValidValue(fields()[5], other.close)) {
+        this.close = data().deepCopy(fields()[5].schema(), other.close);
+        fieldSetFlags()[5] = true;
+      }
+      if (isValidValue(fields()[6], other.volume)) {
+        this.volume = data().deepCopy(fields()[6].schema(), other.volume);
+        fieldSetFlags()[6] = true;
       }
     }
 
@@ -235,6 +385,45 @@ public class Quote extends org.apache.avro.specific.SpecificRecordBase implement
     }
 
     /**
+      * Gets the value of the 'date' field.
+      * @return The value.
+      */
+    public java.lang.CharSequence getDate() {
+      return date;
+    }
+
+    /**
+      * Sets the value of the 'date' field.
+      * @param value The value of 'date'.
+      * @return This builder.
+      */
+    public avro.Quote.Builder setDate(java.lang.CharSequence value) {
+      validate(fields()[1], value);
+      this.date = value;
+      fieldSetFlags()[1] = true;
+      return this;
+    }
+
+    /**
+      * Checks whether the 'date' field has been set.
+      * @return True if the 'date' field has been set, false otherwise.
+      */
+    public boolean hasDate() {
+      return fieldSetFlags()[1];
+    }
+
+
+    /**
+      * Clears the value of the 'date' field.
+      * @return This builder.
+      */
+    public avro.Quote.Builder clearDate() {
+      date = null;
+      fieldSetFlags()[1] = false;
+      return this;
+    }
+
+    /**
       * Gets the value of the 'ticket' field.
       * @return The value.
       */
@@ -248,9 +437,9 @@ public class Quote extends org.apache.avro.specific.SpecificRecordBase implement
       * @return This builder.
       */
     public avro.Quote.Builder setTicket(java.lang.CharSequence value) {
-      validate(fields()[1], value);
+      validate(fields()[2], value);
       this.ticket = value;
-      fieldSetFlags()[1] = true;
+      fieldSetFlags()[2] = true;
       return this;
     }
 
@@ -259,7 +448,7 @@ public class Quote extends org.apache.avro.specific.SpecificRecordBase implement
       * @return True if the 'ticket' field has been set, false otherwise.
       */
     public boolean hasTicket() {
-      return fieldSetFlags()[1];
+      return fieldSetFlags()[2];
     }
 
 
@@ -269,7 +458,163 @@ public class Quote extends org.apache.avro.specific.SpecificRecordBase implement
       */
     public avro.Quote.Builder clearTicket() {
       ticket = null;
-      fieldSetFlags()[1] = false;
+      fieldSetFlags()[2] = false;
+      return this;
+    }
+
+    /**
+      * Gets the value of the 'open' field.
+      * @return The value.
+      */
+    public java.lang.CharSequence getOpen() {
+      return open;
+    }
+
+    /**
+      * Sets the value of the 'open' field.
+      * @param value The value of 'open'.
+      * @return This builder.
+      */
+    public avro.Quote.Builder setOpen(java.lang.CharSequence value) {
+      validate(fields()[3], value);
+      this.open = value;
+      fieldSetFlags()[3] = true;
+      return this;
+    }
+
+    /**
+      * Checks whether the 'open' field has been set.
+      * @return True if the 'open' field has been set, false otherwise.
+      */
+    public boolean hasOpen() {
+      return fieldSetFlags()[3];
+    }
+
+
+    /**
+      * Clears the value of the 'open' field.
+      * @return This builder.
+      */
+    public avro.Quote.Builder clearOpen() {
+      open = null;
+      fieldSetFlags()[3] = false;
+      return this;
+    }
+
+    /**
+      * Gets the value of the 'high' field.
+      * @return The value.
+      */
+    public java.lang.CharSequence getHigh() {
+      return high;
+    }
+
+    /**
+      * Sets the value of the 'high' field.
+      * @param value The value of 'high'.
+      * @return This builder.
+      */
+    public avro.Quote.Builder setHigh(java.lang.CharSequence value) {
+      validate(fields()[4], value);
+      this.high = value;
+      fieldSetFlags()[4] = true;
+      return this;
+    }
+
+    /**
+      * Checks whether the 'high' field has been set.
+      * @return True if the 'high' field has been set, false otherwise.
+      */
+    public boolean hasHigh() {
+      return fieldSetFlags()[4];
+    }
+
+
+    /**
+      * Clears the value of the 'high' field.
+      * @return This builder.
+      */
+    public avro.Quote.Builder clearHigh() {
+      high = null;
+      fieldSetFlags()[4] = false;
+      return this;
+    }
+
+    /**
+      * Gets the value of the 'close' field.
+      * @return The value.
+      */
+    public java.lang.CharSequence getClose() {
+      return close;
+    }
+
+    /**
+      * Sets the value of the 'close' field.
+      * @param value The value of 'close'.
+      * @return This builder.
+      */
+    public avro.Quote.Builder setClose(java.lang.CharSequence value) {
+      validate(fields()[5], value);
+      this.close = value;
+      fieldSetFlags()[5] = true;
+      return this;
+    }
+
+    /**
+      * Checks whether the 'close' field has been set.
+      * @return True if the 'close' field has been set, false otherwise.
+      */
+    public boolean hasClose() {
+      return fieldSetFlags()[5];
+    }
+
+
+    /**
+      * Clears the value of the 'close' field.
+      * @return This builder.
+      */
+    public avro.Quote.Builder clearClose() {
+      close = null;
+      fieldSetFlags()[5] = false;
+      return this;
+    }
+
+    /**
+      * Gets the value of the 'volume' field.
+      * @return The value.
+      */
+    public java.lang.CharSequence getVolume() {
+      return volume;
+    }
+
+    /**
+      * Sets the value of the 'volume' field.
+      * @param value The value of 'volume'.
+      * @return This builder.
+      */
+    public avro.Quote.Builder setVolume(java.lang.CharSequence value) {
+      validate(fields()[6], value);
+      this.volume = value;
+      fieldSetFlags()[6] = true;
+      return this;
+    }
+
+    /**
+      * Checks whether the 'volume' field has been set.
+      * @return True if the 'volume' field has been set, false otherwise.
+      */
+    public boolean hasVolume() {
+      return fieldSetFlags()[6];
+    }
+
+
+    /**
+      * Clears the value of the 'volume' field.
+      * @return This builder.
+      */
+    public avro.Quote.Builder clearVolume() {
+      volume = null;
+      fieldSetFlags()[6] = false;
       return this;
     }
 
@@ -279,7 +624,12 @@ public class Quote extends org.apache.avro.specific.SpecificRecordBase implement
       try {
         Quote record = new Quote();
         record.id = fieldSetFlags()[0] ? this.id : (java.lang.CharSequence) defaultValue(fields()[0]);
-        record.ticket = fieldSetFlags()[1] ? this.ticket : (java.lang.CharSequence) defaultValue(fields()[1]);
+        record.date = fieldSetFlags()[1] ? this.date : (java.lang.CharSequence) defaultValue(fields()[1]);
+        record.ticket = fieldSetFlags()[2] ? this.ticket : (java.lang.CharSequence) defaultValue(fields()[2]);
+        record.open = fieldSetFlags()[3] ? this.open : (java.lang.CharSequence) defaultValue(fields()[3]);
+        record.high = fieldSetFlags()[4] ? this.high : (java.lang.CharSequence) defaultValue(fields()[4]);
+        record.close = fieldSetFlags()[5] ? this.close : (java.lang.CharSequence) defaultValue(fields()[5]);
+        record.volume = fieldSetFlags()[6] ? this.volume : (java.lang.CharSequence) defaultValue(fields()[6]);
         return record;
       } catch (java.lang.Exception e) {
         throw new org.apache.avro.AvroRuntimeException(e);
