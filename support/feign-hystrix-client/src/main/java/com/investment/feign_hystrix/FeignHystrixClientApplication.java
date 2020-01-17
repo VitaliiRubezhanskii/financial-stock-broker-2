@@ -10,7 +10,6 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 @SpringBootApplication
 @EnableDiscoveryClient
 @EnableCircuitBreaker
-@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class FeignHystrixClientApplication {
 
     public static void main(String[] args) {
