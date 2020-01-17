@@ -1,4 +1,4 @@
-package com.investment.feign_hystrix.reactive.security;
+package com.investment.feign_hystrix.auth.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -7,8 +7,11 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class LoginResponse {
+public class LoginRequest {
 
-    private String token;
+    private String username;
+
+    private String password;
+
 
 }

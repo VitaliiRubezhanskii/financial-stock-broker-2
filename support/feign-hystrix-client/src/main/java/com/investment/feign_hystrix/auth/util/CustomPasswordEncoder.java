@@ -1,4 +1,4 @@
-package com.investment.feign_hystrix.reactive.security;
+package com.investment.feign_hystrix.auth.util;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -15,7 +15,7 @@ import java.util.Base64;
  * @author ard333
  */
 @Component
-public class PBKDF2Encoder implements PasswordEncoder {
+public class CustomPasswordEncoder implements PasswordEncoder {
 	
 	@Value("${springbootwebfluxjjwt.password.encoder.secret}")
 	private String secret;
@@ -25,12 +25,7 @@ public class PBKDF2Encoder implements PasswordEncoder {
 
 	@Value("${springbootwebfluxjjwt.password.encoder.keylength}")
 	private Integer keylength;
-	
-	/**
-	 * More info (https://www.owasp.org/index.php/Hashing_Java)
-	 * @param cs password
-	 * @return encoded password
-	 */
+
 	@Override
 	public String encode(CharSequence cs) {
 		try {

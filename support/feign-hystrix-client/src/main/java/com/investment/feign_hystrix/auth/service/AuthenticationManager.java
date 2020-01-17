@@ -1,7 +1,8 @@
-package com.investment.feign_hystrix.reactive.security;
+package com.investment.feign_hystrix.auth.service;
 
 
-import com.investment.feign_hystrix.reactive.security.model.Role;
+import com.investment.feign_hystrix.auth.model.Role;
+import com.investment.feign_hystrix.auth.util.TokenProvider;
 import io.jsonwebtoken.Claims;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.ReactiveAuthenticationManager;
@@ -23,7 +24,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class AuthenticationManager implements ReactiveAuthenticationManager {
 
-	private final JWTUtil jwtUtil;
+	private final TokenProvider tokenProvider;
 
 	@Override
 	@SuppressWarnings("unchecked")
@@ -32,12 +33,12 @@ public class AuthenticationManager implements ReactiveAuthenticationManager {
 		
 		String username;
 		try {
-			username = jwtUtil.getUsernameFromToken(authToken);
+			username = tokenProvider.getUsernameFromToken(authToken);
 		} catch (Exception e) {
 			username = null;
 		}
-		if (username != null && jwtUtil.validateToken(authToken)) {
-			Claims claims = jwtUtil.getAllClaimsFromToken(authToken);
+		if (username != null && tokenProvider.validateToken(authToken)) {
+			Claims claims = tokenProvider.getAllClaimsFromToken(authToken);
 			List<String> rolesMap = claims.get("role", List.class);
 			List<Role> roles = new ArrayList<>();
 			for (String rolemap : rolesMap) {

@@ -1,9 +1,8 @@
-package com.investment.feign_hystrix.reactive.model;
+package com.investment.feign_hystrix.auth.model;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.investment.feign_hystrix.reactive.security.model.Role;
 import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;

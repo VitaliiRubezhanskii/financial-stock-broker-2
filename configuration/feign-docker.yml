@@ -5,7 +5,7 @@ spring:
 
 feign:
   hystrix:
-    enabled: true
+    enabled: trued
 
 #security:
 #  oauth2:
@@ -23,7 +23,7 @@ feign:
 springbootwebfluxjjwt:
     password:
       encoder:
-        secret: mysecret
+        secret: ThisIsSecretForJWTHS512SignatureAlgorithmThatMUSTHave512bitsKeySize
         iteration: 33
         keylength: 256
 

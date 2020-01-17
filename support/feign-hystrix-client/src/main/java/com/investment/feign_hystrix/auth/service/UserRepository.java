@@ -1,6 +1,6 @@
-package com.investment.feign_hystrix.reactive.security;
+package com.investment.feign_hystrix.auth.service;
 
-import com.investment.feign_hystrix.reactive.model.User;
+import com.investment.feign_hystrix.auth.model.User;
 import org.springframework.data.mongodb.repository.ReactiveMongoRepository;
 import org.springframework.stereotype.Repository;
 import reactor.core.publisher.Mono;

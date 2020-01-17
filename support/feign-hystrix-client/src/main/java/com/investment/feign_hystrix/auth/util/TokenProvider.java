@@ -1,7 +1,7 @@
-package com.investment.feign_hystrix.reactive.security;
+package com.investment.feign_hystrix.auth.util;
 
 
-import com.investment.feign_hystrix.reactive.model.User;
+import com.investment.feign_hystrix.auth.model.User;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -16,7 +16,7 @@ import java.util.Map;
 
 
 @Component
-public class JWTUtil implements Serializable {
+public class TokenProvider implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	

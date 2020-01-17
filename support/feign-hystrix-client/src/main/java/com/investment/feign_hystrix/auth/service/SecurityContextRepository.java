@@ -1,4 +1,4 @@
-package com.investment.feign_hystrix.reactive.security;
+package com.investment.feign_hystrix.auth.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -12,10 +12,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 
-/**
- *
- * @author ard333
- */
 @Component
 public class SecurityContextRepository implements ServerSecurityContextRepository {
 	
