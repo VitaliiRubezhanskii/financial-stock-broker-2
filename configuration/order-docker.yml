@@ -35,14 +35,14 @@ spring:
                binder:
                  brokers: broker
 
-security.oauth2:
-    client:
-      clientId: order
-      clientSecret: 1234
-      accessTokenUri: http://auth:8084/uaa/oauth/token
-      grant-type: client_credentials
-      scope: server
-
-    resource:
-      user-info-uri: http://auth:8084/uaa/user/current
-      token-info-uri: http://auth:8084/uaa/oauth/check_token
+#security.oauth2:
+#    client:
+#      clientId: order
+#      clientSecret: 1234
+#      accessTokenUri: http://auth:8084/uaa/oauth/token
+#      grant-type: client_credentials
+#      scope: server
+#
+#    resource:
+#      user-info-uri: http://auth:8084/uaa/user/current
+#      token-info-uri: http://auth:8084/uaa/oauth/check_token
