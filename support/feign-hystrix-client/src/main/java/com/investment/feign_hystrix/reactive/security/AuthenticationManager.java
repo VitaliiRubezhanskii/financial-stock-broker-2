@@ -3,7 +3,7 @@ package com.investment.feign_hystrix.reactive.security;
 
 import com.investment.feign_hystrix.reactive.security.model.Role;
 import io.jsonwebtoken.Claims;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.ReactiveAuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -20,11 +20,11 @@ import java.util.stream.Collectors;
  * @author ard333
  */
 @Component
+@RequiredArgsConstructor
 public class AuthenticationManager implements ReactiveAuthenticationManager {
 
-	@Autowired
-	private JWTUtil jwtUtil;
-	
+	private final JWTUtil jwtUtil;
+
 	@Override
 	@SuppressWarnings("unchecked")
 	public Mono<Authentication> authenticate(Authentication authentication) {
@@ -53,4 +53,7 @@ public class AuthenticationManager implements ReactiveAuthenticationManager {
 			return Mono.empty();
 		}
 	}
+
+
+
 }

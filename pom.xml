@@ -28,7 +28,7 @@
         <module>core/account-service</module>
         <module>core/analytics-service</module>
         <module>core/quotes-provider-service</module>
-        <module>support/auth</module>
+        <!--<module>support/auth</module>-->
         <module>support/config</module>
         <module>support/monitoring</module>
         <module>support/feign-hystrix-client</module>
@@ -38,11 +38,11 @@
     </modules>
 
     <dependencies>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>org.springframework.boot</groupId>-->
+            <!--<artifactId>spring-boot-starter-test</artifactId>-->
+            <!--<scope>test</scope>-->
+        <!--</dependency>-->
 
         <dependency>
             <groupId>org.springframework.boot</groupId>

@@ -35,6 +35,8 @@ spring:
                binder:
                  brokers: broker
 
+
+
 #security.oauth2:
 #    client:
 #      clientId: order

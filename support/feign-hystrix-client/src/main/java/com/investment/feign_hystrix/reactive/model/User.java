@@ -5,6 +5,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.investment.feign_hystrix.reactive.security.model.Role;
 import lombok.*;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -20,13 +22,24 @@ import java.util.stream.Collectors;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
+@Document
 public class User implements UserDetails {
 	
 	private static final long serialVersionUID = 1L;
 
+	@Id
+	private String id;
+
 	private String username;
 	
 	private String password;
+
+	private String name;
+
+	private int age;
+
+	private double salary;
+
 	
 	@Getter
     @Setter
