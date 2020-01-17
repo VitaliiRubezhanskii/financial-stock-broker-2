@@ -14,6 +14,7 @@ import org.springframework.cloud.stream.messaging.Processor;
 import org.springframework.kafka.support.KafkaHeaders;
 import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.web.bind.annotation.*;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import java.time.LocalDateTime;
@@ -47,8 +48,8 @@ public class OrderController {
 
 
     @GetMapping("/sku/{sku}")
-    public Order getAllOrdersContainingSKU(@PathVariable("sku") String sku){
-        return orderService.findAllOrdersByContainingSKU(sku).blockFirst();
+    public Flux<Order> getAllOrdersContainingSKU(@PathVariable("sku") String sku){
+        return orderService.findAllOrdersByContainingSKU(sku);
     }
 
     @GetMapping("/order/sample")

@@ -13,8 +13,8 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 @EnableDiscoveryClient
 @EnableFeignClients
 @EnableCircuitBreaker
-@EnableOAuth2Sso
-@EnableGlobalMethodSecurity(prePostEnabled = true)
+//@EnableOAuth2Sso
+//@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class FeignHystrixClientApplication {
 
     public static void main(String[] args) {

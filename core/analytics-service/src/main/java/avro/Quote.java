@@ -13,8 +13,8 @@ import org.apache.avro.message.SchemaStore;
 @SuppressWarnings("all")
 @org.apache.avro.specific.AvroGenerated
 public class Quote extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  private static final long serialVersionUID = -8038664966901552948L;
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"Quote\",\"namespace\":\"avro\",\"fields\":[{\"name\":\"id\",\"type\":\"string\"},{\"name\":\"date\",\"type\":\"string\"},{\"name\":\"ticket\",\"type\":\"string\"},{\"name\":\"open\",\"type\":\"string\"},{\"name\":\"high\",\"type\":\"string\"},{\"name\":\"close\",\"type\":\"string\"},{\"name\":\"volume\",\"type\":\"string\"}]}");
+  private static final long serialVersionUID = -2444323768816826907L;
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"Quote\",\"namespace\":\"avro\",\"fields\":[{\"name\":\"id\",\"type\":\"string\"},{\"name\":\"date\",\"type\":\"string\"},{\"name\":\"ticket\",\"type\":\"string\"},{\"name\":\"open\",\"type\":\"string\"},{\"name\":\"high\",\"type\":\"string\"},{\"name\":\"close\",\"type\":\"string\"},{\"name\":\"volume\",\"type\":\"string\"},{\"name\":\"low\",\"type\":\"string\"}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 
   private static SpecificData MODEL$ = new SpecificData();
@@ -58,6 +58,7 @@ public class Quote extends org.apache.avro.specific.SpecificRecordBase implement
   @Deprecated public java.lang.CharSequence high;
   @Deprecated public java.lang.CharSequence close;
   @Deprecated public java.lang.CharSequence volume;
+  @Deprecated public java.lang.CharSequence low;
 
   /**
    * Default constructor.  Note that this does not initialize fields
@@ -75,8 +76,9 @@ public class Quote extends org.apache.avro.specific.SpecificRecordBase implement
    * @param high The new value for high
    * @param close The new value for close
    * @param volume The new value for volume
+   * @param low The new value for low
    */
-  public Quote(java.lang.CharSequence id, java.lang.CharSequence date, java.lang.CharSequence ticket, java.lang.CharSequence open, java.lang.CharSequence high, java.lang.CharSequence close, java.lang.CharSequence volume) {
+  public Quote(java.lang.CharSequence id, java.lang.CharSequence date, java.lang.CharSequence ticket, java.lang.CharSequence open, java.lang.CharSequence high, java.lang.CharSequence close, java.lang.CharSequence volume, java.lang.CharSequence low) {
     this.id = id;
     this.date = date;
     this.ticket = ticket;
@@ -84,6 +86,7 @@ public class Quote extends org.apache.avro.specific.SpecificRecordBase implement
     this.high = high;
     this.close = close;
     this.volume = volume;
+    this.low = low;
   }
 
   public org.apache.avro.Schema getSchema() { return SCHEMA$; }
@@ -97,6 +100,7 @@ public class Quote extends org.apache.avro.specific.SpecificRecordBase implement
     case 4: return high;
     case 5: return close;
     case 6: return volume;
+    case 7: return low;
     default: throw new org.apache.avro.AvroRuntimeException("Bad index");
     }
   }
@@ -112,6 +116,7 @@ public class Quote extends org.apache.avro.specific.SpecificRecordBase implement
     case 4: high = (java.lang.CharSequence)value$; break;
     case 5: close = (java.lang.CharSequence)value$; break;
     case 6: volume = (java.lang.CharSequence)value$; break;
+    case 7: low = (java.lang.CharSequence)value$; break;
     default: throw new org.apache.avro.AvroRuntimeException("Bad index");
     }
   }
@@ -229,6 +234,22 @@ public class Quote extends org.apache.avro.specific.SpecificRecordBase implement
   }
 
   /**
+   * Gets the value of the 'low' field.
+   * @return The value of the 'low' field.
+   */
+  public java.lang.CharSequence getLow() {
+    return low;
+  }
+
+  /**
+   * Sets the value of the 'low' field.
+   * @param value the value to set.
+   */
+  public void setLow(java.lang.CharSequence value) {
+    this.low = value;
+  }
+
+  /**
    * Creates a new Quote RecordBuilder.
    * @return A new Quote RecordBuilder
    */
@@ -267,6 +288,7 @@ public class Quote extends org.apache.avro.specific.SpecificRecordBase implement
     private java.lang.CharSequence high;
     private java.lang.CharSequence close;
     private java.lang.CharSequence volume;
+    private java.lang.CharSequence low;
 
     /** Creates a new Builder */
     private Builder() {
@@ -307,6 +329,10 @@ public class Quote extends org.apache.avro.specific.SpecificRecordBase implement
         this.volume = data().deepCopy(fields()[6].schema(), other.volume);
         fieldSetFlags()[6] = true;
       }
+      if (isValidValue(fields()[7], other.low)) {
+        this.low = data().deepCopy(fields()[7].schema(), other.low);
+        fieldSetFlags()[7] = true;
+      }
     }
 
     /**
@@ -342,6 +368,10 @@ public class Quote extends org.apache.avro.specific.SpecificRecordBase implement
       if (isValidValue(fields()[6], other.volume)) {
         this.volume = data().deepCopy(fields()[6].schema(), other.volume);
         fieldSetFlags()[6] = true;
+      }
+      if (isValidValue(fields()[7], other.low)) {
+        this.low = data().deepCopy(fields()[7].schema(), other.low);
+        fieldSetFlags()[7] = true;
       }
     }
 
@@ -618,6 +648,45 @@ public class Quote extends org.apache.avro.specific.SpecificRecordBase implement
       return this;
     }
 
+    /**
+      * Gets the value of the 'low' field.
+      * @return The value.
+      */
+    public java.lang.CharSequence getLow() {
+      return low;
+    }
+
+    /**
+      * Sets the value of the 'low' field.
+      * @param value The value of 'low'.
+      * @return This builder.
+      */
+    public avro.Quote.Builder setLow(java.lang.CharSequence value) {
+      validate(fields()[7], value);
+      this.low = value;
+      fieldSetFlags()[7] = true;
+      return this;
+    }
+
+    /**
+      * Checks whether the 'low' field has been set.
+      * @return True if the 'low' field has been set, false otherwise.
+      */
+    public boolean hasLow() {
+      return fieldSetFlags()[7];
+    }
+
+
+    /**
+      * Clears the value of the 'low' field.
+      * @return This builder.
+      */
+    public avro.Quote.Builder clearLow() {
+      low = null;
+      fieldSetFlags()[7] = false;
+      return this;
+    }
+
     @Override
     @SuppressWarnings("unchecked")
     public Quote build() {
@@ -630,6 +699,7 @@ public class Quote extends org.apache.avro.specific.SpecificRecordBase implement
         record.high = fieldSetFlags()[4] ? this.high : (java.lang.CharSequence) defaultValue(fields()[4]);
         record.close = fieldSetFlags()[5] ? this.close : (java.lang.CharSequence) defaultValue(fields()[5]);
         record.volume = fieldSetFlags()[6] ? this.volume : (java.lang.CharSequence) defaultValue(fields()[6]);
+        record.low = fieldSetFlags()[7] ? this.low : (java.lang.CharSequence) defaultValue(fields()[7]);
         return record;
       } catch (java.lang.Exception e) {
         throw new org.apache.avro.AvroRuntimeException(e);
