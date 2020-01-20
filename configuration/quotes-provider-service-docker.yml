@@ -24,7 +24,7 @@ eureka:
 
   client:
     serviceUrl:
-      defaultZone: http://dicovery:8761/eureka/
+      defaultZone: http://discovery:8761/eureka/
     healthcheck:
       enabled: true
     lease:
