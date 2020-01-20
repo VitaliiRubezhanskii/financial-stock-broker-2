@@ -3,8 +3,6 @@ spring:
     mongodb:
       uri: mongodb://mongo1:27017,mongo2:27017,mongo3:27017/account?replicaSet=rs0
 
-
-
 security:
   oauth2:
     client:

@@ -20,9 +20,6 @@ public class IntegrationOrderController {
 
     private final IntegrationClient integrationClient;
 
-
-
-
     @GetMapping(value = "/order/samples")
     @PreAuthorize("hasRole('ROLE_USER')")
     @HystrixCommand(fallbackMethod = "getDefaultExample")

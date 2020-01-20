@@ -30,7 +30,7 @@ public class IntegrationClient {
     }
 
 
-//    @HystrixCommand(fallbackMethod = "getDefaultHello")
+    @HystrixCommand(fallbackMethod = "getDefaultHello")
     public String getHello(){
         return accountServiceClient.getHello();
     }
