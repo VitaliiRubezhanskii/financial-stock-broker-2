@@ -3,17 +3,34 @@ spring:
     mongodb:
       uri: mongodb://mongo1:27017,mongo2:27017,mongo3:27017/account?replicaSet=rs0
 
+spring.cloud.stream.bindings.output:
+    destination: order-response
+spring.cloud.stream.bindings.input:
+    destination: order-request
+    consumer:
+      useNativeDecoding: true
+spring.cloud.stream.kafka.streams.binder:
+    brokers: broker
+    configuration:
+      schema.registry.url: http://schema-registry:8081
+      commit.interval.ms: 1000
+      default.key.serde: org.apache.kafka.common.serialization.Serdes$StringSerde
+      default.value.serde: io.confluent.kafka.streams.serdes.avro.SpecificAvroSerde
+spring.cloud.stream.kafka.streams.bindings.input:
+  consumer:
+    keySerde: org.apache.kafka.common.serialization.Serdes$StringSerde
+    valueSerde: io.confluent.kafka.streams.serdes.avro.SpecificAvroSerde
 
 
-#security:
-#  oauth2:
-#    client:
-#      clientId: account
-#      clientSecret: 1234
-#      accessTokenUri: http://auth:8084/uaa/oauth/token
-#      grant-type: client_credentials
-#      scope: server
-#
-#    resource:
-#      user-info-uri: http://auth:8084/uaa/user/current
-#      token-info-uri: http://auth:8084/uaa/oauth/check_token
+security:
+  oauth2:
+    client:
+      clientId: account
+      clientSecret: 1234
+      accessTokenUri: http://auth:8084/uaa/oauth/token
+      grant-type: client_credentials
+      scope: server
+
+    resource:
+      user-info-uri: http://auth:8084/uaa/user/current
+      token-info-uri: http://auth:8084/uaa/oauth/check_token

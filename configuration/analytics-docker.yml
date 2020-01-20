@@ -1,5 +1,5 @@
 server.port: 9998
-spring.application.name: quote-service-consumer
+spring.application.name: analytics
 spring.cloud.stream.bindings.output:
     destination: quote-aggregation
 spring.cloud.stream.bindings.input:
@@ -25,7 +25,7 @@ eureka:
 
   client:
     serviceUrl:
-      defaultZone: http://dicovery_service:8761/eureka/
+      defaultZone: http://discovery:8761/eureka/
     healthcheck:
       enabled: true
     lease:

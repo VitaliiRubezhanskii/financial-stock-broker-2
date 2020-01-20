@@ -9,17 +9,17 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class IntegrationAccountController {
 
-//    private final IntegrationClient integrationClient;
+    private final IntegrationClient integrationClient;
 
-//    @GetMapping(name = "/account/mine")
-//    @HystrixCommand(fallbackMethod = "getDefaultHello")
-//    public String getHello(){
-//        return integrationClient.getHello();
-//    }
+    @GetMapping(name = "/account/mine")
+    @HystrixCommand(fallbackMethod = "getDefaultHello")
+    public String getHello(){
+        return integrationClient.getHello();
+    }
 
-//    public String getDefaultHello(){
-//        return "THis is Hello! That was wrong";
-//    }
+    public String getDefaultHello(){
+        return "THis is Hello! That was wrong";
+    }
 
 
 }

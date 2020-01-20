@@ -5,12 +5,26 @@
 	"fields": [
 	 {
 		"name": "id",
-		"type": "int"
+		"type": "string"
 	},
 	{
 		"name": "ticket",
 		"type": "string"
 	},
-	{   "name":"batch",
-	    "type": "int"}]
+	{   "name": "volume",
+	    "type": "string"
+	},
+    {   "name": "condition",
+        "type": "string"
+    },
+    {   "name": "account",
+        "type": "string"
+    },
+    {   "name": "bid",
+        "type": "string"
+    },
+    {   "name": "ask",
+        "type": "string"
+    }
+	    ]
 }
