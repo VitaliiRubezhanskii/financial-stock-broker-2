@@ -1,14 +1,20 @@
 package com.investment.trading.configuration;
 
 import com.investment.trading.domain.Order;
+import com.investment.trading.utils.OrderUtils;
 import com.mongodb.client.model.changestream.ChangeStreamDocument;
 import lombok.RequiredArgsConstructor;
 import org.bson.Document;
+import org.springframework.cloud.stream.messaging.Processor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.messaging.*;
+import org.springframework.kafka.support.KafkaHeaders;
+import org.springframework.messaging.support.MessageBuilder;
 
+
+import static com.investment.trading.utils.OrderUtils.payloadFromOrderEntity;
 import static org.springframework.data.mongodb.core.aggregation.Aggregation.match;
 import static org.springframework.data.mongodb.core.aggregation.Aggregation.newAggregation;
 import static org.springframework.data.mongodb.core.query.Criteria.where;
@@ -17,12 +23,13 @@ import static org.springframework.data.mongodb.core.query.Criteria.where;
 @RequiredArgsConstructor
 public class ChangeStreamConfiguration {
 
-    @Bean
-    public Subscription subscription(MessageListenerContainer container) {
-        return container.register(ChangeStreamRequest.builder(this::convert)
-                .collection("order")
-                .filter(newAggregation(match(where("operationType").is("insert"))))
+    private final Processor processor;
 
+    @Bean
+    public Subscription emitOrderRequestToKafkaTopic(MessageListenerContainer container) {
+        return container.register(ChangeStreamRequest.builder(this::sendToKafkaTopic)
+                .collection("order")
+                .filter(newAggregation(match(where("operationType").is("update"))))
                 .build(), Order.class);
     }
 
@@ -36,8 +43,13 @@ public class ChangeStreamConfiguration {
         };
     }
 
-    private void convert(Message<ChangeStreamDocument<Document>, Order> message){
-        System.out.println("Received message with id: " + message.getRaw() + " ----------" + message.getBody());
+    private void sendToKafkaTopic(Message<ChangeStreamDocument<Document>, Order> message){
+        processor.output()
+                .send(MessageBuilder
+                        .withPayload(payloadFromOrderEntity(message.getBody()))
+                        .setHeader(KafkaHeaders.MESSAGE_KEY, 1)
+                        .build());
+
     }
 
 }

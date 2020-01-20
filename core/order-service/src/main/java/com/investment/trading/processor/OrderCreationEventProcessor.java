@@ -13,7 +13,8 @@ import org.springframework.stereotype.Service;
 public class OrderCreationEventProcessor {
 
     @StreamListener(Processor.INPUT)
-    public void consumeEmployeeDetails(Order order) {
+    public void consumeOrderResponse(Order order) {
         log.info("Let's process employee details: {}", order);
+        // save to mongo ---> emits change stream which sends data to orders topic of Kafka
     }
 }

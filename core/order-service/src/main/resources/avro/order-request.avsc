@@ -1,6 +1,6 @@
 {
 	"type": "record",
-	"name": "Order",
+	"name": "OrderRequest",
 	"namespace": "com.investment.trading.avro",
 	"fields": [
 	 {

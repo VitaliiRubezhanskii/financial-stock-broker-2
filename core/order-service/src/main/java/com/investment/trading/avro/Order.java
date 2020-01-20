@@ -13,8 +13,8 @@ import org.apache.avro.message.SchemaStore;
 @SuppressWarnings("all")
 @org.apache.avro.specific.AvroGenerated
 public class Order extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  private static final long serialVersionUID = 4785778101767480915L;
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"Order\",\"namespace\":\"com.investment.trading.avro\",\"fields\":[{\"name\":\"id\",\"type\":\"int\"},{\"name\":\"ticket\",\"type\":\"string\"},{\"name\":\"batch\",\"type\":\"int\"}]}");
+  private static final long serialVersionUID = -6353708702689215620L;
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"Order\",\"namespace\":\"com.investment.trading.avro\",\"fields\":[{\"name\":\"id\",\"type\":\"string\"},{\"name\":\"ticket\",\"type\":\"string\"},{\"name\":\"volume\",\"type\":\"string\"},{\"name\":\"condition\",\"type\":\"string\"},{\"name\":\"account\",\"type\":\"string\"},{\"name\":\"bid\",\"type\":\"string\"},{\"name\":\"ask\",\"type\":\"string\"}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 
   private static SpecificData MODEL$ = new SpecificData();
@@ -51,9 +51,13 @@ public class Order extends org.apache.avro.specific.SpecificRecordBase implement
     return DECODER.decode(b);
   }
 
-  @Deprecated public int id;
+  @Deprecated public java.lang.CharSequence id;
   @Deprecated public java.lang.CharSequence ticket;
-  @Deprecated public int batch;
+  @Deprecated public java.lang.CharSequence volume;
+  @Deprecated public java.lang.CharSequence condition;
+  @Deprecated public java.lang.CharSequence account;
+  @Deprecated public java.lang.CharSequence bid;
+  @Deprecated public java.lang.CharSequence ask;
 
   /**
    * Default constructor.  Note that this does not initialize fields
@@ -66,12 +70,20 @@ public class Order extends org.apache.avro.specific.SpecificRecordBase implement
    * All-args constructor.
    * @param id The new value for id
    * @param ticket The new value for ticket
-   * @param batch The new value for batch
+   * @param volume The new value for volume
+   * @param condition The new value for condition
+   * @param account The new value for account
+   * @param bid The new value for bid
+   * @param ask The new value for ask
    */
-  public Order(java.lang.Integer id, java.lang.CharSequence ticket, java.lang.Integer batch) {
+  public Order(java.lang.CharSequence id, java.lang.CharSequence ticket, java.lang.CharSequence volume, java.lang.CharSequence condition, java.lang.CharSequence account, java.lang.CharSequence bid, java.lang.CharSequence ask) {
     this.id = id;
     this.ticket = ticket;
-    this.batch = batch;
+    this.volume = volume;
+    this.condition = condition;
+    this.account = account;
+    this.bid = bid;
+    this.ask = ask;
   }
 
   public org.apache.avro.Schema getSchema() { return SCHEMA$; }
@@ -80,7 +92,11 @@ public class Order extends org.apache.avro.specific.SpecificRecordBase implement
     switch (field$) {
     case 0: return id;
     case 1: return ticket;
-    case 2: return batch;
+    case 2: return volume;
+    case 3: return condition;
+    case 4: return account;
+    case 5: return bid;
+    case 6: return ask;
     default: throw new org.apache.avro.AvroRuntimeException("Bad index");
     }
   }
@@ -89,9 +105,13 @@ public class Order extends org.apache.avro.specific.SpecificRecordBase implement
   @SuppressWarnings(value="unchecked")
   public void put(int field$, java.lang.Object value$) {
     switch (field$) {
-    case 0: id = (java.lang.Integer)value$; break;
+    case 0: id = (java.lang.CharSequence)value$; break;
     case 1: ticket = (java.lang.CharSequence)value$; break;
-    case 2: batch = (java.lang.Integer)value$; break;
+    case 2: volume = (java.lang.CharSequence)value$; break;
+    case 3: condition = (java.lang.CharSequence)value$; break;
+    case 4: account = (java.lang.CharSequence)value$; break;
+    case 5: bid = (java.lang.CharSequence)value$; break;
+    case 6: ask = (java.lang.CharSequence)value$; break;
     default: throw new org.apache.avro.AvroRuntimeException("Bad index");
     }
   }
@@ -100,7 +120,7 @@ public class Order extends org.apache.avro.specific.SpecificRecordBase implement
    * Gets the value of the 'id' field.
    * @return The value of the 'id' field.
    */
-  public java.lang.Integer getId() {
+  public java.lang.CharSequence getId() {
     return id;
   }
 
@@ -108,7 +128,7 @@ public class Order extends org.apache.avro.specific.SpecificRecordBase implement
    * Sets the value of the 'id' field.
    * @param value the value to set.
    */
-  public void setId(java.lang.Integer value) {
+  public void setId(java.lang.CharSequence value) {
     this.id = value;
   }
 
@@ -129,19 +149,83 @@ public class Order extends org.apache.avro.specific.SpecificRecordBase implement
   }
 
   /**
-   * Gets the value of the 'batch' field.
-   * @return The value of the 'batch' field.
+   * Gets the value of the 'volume' field.
+   * @return The value of the 'volume' field.
    */
-  public java.lang.Integer getBatch() {
-    return batch;
+  public java.lang.CharSequence getVolume() {
+    return volume;
   }
 
   /**
-   * Sets the value of the 'batch' field.
+   * Sets the value of the 'volume' field.
    * @param value the value to set.
    */
-  public void setBatch(java.lang.Integer value) {
-    this.batch = value;
+  public void setVolume(java.lang.CharSequence value) {
+    this.volume = value;
+  }
+
+  /**
+   * Gets the value of the 'condition' field.
+   * @return The value of the 'condition' field.
+   */
+  public java.lang.CharSequence getCondition() {
+    return condition;
+  }
+
+  /**
+   * Sets the value of the 'condition' field.
+   * @param value the value to set.
+   */
+  public void setCondition(java.lang.CharSequence value) {
+    this.condition = value;
+  }
+
+  /**
+   * Gets the value of the 'account' field.
+   * @return The value of the 'account' field.
+   */
+  public java.lang.CharSequence getAccount() {
+    return account;
+  }
+
+  /**
+   * Sets the value of the 'account' field.
+   * @param value the value to set.
+   */
+  public void setAccount(java.lang.CharSequence value) {
+    this.account = value;
+  }
+
+  /**
+   * Gets the value of the 'bid' field.
+   * @return The value of the 'bid' field.
+   */
+  public java.lang.CharSequence getBid() {
+    return bid;
+  }
+
+  /**
+   * Sets the value of the 'bid' field.
+   * @param value the value to set.
+   */
+  public void setBid(java.lang.CharSequence value) {
+    this.bid = value;
+  }
+
+  /**
+   * Gets the value of the 'ask' field.
+   * @return The value of the 'ask' field.
+   */
+  public java.lang.CharSequence getAsk() {
+    return ask;
+  }
+
+  /**
+   * Sets the value of the 'ask' field.
+   * @param value the value to set.
+   */
+  public void setAsk(java.lang.CharSequence value) {
+    this.ask = value;
   }
 
   /**
@@ -176,9 +260,13 @@ public class Order extends org.apache.avro.specific.SpecificRecordBase implement
   public static class Builder extends org.apache.avro.specific.SpecificRecordBuilderBase<Order>
     implements org.apache.avro.data.RecordBuilder<Order> {
 
-    private int id;
+    private java.lang.CharSequence id;
     private java.lang.CharSequence ticket;
-    private int batch;
+    private java.lang.CharSequence volume;
+    private java.lang.CharSequence condition;
+    private java.lang.CharSequence account;
+    private java.lang.CharSequence bid;
+    private java.lang.CharSequence ask;
 
     /** Creates a new Builder */
     private Builder() {
@@ -199,9 +287,25 @@ public class Order extends org.apache.avro.specific.SpecificRecordBase implement
         this.ticket = data().deepCopy(fields()[1].schema(), other.ticket);
         fieldSetFlags()[1] = true;
       }
-      if (isValidValue(fields()[2], other.batch)) {
-        this.batch = data().deepCopy(fields()[2].schema(), other.batch);
+      if (isValidValue(fields()[2], other.volume)) {
+        this.volume = data().deepCopy(fields()[2].schema(), other.volume);
         fieldSetFlags()[2] = true;
+      }
+      if (isValidValue(fields()[3], other.condition)) {
+        this.condition = data().deepCopy(fields()[3].schema(), other.condition);
+        fieldSetFlags()[3] = true;
+      }
+      if (isValidValue(fields()[4], other.account)) {
+        this.account = data().deepCopy(fields()[4].schema(), other.account);
+        fieldSetFlags()[4] = true;
+      }
+      if (isValidValue(fields()[5], other.bid)) {
+        this.bid = data().deepCopy(fields()[5].schema(), other.bid);
+        fieldSetFlags()[5] = true;
+      }
+      if (isValidValue(fields()[6], other.ask)) {
+        this.ask = data().deepCopy(fields()[6].schema(), other.ask);
+        fieldSetFlags()[6] = true;
       }
     }
 
@@ -219,9 +323,25 @@ public class Order extends org.apache.avro.specific.SpecificRecordBase implement
         this.ticket = data().deepCopy(fields()[1].schema(), other.ticket);
         fieldSetFlags()[1] = true;
       }
-      if (isValidValue(fields()[2], other.batch)) {
-        this.batch = data().deepCopy(fields()[2].schema(), other.batch);
+      if (isValidValue(fields()[2], other.volume)) {
+        this.volume = data().deepCopy(fields()[2].schema(), other.volume);
         fieldSetFlags()[2] = true;
+      }
+      if (isValidValue(fields()[3], other.condition)) {
+        this.condition = data().deepCopy(fields()[3].schema(), other.condition);
+        fieldSetFlags()[3] = true;
+      }
+      if (isValidValue(fields()[4], other.account)) {
+        this.account = data().deepCopy(fields()[4].schema(), other.account);
+        fieldSetFlags()[4] = true;
+      }
+      if (isValidValue(fields()[5], other.bid)) {
+        this.bid = data().deepCopy(fields()[5].schema(), other.bid);
+        fieldSetFlags()[5] = true;
+      }
+      if (isValidValue(fields()[6], other.ask)) {
+        this.ask = data().deepCopy(fields()[6].schema(), other.ask);
+        fieldSetFlags()[6] = true;
       }
     }
 
@@ -229,7 +349,7 @@ public class Order extends org.apache.avro.specific.SpecificRecordBase implement
       * Gets the value of the 'id' field.
       * @return The value.
       */
-    public java.lang.Integer getId() {
+    public java.lang.CharSequence getId() {
       return id;
     }
 
@@ -238,7 +358,7 @@ public class Order extends org.apache.avro.specific.SpecificRecordBase implement
       * @param value The value of 'id'.
       * @return This builder.
       */
-    public com.investment.trading.avro.Order.Builder setId(int value) {
+    public com.investment.trading.avro.Order.Builder setId(java.lang.CharSequence value) {
       validate(fields()[0], value);
       this.id = value;
       fieldSetFlags()[0] = true;
@@ -259,6 +379,7 @@ public class Order extends org.apache.avro.specific.SpecificRecordBase implement
       * @return This builder.
       */
     public com.investment.trading.avro.Order.Builder clearId() {
+      id = null;
       fieldSetFlags()[0] = false;
       return this;
     }
@@ -303,40 +424,197 @@ public class Order extends org.apache.avro.specific.SpecificRecordBase implement
     }
 
     /**
-      * Gets the value of the 'batch' field.
+      * Gets the value of the 'volume' field.
       * @return The value.
       */
-    public java.lang.Integer getBatch() {
-      return batch;
+    public java.lang.CharSequence getVolume() {
+      return volume;
     }
 
     /**
-      * Sets the value of the 'batch' field.
-      * @param value The value of 'batch'.
+      * Sets the value of the 'volume' field.
+      * @param value The value of 'volume'.
       * @return This builder.
       */
-    public com.investment.trading.avro.Order.Builder setBatch(int value) {
+    public com.investment.trading.avro.Order.Builder setVolume(java.lang.CharSequence value) {
       validate(fields()[2], value);
-      this.batch = value;
+      this.volume = value;
       fieldSetFlags()[2] = true;
       return this;
     }
 
     /**
-      * Checks whether the 'batch' field has been set.
-      * @return True if the 'batch' field has been set, false otherwise.
+      * Checks whether the 'volume' field has been set.
+      * @return True if the 'volume' field has been set, false otherwise.
       */
-    public boolean hasBatch() {
+    public boolean hasVolume() {
       return fieldSetFlags()[2];
     }
 
 
     /**
-      * Clears the value of the 'batch' field.
+      * Clears the value of the 'volume' field.
       * @return This builder.
       */
-    public com.investment.trading.avro.Order.Builder clearBatch() {
+    public com.investment.trading.avro.Order.Builder clearVolume() {
+      volume = null;
       fieldSetFlags()[2] = false;
+      return this;
+    }
+
+    /**
+      * Gets the value of the 'condition' field.
+      * @return The value.
+      */
+    public java.lang.CharSequence getCondition() {
+      return condition;
+    }
+
+    /**
+      * Sets the value of the 'condition' field.
+      * @param value The value of 'condition'.
+      * @return This builder.
+      */
+    public com.investment.trading.avro.Order.Builder setCondition(java.lang.CharSequence value) {
+      validate(fields()[3], value);
+      this.condition = value;
+      fieldSetFlags()[3] = true;
+      return this;
+    }
+
+    /**
+      * Checks whether the 'condition' field has been set.
+      * @return True if the 'condition' field has been set, false otherwise.
+      */
+    public boolean hasCondition() {
+      return fieldSetFlags()[3];
+    }
+
+
+    /**
+      * Clears the value of the 'condition' field.
+      * @return This builder.
+      */
+    public com.investment.trading.avro.Order.Builder clearCondition() {
+      condition = null;
+      fieldSetFlags()[3] = false;
+      return this;
+    }
+
+    /**
+      * Gets the value of the 'account' field.
+      * @return The value.
+      */
+    public java.lang.CharSequence getAccount() {
+      return account;
+    }
+
+    /**
+      * Sets the value of the 'account' field.
+      * @param value The value of 'account'.
+      * @return This builder.
+      */
+    public com.investment.trading.avro.Order.Builder setAccount(java.lang.CharSequence value) {
+      validate(fields()[4], value);
+      this.account = value;
+      fieldSetFlags()[4] = true;
+      return this;
+    }
+
+    /**
+      * Checks whether the 'account' field has been set.
+      * @return True if the 'account' field has been set, false otherwise.
+      */
+    public boolean hasAccount() {
+      return fieldSetFlags()[4];
+    }
+
+
+    /**
+      * Clears the value of the 'account' field.
+      * @return This builder.
+      */
+    public com.investment.trading.avro.Order.Builder clearAccount() {
+      account = null;
+      fieldSetFlags()[4] = false;
+      return this;
+    }
+
+    /**
+      * Gets the value of the 'bid' field.
+      * @return The value.
+      */
+    public java.lang.CharSequence getBid() {
+      return bid;
+    }
+
+    /**
+      * Sets the value of the 'bid' field.
+      * @param value The value of 'bid'.
+      * @return This builder.
+      */
+    public com.investment.trading.avro.Order.Builder setBid(java.lang.CharSequence value) {
+      validate(fields()[5], value);
+      this.bid = value;
+      fieldSetFlags()[5] = true;
+      return this;
+    }
+
+    /**
+      * Checks whether the 'bid' field has been set.
+      * @return True if the 'bid' field has been set, false otherwise.
+      */
+    public boolean hasBid() {
+      return fieldSetFlags()[5];
+    }
+
+
+    /**
+      * Clears the value of the 'bid' field.
+      * @return This builder.
+      */
+    public com.investment.trading.avro.Order.Builder clearBid() {
+      bid = null;
+      fieldSetFlags()[5] = false;
+      return this;
+    }
+
+    /**
+      * Gets the value of the 'ask' field.
+      * @return The value.
+      */
+    public java.lang.CharSequence getAsk() {
+      return ask;
+    }
+
+    /**
+      * Sets the value of the 'ask' field.
+      * @param value The value of 'ask'.
+      * @return This builder.
+      */
+    public com.investment.trading.avro.Order.Builder setAsk(java.lang.CharSequence value) {
+      validate(fields()[6], value);
+      this.ask = value;
+      fieldSetFlags()[6] = true;
+      return this;
+    }
+
+    /**
+      * Checks whether the 'ask' field has been set.
+      * @return True if the 'ask' field has been set, false otherwise.
+      */
+    public boolean hasAsk() {
+      return fieldSetFlags()[6];
+    }
+
+
+    /**
+      * Clears the value of the 'ask' field.
+      * @return This builder.
+      */
+    public com.investment.trading.avro.Order.Builder clearAsk() {
+      ask = null;
+      fieldSetFlags()[6] = false;
       return this;
     }
 
@@ -345,9 +623,13 @@ public class Order extends org.apache.avro.specific.SpecificRecordBase implement
     public Order build() {
       try {
         Order record = new Order();
-        record.id = fieldSetFlags()[0] ? this.id : (java.lang.Integer) defaultValue(fields()[0]);
+        record.id = fieldSetFlags()[0] ? this.id : (java.lang.CharSequence) defaultValue(fields()[0]);
         record.ticket = fieldSetFlags()[1] ? this.ticket : (java.lang.CharSequence) defaultValue(fields()[1]);
-        record.batch = fieldSetFlags()[2] ? this.batch : (java.lang.Integer) defaultValue(fields()[2]);
+        record.volume = fieldSetFlags()[2] ? this.volume : (java.lang.CharSequence) defaultValue(fields()[2]);
+        record.condition = fieldSetFlags()[3] ? this.condition : (java.lang.CharSequence) defaultValue(fields()[3]);
+        record.account = fieldSetFlags()[4] ? this.account : (java.lang.CharSequence) defaultValue(fields()[4]);
+        record.bid = fieldSetFlags()[5] ? this.bid : (java.lang.CharSequence) defaultValue(fields()[5]);
+        record.ask = fieldSetFlags()[6] ? this.ask : (java.lang.CharSequence) defaultValue(fields()[6]);
         return record;
       } catch (java.lang.Exception e) {
         throw new org.apache.avro.AvroRuntimeException(e);

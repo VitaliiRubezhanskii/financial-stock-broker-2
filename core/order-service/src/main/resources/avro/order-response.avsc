@@ -1,6 +1,6 @@
 {
 	"type": "record",
-	"name": "Order",
+	"name": "OrderResponse",
 	"namespace": "com.investment.trading.avro",
 	"fields": [
 	 {
@@ -25,6 +25,11 @@
     },
     {   "name": "ask",
         "type": "string"
-    }
-	    ]
+    },
+    {   "name": "approved",
+        "type": "boolean"
+    },
+    {   "name": "message",
+        "type": "string"
+    }]
 }

@@ -12,10 +12,15 @@ spring:
 #          useNativeEncoding: true
       bindings:
         input:
-          destination: orders
+          destination: order-response
           content-type: application/*+avro
+        output1:
+           destination: orders
+           content-type: application/*+avro
+          group: group-1
+           concurrency: 3
         output:
-          destination: orders
+          destination: orders-request
           content-type: application/*+avro
           group: group-1
           concurrency: 3

@@ -1,7 +1,7 @@
 {
 	"type": "record",
-	"name": "Order",
-	"namespace": "com.investment.trading.avro",
+	"name": "OrderRequest",
+	"namespace": "com.investment.account.avro",
 	"fields": [
 	 {
 		"name": "id",

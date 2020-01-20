@@ -1,18 +1,20 @@
 package com.investment.trading.service;
 
 import com.investment.trading.domain.Order;
+import com.investment.trading.dto.OrderCreatedDto;
+import com.investment.trading.dto.OrderCreationDto;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 public interface OrderService {
 
-    Mono<Order> newOrder(Order order);
+    OrderCreatedDto newOrder(OrderCreationDto orderCreationDto);
 
-    Mono<Order> findOrderById(String id);
+    Order findOrderById(String id);
 
-    Flux<Order> findAllOrdersByContainingSKU(String sku);
+    Order findAllOrdersByContainingSKU(String sku);
 
-    Mono<Void> deleteById(String id);
+    void deleteById(String id);
 
 
 }

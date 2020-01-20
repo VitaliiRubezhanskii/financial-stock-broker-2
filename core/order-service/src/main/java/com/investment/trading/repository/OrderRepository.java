@@ -5,8 +5,8 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.ReactiveMongoRepository;
 import reactor.core.publisher.Flux;
 
-public interface OrderRepository extends ReactiveMongoRepository<Order, String> {
+public interface OrderRepository extends MongoRepository<Order, String> {
 
-    Flux<Order> findOrderByItemsContaining(String sku);
+    Order findOrderByItemsContaining(String sku);
 
 }
