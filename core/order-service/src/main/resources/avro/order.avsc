@@ -1,7 +1,7 @@
 {
 	"type": "record",
 	"name": "Order",
-	"namespace": "com.investment.trading.avro",
+	"namespace": "com.investment.trading.kafka.avro",
 	"fields": [
 	 {
 		"name": "id",

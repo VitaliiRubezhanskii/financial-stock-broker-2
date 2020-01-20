@@ -1,4 +1,4 @@
-package com.investment.auth.service;
+package com.investment.auth.api.service;
 
 import com.investment.auth.domain.User;
 

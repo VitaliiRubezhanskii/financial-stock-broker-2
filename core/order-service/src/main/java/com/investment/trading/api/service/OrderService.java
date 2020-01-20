@@ -1,20 +1,15 @@
-package com.investment.trading.service;
+package com.investment.trading.api.service;
 
-import com.investment.trading.domain.Order;
-import com.investment.trading.dto.OrderCreatedDto;
-import com.investment.trading.dto.OrderCreationDto;
-import reactor.core.publisher.Flux;
-import reactor.core.publisher.Mono;
+import com.investment.trading.model.dto.OrderCreatedDto;
+import com.investment.trading.model.dto.OrderCreationDto;
+
+import java.util.List;
 
 public interface OrderService {
 
     OrderCreatedDto newOrder(OrderCreationDto orderCreationDto);
 
-    Order findOrderById(String id);
+    OrderCreatedDto findOrderById(String id);
 
-    Order findAllOrdersByContainingSKU(String sku);
-
-    void deleteById(String id);
-
-
+    List<OrderCreatedDto> findOrdersByAccountId(String accountID);
 }

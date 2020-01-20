@@ -1,4 +1,4 @@
-package com.investment.account.dto;
+package com.investment.account.model.dto;
 
 public class AccountCreatedDto {
 }

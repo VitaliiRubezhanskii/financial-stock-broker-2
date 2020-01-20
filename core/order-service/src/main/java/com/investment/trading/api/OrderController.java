@@ -1,13 +1,15 @@
-package com.investment.trading.controller;
+package com.investment.trading.api;
 
-import com.investment.trading.dto.OrderCreatedDto;
-import com.investment.trading.dto.OrderCreationDto;
-import com.investment.trading.service.OrderService;
+import com.investment.trading.model.dto.OrderCreatedDto;
+import com.investment.trading.model.dto.OrderCreationDto;
+import com.investment.trading.api.service.OrderService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 
 @RestController(value = "/order")
@@ -21,4 +23,10 @@ public class OrderController {
     public OrderCreatedDto create(@RequestBody OrderCreationDto orderCreationDto) {
        return orderService.newOrder(orderCreationDto);
     }
+
+
+//
+//    OrderCreatedDto findOrderById(String id);
+//
+//    List<OrderCreatedDto> findOrdersByAccountId(String accountID);
 }

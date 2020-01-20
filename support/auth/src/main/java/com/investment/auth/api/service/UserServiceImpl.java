@@ -1,8 +1,8 @@
-package com.investment.auth.service;
+package com.investment.auth.api.service;
 
 import com.investment.auth.domain.User;
 import com.investment.auth.enums.Authorities;
-import com.investment.auth.repository.UserRepository;
+import com.investment.auth.api.repository.UserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 

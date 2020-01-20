@@ -1,7 +1,6 @@
 package com.investment.trading.configuration;
 
-import com.investment.trading.domain.Order;
-import com.investment.trading.utils.OrderUtils;
+import com.investment.trading.model.domain.Order;
 import com.mongodb.client.model.changestream.ChangeStreamDocument;
 import lombok.RequiredArgsConstructor;
 import org.bson.Document;

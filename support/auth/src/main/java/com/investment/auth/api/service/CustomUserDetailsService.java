@@ -1,12 +1,11 @@
-package com.investment.auth.service;
+package com.investment.auth.api.service;
 
 import com.investment.auth.domain.User;
-import com.investment.auth.repository.UserRepository;
+import com.investment.auth.api.repository.UserRepository;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import sun.awt.SunToolkit;
 
 @Service
 public class CustomUserDetailsService implements UserDetailsService {

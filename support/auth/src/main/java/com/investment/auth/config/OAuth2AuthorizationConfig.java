@@ -1,7 +1,7 @@
 package com.investment.auth.config;
 
-import com.investment.auth.service.AuthClientDetailsService;
-import com.investment.auth.service.CustomUserDetailsService;
+import com.investment.auth.api.service.AuthClientDetailsService;
+import com.investment.auth.api.service.CustomUserDetailsService;
 import com.investment.auth.config.mongodb.MongoTokenStore;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;

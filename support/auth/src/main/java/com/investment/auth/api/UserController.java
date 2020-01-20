@@ -1,9 +1,10 @@
-package com.investment.auth.controller;
+package com.investment.auth.api;
 
 import com.investment.auth.domain.User;
 import com.investment.auth.dto.UserDto;
 import com.investment.auth.dto.UserRegistrationDto;
-import com.investment.auth.service.UserService;
+import com.investment.auth.api.service.UserService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,13 +13,10 @@ import java.security.Principal;
 
 @RestController
 @RequestMapping("/user")
+@RequiredArgsConstructor
 public class UserController {
 
     private final UserService userService;
-
-    public UserController(UserService userService) {
-        this.userService = userService;
-    }
 
     @GetMapping("/current")
     public Principal getUser(Principal principal) {

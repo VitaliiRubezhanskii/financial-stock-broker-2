@@ -1,6 +1,6 @@
-package com.investment.auth.service;
+package com.investment.auth.api.service;
 
-import com.investment.auth.repository.AuthClientRepository;
+import com.investment.auth.api.repository.AuthClientRepository;
 import org.springframework.security.oauth2.provider.ClientDetails;
 import org.springframework.security.oauth2.provider.ClientDetailsService;
 import org.springframework.stereotype.Service;

@@ -1,16 +1,10 @@
-package com.investment.account.processor;
+package com.investment.account.kafka;
 
-import com.investment.account.avro.OrderRequest;
-import com.investment.account.avro.OrderResponse;
-import io.confluent.kafka.serializers.AbstractKafkaAvroSerDeConfig;
-import io.confluent.kafka.streams.serdes.avro.SpecificAvroSerde;
-import org.apache.kafka.streams.KeyValue;
+import com.investment.account.kafka.avro.OrderRequest;
+import com.investment.account.kafka.avro.OrderResponse;
 import org.apache.kafka.streams.kstream.KStream;
 import org.springframework.cloud.stream.annotation.StreamListener;
 import org.springframework.messaging.handler.annotation.SendTo;
-
-import java.util.Collections;
-import java.util.Map;
 
 public class OrderRequestProcessor {
 

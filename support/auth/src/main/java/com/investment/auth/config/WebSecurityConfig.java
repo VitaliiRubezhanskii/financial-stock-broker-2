@@ -1,6 +1,6 @@
 package com.investment.auth.config;
 
-import com.investment.auth.service.CustomUserDetailsService;
+import com.investment.auth.api.service.CustomUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

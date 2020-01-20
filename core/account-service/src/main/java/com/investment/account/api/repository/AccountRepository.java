@@ -1,4 +1,10 @@
-package com.investment.account.repository;
+package com.investment.account.api.repository;
 
-public interface AccountRepository {
+import com.investment.account.model.domain.Account;
+import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface AccountRepository extends MongoRepository<Account, String> {
+
 }

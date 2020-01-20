@@ -1,14 +1,12 @@
 package com.investment.trading.utils;
 
 
-import com.investment.trading.avro.Order;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Component;
+import com.investment.trading.kafka.avro.Order;
 
 
 public class OrderUtils {
 
-   public static Order payloadFromOrderEntity(com.investment.trading.domain.Order order){
+   public static Order payloadFromOrderEntity(com.investment.trading.model.domain.Order order){
        return Order.newBuilder()
                    .setAccount(order.getAccount())
                    .setId(order.getId())

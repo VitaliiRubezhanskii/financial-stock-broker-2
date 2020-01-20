@@ -1,6 +1,6 @@
-package com.investment.trading.processor;
+package com.investment.trading.kafka;
 
-import com.investment.trading.avro.Order;
+import com.investment.trading.kafka.avro.Order;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.stream.annotation.EnableBinding;
 import org.springframework.cloud.stream.annotation.StreamListener;

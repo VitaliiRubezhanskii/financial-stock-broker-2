@@ -3,7 +3,7 @@
  *
  * DO NOT EDIT DIRECTLY
  */
-package com.investment.trading.avro;
+package com.investment.trading.kafka.avro;
 
 import org.apache.avro.specific.SpecificData;
 import org.apache.avro.message.BinaryMessageEncoder;
@@ -14,7 +14,7 @@ import org.apache.avro.message.SchemaStore;
 @org.apache.avro.specific.AvroGenerated
 public class OrderResponse extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
   private static final long serialVersionUID = -2584933868326339581L;
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"OrderResponse\",\"namespace\":\"com.investment.trading.avro\",\"fields\":[{\"name\":\"id\",\"type\":\"string\"},{\"name\":\"ticket\",\"type\":\"string\"},{\"name\":\"volume\",\"type\":\"string\"},{\"name\":\"condition\",\"type\":\"string\"},{\"name\":\"account\",\"type\":\"string\"},{\"name\":\"bid\",\"type\":\"string\"},{\"name\":\"ask\",\"type\":\"string\"},{\"name\":\"approved\",\"type\":\"boolean\"},{\"name\":\"message\",\"type\":\"string\"}]}");
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"OrderResponse\",\"namespace\":\"com.investment.trading.kafka.avro\",\"fields\":[{\"name\":\"id\",\"type\":\"string\"},{\"name\":\"ticket\",\"type\":\"string\"},{\"name\":\"volume\",\"type\":\"string\"},{\"name\":\"condition\",\"type\":\"string\"},{\"name\":\"account\",\"type\":\"string\"},{\"name\":\"bid\",\"type\":\"string\"},{\"name\":\"ask\",\"type\":\"string\"},{\"name\":\"approved\",\"type\":\"boolean\"},{\"name\":\"message\",\"type\":\"string\"}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 
   private static SpecificData MODEL$ = new SpecificData();
@@ -274,8 +274,8 @@ public class OrderResponse extends org.apache.avro.specific.SpecificRecordBase i
    * Creates a new OrderResponse RecordBuilder.
    * @return A new OrderResponse RecordBuilder
    */
-  public static com.investment.trading.avro.OrderResponse.Builder newBuilder() {
-    return new com.investment.trading.avro.OrderResponse.Builder();
+  public static com.investment.trading.kafka.avro.OrderResponse.Builder newBuilder() {
+    return new com.investment.trading.kafka.avro.OrderResponse.Builder();
   }
 
   /**
@@ -283,8 +283,8 @@ public class OrderResponse extends org.apache.avro.specific.SpecificRecordBase i
    * @param other The existing builder to copy.
    * @return A new OrderResponse RecordBuilder
    */
-  public static com.investment.trading.avro.OrderResponse.Builder newBuilder(com.investment.trading.avro.OrderResponse.Builder other) {
-    return new com.investment.trading.avro.OrderResponse.Builder(other);
+  public static com.investment.trading.kafka.avro.OrderResponse.Builder newBuilder(com.investment.trading.kafka.avro.OrderResponse.Builder other) {
+    return new com.investment.trading.kafka.avro.OrderResponse.Builder(other);
   }
 
   /**
@@ -292,8 +292,8 @@ public class OrderResponse extends org.apache.avro.specific.SpecificRecordBase i
    * @param other The existing instance to copy.
    * @return A new OrderResponse RecordBuilder
    */
-  public static com.investment.trading.avro.OrderResponse.Builder newBuilder(com.investment.trading.avro.OrderResponse other) {
-    return new com.investment.trading.avro.OrderResponse.Builder(other);
+  public static com.investment.trading.kafka.avro.OrderResponse.Builder newBuilder(com.investment.trading.kafka.avro.OrderResponse other) {
+    return new com.investment.trading.kafka.avro.OrderResponse.Builder(other);
   }
 
   /**
@@ -321,7 +321,7 @@ public class OrderResponse extends org.apache.avro.specific.SpecificRecordBase i
      * Creates a Builder by copying an existing Builder.
      * @param other The existing Builder to copy.
      */
-    private Builder(com.investment.trading.avro.OrderResponse.Builder other) {
+    private Builder(com.investment.trading.kafka.avro.OrderResponse.Builder other) {
       super(other);
       if (isValidValue(fields()[0], other.id)) {
         this.id = data().deepCopy(fields()[0].schema(), other.id);
@@ -365,7 +365,7 @@ public class OrderResponse extends org.apache.avro.specific.SpecificRecordBase i
      * Creates a Builder by copying an existing OrderResponse instance
      * @param other The existing instance to copy.
      */
-    private Builder(com.investment.trading.avro.OrderResponse other) {
+    private Builder(com.investment.trading.kafka.avro.OrderResponse other) {
             super(SCHEMA$);
       if (isValidValue(fields()[0], other.id)) {
         this.id = data().deepCopy(fields()[0].schema(), other.id);
@@ -418,7 +418,7 @@ public class OrderResponse extends org.apache.avro.specific.SpecificRecordBase i
       * @param value The value of 'id'.
       * @return This builder.
       */
-    public com.investment.trading.avro.OrderResponse.Builder setId(java.lang.CharSequence value) {
+    public com.investment.trading.kafka.avro.OrderResponse.Builder setId(java.lang.CharSequence value) {
       validate(fields()[0], value);
       this.id = value;
       fieldSetFlags()[0] = true;
@@ -438,7 +438,7 @@ public class OrderResponse extends org.apache.avro.specific.SpecificRecordBase i
       * Clears the value of the 'id' field.
       * @return This builder.
       */
-    public com.investment.trading.avro.OrderResponse.Builder clearId() {
+    public com.investment.trading.kafka.avro.OrderResponse.Builder clearId() {
       id = null;
       fieldSetFlags()[0] = false;
       return this;
@@ -457,7 +457,7 @@ public class OrderResponse extends org.apache.avro.specific.SpecificRecordBase i
       * @param value The value of 'ticket'.
       * @return This builder.
       */
-    public com.investment.trading.avro.OrderResponse.Builder setTicket(java.lang.CharSequence value) {
+    public com.investment.trading.kafka.avro.OrderResponse.Builder setTicket(java.lang.CharSequence value) {
       validate(fields()[1], value);
       this.ticket = value;
       fieldSetFlags()[1] = true;
@@ -477,7 +477,7 @@ public class OrderResponse extends org.apache.avro.specific.SpecificRecordBase i
       * Clears the value of the 'ticket' field.
       * @return This builder.
       */
-    public com.investment.trading.avro.OrderResponse.Builder clearTicket() {
+    public com.investment.trading.kafka.avro.OrderResponse.Builder clearTicket() {
       ticket = null;
       fieldSetFlags()[1] = false;
       return this;
@@ -496,7 +496,7 @@ public class OrderResponse extends org.apache.avro.specific.SpecificRecordBase i
       * @param value The value of 'volume'.
       * @return This builder.
       */
-    public com.investment.trading.avro.OrderResponse.Builder setVolume(java.lang.CharSequence value) {
+    public com.investment.trading.kafka.avro.OrderResponse.Builder setVolume(java.lang.CharSequence value) {
       validate(fields()[2], value);
       this.volume = value;
       fieldSetFlags()[2] = true;
@@ -516,7 +516,7 @@ public class OrderResponse extends org.apache.avro.specific.SpecificRecordBase i
       * Clears the value of the 'volume' field.
       * @return This builder.
       */
-    public com.investment.trading.avro.OrderResponse.Builder clearVolume() {
+    public com.investment.trading.kafka.avro.OrderResponse.Builder clearVolume() {
       volume = null;
       fieldSetFlags()[2] = false;
       return this;
@@ -535,7 +535,7 @@ public class OrderResponse extends org.apache.avro.specific.SpecificRecordBase i
       * @param value The value of 'condition'.
       * @return This builder.
       */
-    public com.investment.trading.avro.OrderResponse.Builder setCondition(java.lang.CharSequence value) {
+    public com.investment.trading.kafka.avro.OrderResponse.Builder setCondition(java.lang.CharSequence value) {
       validate(fields()[3], value);
       this.condition = value;
       fieldSetFlags()[3] = true;
@@ -555,7 +555,7 @@ public class OrderResponse extends org.apache.avro.specific.SpecificRecordBase i
       * Clears the value of the 'condition' field.
       * @return This builder.
       */
-    public com.investment.trading.avro.OrderResponse.Builder clearCondition() {
+    public com.investment.trading.kafka.avro.OrderResponse.Builder clearCondition() {
       condition = null;
       fieldSetFlags()[3] = false;
       return this;
@@ -574,7 +574,7 @@ public class OrderResponse extends org.apache.avro.specific.SpecificRecordBase i
       * @param value The value of 'account'.
       * @return This builder.
       */
-    public com.investment.trading.avro.OrderResponse.Builder setAccount(java.lang.CharSequence value) {
+    public com.investment.trading.kafka.avro.OrderResponse.Builder setAccount(java.lang.CharSequence value) {
       validate(fields()[4], value);
       this.account = value;
       fieldSetFlags()[4] = true;
@@ -594,7 +594,7 @@ public class OrderResponse extends org.apache.avro.specific.SpecificRecordBase i
       * Clears the value of the 'account' field.
       * @return This builder.
       */
-    public com.investment.trading.avro.OrderResponse.Builder clearAccount() {
+    public com.investment.trading.kafka.avro.OrderResponse.Builder clearAccount() {
       account = null;
       fieldSetFlags()[4] = false;
       return this;
@@ -613,7 +613,7 @@ public class OrderResponse extends org.apache.avro.specific.SpecificRecordBase i
       * @param value The value of 'bid'.
       * @return This builder.
       */
-    public com.investment.trading.avro.OrderResponse.Builder setBid(java.lang.CharSequence value) {
+    public com.investment.trading.kafka.avro.OrderResponse.Builder setBid(java.lang.CharSequence value) {
       validate(fields()[5], value);
       this.bid = value;
       fieldSetFlags()[5] = true;
@@ -633,7 +633,7 @@ public class OrderResponse extends org.apache.avro.specific.SpecificRecordBase i
       * Clears the value of the 'bid' field.
       * @return This builder.
       */
-    public com.investment.trading.avro.OrderResponse.Builder clearBid() {
+    public com.investment.trading.kafka.avro.OrderResponse.Builder clearBid() {
       bid = null;
       fieldSetFlags()[5] = false;
       return this;
@@ -652,7 +652,7 @@ public class OrderResponse extends org.apache.avro.specific.SpecificRecordBase i
       * @param value The value of 'ask'.
       * @return This builder.
       */
-    public com.investment.trading.avro.OrderResponse.Builder setAsk(java.lang.CharSequence value) {
+    public com.investment.trading.kafka.avro.OrderResponse.Builder setAsk(java.lang.CharSequence value) {
       validate(fields()[6], value);
       this.ask = value;
       fieldSetFlags()[6] = true;
@@ -672,7 +672,7 @@ public class OrderResponse extends org.apache.avro.specific.SpecificRecordBase i
       * Clears the value of the 'ask' field.
       * @return This builder.
       */
-    public com.investment.trading.avro.OrderResponse.Builder clearAsk() {
+    public com.investment.trading.kafka.avro.OrderResponse.Builder clearAsk() {
       ask = null;
       fieldSetFlags()[6] = false;
       return this;
@@ -691,7 +691,7 @@ public class OrderResponse extends org.apache.avro.specific.SpecificRecordBase i
       * @param value The value of 'approved'.
       * @return This builder.
       */
-    public com.investment.trading.avro.OrderResponse.Builder setApproved(boolean value) {
+    public com.investment.trading.kafka.avro.OrderResponse.Builder setApproved(boolean value) {
       validate(fields()[7], value);
       this.approved = value;
       fieldSetFlags()[7] = true;
@@ -711,7 +711,7 @@ public class OrderResponse extends org.apache.avro.specific.SpecificRecordBase i
       * Clears the value of the 'approved' field.
       * @return This builder.
       */
-    public com.investment.trading.avro.OrderResponse.Builder clearApproved() {
+    public com.investment.trading.kafka.avro.OrderResponse.Builder clearApproved() {
       fieldSetFlags()[7] = false;
       return this;
     }
@@ -729,7 +729,7 @@ public class OrderResponse extends org.apache.avro.specific.SpecificRecordBase i
       * @param value The value of 'message'.
       * @return This builder.
       */
-    public com.investment.trading.avro.OrderResponse.Builder setMessage(java.lang.CharSequence value) {
+    public com.investment.trading.kafka.avro.OrderResponse.Builder setMessage(java.lang.CharSequence value) {
       validate(fields()[8], value);
       this.message = value;
       fieldSetFlags()[8] = true;
@@ -749,7 +749,7 @@ public class OrderResponse extends org.apache.avro.specific.SpecificRecordBase i
       * Clears the value of the 'message' field.
       * @return This builder.
       */
-    public com.investment.trading.avro.OrderResponse.Builder clearMessage() {
+    public com.investment.trading.kafka.avro.OrderResponse.Builder clearMessage() {
       message = null;
       fieldSetFlags()[8] = false;
       return this;

@@ -1,9 +1,8 @@
 package com.investment.trading.mapper;
 
-import com.investment.trading.avro.OrderResponse;
-import com.investment.trading.domain.Order;
-import com.investment.trading.dto.OrderCreatedDto;
-import com.investment.trading.dto.OrderCreationDto;
+import com.investment.trading.model.domain.Order;
+import com.investment.trading.model.dto.OrderCreatedDto;
+import com.investment.trading.model.dto.OrderCreationDto;
 import org.mapstruct.Mapper;
 import org.mapstruct.NullValuePropertyMappingStrategy;
 

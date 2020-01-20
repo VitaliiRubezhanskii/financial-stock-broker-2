@@ -1,4 +1,4 @@
-package com.investment.auth.repository;
+package com.investment.auth.api.repository;
 
 import com.investment.auth.domain.AuthClientDetails;
 import org.springframework.data.mongodb.repository.MongoRepository;
