@@ -8,5 +8,6 @@ import java.util.Optional;
 
 @Repository
 public interface AuthClientRepository extends MongoRepository<AuthClientDetails, String> {
+
     Optional<AuthClientDetails> findByClientId(String clientId);
 }

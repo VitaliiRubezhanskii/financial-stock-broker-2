@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class AuthClientDetailsService implements ClientDetailsService {
+
     private final AuthClientRepository authClientRepository;
 
     public AuthClientDetailsService(AuthClientRepository authClientRepository) {
