@@ -1,5 +1,7 @@
 package com.investment.feign_hystrix.integration;
 
+import com.investment.feign_hystrix.integration.domain.Order;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -7,30 +9,30 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class IntegrationClient {
 
-//    private final AccountServiceClient accountServiceClient;
+    private final AccountServiceClient accountServiceClient;
 
-//    private final OrderServiceClient orderServiceClient;
-
-
-//    @HystrixCommand(fallbackMethod = "getDefaultOrders")
-//    public Flux<Order> getOrders(String id){
-//        return orderServiceClient.get(id);
-//    }
-
-//    @HystrixCommand(fallbackMethod = "getDefaultExample")
-//    public Flux<Order> getExample(){
-//        return orderServiceClient.getExample();
-//    }
+    private final OrderServiceClient orderServiceClient;
 
 
-//    public Order create(Order order){
-//        return orderServiceClient.create(order);
-//    }
-//
-//
-////    @HystrixCommand(fallbackMethod = "getDefaultHello")
-//    public String getHello(){
-//        return accountServiceClient.getHello();
-//    }
+    @HystrixCommand(fallbackMethod = "getDefaultOrders")
+    public Order getOrders(String id){
+        return orderServiceClient.get(id);
+    }
+
+    @HystrixCommand(fallbackMethod = "getDefaultExample")
+    public Order getExample(){
+        return orderServiceClient.getExample();
+    }
+
+
+    public Order create(Order order){
+        return orderServiceClient.create(order);
+    }
+
+
+//    @HystrixCommand(fallbackMethod = "getDefaultHello")
+    public String getHello(){
+        return accountServiceClient.getHello();
+    }
 
 }
