@@ -1,13 +1,13 @@
 package com.investment.trading.kafka.serde;
 
-import com.investment.trading.kafka.avro.OrderRequest;
+import com.investment.trading.kafka.avro.OrderResponse;
 import io.confluent.kafka.serializers.AbstractKafkaAvroSerDeConfig;
 import io.confluent.kafka.streams.serdes.avro.SpecificAvroDeserializer;
 
 import java.util.Collections;
 import java.util.Map;
 
-public class OrderRequestDeser extends SpecificAvroDeserializer<OrderRequest> {
+public class OrderResponseSerde extends SpecificAvroDeserializer<OrderResponse> {
 
     @Override
     public void configure(Map<String, ?> serializerConfig, boolean isSerializerForRecordKeys) {

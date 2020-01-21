@@ -3,44 +3,33 @@ spring:
     mongodb:
       uri: mongodb://mongo1:27017,mongo2:27017,mongo3:27017/order?replicaSet=rs0
 
-  cloud:
-    stream:
-#      default:
-#        producer:
-#          useNativeEncoding: true
-#        consumer:
-#          useNativeEncoding: true
-      bindings:
-        input:
-          destination: order-response
-          content-type: application/*+avro
-#        output1:
-#           destination: orders
-#           content-type: application/*+avro
-#           group: group-1
-#           concurrency: 3
-        output:
-          destination: order-request
-          content-type: application/*+avro
-          group: group-1
-          concurrency: 3
-      kafka:
-          binder:
-           producer-properties:
-             key.serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
-             value.serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
-             schema.registry.url: http://schema-registry:8081
-           consumer-properties:
-             key.deserializer: io.confluent.kafka.serializers.KafkaAvroDeserializer
-             value.deserializer: io.confluent.kafka.serializers.KafkaAvroDeserializer
-             schema.registry.url: http://schema-registry:8081
-             specific.avro.reader: true
-           brokers: broker
-           streams:
-               binder:
-                 brokers: broker
-spring.cloud.stream.schemaRegistryClient.endpoint: http://schema-registry:8081
-spring.cloud.stream.schemaRegistryClient.cached: false
+server.port: 9998
+spring.application.name: analytics
+spring.cloud.stream.bindings.output:
+    destination: order-request
+spring.cloud.stream.bindings.input:
+    destination: order-response
+    consumer:
+      useNativeDecoding: true
+spring.cloud.stream.kafka.streams.binder:
+    brokers: broker
+    configuration:
+      schema.registry.url: http://schema-registry:8081
+      commit.interval.ms: 1000
+      default.key.serde: org.apache.kafka.common.serialization.Serdes$StringSerde
+      default.value.serde: io.confluent.kafka.streams.serdes.avro.SpecificAvroSerde
+
+spring.cloud.stream.kafka.streams.bindings.input:
+  consumer:
+    keySerde: org.apache.kafka.common.serialization.Serdes$StringSerde
+    valueSerde: com.investment.trading.kafka.serde.OrderResponseSerde
+spring.cloud.stream.kafka.streams.bindings.output:
+  consumer:
+    keySerde: org.apache.kafka.common.serialization.Serdes$StringSerde
+    valueSerde: com.investment.trading.kafka.serde.OrderRequestSerde
+
+#spring.cloud.stream.schemaRegistryClient.endpoint: http://schema-registry:8081
+#spring.cloud.stream.schemaRegistryClient.cached: false
 
 
 security.oauth2:
