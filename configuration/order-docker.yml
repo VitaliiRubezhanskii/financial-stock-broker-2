@@ -20,7 +20,7 @@ spring:
           group: group-1
            concurrency: 3
         output:
-          destination: orders-request
+          destination: order-request
           content-type: application/*+avro
           group: group-1
           concurrency: 3

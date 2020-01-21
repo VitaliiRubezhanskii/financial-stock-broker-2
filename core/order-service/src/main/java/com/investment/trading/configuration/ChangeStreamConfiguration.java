@@ -1,5 +1,7 @@
 package com.investment.trading.configuration;
 
+import com.investment.trading.kafka.avro.OrderRequest;
+import com.investment.trading.kafka.processors.KafkaProcessor;
 import com.investment.trading.model.domain.Order;
 import com.mongodb.client.model.changestream.ChangeStreamDocument;
 import lombok.RequiredArgsConstructor;
@@ -10,6 +12,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.messaging.*;
 import org.springframework.kafka.support.KafkaHeaders;
+import org.springframework.messaging.MessageChannel;
 import org.springframework.messaging.support.MessageBuilder;
 
 
@@ -22,14 +25,22 @@ import static org.springframework.data.mongodb.core.query.Criteria.where;
 @RequiredArgsConstructor
 public class ChangeStreamConfiguration {
 
-    private final Processor processor;
+    private final KafkaProcessor processor;
 
     @Bean
-    public Subscription emitOrderRequestToKafkaTopic(MessageListenerContainer container) {
-        return container.register(ChangeStreamRequest.builder(this::sendToKafkaTopic)
+    public Subscription streamOrderRequestToKafkaTopic(MessageListenerContainer container) {
+        return container.register(ChangeStreamRequest.builder(stream -> sendToKafkaTopic((Message)stream.getBody(), processor.orderRequestChannel()))
+                .collection("order")
+                .filter(newAggregation(match(where("operationType").is("insert"))))
+                .build(), OrderRequest.class);
+    }
+
+    @Bean
+    public Subscription streamOrderToKafkaTopic(MessageListenerContainer container) {
+        return container.register(ChangeStreamRequest.builder(stream -> sendToKafkaTopic((Message)stream.getBody(), processor.ordersChannel()))
                 .collection("order")
                 .filter(newAggregation(match(where("operationType").is("update"))))
-                .build(), Order.class);
+                .build(), com.investment.trading.kafka.avro.Order.class);
     }
 
     @Bean
@@ -42,9 +53,8 @@ public class ChangeStreamConfiguration {
         };
     }
 
-    private void sendToKafkaTopic(Message<ChangeStreamDocument<Document>, Order> message){
-        processor.output()
-                .send(MessageBuilder
+    private void sendToKafkaTopic(Message<ChangeStreamDocument<Document>, Order> message, MessageChannel channel){
+       channel.send(MessageBuilder
                         .withPayload(payloadFromOrderEntity(message.getBody()))
                         .setHeader(KafkaHeaders.MESSAGE_KEY, 1)
                         .build());

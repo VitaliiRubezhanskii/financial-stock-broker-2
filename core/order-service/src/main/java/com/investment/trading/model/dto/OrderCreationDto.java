@@ -9,6 +9,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class OrderCreationDto {
 
+    private String id;
+
     private String ticket;
 
     private String volume;

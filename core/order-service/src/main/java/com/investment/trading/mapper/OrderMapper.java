@@ -4,6 +4,7 @@ import com.investment.trading.model.domain.Order;
 import com.investment.trading.model.dto.OrderCreatedDto;
 import com.investment.trading.model.dto.OrderCreationDto;
 import org.mapstruct.Mapper;
+import org.mapstruct.MappingTarget;
 import org.mapstruct.NullValuePropertyMappingStrategy;
 
 @Mapper(componentModel="spring",
@@ -13,5 +14,10 @@ public interface OrderMapper {
     Order toEntity(OrderCreationDto orderCreationDto);
 
     OrderCreatedDto toDto(Order order);
+
+    OrderCreationDto update(OrderCreatedDto orderCreatedDto, @MappingTarget OrderCreationDto orderCreationDto);
+
+
+
 
 }

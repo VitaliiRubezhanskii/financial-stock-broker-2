@@ -19,8 +19,7 @@ public class Account {
     @Id
     private String id;
 
-    @DBRef
-    private Account account;
+    private String account;
 
     private BigDecimal balance;
 

@@ -5,9 +5,9 @@ import com.investment.trading.model.dto.OrderCreationDto;
 import com.investment.trading.api.service.OrderService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -20,13 +20,17 @@ public class OrderController {
     private final OrderService orderService;
 
     @PostMapping
-    public OrderCreatedDto create(@RequestBody OrderCreationDto orderCreationDto) {
-       return orderService.newOrder(orderCreationDto);
+    public ResponseEntity<OrderCreatedDto> create(@RequestBody OrderCreationDto orderCreationDto) {
+       return new ResponseEntity<>(orderService.newOrder(orderCreationDto), HttpStatus.CREATED);
     }
 
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<OrderCreatedDto> findOrderById(@PathVariable("id") String id){
+        return new ResponseEntity<>(orderService.findOrderById(id), HttpStatus.OK);
+    }
 
-//
-//    OrderCreatedDto findOrderById(String id);
-//
-//    List<OrderCreatedDto> findOrdersByAccountId(String accountID);
+    @GetMapping(value = "/account/{accountId}")
+    public ResponseEntity<List<OrderCreatedDto>> findOrdersByAccount(@PathVariable("accountId") String accountId){
+        return new ResponseEntity<>(orderService.findOrdersByAccountId(accountId), HttpStatus.OK);
+    }
 }
