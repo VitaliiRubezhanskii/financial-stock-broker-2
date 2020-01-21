@@ -3,12 +3,12 @@ package com.investment.trading.api.service.impl;
 import com.investment.trading.api.repository.OrderRepository;
 import com.investment.trading.api.service.OrderService;
 import com.investment.trading.kafka.avro.OrderRequest;
-import com.investment.trading.kafka.processors.KafkaProcessor;
 import com.investment.trading.mapper.OrderMapper;
 import com.investment.trading.model.dto.OrderCreatedDto;
 import com.investment.trading.model.dto.OrderCreationDto;
 import com.investment.trading.utils.OrderUtils;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cloud.stream.messaging.Processor;
 import org.springframework.kafka.support.KafkaHeaders;
 import org.springframework.messaging.MessageChannel;
 import org.springframework.messaging.support.MessageBuilder;
@@ -26,7 +26,7 @@ public class OrderServiceImpl implements OrderService {
 
     private final OrderMapper orderMapper;
 
-    private final KafkaProcessor processor;
+    private final Processor processor;
 
     @Override
     public OrderCreatedDto newOrder(OrderCreationDto orderCreationDto) {
@@ -34,7 +34,7 @@ public class OrderServiceImpl implements OrderService {
                 .map(dto -> orderRepository.save(orderMapper.toEntity(dto)))
                 .map(order -> {
                     OrderCreatedDto orderCreatedDto = orderMapper.toDto(order);
-                    sendToKafkaTopic(OrderUtils.payloadToOrderRequest(orderCreatedDto), processor.orderRequestChannel());
+                    sendToKafkaTopic(OrderUtils.payloadToOrderRequest(orderCreatedDto), processor.output());
                     return orderCreatedDto;
                 }).orElse(new OrderCreatedDto());
 

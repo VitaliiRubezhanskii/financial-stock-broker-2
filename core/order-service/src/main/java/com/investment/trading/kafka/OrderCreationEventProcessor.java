@@ -1,12 +1,9 @@
 package com.investment.trading.kafka;
 
-import com.investment.trading.api.repository.OrderRepository;
 import com.investment.trading.api.service.OrderService;
 import com.investment.trading.kafka.avro.OrderRequest;
 import com.investment.trading.kafka.avro.OrderResponse;
-import com.investment.trading.kafka.processors.KafkaProcessor;
 import com.investment.trading.mapper.OrderMapper;
-import com.investment.trading.model.domain.Order;
 import com.investment.trading.model.dto.OrderCreationDto;
 import com.investment.trading.utils.OrderUtils;
 import io.confluent.kafka.serializers.AbstractKafkaAvroSerDeConfig;
@@ -23,7 +20,7 @@ import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
-@EnableBinding(KafkaProcessor.class)
+@EnableBinding(Processor.class)
 @Slf4j
 public class OrderCreationEventProcessor {
 
@@ -31,7 +28,7 @@ public class OrderCreationEventProcessor {
 
     private final OrderMapper orderMapper;
 
-    @StreamListener(KafkaProcessor.INPUT)
+    @StreamListener(Processor.INPUT)
     public void consumeOrderResponse(OrderResponse orderResponse) {
         final Map<String, String> serdeConfig = Collections.singletonMap(AbstractKafkaAvroSerDeConfig.SCHEMA_REGISTRY_URL_CONFIG, "http://schema-registry:8081");
         final SpecificAvroSerde<OrderRequest> orderRequestSpecificAvroSerde = new SpecificAvroSerde<>();
