@@ -4,6 +4,7 @@ package com.investment.trading.utils;
 import com.investment.trading.kafka.avro.Order;
 import com.investment.trading.kafka.avro.OrderRequest;
 import com.investment.trading.kafka.avro.OrderResponse;
+import com.investment.trading.model.dto.OrderCreatedDto;
 import com.investment.trading.model.dto.OrderCreationDto;
 import com.mongodb.client.model.changestream.ChangeStreamDocument;
 import org.bson.Document;
@@ -15,7 +16,7 @@ public class OrderUtils {
    public static Order payloadFromOrderEntity(com.investment.trading.model.domain.Order order){
        return Order.newBuilder()
                    .setAccount(order.getAccount())
-                   .setId(order.getId())
+                   .setId(1)
                    .setCondition(order.getCondition())
                    .setTicket(order.getTicket())
                    .setVolume(order.getVolume())
@@ -23,15 +24,15 @@ public class OrderUtils {
                    .setBid(order.getBid()).build();
    }
 
-    public static OrderRequest payloadToOrderRequest(Message<ChangeStreamDocument<Document>, OrderRequest> message){
+    public static OrderRequest payloadToOrderRequest(OrderCreatedDto message){
         return OrderRequest.newBuilder()
-                .setAccount(message.getBody().getAccount())
-                .setId(message.getBody().getId())
-                .setCondition(message.getBody().getCondition())
-                .setTicket(message.getBody().getTicket())
-                .setVolume(message.getBody().getVolume())
-                .setAsk(message.getBody().getAsk())
-                .setBid(message.getBody().getBid()).build();
+                .setAccount(message.getAccount())
+                .setId(1)
+                .setCondition(message.getCondition())
+                .setTicket(message.getTicket())
+                .setVolume(message.getVolume())
+                .setAsk(message.getAsk())
+                .setBid(message.getBid()).build();
     }
 
    public static OrderCreationDto mapOrderRequestToOrderCreationDto(OrderResponse orderResponse){

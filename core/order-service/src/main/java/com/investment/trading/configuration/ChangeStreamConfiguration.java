@@ -28,14 +28,14 @@ public class ChangeStreamConfiguration {
 
     private final KafkaProcessor processor;
 
-    @Bean
-    public Subscription streamOrderRequestToKafkaTopic(MessageListenerContainer container) {
-        return container.register(ChangeStreamRequest
-                .builder(stream -> sendToKafkaTopic(stream.getBody(), processor.orderRequestChannel()))
-                .collection("order")
-                .filter(newAggregation(match(where("operationType").is("insert"))))
-                .build(), OrderRequest.class);
-    }
+//    @Bean
+//    public Subscription streamOrderRequestToKafkaTopic(MessageListenerContainer container) {
+//        return container.register(ChangeStreamRequest
+//                .builder(stream -> sendToKafkaTopic((OrderRequest) stream.getBody(), processor.orderRequestChannel()))
+//                .collection("order")
+//                .filter(newAggregation(match(where("operationType").is("insert"))))
+//                .build(), OrderRequest.class);
+//    }
 
 //    @Bean
 //    public Subscription streamOrderToKafkaTopic(MessageListenerContainer container) {
@@ -55,13 +55,13 @@ public class ChangeStreamConfiguration {
         };
     }
 
-    private void sendToKafkaTopic(Object message, MessageChannel channel){
-       channel.send(MessageBuilder
-                        .withPayload(OrderUtils.payloadToOrderRequest((Message<ChangeStreamDocument<Document>, OrderRequest>) message))
-                        .setHeader(KafkaHeaders.MESSAGE_KEY, 1)
-                        .build());
-
-    }
+//    private void sendToKafkaTopic(OrderRequest message, MessageChannel channel){
+//       channel.send(MessageBuilder
+//                        .withPayload(OrderUtils.payloadToOrderRequest(message))
+//                        .setHeader(KafkaHeaders.MESSAGE_KEY, 1)
+//                        .build());
+//
+//    }
 
     private void convert(Message<ChangeStreamDocument<Document>, OrderRequest> message){
         System.out.println("Received message with id: " + message.getRaw() + " ----------" + message.getBody());

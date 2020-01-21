@@ -2,10 +2,16 @@ package com.investment.trading.api.service.impl;
 
 import com.investment.trading.api.repository.OrderRepository;
 import com.investment.trading.api.service.OrderService;
+import com.investment.trading.kafka.avro.OrderRequest;
+import com.investment.trading.kafka.processors.KafkaProcessor;
 import com.investment.trading.mapper.OrderMapper;
 import com.investment.trading.model.dto.OrderCreatedDto;
 import com.investment.trading.model.dto.OrderCreationDto;
+import com.investment.trading.utils.OrderUtils;
 import lombok.RequiredArgsConstructor;
+import org.springframework.kafka.support.KafkaHeaders;
+import org.springframework.messaging.MessageChannel;
+import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,12 +26,19 @@ public class OrderServiceImpl implements OrderService {
 
     private final OrderMapper orderMapper;
 
+    private final KafkaProcessor processor;
+
     @Override
     public OrderCreatedDto newOrder(OrderCreationDto orderCreationDto) {
         return Optional.ofNullable(orderCreationDto)
                 .map(dto -> orderRepository.save(orderMapper.toEntity(dto)))
-                .map(orderMapper::toDto)
-                .orElse(new OrderCreatedDto());
+                .map(order -> {
+                    OrderCreatedDto orderCreatedDto = orderMapper.toDto(order);
+                    sendToKafkaTopic(OrderUtils.payloadToOrderRequest(orderCreatedDto), processor.orderRequestChannel());
+                    return orderCreatedDto;
+                }).orElse(new OrderCreatedDto());
+
+
     }
 
     @Override
@@ -41,5 +54,14 @@ public class OrderServiceImpl implements OrderService {
                  .stream()
                  .map(orderMapper::toDto)
                  .collect(Collectors.toList());
+    }
+
+
+    private void sendToKafkaTopic(OrderRequest message, MessageChannel channel){
+        channel.send(MessageBuilder
+                .withPayload(message)
+                .setHeader(KafkaHeaders.MESSAGE_KEY, 1)
+                .build());
+
     }
 }
