@@ -2,8 +2,12 @@ package com.investment.trading.utils;
 
 
 import com.investment.trading.kafka.avro.Order;
+import com.investment.trading.kafka.avro.OrderRequest;
 import com.investment.trading.kafka.avro.OrderResponse;
 import com.investment.trading.model.dto.OrderCreationDto;
+import com.mongodb.client.model.changestream.ChangeStreamDocument;
+import org.bson.Document;
+import org.springframework.data.mongodb.core.messaging.Message;
 
 
 public class OrderUtils {
@@ -18,6 +22,17 @@ public class OrderUtils {
                    .setAsk(order.getAsk())
                    .setBid(order.getBid()).build();
    }
+
+    public static OrderRequest payloadToOrderRequest(Message<ChangeStreamDocument<Document>, OrderRequest> message){
+        return OrderRequest.newBuilder()
+                .setAccount(message.getBody().getAccount())
+                .setId(message.getBody().getId())
+                .setCondition(message.getBody().getCondition())
+                .setTicket(message.getBody().getTicket())
+                .setVolume(message.getBody().getVolume())
+                .setAsk(message.getBody().getAsk())
+                .setBid(message.getBody().getBid()).build();
+    }
 
    public static OrderCreationDto mapOrderRequestToOrderCreationDto(OrderResponse orderResponse){
        OrderCreationDto orderDto = new OrderCreationDto();

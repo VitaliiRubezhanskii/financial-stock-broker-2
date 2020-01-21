@@ -3,6 +3,7 @@ package com.investment.trading.configuration;
 import com.investment.trading.kafka.avro.OrderRequest;
 import com.investment.trading.kafka.processors.KafkaProcessor;
 import com.investment.trading.model.domain.Order;
+import com.investment.trading.utils.OrderUtils;
 import com.mongodb.client.model.changestream.ChangeStreamDocument;
 import lombok.RequiredArgsConstructor;
 import org.bson.Document;
@@ -29,19 +30,20 @@ public class ChangeStreamConfiguration {
 
     @Bean
     public Subscription streamOrderRequestToKafkaTopic(MessageListenerContainer container) {
-        return container.register(ChangeStreamRequest.builder(stream -> sendToKafkaTopic((Message)stream.getBody(), processor.orderRequestChannel()))
+        return container.register(ChangeStreamRequest
+                .builder(stream -> sendToKafkaTopic((Message)stream.getBody(), processor.orderRequestChannel()))
                 .collection("order")
                 .filter(newAggregation(match(where("operationType").is("insert"))))
                 .build(), OrderRequest.class);
     }
 
-    @Bean
-    public Subscription streamOrderToKafkaTopic(MessageListenerContainer container) {
-        return container.register(ChangeStreamRequest.builder(stream -> sendToKafkaTopic((Message)stream.getBody(), processor.ordersChannel()))
-                .collection("order")
-                .filter(newAggregation(match(where("operationType").is("update"))))
-                .build(), com.investment.trading.kafka.avro.Order.class);
-    }
+//    @Bean
+//    public Subscription streamOrderToKafkaTopic(MessageListenerContainer container) {
+//        return container.register(ChangeStreamRequest.builder(stream -> sendToKafkaTopic((Message)stream.getBody(), processor.ordersChannel()))
+//                .collection("order")
+//                .filter(newAggregation(match(where("operationType").is("update"))))
+//                .build(), com.investment.trading.kafka.avro.Order.class);
+//    }
 
     @Bean
     public MessageListenerContainer messageListenerContainer(MongoTemplate template) {
@@ -53,12 +55,18 @@ public class ChangeStreamConfiguration {
         };
     }
 
-    private void sendToKafkaTopic(Message<ChangeStreamDocument<Document>, Order> message, MessageChannel channel){
+    private void sendToKafkaTopic(Message<ChangeStreamDocument<Document>, OrderRequest> message, MessageChannel channel){
        channel.send(MessageBuilder
-                        .withPayload(payloadFromOrderEntity(message.getBody()))
+                        .withPayload(OrderUtils.payloadToOrderRequest(message))
                         .setHeader(KafkaHeaders.MESSAGE_KEY, 1)
                         .build());
 
     }
+
+    private void convert(Message<ChangeStreamDocument<Document>, OrderRequest> message){
+        System.out.println("Received message with id: " + message.getRaw() + " ----------" + message.getBody());
+    }
+
+
 
 }

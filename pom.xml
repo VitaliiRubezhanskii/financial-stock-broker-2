@@ -24,7 +24,7 @@
     </parent>
 
     <modules>
-        <module>core/orderCreationDto-service</module>
+        <module>core/order-service</module>
         <module>core/account-service</module>
         <module>core/analytics-service</module>
         <module>core/quotes-provider-service</module>

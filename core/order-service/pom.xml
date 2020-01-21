@@ -10,9 +10,9 @@
     </parent>
 
     <groupId>com.investment</groupId>
-    <artifactId>orderCreationDto-service</artifactId>
+    <artifactId>order-service</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>orderCreationDto-service</name>
+    <name>order-service</name>
 
     <description>Ordering application</description>
 

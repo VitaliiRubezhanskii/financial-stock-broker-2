@@ -19,6 +19,6 @@ public interface OrderServiceClient {
     @GetMapping(value = "/order/{id}")
     OrderCreationDto get(@PathVariable("id") String id);
 
-    @PostMapping(value = "/order")
+    @PostMapping
     OrderCreatedDto create(@RequestBody OrderCreationDto orderCreationDto);
 }
