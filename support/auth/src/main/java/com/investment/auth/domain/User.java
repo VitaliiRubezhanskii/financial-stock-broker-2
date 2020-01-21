@@ -21,13 +21,13 @@ public class User implements UserDetails {
 
     private String password;
 
-    private String firstname;
-
-    private String lastName;
-
-    private LocalDate birthDate;
-
-    private String address;
+//    private String firstname;
+//
+//    private String lastName;
+//
+//    private LocalDate birthDate;
+//
+//    private String address;
 
     private boolean activated;
 
