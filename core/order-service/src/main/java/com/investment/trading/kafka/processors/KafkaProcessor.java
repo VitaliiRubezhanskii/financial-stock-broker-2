@@ -10,11 +10,11 @@ public interface KafkaProcessor extends Source {
 
     String INPUT = "input";
 
-    String OUTPUT = "output";
+    String OUTPUT = "output0";
 
     String OUTPUT1 = "output1";
 
-    @Output("output")
+    @Output("output0")
     MessageChannel orderRequestChannel();
 
     @Output("output1")

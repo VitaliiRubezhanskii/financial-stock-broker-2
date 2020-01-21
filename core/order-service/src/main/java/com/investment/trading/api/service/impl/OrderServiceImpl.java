@@ -1,4 +1,4 @@
-package com.investment.trading.api.service.Impl;
+package com.investment.trading.api.service.impl;
 
 import com.investment.trading.api.repository.OrderRepository;
 import com.investment.trading.api.service.OrderService;

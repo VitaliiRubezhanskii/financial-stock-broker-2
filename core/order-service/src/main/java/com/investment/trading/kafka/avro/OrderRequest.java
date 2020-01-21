@@ -13,7 +13,7 @@ import org.apache.avro.message.SchemaStore;
 @SuppressWarnings("all")
 @org.apache.avro.specific.AvroGenerated
 public class OrderRequest extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  private static final long serialVersionUID = -2277211645295619220L;
+  private static final long serialVersionUID = -8344157803955537972L;
   public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"OrderRequest\",\"namespace\":\"com.investment.trading.kafka.avro\",\"fields\":[{\"name\":\"id\",\"type\":\"string\"},{\"name\":\"ticket\",\"type\":\"string\"},{\"name\":\"volume\",\"type\":\"string\"},{\"name\":\"condition\",\"type\":\"string\"},{\"name\":\"account\",\"type\":\"string\"},{\"name\":\"bid\",\"type\":\"string\"},{\"name\":\"ask\",\"type\":\"string\"}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 
