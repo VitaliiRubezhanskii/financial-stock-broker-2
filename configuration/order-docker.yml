@@ -27,11 +27,11 @@ spring:
       kafka:
           binder:
            producer-properties:
-             key.serializer: rg.apache.kafka.common.serialization.Serdes$StringSerde
+             key.serializer: org.apache.kafka.common.serialization.Serdes$StringSerde
              value.serializer: io.confluent.kafka.streams.serdes.avro.SpecificAvroSerde
              schema.registry.url: http://schema-registry:8081
            consumer-properties:
-             key.deserializer: rg.apache.kafka.common.serialization.Serdes$StringSerde
+             key.deserializer: org.apache.kafka.common.serialization.Serdes$StringSerde
              value.deserializer: io.confluent.kafka.streams.serdes.avro.SpecificAvroSerde
              schema.registry.url: http://schema-registry:8081
              specific.avro.reader: true
