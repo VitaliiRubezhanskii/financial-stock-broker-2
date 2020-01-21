@@ -17,8 +17,9 @@ public class AccountUtils {
     private final AccountService accountService;
 
     public boolean checkAccount(OrderRequest orderRequest){
-        AccountCreatedDto account = accountService.getAccountById(orderRequest.getAccount().toString());
-       return account.getBalance().compareTo(new BigDecimal(orderRequest.getBid().toString())) >= 0 && account.getStatus() == AccountStatus.ACTIVE;
+//        AccountCreatedDto account = accountService.getAccountById(orderRequest.getAccount().toString());
+//       return account.getBalance().compareTo(new BigDecimal(orderRequest.getBid().toString())) >= 0 && account.getStatus() == AccountStatus.ACTIVE;
+        return true;
     }
 
     public OrderResponse mapRequestToResponse(OrderRequest orderRequest){

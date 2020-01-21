@@ -1,6 +1,7 @@
 package com.investment.feign_hystrix.integration;
 
-import com.investment.feign_hystrix.integration.domain.Order;
+import com.investment.feign_hystrix.integration.domain.OrderCreatedDto;
+import com.investment.feign_hystrix.integration.domain.OrderCreationDto;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -15,20 +16,18 @@ public class IntegrationClient {
 
 
     @HystrixCommand(fallbackMethod = "getDefaultOrders")
-    public Order getOrders(String id){
+    public OrderCreationDto getOrders(String id){
         return orderServiceClient.get(id);
     }
 
     @HystrixCommand(fallbackMethod = "getDefaultExample")
-    public Order getExample(){
+    public OrderCreationDto getExample(){
         return orderServiceClient.getExample();
     }
 
-
-    public Order create(Order order){
-        return orderServiceClient.create(order);
+    public OrderCreatedDto create(OrderCreationDto orderCreationDto){
+        return orderServiceClient.create(orderCreationDto);
     }
-
 
     @HystrixCommand(fallbackMethod = "getDefaultHello")
     public String getHello(){

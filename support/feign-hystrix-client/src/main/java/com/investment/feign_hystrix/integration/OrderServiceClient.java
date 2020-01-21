@@ -1,6 +1,7 @@
 package com.investment.feign_hystrix.integration;
 
-import com.investment.feign_hystrix.integration.domain.Order;
+import com.investment.feign_hystrix.integration.domain.OrderCreatedDto;
+import com.investment.feign_hystrix.integration.domain.OrderCreationDto;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,11 +14,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 public interface OrderServiceClient {
 
     @GetMapping(value = "/order/sample")
-    Order getExample();
+    OrderCreationDto getExample();
 
     @GetMapping(value = "/order/{id}")
-    Order get(@PathVariable("id") String id);
+    OrderCreationDto get(@PathVariable("id") String id);
 
     @PostMapping(value = "/order")
-    Order create(@RequestBody Order order);
+    OrderCreatedDto create(@RequestBody OrderCreationDto orderCreationDto);
 }
