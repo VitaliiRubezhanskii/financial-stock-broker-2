@@ -13,8 +13,8 @@ import org.apache.avro.message.SchemaStore;
 @SuppressWarnings("all")
 @org.apache.avro.specific.AvroGenerated
 public class OrderRequest extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  private static final long serialVersionUID = 3574117143236902655L;
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"OrderRequest\",\"namespace\":\"com.investment.account.kafka.avro\",\"fields\":[{\"name\":\"id\",\"type\":\"string\"},{\"name\":\"ticket\",\"type\":\"string\"},{\"name\":\"volume\",\"type\":\"string\"},{\"name\":\"condition\",\"type\":\"string\"},{\"name\":\"account\",\"type\":\"string\"},{\"name\":\"bid\",\"type\":\"string\"},{\"name\":\"ask\",\"type\":\"string\"}]}");
+  private static final long serialVersionUID = 463499475094945456L;
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"OrderRequest\",\"namespace\":\"com.investment.account.kafka.avro\",\"fields\":[{\"name\":\"id\",\"type\":\"int\"},{\"name\":\"ticket\",\"type\":\"string\"},{\"name\":\"volume\",\"type\":\"string\"},{\"name\":\"condition\",\"type\":\"string\"},{\"name\":\"account\",\"type\":\"string\"},{\"name\":\"bid\",\"type\":\"string\"},{\"name\":\"ask\",\"type\":\"string\"}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 
   private static SpecificData MODEL$ = new SpecificData();
@@ -51,7 +51,7 @@ public class OrderRequest extends org.apache.avro.specific.SpecificRecordBase im
     return DECODER.decode(b);
   }
 
-  @Deprecated public java.lang.CharSequence id;
+  @Deprecated public int id;
   @Deprecated public java.lang.CharSequence ticket;
   @Deprecated public java.lang.CharSequence volume;
   @Deprecated public java.lang.CharSequence condition;
@@ -76,7 +76,7 @@ public class OrderRequest extends org.apache.avro.specific.SpecificRecordBase im
    * @param bid The new value for bid
    * @param ask The new value for ask
    */
-  public OrderRequest(java.lang.CharSequence id, java.lang.CharSequence ticket, java.lang.CharSequence volume, java.lang.CharSequence condition, java.lang.CharSequence account, java.lang.CharSequence bid, java.lang.CharSequence ask) {
+  public OrderRequest(java.lang.Integer id, java.lang.CharSequence ticket, java.lang.CharSequence volume, java.lang.CharSequence condition, java.lang.CharSequence account, java.lang.CharSequence bid, java.lang.CharSequence ask) {
     this.id = id;
     this.ticket = ticket;
     this.volume = volume;
@@ -105,7 +105,7 @@ public class OrderRequest extends org.apache.avro.specific.SpecificRecordBase im
   @SuppressWarnings(value="unchecked")
   public void put(int field$, java.lang.Object value$) {
     switch (field$) {
-    case 0: id = (java.lang.CharSequence)value$; break;
+    case 0: id = (java.lang.Integer)value$; break;
     case 1: ticket = (java.lang.CharSequence)value$; break;
     case 2: volume = (java.lang.CharSequence)value$; break;
     case 3: condition = (java.lang.CharSequence)value$; break;
@@ -120,7 +120,7 @@ public class OrderRequest extends org.apache.avro.specific.SpecificRecordBase im
    * Gets the value of the 'id' field.
    * @return The value of the 'id' field.
    */
-  public java.lang.CharSequence getId() {
+  public java.lang.Integer getId() {
     return id;
   }
 
@@ -128,7 +128,7 @@ public class OrderRequest extends org.apache.avro.specific.SpecificRecordBase im
    * Sets the value of the 'id' field.
    * @param value the value to set.
    */
-  public void setId(java.lang.CharSequence value) {
+  public void setId(java.lang.Integer value) {
     this.id = value;
   }
 
@@ -232,8 +232,8 @@ public class OrderRequest extends org.apache.avro.specific.SpecificRecordBase im
    * Creates a new OrderRequest RecordBuilder.
    * @return A new OrderRequest RecordBuilder
    */
-  public static OrderRequest.Builder newBuilder() {
-    return new OrderRequest.Builder();
+  public static com.investment.account.kafka.avro.OrderRequest.Builder newBuilder() {
+    return new com.investment.account.kafka.avro.OrderRequest.Builder();
   }
 
   /**
@@ -241,8 +241,8 @@ public class OrderRequest extends org.apache.avro.specific.SpecificRecordBase im
    * @param other The existing builder to copy.
    * @return A new OrderRequest RecordBuilder
    */
-  public static OrderRequest.Builder newBuilder(OrderRequest.Builder other) {
-    return new OrderRequest.Builder(other);
+  public static com.investment.account.kafka.avro.OrderRequest.Builder newBuilder(com.investment.account.kafka.avro.OrderRequest.Builder other) {
+    return new com.investment.account.kafka.avro.OrderRequest.Builder(other);
   }
 
   /**
@@ -250,8 +250,8 @@ public class OrderRequest extends org.apache.avro.specific.SpecificRecordBase im
    * @param other The existing instance to copy.
    * @return A new OrderRequest RecordBuilder
    */
-  public static OrderRequest.Builder newBuilder(OrderRequest other) {
-    return new OrderRequest.Builder(other);
+  public static com.investment.account.kafka.avro.OrderRequest.Builder newBuilder(com.investment.account.kafka.avro.OrderRequest other) {
+    return new com.investment.account.kafka.avro.OrderRequest.Builder(other);
   }
 
   /**
@@ -260,7 +260,7 @@ public class OrderRequest extends org.apache.avro.specific.SpecificRecordBase im
   public static class Builder extends org.apache.avro.specific.SpecificRecordBuilderBase<OrderRequest>
     implements org.apache.avro.data.RecordBuilder<OrderRequest> {
 
-    private java.lang.CharSequence id;
+    private int id;
     private java.lang.CharSequence ticket;
     private java.lang.CharSequence volume;
     private java.lang.CharSequence condition;
@@ -277,7 +277,7 @@ public class OrderRequest extends org.apache.avro.specific.SpecificRecordBase im
      * Creates a Builder by copying an existing Builder.
      * @param other The existing Builder to copy.
      */
-    private Builder(OrderRequest.Builder other) {
+    private Builder(com.investment.account.kafka.avro.OrderRequest.Builder other) {
       super(other);
       if (isValidValue(fields()[0], other.id)) {
         this.id = data().deepCopy(fields()[0].schema(), other.id);
@@ -313,7 +313,7 @@ public class OrderRequest extends org.apache.avro.specific.SpecificRecordBase im
      * Creates a Builder by copying an existing OrderRequest instance
      * @param other The existing instance to copy.
      */
-    private Builder(OrderRequest other) {
+    private Builder(com.investment.account.kafka.avro.OrderRequest other) {
             super(SCHEMA$);
       if (isValidValue(fields()[0], other.id)) {
         this.id = data().deepCopy(fields()[0].schema(), other.id);
@@ -349,7 +349,7 @@ public class OrderRequest extends org.apache.avro.specific.SpecificRecordBase im
       * Gets the value of the 'id' field.
       * @return The value.
       */
-    public java.lang.CharSequence getId() {
+    public java.lang.Integer getId() {
       return id;
     }
 
@@ -358,7 +358,7 @@ public class OrderRequest extends org.apache.avro.specific.SpecificRecordBase im
       * @param value The value of 'id'.
       * @return This builder.
       */
-    public OrderRequest.Builder setId(java.lang.CharSequence value) {
+    public com.investment.account.kafka.avro.OrderRequest.Builder setId(int value) {
       validate(fields()[0], value);
       this.id = value;
       fieldSetFlags()[0] = true;
@@ -378,8 +378,7 @@ public class OrderRequest extends org.apache.avro.specific.SpecificRecordBase im
       * Clears the value of the 'id' field.
       * @return This builder.
       */
-    public OrderRequest.Builder clearId() {
-      id = null;
+    public com.investment.account.kafka.avro.OrderRequest.Builder clearId() {
       fieldSetFlags()[0] = false;
       return this;
     }
@@ -397,7 +396,7 @@ public class OrderRequest extends org.apache.avro.specific.SpecificRecordBase im
       * @param value The value of 'ticket'.
       * @return This builder.
       */
-    public OrderRequest.Builder setTicket(java.lang.CharSequence value) {
+    public com.investment.account.kafka.avro.OrderRequest.Builder setTicket(java.lang.CharSequence value) {
       validate(fields()[1], value);
       this.ticket = value;
       fieldSetFlags()[1] = true;
@@ -417,7 +416,7 @@ public class OrderRequest extends org.apache.avro.specific.SpecificRecordBase im
       * Clears the value of the 'ticket' field.
       * @return This builder.
       */
-    public OrderRequest.Builder clearTicket() {
+    public com.investment.account.kafka.avro.OrderRequest.Builder clearTicket() {
       ticket = null;
       fieldSetFlags()[1] = false;
       return this;
@@ -436,7 +435,7 @@ public class OrderRequest extends org.apache.avro.specific.SpecificRecordBase im
       * @param value The value of 'volume'.
       * @return This builder.
       */
-    public OrderRequest.Builder setVolume(java.lang.CharSequence value) {
+    public com.investment.account.kafka.avro.OrderRequest.Builder setVolume(java.lang.CharSequence value) {
       validate(fields()[2], value);
       this.volume = value;
       fieldSetFlags()[2] = true;
@@ -456,7 +455,7 @@ public class OrderRequest extends org.apache.avro.specific.SpecificRecordBase im
       * Clears the value of the 'volume' field.
       * @return This builder.
       */
-    public OrderRequest.Builder clearVolume() {
+    public com.investment.account.kafka.avro.OrderRequest.Builder clearVolume() {
       volume = null;
       fieldSetFlags()[2] = false;
       return this;
@@ -475,7 +474,7 @@ public class OrderRequest extends org.apache.avro.specific.SpecificRecordBase im
       * @param value The value of 'condition'.
       * @return This builder.
       */
-    public OrderRequest.Builder setCondition(java.lang.CharSequence value) {
+    public com.investment.account.kafka.avro.OrderRequest.Builder setCondition(java.lang.CharSequence value) {
       validate(fields()[3], value);
       this.condition = value;
       fieldSetFlags()[3] = true;
@@ -495,7 +494,7 @@ public class OrderRequest extends org.apache.avro.specific.SpecificRecordBase im
       * Clears the value of the 'condition' field.
       * @return This builder.
       */
-    public OrderRequest.Builder clearCondition() {
+    public com.investment.account.kafka.avro.OrderRequest.Builder clearCondition() {
       condition = null;
       fieldSetFlags()[3] = false;
       return this;
@@ -514,7 +513,7 @@ public class OrderRequest extends org.apache.avro.specific.SpecificRecordBase im
       * @param value The value of 'account'.
       * @return This builder.
       */
-    public OrderRequest.Builder setAccount(java.lang.CharSequence value) {
+    public com.investment.account.kafka.avro.OrderRequest.Builder setAccount(java.lang.CharSequence value) {
       validate(fields()[4], value);
       this.account = value;
       fieldSetFlags()[4] = true;
@@ -534,7 +533,7 @@ public class OrderRequest extends org.apache.avro.specific.SpecificRecordBase im
       * Clears the value of the 'account' field.
       * @return This builder.
       */
-    public OrderRequest.Builder clearAccount() {
+    public com.investment.account.kafka.avro.OrderRequest.Builder clearAccount() {
       account = null;
       fieldSetFlags()[4] = false;
       return this;
@@ -553,7 +552,7 @@ public class OrderRequest extends org.apache.avro.specific.SpecificRecordBase im
       * @param value The value of 'bid'.
       * @return This builder.
       */
-    public OrderRequest.Builder setBid(java.lang.CharSequence value) {
+    public com.investment.account.kafka.avro.OrderRequest.Builder setBid(java.lang.CharSequence value) {
       validate(fields()[5], value);
       this.bid = value;
       fieldSetFlags()[5] = true;
@@ -573,7 +572,7 @@ public class OrderRequest extends org.apache.avro.specific.SpecificRecordBase im
       * Clears the value of the 'bid' field.
       * @return This builder.
       */
-    public OrderRequest.Builder clearBid() {
+    public com.investment.account.kafka.avro.OrderRequest.Builder clearBid() {
       bid = null;
       fieldSetFlags()[5] = false;
       return this;
@@ -592,7 +591,7 @@ public class OrderRequest extends org.apache.avro.specific.SpecificRecordBase im
       * @param value The value of 'ask'.
       * @return This builder.
       */
-    public OrderRequest.Builder setAsk(java.lang.CharSequence value) {
+    public com.investment.account.kafka.avro.OrderRequest.Builder setAsk(java.lang.CharSequence value) {
       validate(fields()[6], value);
       this.ask = value;
       fieldSetFlags()[6] = true;
@@ -612,7 +611,7 @@ public class OrderRequest extends org.apache.avro.specific.SpecificRecordBase im
       * Clears the value of the 'ask' field.
       * @return This builder.
       */
-    public OrderRequest.Builder clearAsk() {
+    public com.investment.account.kafka.avro.OrderRequest.Builder clearAsk() {
       ask = null;
       fieldSetFlags()[6] = false;
       return this;
@@ -623,7 +622,7 @@ public class OrderRequest extends org.apache.avro.specific.SpecificRecordBase im
     public OrderRequest build() {
       try {
         OrderRequest record = new OrderRequest();
-        record.id = fieldSetFlags()[0] ? this.id : (java.lang.CharSequence) defaultValue(fields()[0]);
+        record.id = fieldSetFlags()[0] ? this.id : (java.lang.Integer) defaultValue(fields()[0]);
         record.ticket = fieldSetFlags()[1] ? this.ticket : (java.lang.CharSequence) defaultValue(fields()[1]);
         record.volume = fieldSetFlags()[2] ? this.volume : (java.lang.CharSequence) defaultValue(fields()[2]);
         record.condition = fieldSetFlags()[3] ? this.condition : (java.lang.CharSequence) defaultValue(fields()[3]);
