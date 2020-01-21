@@ -38,6 +38,7 @@ services:
        - configserver
        - discovery
        - broker
+       - rabbitmq
      healthcheck:
        test: ["CMD", "curl", "-f", "http://localhost:8990/"]
        interval: 30s
@@ -46,6 +47,15 @@ services:
      restart: always
      networks:
         - my-mongo-cluster
+
+   rabbitmq:
+       image: 'bitnami/rabbitmq:latest'
+       ports:
+         - 5675:5672
+         - 15675:15672
+       networks:
+         - my-mongo-cluster
+
 
    mongo1:
       image: mongo:4.1.13-bionic

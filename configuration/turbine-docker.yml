@@ -32,7 +32,7 @@ logging:
 
 spring:
   rabbitmq:
-    host: localhost
+    host: rabbitmq
     port: 5672
 
 eureka:
@@ -40,4 +40,4 @@ eureka:
     leaseRenewalIntervalInSeconds: 10
   client:
     serviceUrl:
-      defaultZone: http://localhost:8761/eureka/
+      defaultZone: http://discovery:8761/eureka/
