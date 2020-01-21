@@ -7,9 +7,11 @@ import lombok.RequiredArgsConstructor;
 import org.apache.kafka.streams.KeyValue;
 import org.apache.kafka.streams.kstream.KStream;
 import org.springframework.cloud.stream.annotation.StreamListener;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.messaging.handler.annotation.SendTo;
 
 @RequiredArgsConstructor
+@Configuration
 public class OrderRequestProcessor {
 
     private final AccountUtils accountUtils;

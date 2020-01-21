@@ -141,6 +141,7 @@ services:
            - mongo-replicator
            - configserver
            - discovery
+           - broker
       restart: always
       labels:
         collect_logs_with_filebeat: "true"
@@ -239,6 +240,7 @@ services:
          - mongo-replicator
          - configserver
          - discovery
+         - broker
       links:
         - configserver
         - discovery
