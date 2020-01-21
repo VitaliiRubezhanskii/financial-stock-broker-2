@@ -22,6 +22,31 @@ services:
       networks:
          - my-mongo-cluster
 
+   turbine:
+     image: turbine
+     ports:
+       - 8990:8990
+     build:
+       context: ./support/turbine
+       dockerfile: Dockerfile
+     environment:
+       PORT: 8990
+       SPRING_PROFILES_ACTIVE: docker
+       CONFIGSERVER_URI: http://configserver:8888
+     depends_on:
+       - mongo-replicator
+       - configserver
+       - discovery
+       - broker
+     healthcheck:
+       test: ["CMD", "curl", "-f", "http://localhost:8990/"]
+       interval: 30s
+       timeout: 10s
+       retries: 5
+     restart: always
+     networks:
+        - my-mongo-cluster
+
    mongo1:
       image: mongo:4.1.13-bionic
       command: --replSet rs0 --bind_ip_all

@@ -31,7 +31,7 @@ public class ChangeStreamConfiguration {
     @Bean
     public Subscription streamOrderRequestToKafkaTopic(MessageListenerContainer container) {
         return container.register(ChangeStreamRequest
-                .builder(stream -> sendToKafkaTopic((Message)stream.getBody(), processor.orderRequestChannel()))
+                .builder(stream -> sendToKafkaTopic((Message)stream, processor.orderRequestChannel()))
                 .collection("order")
                 .filter(newAggregation(match(where("operationType").is("insert"))))
                 .build(), OrderRequest.class);
