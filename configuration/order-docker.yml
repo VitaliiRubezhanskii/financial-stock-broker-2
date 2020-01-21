@@ -4,7 +4,7 @@ spring:
       uri: mongodb://mongo1:27017,mongo2:27017,mongo3:27017/order?replicaSet=rs0
 
 server.port: 9998
-spring.application.name: analytics
+spring.application.name: order
 spring.cloud.stream.bindings.output:
     destination: order-request
 spring.cloud.stream.bindings.input:
