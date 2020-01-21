@@ -39,7 +39,7 @@ spring:
            streams:
                binder:
                  brokers: broker
-#spring.cloud.stream.schemaRegistryClient.endpoint: http://schema-registry:8081
+spring.cloud.stream.schemaRegistryClient.endpoint: http://schema-registry:8990
 spring.cloud.stream.schemaRegistryClient.cached: false
 
 
@@ -50,6 +50,7 @@ security.oauth2:
       accessTokenUri: http://auth:8084/uaa/oauth/token
       grant-type: client_credentials
       scope: server
+
 
     resource:
       user-info-uri: http://auth:8084/uaa/user/current
