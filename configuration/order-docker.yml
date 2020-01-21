@@ -39,7 +39,8 @@ spring:
            streams:
                binder:
                  brokers: broker
-spring.cloud.stream.schemaRegistryClient.endpoint: http://schema-registry:8081
+#spring.cloud.stream.schemaRegistryClient.endpoint: http://schema-registry:8081
+spring.cloud.stream.schemaRegistryClient.cached: false
 
 
 security.oauth2:
