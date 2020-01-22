@@ -1,7 +1,7 @@
 package com.investment.account.kafka;
 
-import com.investment.account.kafka.avro.OrderRequest;
-import com.investment.account.kafka.avro.OrderResponse;
+import avro.OrderRequest;
+import avro.OrderResponse;
 import com.investment.account.util.AccountUtils;
 import io.confluent.kafka.serializers.AbstractKafkaAvroSerDeConfig;
 import io.confluent.kafka.streams.serdes.avro.SpecificAvroSerde;

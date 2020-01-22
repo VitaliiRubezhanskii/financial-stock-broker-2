@@ -1,8 +1,8 @@
 package com.investment.trading.kafka;
 
+import avro.OrderRequest;
+import avro.OrderResponse;
 import com.investment.trading.api.service.OrderService;
-import com.investment.trading.kafka.avro.OrderRequest;
-import com.investment.trading.kafka.avro.OrderResponse;
 import com.investment.trading.kafka.processors.KafkaProcessor;
 import com.investment.trading.mapper.OrderMapper;
 import com.investment.trading.model.dto.OrderCreationDto;
@@ -13,7 +13,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.stream.annotation.EnableBinding;
 import org.springframework.cloud.stream.annotation.StreamListener;
-import org.springframework.messaging.Message;
 import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.stereotype.Service;
 

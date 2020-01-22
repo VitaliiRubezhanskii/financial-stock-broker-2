@@ -1,6 +1,6 @@
 package com.investment.trading.kafka.serde;
 
-import com.investment.trading.kafka.avro.OrderRequest;
+import avro.OrderRequest;
 import io.confluent.kafka.serializers.AbstractKafkaAvroSerDeConfig;
 import io.confluent.kafka.streams.serdes.avro.SpecificAvroSerializer;
 

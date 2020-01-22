@@ -1,14 +1,11 @@
 package com.investment.trading.utils;
 
 
+import avro.OrderRequest;
+import avro.OrderResponse;
 import com.investment.trading.kafka.avro.Order;
-import com.investment.trading.kafka.avro.OrderRequest;
-import com.investment.trading.kafka.avro.OrderResponse;
 import com.investment.trading.model.dto.OrderCreatedDto;
 import com.investment.trading.model.dto.OrderCreationDto;
-import com.mongodb.client.model.changestream.ChangeStreamDocument;
-import org.bson.Document;
-import org.springframework.data.mongodb.core.messaging.Message;
 
 
 public class OrderUtils {

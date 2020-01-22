@@ -1,22 +1,17 @@
 package com.investment.trading.api.service.impl;
 
+import avro.OrderRequest;
 import com.investment.trading.api.repository.OrderRepository;
 import com.investment.trading.api.service.OrderService;
-import com.investment.trading.kafka.avro.OrderRequest;
 import com.investment.trading.mapper.OrderMapper;
 import com.investment.trading.model.dto.OrderCreatedDto;
 import com.investment.trading.model.dto.OrderCreationDto;
-import com.investment.trading.utils.OrderUtils;
 import lombok.RequiredArgsConstructor;
-import org.springframework.cloud.stream.annotation.EnableBinding;
-import org.springframework.cloud.stream.messaging.Processor;
 import org.springframework.kafka.support.KafkaHeaders;
 import org.springframework.messaging.MessageChannel;
 import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
-
-import static com.investment.trading.utils.OrderUtils.payloadToOrderRequest;
 
 @Service
 @RequiredArgsConstructor

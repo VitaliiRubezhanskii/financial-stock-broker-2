@@ -1,14 +1,10 @@
 package com.investment.account.util;
 
+import avro.OrderRequest;
+import avro.OrderResponse;
 import com.investment.account.api.service.AccountService;
-import com.investment.account.kafka.avro.OrderRequest;
-import com.investment.account.kafka.avro.OrderResponse;
-import com.investment.account.model.domain.enums.AccountStatus;
-import com.investment.account.model.dto.AccountCreatedDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
-
-import java.math.BigDecimal;
 
 @Configuration
 @RequiredArgsConstructor

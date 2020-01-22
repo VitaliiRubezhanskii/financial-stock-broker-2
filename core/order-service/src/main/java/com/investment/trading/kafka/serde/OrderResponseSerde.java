@@ -1,6 +1,6 @@
 package com.investment.trading.kafka.serde;
 
-import com.investment.trading.kafka.avro.OrderResponse;
+import avro.OrderResponse;
 import io.confluent.kafka.serializers.AbstractKafkaAvroSerDeConfig;
 import io.confluent.kafka.streams.serdes.avro.SpecificAvroDeserializer;
 
