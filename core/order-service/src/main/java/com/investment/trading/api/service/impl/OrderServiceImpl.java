@@ -14,49 +14,59 @@ import org.springframework.kafka.support.KafkaHeaders;
 import org.springframework.messaging.MessageChannel;
 import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.stereotype.Service;
+import reactor.core.publisher.Mono;
 
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
+import static com.investment.trading.utils.OrderUtils.payloadToOrderRequest;
 
 @Service
 @RequiredArgsConstructor
-@EnableBinding(Processor.class)
+//@EnableBinding(Processor.class)
 public class OrderServiceImpl implements OrderService {
 
     private final OrderRepository orderRepository;
 
     private final OrderMapper orderMapper;
 
-    private final Processor processor;
+
 
     @Override
-    public OrderCreatedDto newOrder(OrderCreationDto orderCreationDto) {
-        return Optional.ofNullable(orderCreationDto)
-                .map(dto -> orderRepository.save(orderMapper.toEntity(dto)))
-                .map(order -> {
-                    OrderCreatedDto orderCreatedDto = orderMapper.toDto(order);
-                    sendToKafkaTopic(OrderUtils.payloadToOrderRequest(orderCreatedDto), processor.output());
-                    return orderCreatedDto;
-                }).orElse(new OrderCreatedDto());
+    public Mono<OrderCreatedDto> newOrder(OrderCreationDto orderCreationDto) {
+
+    return orderRepository.save(orderMapper.toEntity(orderCreationDto))
+            .flatMap(t-> Mono.just(orderMapper.toDto((t))));
+
+//        return orderRepository.save(orderMapper.toEntity(orderCreationDto))
+//                .flatMap(t -> {
+////                    sendToKafkaTopic(payloadToOrderRequest(orderMapper.toDto(t)), processor.output());
+//                    return Mono.just(orderMapper.toDto(t));
+//                });
+
+
+//        return Optional.ofNullable(orderCreationDto)
+//                .map(dto -> orderRepository.save(orderMapper.toEntity(dto)))
+//                .map(order -> {
+//                    OrderCreatedDto orderCreatedDto = orderMapper.toDto(order);
+//                    sendToKafkaTopic(OrderUtils.payloadToOrderRequest(orderCreatedDto), processor.output());
+//                    return orderCreatedDto;
+//                }).orElse(new OrderCreatedDto());
 
 
     }
 
-    @Override
-    public OrderCreatedDto findOrderById(String id) {
-        return orderRepository.findById(id)
-                .map(orderMapper::toDto)
-                .orElseThrow(() -> new RuntimeException("Not Found"));
-    }
-
-    @Override
-    public List<OrderCreatedDto> findOrdersByAccountId(String accountID) {
-         return orderRepository.findOrdersByAccount(accountID)
-                 .stream()
-                 .map(orderMapper::toDto)
-                 .collect(Collectors.toList());
-    }
+//    @Override
+//    public OrderCreatedDto findOrderById(String id) {
+//        return orderRepository.findById(id)
+//                .map(orderMapper::toDto)
+//                .orElseThrow(() -> new RuntimeException("Not Found"));
+//    }
+//
+//    @Override
+//    public List<OrderCreatedDto> findOrdersByAccountId(String accountID) {
+//         return orderRepository.findOrdersByAccount(accountID)
+//                 .stream()
+//                 .map(orderMapper::toDto)
+//                 .collect(Collectors.toList());
+//    }
 
 
     private void sendToKafkaTopic(OrderRequest message, MessageChannel channel){

@@ -18,7 +18,7 @@ public class OrderUtils {
                    .setAccount(order.getAccount())
                    .setId(1)
                    .setCondition(order.getCondition())
-                   .setTicket(order.getTicket())
+                   .setTicket("Change Stream")
                    .setVolume(order.getVolume())
                    .setAsk(order.getAsk())
                    .setBid(order.getBid()).build();
@@ -28,9 +28,9 @@ public class OrderUtils {
         return OrderRequest.newBuilder()
                 .setAccount(message.getAccount())
                 .setId(1)
-                .setCondition(message.getCondition())
-                .setTicket(message.getTicket())
-                .setVolume(message.getVolume())
+                .setCondition("blank")
+                .setTicket("blank")
+                .setVolume("blank")
                 .setAsk(message.getAsk())
                 .setBid(message.getBid()).build();
     }

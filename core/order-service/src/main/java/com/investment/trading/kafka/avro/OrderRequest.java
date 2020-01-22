@@ -14,7 +14,7 @@ import org.apache.avro.message.SchemaStore;
 @org.apache.avro.specific.AvroGenerated
 public class OrderRequest extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
   private static final long serialVersionUID = 8104501069792641406L;
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"OrderRequest\",\"namespace\":\"com.investment.trading.kafka.avro\",\"fields\":[{\"name\":\"id\",\"type\":\"int\"},{\"name\":\"ticket\",\"type\":\"string\"},{\"name\":\"volume\",\"type\":\"string\"},{\"name\":\"condition\",\"type\":\"string\"},{\"name\":\"account\",\"type\":\"string\"},{\"name\":\"bid\",\"type\":\"string\"},{\"name\":\"ask\",\"type\":\"string\"}]}");
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"OrderRequest\",\"namespace\":\"com.investment.trading.kafka.avro\",\"fields\":[{\"name\":\"id\",\"type\":\"int\"},{\"name\":\"ticket\",\"type\":\"string\",\"default\":\"no data\"},{\"name\":\"volume\",\"type\":\"string\",\"default\":\"no data\"},{\"name\":\"condition\",\"type\":\"string\",\"default\":\"no data\"},{\"name\":\"account\",\"type\":\"string\",\"default\":\"no data\"},{\"name\":\"bid\",\"type\":\"string\",\"default\":\"no data\"},{\"name\":\"ask\",\"type\":\"string\",\"default\":\"no data\"}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 
   private static SpecificData MODEL$ = new SpecificData();

@@ -13,7 +13,11 @@ public interface OrderMapper {
 
     Order toEntity(OrderCreationDto orderCreationDto);
 
+    Order fromCreatedToEntity(OrderCreatedDto dto);
+
     OrderCreatedDto toDto(Order order);
+
+    OrderCreationDto fromOrderCreatedDto(OrderCreatedDto orderCreatedDto);
 
     OrderCreationDto update(OrderCreatedDto orderCreatedDto, @MappingTarget OrderCreationDto orderCreationDto);
 

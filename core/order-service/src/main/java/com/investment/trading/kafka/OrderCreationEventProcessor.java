@@ -39,8 +39,7 @@ public class OrderCreationEventProcessor {
         orderSpecificAvroSerde.configure(serdeConfig, false);
 
         OrderCreationDto orderDto = OrderUtils.mapOrderRequestToOrderCreationDto(orderResponse);
-       OrderCreationDto updatedDto = orderMapper.update(orderService.findOrderById(orderResponse.getId().toString()), orderDto);
-        orderService.newOrder(updatedDto);
-        // save to mongo ---> emits change stream which sends data to orders topic of Kafka
+        orderService.newOrder(orderDto).map();
+
     }
 }

@@ -3,7 +3,9 @@ spring:
     mongodb:
       uri: mongodb://mongo1:27017,mongo2:27017,mongo3:27017/order?replicaSet=rs0
 
-spring.cloud.stream.bindings.output:
+spring.cloud.stream.bindings.output0:
+    destination: order-request
+spring.cloud.stream.bindings.output1:
     destination: order-request
 spring.cloud.stream.bindings.input:
     destination: order-response
