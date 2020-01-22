@@ -24,7 +24,7 @@ public class OrderRequestProcessor {
 
     @StreamListener("input")
     @SendTo("output")
-    public KStream<String, OrderResponse> process(KStream<String, OrderRequest> input) {
+    public KStream<String, String> process(KStream<String, OrderRequest> input) {
 
         final Map<String, String> serdeConfig = Collections.singletonMap(AbstractKafkaAvroSerDeConfig.SCHEMA_REGISTRY_URL_CONFIG, "http://schema-registry:8081");
         final SpecificAvroSerde<OrderRequest> orderRequestSpecificAvroSerde = new SpecificAvroSerde<>();
@@ -34,7 +34,7 @@ public class OrderRequestProcessor {
 
         return input
                 .filter((key, value) -> accountUtils.checkAccount(value))
-                .map((k, value) ->  new KeyValue<>(k, accountUtils.mapRequestToResponse(value)));
+                .map((k, value) ->  new KeyValue<>(k, value.getTicket().toString()));
 
     }
 
