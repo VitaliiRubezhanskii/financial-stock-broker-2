@@ -25,10 +25,9 @@ import static org.springframework.data.mongodb.core.query.Criteria.where;
 
 @Configuration
 @RequiredArgsConstructor
-@EnableBinding(Processor.class)
 public class ChangeStreamConfiguration {
 
-    private final Processor processor;
+
 
     private final Gson gson = new Gson();
 
@@ -63,13 +62,7 @@ public class ChangeStreamConfiguration {
         };
     }
 
-    private void sendToKafkaTopic(OrderRequest message, MessageChannel channel){
-       channel.send(MessageBuilder
-                        .withPayload(message)
-                        .setHeader(KafkaHeaders.MESSAGE_KEY, 1)
-                        .build());
 
-    }
 
     private void convert(Message<ChangeStreamDocument<Document>, com.investment.trading.model.domain.Order> message){
         System.out.println("Received message with id: " + message.getRaw() + "as json: --> " + gson.fromJson(message.getRaw().getFullDocument().toJson(), OrderCreatedDto.class));

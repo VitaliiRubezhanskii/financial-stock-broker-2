@@ -6,7 +6,7 @@ spring:
 spring.cloud.stream.bindings.output0:
     destination: order-request
 spring.cloud.stream.bindings.output1:
-    destination: order-request
+    destination: order
 spring.cloud.stream.bindings.input:
     destination: order-response
     consumer:

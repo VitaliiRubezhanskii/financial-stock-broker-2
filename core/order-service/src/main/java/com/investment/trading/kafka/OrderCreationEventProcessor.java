@@ -3,6 +3,7 @@ package com.investment.trading.kafka;
 import com.investment.trading.api.service.OrderService;
 import com.investment.trading.kafka.avro.OrderRequest;
 import com.investment.trading.kafka.avro.OrderResponse;
+import com.investment.trading.kafka.processors.KafkaProcessor;
 import com.investment.trading.mapper.OrderMapper;
 import com.investment.trading.model.dto.OrderCreationDto;
 import com.investment.trading.utils.OrderUtils;
@@ -12,15 +13,18 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.stream.annotation.EnableBinding;
 import org.springframework.cloud.stream.annotation.StreamListener;
-import org.springframework.cloud.stream.messaging.Processor;
+import org.springframework.messaging.Message;
+import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
 import java.util.Map;
 
+import static com.investment.trading.utils.OrderUtils.payloadFromOrderEntity;
+
 @Service
 @RequiredArgsConstructor
-@EnableBinding(Processor.class)
+@EnableBinding(KafkaProcessor.class)
 @Slf4j
 public class OrderCreationEventProcessor {
 
@@ -28,7 +32,9 @@ public class OrderCreationEventProcessor {
 
     private final OrderMapper orderMapper;
 
-    @StreamListener(Processor.INPUT)
+    private final KafkaProcessor processor;
+
+    @StreamListener(KafkaProcessor.INPUT)
     public void consumeOrderResponse(OrderResponse orderResponse) {
         final Map<String, String> serdeConfig = Collections.singletonMap(AbstractKafkaAvroSerDeConfig.SCHEMA_REGISTRY_URL_CONFIG, "http://schema-registry:8081");
         final SpecificAvroSerde<OrderRequest> orderRequestSpecificAvroSerde = new SpecificAvroSerde<>();
@@ -39,7 +45,9 @@ public class OrderCreationEventProcessor {
         orderSpecificAvroSerde.configure(serdeConfig, false);
 
         OrderCreationDto orderDto = OrderUtils.mapOrderRequestToOrderCreationDto(orderResponse);
-        orderService.newOrder(orderDto).map();
+        orderService.newOrder(orderDto)
+                .map(message-> processor.ordersChannel()
+                        .send(MessageBuilder.withPayload(payloadFromOrderEntity(message)).build()));
 
     }
 }

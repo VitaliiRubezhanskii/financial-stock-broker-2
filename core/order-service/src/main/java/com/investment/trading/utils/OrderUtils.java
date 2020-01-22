@@ -13,7 +13,7 @@ import org.springframework.data.mongodb.core.messaging.Message;
 
 public class OrderUtils {
 
-   public static Order payloadFromOrderEntity(com.investment.trading.model.domain.Order order){
+   public static Order payloadFromOrderEntity(OrderCreatedDto order){
        return Order.newBuilder()
                    .setAccount(order.getAccount())
                    .setId(1)
