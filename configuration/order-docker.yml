@@ -7,7 +7,7 @@ spring.cloud.stream.bindings.output0:
     destination: order-request
 spring.cloud.stream.bindings.output1:
     destination: order
-spring.cloud.stream.bindings.input:
+spring.cloud.stream.bindings.input0:
     destination: order-response
     consumer:
       useNativeDecoding: true

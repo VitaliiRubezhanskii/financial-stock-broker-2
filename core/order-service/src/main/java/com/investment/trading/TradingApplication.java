@@ -24,8 +24,7 @@ public class TradingApplication {
         SpringApplication.run(TradingApplication.class, args);
     }
 
-    @Autowired
-    private Processor source;
+
 
 //    @Bean
 //    public WebClient client() {
