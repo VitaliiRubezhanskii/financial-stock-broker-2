@@ -1,5 +1,6 @@
 package com.investment.trading.mapper;
 
+import avro.OrderRequest;
 import com.investment.trading.model.domain.Order;
 import com.investment.trading.model.dto.OrderCreatedDto;
 import com.investment.trading.model.dto.OrderCreationDto;
@@ -13,9 +14,11 @@ public interface OrderMapper {
 
     Order toEntity(OrderCreationDto orderCreationDto);
 
-    Order fromCreatedToEntity(OrderCreatedDto dto);
+//    Order fromCreatedToEntity(OrderRequest dto);
 
     OrderCreatedDto toDto(Order order);
+
+
 
     OrderCreationDto fromOrderCreatedDto(OrderCreatedDto orderCreatedDto);
 
