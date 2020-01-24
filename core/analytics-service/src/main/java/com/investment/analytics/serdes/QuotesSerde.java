@@ -1,14 +1,14 @@
-package com.investment.trading.kafka.serde;
+package com.investment.analytics.serdes;
 
-import avro.OrderResponse;
 import io.confluent.kafka.serializers.AbstractKafkaAvroSerDeConfig;
-import io.confluent.kafka.streams.serdes.avro.SpecificAvroDeserializer;
+import io.confluent.kafka.streams.serdes.avro.SpecificAvroSerde;
 import io.confluent.kafka.streams.serdes.avro.SpecificAvroSerializer;
 
 import java.util.Collections;
 import java.util.Map;
 
-public class OrderResponseSerde extends SpecificAvroSerializer<OrderResponse> {
+public class QuotesSerde implements SpecificAvroSerde<QuotesSerde> {
+
 
     @Override
     public void configure(Map<String, ?> serializerConfig, boolean isSerializerForRecordKeys) {

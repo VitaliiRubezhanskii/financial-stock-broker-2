@@ -4,11 +4,12 @@ import avro.Order;
 import avro.OrderResponse;
 import io.confluent.kafka.serializers.AbstractKafkaAvroSerDeConfig;
 import io.confluent.kafka.streams.serdes.avro.SpecificAvroDeserializer;
+import io.confluent.kafka.streams.serdes.avro.SpecificAvroSerializer;
 
 import java.util.Collections;
 import java.util.Map;
 
-public class OrderSerde extends SpecificAvroDeserializer<Order> {
+public class OrderSerde extends SpecificAvroSerializer<Order> {
 
     @Override
     public void configure(Map<String, ?> serializerConfig, boolean isSerializerForRecordKeys) {

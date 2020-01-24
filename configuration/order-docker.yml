@@ -22,7 +22,7 @@ spring.cloud.stream.kafka.streams.binder:
       schema.registry.url: http://schema-registry:8081
       commit.interval.ms: 1000
       default.key.serde: org.apache.kafka.common.serialization.ByteArraySerializer
-      default.value.serde: org.apache.kafka.common.serialization.ByteArraySerializer
+      default.value.serde: com.investment.trading.kafka.serde.OrderRequestSerde
 
 
 #      com.investment.trading.kafka.serde.OrderRequestSerde
@@ -51,7 +51,7 @@ spring.cloud.stream.kafka.streams.bindings.output1:
 spring.cloud.stream.kafka.binder.configuration:
     schema.registry.url: http://schema-registry:8081
     key.serializer: org.apache.kafka.common.serialization.ByteArraySerializer
-    value.serializer: org.springframework.kafka.support.serializer.JsonSerializer
+    value.serializer: com.investment.trading.kafka.serde.OrderRequestSerde
 #     com.investment.trading.kafka.serde.OrderRequestSerde
 #    io.confluent.kafka.streams.serdes.avro.SpecificAvroSerde
 #    -- last ch
