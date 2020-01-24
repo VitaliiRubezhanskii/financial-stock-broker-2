@@ -5,6 +5,8 @@ spring:
 
 spring.cloud.stream.bindings.output:
     destination: order-response
+    producer:
+      useNativeEncoding: true
 spring.cloud.stream.bindings.input:
     destination: order-request
     consumer:
