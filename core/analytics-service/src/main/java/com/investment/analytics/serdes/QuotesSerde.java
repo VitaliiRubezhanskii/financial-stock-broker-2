@@ -1,5 +1,6 @@
 package com.investment.analytics.serdes;
 
+import avro.Quote;
 import io.confluent.kafka.serializers.AbstractKafkaAvroSerDeConfig;
 import io.confluent.kafka.streams.serdes.avro.SpecificAvroSerde;
 import io.confluent.kafka.streams.serdes.avro.SpecificAvroSerializer;
@@ -7,8 +8,7 @@ import io.confluent.kafka.streams.serdes.avro.SpecificAvroSerializer;
 import java.util.Collections;
 import java.util.Map;
 
-public class QuotesSerde implements SpecificAvroSerde<QuotesSerde> {
-
+public class QuotesSerde extends SpecificAvroSerde<Quote>{
 
     @Override
     public void configure(Map<String, ?> serializerConfig, boolean isSerializerForRecordKeys) {
