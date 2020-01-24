@@ -37,7 +37,7 @@ public class OrderController {
 //        orderRepository.save(orderMapper.fromCreatedToEntity(dtos.get(0))).subscribe(data -> log.info(data.getId()));
          return Flux.fromIterable(dtos).flatMap(t-> {
 
-             processor.orderRequestChannel().send(MessageBuilder.withPayload(t).build());
+             processor.orderRequestChannel().send(MessageBuilder.withPayload(OrderUtils.payloadToOrderRequest(t)).build());
              return Flux.fromIterable(dtos);
          });
     }
