@@ -1,5 +1,6 @@
 package com.investment.trading.kafka.processors;
 
+import org.apache.kafka.streams.kstream.KStream;
 import org.springframework.cloud.stream.annotation.Input;
 import org.springframework.cloud.stream.annotation.Output;
 import org.springframework.messaging.MessageChannel;
@@ -17,9 +18,9 @@ public interface KafkaProcessor  {
     MessageChannel orderRequestChannel();
 
     @Output("output1")
-    MessageChannel ordersChannel();
+    KStream<?,?> ordersChannel();
 
     @Input("input0")
-    SubscribableChannel input();
+    KStream<?,?> input();
 
 }
