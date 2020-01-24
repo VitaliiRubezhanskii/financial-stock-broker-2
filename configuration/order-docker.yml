@@ -13,8 +13,8 @@ spring.cloud.stream.bindings.output1:
             useNativeEncoding: true
 spring.cloud.stream.bindings.input0:
     destination: order-response
-    consumer:
-      useNativeDecoding: true
+#    consumer:
+#      useNativeDecoding: true
 spring.cloud.stream.kafka.binder.brokers: broker
 spring.cloud.stream.kafka.streams.binder:
     brokers: broker
@@ -34,8 +34,10 @@ spring.cloud.stream.kafka.streams.bindings.output:
     keySerde: org.apache.kafka.common.serialization.Serdes$StringSerde
     valueSerde: com.investment.trading.kafka.serde.OrderRequestSerde
 
-#spring.cloud.stream.schemaRegistryClient.endpoint: http://schema-registry:8081
-#spring.cloud.stream.schemaRegistryClient.cached: false
+spring.cloud.stream.kafka.binder.configuration:
+    schema.registry.url: http://schema-registry:8081
+    key.serializer: org.apache.kafka.common.serialization.ByteArraySerializer
+    value.serializer: com.investment.trading.kafka.serde.OrderRequestSerde
 
 
 security.oauth2:
