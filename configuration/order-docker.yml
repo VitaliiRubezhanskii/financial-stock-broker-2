@@ -46,7 +46,8 @@ spring.cloud.stream.kafka.streams.bindings.output1:
 spring.cloud.stream.kafka.binder.configuration:
     schema.registry.url: http://schema-registry:8081
     key.serializer: org.apache.kafka.common.serialization.ByteArraySerializer
-    value.serializer: com.investment.trading.kafka.serde.OrderRequestSerde
+    value.serializer: org.springframework.kafka.support.serializer.JsonSerializer
+#    com.investment.trading.kafka.serde.OrderRequestSerde
 
 
 security.oauth2:
