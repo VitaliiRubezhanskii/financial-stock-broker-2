@@ -32,14 +32,14 @@ public class OrderUtils {
                 .setBid(message.getBid()).build();
     }
 
-   public static OrderCreationDto mapOrderRequestToOrderCreationDto(OrderResponse orderResponse){
-       OrderCreationDto orderDto = new OrderCreationDto();
+   public static Order mapOrderRequestToOrderCreationDto(OrderResponse orderResponse){
+       Order orderDto = new Order();
        orderDto.setAccount(orderResponse.getAccount().toString());
        orderDto.setAsk(orderResponse.getAsk().toString());
        orderDto.setBid(orderResponse.getBid().toString());
        orderDto.setTicket(orderResponse.getTicket().toString());
        orderDto.setVolume(orderResponse.getVolume().toString());
-       orderDto.setId(orderResponse.getId().toString());
+       orderDto.setId(orderResponse.getId());
        return orderDto;
    }
 

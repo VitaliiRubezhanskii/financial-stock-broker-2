@@ -9,27 +9,35 @@
 	},
 	{
 		"name": "ticket",
-		"type": "string"
+		"type": "string",
+		"default": "no data"
 	},
 	{   "name": "volume",
-	    "type": "string"
+	    "type": "string",
+	    "default": "no data"
 	},
     {   "name": "condition",
-        "type": "string"
+        "type": "string",
+        "default": "no data"
     },
     {   "name": "account",
-        "type": "string"
+        "type": "string",
+        "default": "no data"
     },
     {   "name": "bid",
-        "type": "string"
+        "type": "string",
+        "default": "no data"
     },
     {   "name": "ask",
-        "type": "string"
+        "type": "string",
+        "default": "no data"
     },
     {   "name": "approved",
-        "type": "boolean"
+        "type": "boolean",
+        "default": false
     },
     {   "name": "message",
-        "type": "string"
+        "type": "string",
+        "default": "no data"
     }]
 }

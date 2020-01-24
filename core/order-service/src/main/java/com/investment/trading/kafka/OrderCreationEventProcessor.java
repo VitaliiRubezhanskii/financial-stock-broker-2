@@ -3,6 +3,7 @@ package com.investment.trading.kafka;
 import avro.OrderRequest;
 import avro.OrderResponse;
 import com.investment.trading.api.service.OrderService;
+import com.investment.trading.kafka.avro.Order;
 import com.investment.trading.kafka.processors.KafkaProcessor;
 import com.investment.trading.mapper.OrderMapper;
 import com.investment.trading.model.dto.OrderCreationDto;
@@ -43,10 +44,12 @@ public class OrderCreationEventProcessor {
         orderResponseSpecificAvroSerde.configure(serdeConfig, false);
         orderSpecificAvroSerde.configure(serdeConfig, false);
 
-        OrderCreationDto orderDto = OrderUtils.mapOrderRequestToOrderCreationDto(orderResponse);
-        orderService.newOrder(orderDto)
-                .map(message-> processor.ordersChannel()
-                        .send(MessageBuilder.withPayload(payloadFromOrderEntity(message)).build()));
+        Order order = OrderUtils.mapOrderRequestToOrderCreationDto(orderResponse);
+        processor.ordersChannel()
+                        .send(MessageBuilder.withPayload(order).build());
+//        orderService.newOrder(orderDto)
+//                .map(message-> processor.ordersChannel()
+//                        .send(MessageBuilder.withPayload(payloadFromOrderEntity(message)).build()));
 
     }
 }
