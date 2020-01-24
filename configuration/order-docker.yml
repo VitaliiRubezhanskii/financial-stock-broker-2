@@ -13,8 +13,8 @@ spring.cloud.stream.bindings.output1:
       useNativeEncoding: true
 spring.cloud.stream.bindings.input0:
     destination: order-response
-#    consumer:
-#      useNativeDecoding: true
+    consumer:
+      useNativeDecoding: true
 spring.cloud.stream.kafka.binder.brokers: broker
 spring.cloud.stream.kafka.streams.binder:
     brokers: broker
