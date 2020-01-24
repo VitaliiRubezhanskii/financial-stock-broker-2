@@ -1,11 +1,10 @@
 package com.investment.trading.utils;
 
 
+import avro.Order;
 import avro.OrderRequest;
 import avro.OrderResponse;
-import com.investment.trading.kafka.avro.Order;
 import com.investment.trading.model.dto.OrderCreatedDto;
-import com.investment.trading.model.dto.OrderCreationDto;
 
 
 public class OrderUtils {

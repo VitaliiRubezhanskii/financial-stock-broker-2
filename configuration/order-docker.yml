@@ -38,7 +38,8 @@ spring.cloud.stream.kafka.streams.bindings.output0:
 spring.cloud.stream.kafka.streams.bindings.output1:
   producer:
     keySerde: org.apache.kafka.common.serialization.Serdes$StringSerde
-    valueSerde: io.confluent.kafka.streams.serdes.avro.SpecificAvroSerde
+    valueSerde: com.investment.trading.kafka.serde.OrderSerde
+#    io.confluent.kafka.streams.serdes.avro.SpecificAvroSerde
 #    com.investment.trading.kafka.serde.OrderRequestSerde
 
 

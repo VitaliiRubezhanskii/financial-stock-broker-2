@@ -1,7 +1,7 @@
 {
 	"type": "record",
 	"name": "Order",
-	"namespace": "com.investment.trading.kafka.avro",
+	"namespace": "avro",
 	"fields": [
 	 {
 		"name": "id",
@@ -9,22 +9,28 @@
 	},
 	{
 		"name": "ticket",
-		"type": "string"
+		"type": "string",
+		"default": "no data"
 	},
 	{   "name": "volume",
-	    "type": "string"
+	    "type": "string",
+	    "default": "no data"
 	},
     {   "name": "condition",
-        "type": "string"
+        "type": "string",
+        "default": "no data"
     },
     {   "name": "account",
-        "type": "string"
+        "type": "string",
+        "default": "no data"
     },
     {   "name": "bid",
-        "type": "string"
+        "type": "string",
+        "default": "no data"
     },
     {   "name": "ask",
-        "type": "string"
+        "type": "string",
+        "default": "no data"
     }
 	    ]
 }
