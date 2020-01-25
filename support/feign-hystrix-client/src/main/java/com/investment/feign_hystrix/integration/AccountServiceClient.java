@@ -5,25 +5,22 @@ import com.investment.feign_hystrix.integration.domain.account.AccountCreationDt
 import com.investment.feign_hystrix.integration.domain.enums.AccountStatus;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 @FeignClient(name = "account")
 @Service
 public interface AccountServiceClient {
 
     @PostMapping(value = "/account")
-    AccountCreatedDto createAccount(AccountCreationDto accountCreationDto);
+    AccountCreatedDto createAccount(@RequestBody AccountCreationDto accountCreationDto);
 
     @PatchMapping(value = "/account/{accountId}")
-    AccountCreatedDto updateAccount(String accountId, AccountCreationDto accountCreationDto);
+    AccountCreatedDto updateAccount(@PathVariable(value = "accountId") String accountId, @RequestBody AccountCreationDto accountCreationDto);
 
     @DeleteMapping(value = "/{accountId}/status/{status}")
-    void lockAccount(String id, AccountStatus status);
+    void lockAccount(@PathVariable(value = "accountId") String id, @PathVariable(value = "status") AccountStatus status);
 
     @GetMapping(value = "/{accountId}")
-    AccountCreatedDto getAccountById(String id);
+    AccountCreatedDto getAccountById(@PathVariable(value = "accountId") String id);
 
 }

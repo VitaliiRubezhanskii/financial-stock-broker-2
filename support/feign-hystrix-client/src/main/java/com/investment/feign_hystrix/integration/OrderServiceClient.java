@@ -16,25 +16,11 @@ import java.util.List;
 public interface OrderServiceClient {
 
     @PostMapping(value = "/order")
-    OrderCreatedDto newOrder(OrderCreationDto orderCreationDto);
+    OrderCreatedDto newOrder(@RequestBody OrderCreationDto orderCreationDto);
 
     @GetMapping(value = "/order/{id}")
-    OrderCreatedDto findOrderById(String id);
+    OrderCreatedDto findOrderById(@PathVariable(value = "id") String id);
 
     @GetMapping(value = "/account/{accountId}")
-    List<OrderCreatedDto> findOrdersByAccountId(String accountID);
-
-
-
-
-
-
-//    @GetMapping(value = "/order/sample")
-//    OrderCreationDto getExample();
-//
-//    @GetMapping(value = "/order/{id}")
-//    OrderCreationDto get(@PathVariable("id") String id);
-//
-//    @PostMapping
-//    OrderCreatedDto create(@RequestBody OrderCreationDto orderCreationDto);
+    List<OrderCreatedDto> findOrdersByAccountId(@PathVariable(value = "accountId") String accountID);
 }
