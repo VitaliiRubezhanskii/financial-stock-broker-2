@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -65,56 +66,29 @@ public class IntegrationClient {
         return accountServiceClient.getAccountById(id);
     }
 
-    public String saveAccountDataAndNotifyUser(String accountId, AccountCreationDto accountCreationDto){
-        return "Account with id " + accountId + " cant be created now, we saved your data and will create account for you" +
-                "with such info: " + accountCreationDto;
+    public AccountCreatedDto saveAccountDataAndNotifyUser(String accountId, AccountCreationDto accountCreationDto){
+        AccountCreatedDto accountCreatedDto = new AccountCreatedDto();
+        accountCreatedDto.setAccount("Account with id " + accountId + " cant be created now, we saved your data and will create account for you" +
+                "with such info: " + accountCreationDto);
+        return accountCreatedDto;
     }
 
-    public String cacheRequestAndNotifyUserThenLockAccount(String id, AccountStatus status){
-        return "Account with id " + id + "cant be locked now, we saved your data and will lock to status " + status;
+    public void cacheRequestAndNotifyUserThenLockAccount(String id, AccountStatus status){
+        System.out.println("Account with id " + id + "cant be locked now, we saved your data and will lock to status " + status);
     }
 
-    public String saveOrderDataAndNotifyUser(OrderCreationDto orderCreationDto){
-        return "Order for " + orderCreationDto.getTicket() + " cant be created now, we saved your data and will create account for you" +
-                "with such info: " + orderCreationDto;
+    public OrderCreatedDto saveOrderDataAndNotifyUser(OrderCreationDto orderCreationDto){
+        OrderCreatedDto orderCreatedDto = new OrderCreatedDto();
+         orderCreatedDto.setAccount("Order for " + orderCreationDto.getTicket() + " cant be created now, we saved your data and will create account for you" +
+                "with such info: " + orderCreationDto);
+         return orderCreatedDto;
     }
 
-    public String cacheRequestAndNotifyUser(String id){
-        return "data is saved";
+    public List<OrderCreatedDto> cacheRequestAndNotifyUser(String id){
+        OrderCreatedDto orderCreatedDto = new OrderCreatedDto();
+        orderCreatedDto.setAccount("data is saved");
+        List<OrderCreatedDto> orderCreatedDtos = new ArrayList<>();
+        orderCreatedDtos.add(orderCreatedDto);
+        return orderCreatedDtos;
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//
-//    @HystrixCommand(fallbackMethod = "getDefaultOrders")
-//    public OrderCreationDto getOrders(String id){
-//        return orderServiceClient.get(id);
-//    }
-//
-//    @HystrixCommand(fallbackMethod = "getDefaultExample")
-//    public OrderCreationDto getExample(){
-//        return orderServiceClient.getExample();
-//    }
-//
-//    public OrderCreatedDto create(OrderCreationDto orderCreationDto){
-//        return orderServiceClient.create(orderCreationDto);
-//    }
-//
-//    @HystrixCommand(fallbackMethod = "getDefaultHello")
-//    public String getHello(){
-//        return accountServiceClient.getHello();
-//    }
-
 }
