@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping(value = "/account")
 @RequiredArgsConstructor
-@Slf4j
 public class AccountController {
 
     private final AccountService accountService;
