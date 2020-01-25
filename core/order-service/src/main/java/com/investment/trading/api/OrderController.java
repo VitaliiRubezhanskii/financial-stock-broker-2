@@ -22,7 +22,8 @@ public class OrderController {
 
     @PostMapping
     public ResponseEntity<OrderCreatedDto> create(@RequestBody OrderCreationDto orderCreationDto) {
-       return new ResponseEntity<>(orderService.newOrder(orderCreationDto), HttpStatus.CREATED);
+        throw new RuntimeException("Seems error happened");
+//       return new ResponseEntity<>(orderService.newOrder(orderCreationDto), HttpStatus.CREATED);
     }
 
     @GetMapping(value = "/{id}")

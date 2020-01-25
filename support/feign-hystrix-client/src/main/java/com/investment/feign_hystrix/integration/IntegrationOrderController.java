@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import javax.ws.rs.Path;
 import java.util.List;
 
 @RestController
@@ -16,17 +17,17 @@ public class IntegrationOrderController {
     private final IntegrationClient integrationClient;
 
     @PostMapping(value = "/order")
-    public OrderCreatedDto newOrder(OrderCreationDto orderCreationDto){
+    public OrderCreatedDto newOrder(@RequestBody OrderCreationDto orderCreationDto){
         return integrationClient.newOrder(orderCreationDto);
     }
 
     @GetMapping(value = "/order/{id}")
-    public OrderCreatedDto findOrderById(String id){
+    public OrderCreatedDto findOrderById(@PathVariable(value = "id") String id){
         return integrationClient.findOrderById(id);
     }
 
     @GetMapping(value = "/account/{accountId}")
-    public List<OrderCreatedDto> findOrdersByAccountId(String accountID){
+    public List<OrderCreatedDto> findOrdersByAccountId(@PathVariable(value = "accountId") String accountID){
         return integrationClient.findOrdersByAccountId(accountID);
     }
 }
