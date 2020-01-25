@@ -3,29 +3,29 @@ spring:
     mongodb:
       uri: mongodb://mongo1:27017,mongo2:27017,mongo3:27017/order?replicaSet=rs0
 
-spring.cloud.stream.bindings.output:
-    destination: order-request
-spring.cloud.stream.bindings.input:
-    destination: order-response
-    consumer:
-      useNativeDecoding: true
-spring.cloud.stream.kafka.binder.brokers: broker
-spring.cloud.stream.kafka.streams.binder:
-    brokers: broker
-    configuration:
-      schema.registry.url: http://schema-registry:8081
-      commit.interval.ms: 1000
-      default.key.serde: org.apache.kafka.common.serialization.Serdes$StringSerde
-      default.value.serde: io.confluent.kafka.streams.serdes.avro.SpecificAvroSerde
-
-spring.cloud.stream.kafka.streams.bindings.input:
-  producer:
-    keySerde: org.apache.kafka.common.serialization.Serdes$StringSerde
-    valueSerde: com.investment.trading.kafka.serde.OrderResponseSerde
-spring.cloud.stream.kafka.streams.bindings.output:
-  consumer:
-    keySerde: org.apache.kafka.common.serialization.Serdes$StringSerde
-    valueSerde: com.investment.trading.kafka.serde.OrderRequestSerde
+#spring.cloud.stream.bindings.output:
+#    destination: order-request
+#spring.cloud.stream.bindings.input:
+#    destination: order-response
+#    consumer:
+#      useNativeDecoding: true
+#spring.cloud.stream.kafka.binder.brokers: broker
+#spring.cloud.stream.kafka.streams.binder:
+#    brokers: broker
+#    configuration:
+#      schema.registry.url: http://schema-registry:8081
+#      commit.interval.ms: 1000
+#      default.key.serde: org.apache.kafka.common.serialization.Serdes$StringSerde
+#      default.value.serde: io.confluent.kafka.streams.serdes.avro.SpecificAvroSerde
+#
+#spring.cloud.stream.kafka.streams.bindings.input:
+#  producer:
+#    keySerde: org.apache.kafka.common.serialization.Serdes$StringSerde
+#    valueSerde: com.investment.trading.kafka.serde.OrderResponseSerde
+#spring.cloud.stream.kafka.streams.bindings.output:
+#  consumer:
+#    keySerde: org.apache.kafka.common.serialization.Serdes$StringSerde
+#    valueSerde: com.investment.trading.kafka.serde.OrderRequestSerde
 
 #spring.cloud.stream.schemaRegistryClient.endpoint: http://schema-registry:8081
 #spring.cloud.stream.schemaRegistryClient.cached: false

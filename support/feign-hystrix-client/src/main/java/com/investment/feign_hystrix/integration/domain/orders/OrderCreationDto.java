@@ -1,4 +1,4 @@
-package com.investment.feign_hystrix.integration.domain;
+package com.investment.feign_hystrix.integration.domain.orders;
 
 import lombok.*;
 

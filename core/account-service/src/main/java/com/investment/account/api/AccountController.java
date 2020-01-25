@@ -10,7 +10,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-@RestController(value = "/account")
+@RestController
+@RequestMapping(value = "/account")
 @RequiredArgsConstructor
 @Slf4j
 public class AccountController {

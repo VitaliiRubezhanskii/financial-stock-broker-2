@@ -1,7 +1,7 @@
 package com.investment.feign_hystrix.integration;
 
-import com.investment.feign_hystrix.integration.domain.OrderCreatedDto;
-import com.investment.feign_hystrix.integration.domain.OrderCreationDto;
+import com.investment.feign_hystrix.integration.domain.orders.OrderCreatedDto;
+import com.investment.feign_hystrix.integration.domain.orders.OrderCreationDto;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

@@ -12,7 +12,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 
-@RestController(value = "/order")
+@RestController
+@RequestMapping(value = "/order")
 @RequiredArgsConstructor
 @Slf4j
 public class OrderController {
