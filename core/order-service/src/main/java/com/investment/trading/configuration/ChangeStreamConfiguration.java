@@ -1,18 +1,15 @@
 package com.investment.trading.configuration;
 
-import com.google.gson.Gson;
-import com.investment.trading.model.dto.OrderCreatedDto;
+import com.investment.trading.kafka.avro.OrderRequest;
 import com.mongodb.client.model.changestream.ChangeStreamDocument;
 import lombok.RequiredArgsConstructor;
 import org.bson.Document;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.mongodb.core.MongoTemplate;
-import org.springframework.data.mongodb.core.messaging.*;
-
-import static org.springframework.data.mongodb.core.aggregation.Aggregation.match;
-import static org.springframework.data.mongodb.core.aggregation.Aggregation.newAggregation;
-import static org.springframework.data.mongodb.core.query.Criteria.where;
+import org.springframework.data.mongodb.core.messaging.DefaultMessageListenerContainer;
+import org.springframework.data.mongodb.core.messaging.Message;
+import org.springframework.data.mongodb.core.messaging.MessageListenerContainer;
 
 @Configuration
 @RequiredArgsConstructor
