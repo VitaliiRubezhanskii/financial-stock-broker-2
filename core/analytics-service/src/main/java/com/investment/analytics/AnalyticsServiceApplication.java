@@ -48,7 +48,7 @@ public class AnalyticsServiceApplication {
                     if (value.getId().toString().endsWith("v2")) {
                         newKey = "v2";
                     }
-                    return new KeyValue<>(newKey, value.toString());
+                    return new KeyValue<String, String>(newKey, value.getTicket().toString());
                 });
 //                .groupByKey()
 //                .count(Materialized.<String, String, KeyValueStore<Bytes, byte[]>>as(STORE_NAME)

@@ -5,7 +5,7 @@ spring.cloud.stream.bindings.output:
 spring.cloud.stream.bindings.input:
     destination: quote
     consumer:
-#      useNativeDecoding: true
+      useNativeDecoding: true
 spring.cloud.stream.kafka.streams.binder:
     brokers: broker
     configuration:

@@ -4,7 +4,7 @@ spring:
       bindings:
         output:
           producer:
-#            useNativeEncoding: true
+            useNativeEncoding: true
           destination: quote
       kafka:
         binder:
@@ -12,7 +12,6 @@ spring:
 server.port: 9010
 
 spring.application.name: quotes-provider-service
-
 spring.cloud.stream.kafka.binder.configuration:
     schema.registry.url: http://schema-registry:8081
     key.serializer: org.apache.kafka.common.serialization.ByteArraySerializer
