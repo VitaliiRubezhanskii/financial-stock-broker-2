@@ -2,12 +2,10 @@ package com.investment.trading.api.service.impl;
 
 import com.investment.trading.api.repository.OrderRepository;
 import com.investment.trading.api.service.OrderService;
-import com.investment.trading.kafka.avro.OrderRequest;
 import com.investment.trading.mapper.OrderMapper;
 import com.investment.trading.model.domain.Order;
 import com.investment.trading.model.dto.OrderCreatedDto;
 import com.investment.trading.model.dto.OrderCreationDto;
-import com.investment.trading.utils.OrderUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

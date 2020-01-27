@@ -1,15 +1,17 @@
 package com.investment.trading.configuration;
 
-import com.investment.trading.kafka.avro.OrderRequest;
+import com.google.gson.Gson;
 import com.mongodb.client.model.changestream.ChangeStreamDocument;
 import lombok.RequiredArgsConstructor;
 import org.bson.Document;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.mongodb.core.MongoTemplate;
-import org.springframework.data.mongodb.core.messaging.DefaultMessageListenerContainer;
-import org.springframework.data.mongodb.core.messaging.Message;
-import org.springframework.data.mongodb.core.messaging.MessageListenerContainer;
+import org.springframework.data.mongodb.core.messaging.*;
+
+import static org.springframework.data.mongodb.core.aggregation.Aggregation.match;
+import static org.springframework.data.mongodb.core.aggregation.Aggregation.newAggregation;
+import static org.springframework.data.mongodb.core.query.Criteria.where;
 
 @Configuration
 @RequiredArgsConstructor
@@ -53,7 +55,7 @@ public class ChangeStreamConfiguration {
 
 
     private void convert(Message<ChangeStreamDocument<Document>, com.investment.trading.model.domain.Order> message){
-        System.out.println("Received message with id: " + message.getRaw() + "as json: --> " + gson.fromJson(message.getRaw().getFullDocument().toJson(), OrderCreatedDto.class));
+        System.out.println("Received message with id: " + message.getRaw() + "as json: --> "  + message.getBody());
     }
 
 

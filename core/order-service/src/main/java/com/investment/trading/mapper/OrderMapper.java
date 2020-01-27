@@ -1,6 +1,5 @@
 package com.investment.trading.mapper;
 
-import avro.OrderRequest;
 import com.investment.trading.model.domain.Order;
 import com.investment.trading.model.dto.OrderCreatedDto;
 import com.investment.trading.model.dto.OrderCreationDto;
