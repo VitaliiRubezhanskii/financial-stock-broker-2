@@ -5,5 +5,5 @@ spring:
   application:
     name: configserver
   profiles:
-    active: docker
+    active: default
 
