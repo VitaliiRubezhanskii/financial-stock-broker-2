@@ -50,7 +50,7 @@ ribbon:
 security:
   oauth2:
     client:
-      clientId: gateway
+      clientId: account-service
       clientSecret: 1234
       accessTokenUri: http://localhost:8084/uaa/oauth/token
       grant-type: client_credentials
