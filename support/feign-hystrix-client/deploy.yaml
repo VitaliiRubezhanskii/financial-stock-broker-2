@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: feign
+spec:
+  selector:
+    matchLabels:
+      app: feign
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: feign
+    spec:
+      containers:
+        - name: feign
+          image: feign #${REPOSITORY_TAG}
+          ports:
+            - containerPort: 8099
+          env:
+            - name: SPRING_PROFILES_ACTIVE
+              value: deployment
+            - name: PORT
+              value: '8099'
+            - name: CONFIGSERVER_URI
+              value: http://configserver:8888
+          imagePullPolicy: Never
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: feign
+spec:
+  selector:
+    app: feign
+  ports:
+    - port: 8099
+      protocol: TCP
+  type: NodePort

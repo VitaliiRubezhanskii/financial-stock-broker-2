@@ -1,0 +1,2 @@
+[{"_id":{"$oid":"5dee2056150f3d001a3f39cd"},"username":"randomuser","password":"$2a$10$fWNTd3H.u7G/aNROVQSifebOkZ2xzU5nUPOCI2Ld42M8E25/ljJqK","activated":true,"authorities":["ROLE_USER"],"_class":"com.investment.auth.domain.User"}
+]

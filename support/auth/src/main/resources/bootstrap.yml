@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: auth
+  profiles:
+    active: ${SPRING_PROFILES_ACTIVE}
+  cloud:
+    config:
+      uri: ${CONFIGSERVER_URI}
+
+server:
+  port: ${PORT}
+

@@ -1,8 +1,62 @@
 version: "3.2"
 networks:
     my-mongo-cluster:
-      driver: bridge
 services:
+   tracing:
+      image: openzipkin/zipkin
+      ports:
+        - 9411:9411
+      build:
+        context: ./support/tracing
+        dockerfile: Dockerfile
+      depends_on:
+        - mongo-replicator
+        - configserver
+        - discovery
+      healthcheck:
+        test: ["CMD", "curl", "-f", "http://localhost:9411/zipkin/"]
+        interval: 30s
+        timeout: 10s
+        retries: 5
+      restart: always
+      networks:
+         - my-mongo-cluster
+
+#   turbine:
+#     image: turbine
+#     ports:
+#       - 8990:8990
+#     build:
+#       context: ./support/turbine
+#       dockerfile: Dockerfile
+#     environment:
+#       PORT: 8990
+#       SPRING_PROFILES_ACTIVE: docker
+#       CONFIGSERVER_URI: http://configserver:8888
+#     depends_on:
+#       - mongo-replicator
+#       - configserver
+#       - discovery
+#       - broker
+#       - rabbitmq
+#     healthcheck:
+#       test: ["CMD", "curl", "-f", "http://localhost:8990/"]
+#       interval: 30s
+#       timeout: 10s
+#       retries: 5
+#     restart: always
+#     networks:
+#        - my-mongo-cluster
+#
+#   rabbitmq:
+#       image: 'bitnami/rabbitmq:latest'
+#       ports:
+#         - 5675:5672
+#         - 15675:15672
+#       networks:
+#         - my-mongo-cluster
+
+
    mongo1:
       image: mongo:4.1.13-bionic
       command: --replSet rs0 --bind_ip_all
@@ -38,10 +92,11 @@ services:
       depends_on:
        - mongo1
        - mongo2
+
    mongo-replicator:
       build:
         context: ./
-        dockerfile: ../../mongodb/Dockerfile
+        dockerfile: ./mongodb/Dockerfile
       networks:
         - my-mongo-cluster
       depends_on:
@@ -49,24 +104,483 @@ services:
         - mongo2
         - mongo3
 
-   order_service:
-      container_name: order_service
-      environment:
-        SERVER_PORT: 8081
-        URI: mongodb://mongo1:27017,mongo2:27017,mongo3:27017/orders?replicaSet=rs0
+   configserver:
+       container_name: configserver
+       expose:
+        - 8888
+       ports:
+        - 8888:8888
+       healthcheck:
+         test: ["CMD", "curl", "-f", "http://localhost:8888"]
+         interval: 30s
+         timeout: 10s
+         retries: 5
+       image: config_service:latest
+       build:
+         context: ./support/config
+         dockerfile: Dockerfile
+
+#       volumes:
+#         - /home/user/Documents/03. Education/financial-stock-broker-2/configuration:/var/lib/financial-stock-broker-2/configuration
+       depends_on:
+         - mongo-replicator
+         - discovery
+       restart: always
+       networks:
+        - my-mongo-cluster
+
+   discovery:
+      container_name: discovery
       expose:
-       - 8081
+       - 8761
       ports:
-       - 8081:8081
+       - 8761:8761
       healthcheck:
-         test: ["CMD", "curl", "-f", "http://localhost:8081"]
+        test: ["CMD", "curl", "-f", "http://localhost:8761/eureka/"]
+        interval: 30s
+        timeout: 10s
+        retries: 5
+      image: discovery_service:latest
+      build:
+        context: ./support/monitoring
+        dockerfile: Dockerfile
+      depends_on:
+        - mongo-replicator
+      restart: always
+#      labels:
+#        collect_logs_with_filebeat: "true"
+#        decode_log_event_to_json_object: "true"
+      networks:
+       - my-mongo-cluster
+#
+   order:
+      container_name: order_service
+      expose:
+        - 8082
+      ports:
+       - 8082:8082
+      healthcheck:
+         test: ["CMD", "curl", "-f", "http://localhost:8082"]
          interval: 30s
          timeout: 10s
          retries: 5
       image: order_service:latest
       build:
-        context: ./../
+        context: ./core/order-service
         dockerfile: Dockerfile
+      environment:
+        PORT: 8082
+        SPRING_PROFILES_ACTIVE: docker
+        CONFIGSERVER_URI: http://configserver:8888
+      depends_on:
+           - mongo-replicator
+           - configserver
+           - discovery
+#           - broker
       restart: always
+      labels:
+        collect_logs_with_filebeat: "true"
+        decode_log_event_to_json_object: "true"
       networks:
         - my-mongo-cluster
+
+   auth:
+     container_name: auth
+     expose:
+       - 8084
+
+     ports:
+       - 8084:8084
+
+     healthcheck:
+       test: ["CMD", "curl", "-f", "http://localhost:8084"]
+       interval: 30s
+       timeout: 10s
+       retries: 5
+     image: auth:latest
+     build:
+       context: ./support/auth
+       dockerfile: Dockerfile
+     environment:
+       PORT: 8084
+       SPRING_PROFILES_ACTIVE: docker
+       CONFIGSERVER_URI: http://configserver:8888
+     depends_on:
+       - mongo-replicator
+       - configserver
+       - discovery
+#       - zookeeper
+#       - broker
+#       - schema-registry
+     restart: always
+     labels:
+       collect_logs_with_filebeat: "true"
+       decode_log_event_to_json_object: "true"
+     networks:
+       - my-mongo-cluster
+
+#   order2:
+#     container_name: order_service2
+#     expose:
+#       - 8092
+#     ports:
+#       - 8092:8092
+#     healthcheck:
+#       test: ["CMD", "curl", "-f", "http://localhost:8092"]
+#       interval: 30s
+#       timeout: 10s
+#       retries: 5
+#     image: order_service:latest
+#     build:
+#       context: ./core/order-service
+#       dockerfile: Dockerfile
+#     environment:
+#       PORT: 8092
+#       SPRING_PROFILES_ACTIVE: docker
+#       CONFIGSERVER_URI: http://configserver:8888
+#     depends_on:
+#       - mongo-replicator
+#       - configserver
+#       - discovery
+#       - zookeepere
+#       - broker
+#       - schema-registry
+#     restart: always
+#     labels:
+#       collect_logs_with_filebeat: "true"
+#       decode_log_event_to_json_object: "true"
+#     networks:
+#       - my-mongo-cluster
+
+   account:
+      container_name: account_service
+      expose:
+       - 8091
+      ports:
+       - 8091:8091
+      environment:
+        PORT: 8091
+        SPRING_PROFILES_ACTIVE: docker
+        CONFIGSERVER_URI: http://configserver:8888
+      healthcheck:
+        test: ["CMD", "curl", "-f", "http://configserver:8888/account/docker"]
+        interval: 30s
+        timeout: 10s
+        retries: 5
+      image: account_service:latest
+      build:
+        context: ./core/account-service
+        dockerfile: Dockerfile
+      depends_on:
+         - mongo-replicator
+         - configserver
+         - discovery
+#         - broker
+      links:
+        - configserver
+        - discovery
+      restart: on-failure
+      labels:
+        collect_logs_with_filebeat: "true"
+        decode_log_event_to_json_object: "true"
+      networks:
+        - my-mongo-cluster
+
+   gateway:
+      container_name: api_gateway_service
+      expose:
+       - 5000
+      ports:
+       - 5000:5000
+      environment:
+        PORT: 5000
+        SPRING_PROFILES_ACTIVE: docker
+        CONFIGSERVER_URI: http://configserver:8888
+      healthcheck:
+        test: ["CMD", "curl", "-f", "http://localhost:5000"]
+        interval: 30s
+        timeout: 10s
+        retries: 5
+      image: api_gateway_service:latest
+      build:
+        context: ./support/gateway
+        dockerfile: Dockerfile
+      depends_on:
+        - mongo-replicator
+        - configserver
+        - discovery
+      restart: always
+      labels:
+        collect_logs_with_filebeat: "true"
+        decode_log_event_to_json_object: "true"
+      networks:
+       - my-mongo-cluster
+
+#   feign:
+#       container_name: feign-hystrix-service
+#       expose:
+#         - 8099
+#       ports:
+#         - 8099:8099
+#       environment:
+#         PORT: 8099
+#         SPRING_PROFILES_ACTIVE: docker
+#         CONFIGSERVER_URI: http://configserver:8888
+#       image: feign-hystrix-service:latest
+#       build:
+#         context: ./support/feign-hystrix-client
+#         dockerfile: Dockerfile
+#       depends_on:
+#         - mongo-replicator
+#         - configserver
+#         - discovery
+#       restart: always
+#       labels:
+#         collect_logs_with_filebeat: "true"
+#         decode_log_event_to_json_object: "true"
+#       networks:
+#         - my-mongo-cluster
+#
+#   analytics:
+#       container_name: analytics
+#       expose:
+#         - 9998
+#       ports:
+#         - 9998:9998
+#       environment:
+#         PORT: 9998
+#         SPRING_PROFILES_ACTIVE: docker
+#         CONFIGSERVER_URI: http://configserver:8888
+#       image: analytics
+#       build:
+#         context: ./core/analytics-service
+#         dockerfile: Dockerfile
+#       depends_on:
+##         - mongo-replicator
+#         - configserver
+#         - discovery
+#         - zookeeper
+#         - broker
+#         - schema-registry
+#       restart: always
+#       labels:
+#         collect_logs_with_filebeat: "true"
+#         decode_log_event_to_json_object: "true"
+#       networks:
+#         - my-mongo-cluster
+#
+#   finprovider:
+#      container_name: quotes-provider-service
+#      expose:
+#        - 9010
+#      ports:
+#        - 9010:9010
+#      environment:
+#        PORT: 9010
+#        SPRING_PROFILES_ACTIVE: docker
+#        CONFIGSERVER_URI: http://configserver:8888
+#      image: quotes-provider-service
+#      build:
+#        context: ./core/quotes-provider-service
+#        dockerfile: Dockerfile
+#      depends_on:
+##        - mongo-replicator
+#        - configserver
+#        - discovery
+#        - zookeeper
+#        - broker
+#        - schema-registry
+#      restart: always
+#      labels:
+#        collect_logs_with_filebeat: "true"
+#        decode_log_event_to_json_object: "true"
+#      networks:
+#        - my-mongo-cluster
+#
+#   zookeeper:
+#       image: confluentinc/cp-zookeeper:latest
+#       hostname: zookeeper
+#       container_name: zookeeper
+#       ports:
+#         - "2181:2181"
+#       environment:
+#         ZOOKEEPER_CLIENT_PORT: 2181
+#         ZOOKEEPER_TICK_TIME: 2000
+##       volumes:
+##           - ./zookeeper/data:/data
+##           - ./zookeeper/datalog:/datalog
+#       networks:
+#           - my-mongo-cluster
+#
+#   broker:
+#       image: confluentinc/cp-enterprise-kafka:latest
+#       hostname: broker
+#       container_name: broker
+#       depends_on:
+#         - zookeeper
+#       ports:
+#         - "9092:9092"
+#         - "29092:29092"
+#       environment:
+#         KAFKA_BROKER_ID: 1
+#         KAFKA_ZOOKEEPER_CONNECT: 'zookeeper:2181'
+#         KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+#         KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+#         KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://broker:9092,PLAINTEXT_HOST://broker:29092
+#         KAFKA_METRIC_REPORTERS: io.confluent.metrics.reporter.ConfluentMetricsReporter
+#         KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+#         KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
+#         CONFLUENT_METRICS_REPORTER_BOOTSTRAP_SERVERS: broker:9092
+#         CONFLUENT_METRICS_REPORTER_ZOOKEEPER_CONNECT: zookeeper:2181
+#         CONFLUENT_METRICS_REPORTER_TOPIC_REPLICAS: 1
+#         CONFLUENT_METRICS_ENABLE: 'true'
+##         CONFLUENT_SUPPORT_CUSTOMER_ID: 'anonymous'
+#         KAFKA_AUTO_CREATE_TOPICS_ENABLE: "true"
+##         KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+##         KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
+##         KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
+#         KAFKA_LOG4J_LOGGERS: "kafka.controller=INFO,kafka.producer.async.DefaultEventHandler=INFO,state.change.logger=INFO"
+##       volumes:
+##           - ./broker_new/broker2/data:/var/lib/kafka/data
+#       networks:
+#           - my-mongo-cluster
+#
+#   schema-registry:
+#       image: confluentinc/cp-schema-registry:latest
+#       hostname: schema-registry
+#       container_name: schema-registry
+#       depends_on:
+#         - zookeeper
+#         - broker
+#       ports:
+#         - "8081:8081"
+#       environment:
+#         SCHEMA_REGISTRY_KAFKASTORE_BOOTSTRAP_SERVERS: PLAINTEXT://broker:29092
+#         SCHEMA_REGISTRY_HOST_NAME: schema-registry
+#         SCHEMA_REGISTRY_LISTENERS: http://0.0.0.0:8081
+#         SCHEMA_REGISTRY_KAFKASTORE_CONNECTION_URL: 'zookeeper:2181'
+#       networks:
+#         - my-mongo-cluster
+#
+#   kafka-connect-cp:
+#       image: datamountaineer/kafka-connect-cassandra:1.1.0
+#       hostname: kafka-connect-cp
+#       ports:
+#         - "18083:18083"
+#       environment:
+#         CONNECT_BOOTSTRAP_SERVERS: "broker:9092"
+#         bootstrap.servers: "broker:9092"
+#         CONNECT_REST_PORT: 18083
+#         CONNECT_GROUP_ID: compose-connect-group
+#         CONNECT_CONFIG_STORAGE_TOPIC: docker-connect-configs
+#         CONNECT_OFFSET_STORAGE_TOPIC: docker-connect-offsets
+#         CONNECT_STATUS_STORAGE_TOPIC: docker-connect-status
+#         CONNECT_KEY_CONVERTER: io.confluent.connect.avro.AvroConverter
+#         CONNECT_KEY_CONVERTER_SCHEMA_REGISTRY_URL: 'http://schema-registry:8081'
+#         CONNECT_VALUE_CONVERTER: io.confluent.connect.avro.AvroConverter
+#         CONNECT_VALUE_CONVERTER_SCHEMA_REGISTRY_URL: 'http://schema-registry:8081'
+#         CONNECT_INTERNAL_KEY_CONVERTER: "org.apache.kafka.connect.json.JsonConverter"
+#         CONNECT_INTERNAL_VALUE_CONVERTER: "org.apache.kafka.connect.json.JsonConverter"
+#         CONNECT_REST_ADVERTISED_HOST_NAME: "kafka-connect-cp"
+#         CONNECT_LOG4J_ROOT_LOGLEVEL: "INFO"
+#         CONNECT_LOG4J_LOGGERS: "org.apache.kafka.connect.runtime.rest=WARN,org.reflections=ERROR"
+#         CONNECT_CONFIG_STORAGE_REPLICATION_FACTOR: "1"
+#         CONNECT_OFFSET_STORAGE_REPLICATION_FACTOR: "1"
+#         CONNECT_STATUS_STORAGE_REPLICATION_FACTOR: "1"
+#         CONNECT_PLUGIN_PATH: '/usr/share/java'
+#       depends_on:
+#         - zookeeper
+#         - broker
+#         - schema-registry
+#       links:
+#         - broker
+#         - schema-registry
+#       networks:
+#         - my-mongo-cluster
+#
+#   connectui:
+#       image: "landoop/kafka-connect-ui"
+#       hostname: connectui
+#       depends_on:
+#         - zookeeper
+#         - broker
+#         - schema-registry
+#       ports:
+#         - '8000:8000'
+#       environment:
+#         CONNECT_URL: "http://kafka-connect-cp:18083"
+#       networks:
+#         - my-mongo-cluster
+#
+#   cassandra:
+#       image: library/cassandra:3.0
+##       network_mode: host
+#       hostname: cassandra
+#       restart: always
+#       container_name: cassandra
+#       hostname: cassandra
+#       networks:
+#         - my-mongo-cluster
+
+
+#   filebeat:
+#     hostname: filebeat
+#     image: docker-logs-elk/filebeat:1.0.0
+#     build:
+#       context: filebeat
+#       dockerfile: Dockerfile
+#     volumes:
+#       # needed to access all docker logs (read only) :
+#       - "/var/lib/docker/containers:/usr/share/dockerlogs/data:ro"
+#       # needed to access additional informations about containers
+#       - "/var/run/docker.sock:/var/run/docker.sock"
+#     links:
+#       - logstash
+#     networks:
+#       - my-mongo-cluster
+#
+#   kibana:
+#     image: kibana:6.5.2
+#     environment:
+#       - "LOGGING_QUIET=true"
+#     links:
+#       - elasticsearch
+#     ports:
+#       - 5601:5601
+#     networks:
+#       - my-mongo-cluster
+#
+#   logstash:
+#     hostname: logstash
+#     image: docker-logs-elk/logstash:1.0.0
+#     build:
+#       context: logstash
+#       dockerfile: Dockerfile
+#     ports:
+#       - 5044:5044
+#     environment:
+#       LOG_LEVEL: info
+#     links:
+#       - elasticsearch
+#     networks:
+#       - my-mongo-cluster
+#
+#
+#   elasticsearch:
+#     hostname: elasticsearch
+#     image: docker-logs-elk/elasticsearch:1.0.0
+#     build:
+#       context: elasticsearch
+#       dockerfile: Dockerfile
+#     environment:
+#       - cluster.name=docker-logs-elk-cluster
+#       - bootstrap.memory_lock=true
+#       - ES_JAVA_OPTS=-Xms256m -Xmx256m
+#     ulimits:
+#       memlock:
+#         soft: -1
+#         hard: -1
+#     ports:
+#       - 9200:9200
+#     networks:
+#       - my-mongo-cluster

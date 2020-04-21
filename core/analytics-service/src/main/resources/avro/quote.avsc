@@ -1,0 +1,15 @@
+{
+  "namespace" : "avro",
+  "type" : "record",
+  "name" : "Quote",
+  "fields" : [
+    {"name":"id","type":"string"},
+    {"name":"date", "type":"string"},
+    {"name":"ticket", "type":"string"},
+    {"name":"open", "type":"string"},
+    {"name":"high", "type":"string"},
+    {"name":"close", "type":"string"},
+    {"name":"volume", "type":"string"},
+    {"name":"low", "type":"string"}
+  ]
+}

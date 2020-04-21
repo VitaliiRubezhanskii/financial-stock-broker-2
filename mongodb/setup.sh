@@ -9,7 +9,11 @@ else
   echo "Replication done..."
   # Wait for few seconds until replication takes effect
   sleep 15
-#  mongo mongo-prima:27018/project_manager seed.js
+  mongoimport --host mongo1 --db auth --collection user --type json --file /user.json --jsonArray
+  mongoimport --host mongo1 --db auth --collection authClientDetails --type json --file /authClientDetails.json --jsonArray
+  mongoimport --host mongo1 --db auth --collection mongoAccessToken --type json --file /mongoAccessToken.json --jsonArray
+  mongoimport --host mongo1 --db auth --collection mongoRefreshToken --type json --file /mongoRefreshToken.json --jsonArray
+
   echo "Seeding done..."
   touch /replicated.txt
 fi

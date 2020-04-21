@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: order
+spec:
+  selector:
+    matchLabels:
+      app: order
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: order
+    spec:
+      containers:
+        - name: order
+          image: order #${REPOSITORY_TAG}
+          ports:
+            - containerPort: 8092
+          env:
+            - name: SPRING_PROFILES_ACTIVE
+              value: deployment
+            - name: PORT
+              value: '8092'
+            - name: CONFIGSERVER_URI
+              value: http://configserver:8888
+          imagePullPolicy: Never
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: order
+
+spec:
+  ports:
+    - port: 8092
+      protocol: TCP
+  selector:
+    app: order
+  type: NodePort

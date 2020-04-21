@@ -1,0 +1,61 @@
+zuul:
+  ignored-services: '*'
+  routes:
+    account:
+      path: /account/**
+      ribbon:
+        listOfServers: http://account:8091
+    order:
+      path: /order/**
+      ribbon:
+        listOfServers: http://order:8092
+    feign:
+      path: /feign/**
+      ribbon:
+        listOfServers: http://feign:8099
+    auth:
+      path: /uaa/**
+      ribbon:
+        listOfServers: http://auth:8084
+  sensitiveHeaders:
+
+
+eureka:
+  instance:
+    preferIpAddress: true
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: http://monitoring:8761/eureka/
+    healthcheck:
+      enabled: true
+    lease:
+      duration: 5
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: routes
+
+hystrix.command.default.execution.isolation.thread.timeoutInMilliseconds: 60000
+ribbon:
+  ConnectTimeout: 3000
+  ReadTimeout: 60000
+
+  eureka:
+    enabled: false
+
+security:
+  oauth2:
+    client:
+      clientId: gateway
+      clientSecret: 1234
+      accessTokenUri: http://auth:8084/uaa/oauth/token
+      grant-type: client_credentials
+      scope: server
+
+    resource:
+      user-info-uri: http://auth:8084/uaa/user/current
+      token-info-uri: http://auth:8084/uaa/oauth/check_token

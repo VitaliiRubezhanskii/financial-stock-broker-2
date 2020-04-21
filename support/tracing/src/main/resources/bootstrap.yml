@@ -1,0 +1,22 @@
+server:
+  port: 9411
+
+spring:
+  application:
+    name: tracing
+  cloud:
+    config:
+      uri: http://configserver:8888
+
+
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    serviceUrl:
+      defaultZone: http://discovery:8761/eureka/
+
+
+

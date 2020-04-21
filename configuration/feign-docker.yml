@@ -1,0 +1,22 @@
+spring:
+  data:
+    mongodb:
+      uri: mongodb://mongo1:27017,mongo2:27017,mongo3:27017/auth?replicaSet=rs0
+
+feign:
+  hystrix:
+    enabled: trued
+
+security:
+  oauth2:
+    client:
+      clientId: feign
+      clientSecret: 1234
+      accessTokenUri: http://auth:8084/uaa/oauth/token
+      grant-type: client_credentials
+      scope: server
+#
+    resource:
+      user-info-uri: http://auth:8084/uaa/user/current
+      token-info-uri: http://auth:8084/uaa/oauth/check_token
+
