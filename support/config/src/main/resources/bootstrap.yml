@@ -6,4 +6,13 @@ spring:
     name: configserver
   profiles:
     active: native
+eureka:
+  client:
+    service-url:
+      defaultZone: http://discovery:8761/eureka/
+    healthcheck:
+      enabled: true
+    register-with-eureka: true
+    fetch-registry: true
+
 
