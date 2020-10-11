@@ -1,24 +1,32 @@
-server:
-  port: 8083
+server.port: 9998
+spring.application.name: analytics
+spring.cloud.stream.bindings.output:
+  destination: quote-aggregation
+spring.cloud.stream.bindings.input:
+  destination: quote
+  consumer:
+    useNativeDecoding: true
+spring.cloud.stream.kafka.streams.binder:
+  brokers: broker
+  configuration:
+    schema.registry.url: http://localhost:8081
+    commit.interval.ms: 1000
+    default.key.serde: org.apache.kafka.common.serialization.Serdes$StringSerde
+    default.value.serde: io.confluent.kafka.streams.serdes.avro.SpecificAvroSerde
+spring.cloud.stream.kafka.streams.bindings.input:
+  consumer:
+    keySerde: org.apache.kafka.common.serialization.Serdes$StringSerde
+    valueSerde: io.confluent.kafka.streams.serdes.avro.SpecificAvroSerde
+spring.cloud.stream.kafka.binder.brokers: localhost
 
-spring:
-
-  data:
-    mongodb:
-      host: localhost
-      port: 27017
-      username: root
-      password: root
-      database: analytics
-
-eureka:         #tells about the Eureka server details and its refresh time
+eureka:
   instance:
     leaseRenewalIntervalInSeconds: 1
     leaseExpirationDurationInSeconds: 2
 
   client:
     serviceUrl:
-      defaultZone: http://localhost:8761/eureka/
+      defaultZone: http://discovery:8761/eureka/
     healthcheck:
       enabled: true
     lease:
