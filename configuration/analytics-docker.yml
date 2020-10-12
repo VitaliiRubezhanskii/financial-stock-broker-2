@@ -1,6 +1,6 @@
 server.port: 9998
 spring.application.name: analytics
-spring.cloud.stream.kafka.binder.brokers: broker:9092
+spring.cloud.stream.kafka.binder.brokers: localhost
 spring.cloud.stream.bindings.output:
     destination: quote-aggregation
 spring.cloud.stream.bindings.input:
@@ -8,7 +8,7 @@ spring.cloud.stream.bindings.input:
     consumer:
       useNativeDecoding: true
 spring.cloud.stream.kafka.streams.binder:
-    brokers: broker
+    brokers: localhost
     configuration:
       schema.registry.url: http://schema-registry:8081
       commit.interval.ms: 1000
