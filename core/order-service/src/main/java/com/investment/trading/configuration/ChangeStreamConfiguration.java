@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.bson.Document;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.messaging.*;
 
@@ -13,11 +14,10 @@ import static org.springframework.data.mongodb.core.aggregation.Aggregation.matc
 import static org.springframework.data.mongodb.core.aggregation.Aggregation.newAggregation;
 import static org.springframework.data.mongodb.core.query.Criteria.where;
 
+@Profile("!local")
 @Configuration
 @RequiredArgsConstructor
 public class ChangeStreamConfiguration {
-
-
 
     private final Gson gson = new Gson();
 

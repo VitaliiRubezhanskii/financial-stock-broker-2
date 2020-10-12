@@ -5,11 +5,11 @@ spring:
   application:
     name: configserver
   profiles:
-    active: native
+    active: docker
 eureka:
   client:
     service-url:
-      defaultZone: http://discovery:8761/eureka/
+      defaultZone: http://localhost:8761/eureka/
     healthcheck:
       enabled: true
     register-with-eureka: true

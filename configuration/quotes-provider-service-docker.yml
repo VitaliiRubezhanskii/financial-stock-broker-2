@@ -15,7 +15,6 @@ spring:
             schema.registry.url: http://schema-registry:8081
             key.serializer: org.apache.kafka.common.serialization.ByteArraySerializer
             value.serializer: com.investment.quotesproviderservice.serdes.QuoteSerde
-spring.cloud.stream.kafka.binder.brokers: broker
 
 eureka:
   instance:
