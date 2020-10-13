@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: configserver
+spec:
+  selector:
+    matchLabels:
+      app: configserver
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: configserver
+    spec:
+      containers:
+        - name: configserver
+          image: vitalii1992/configserver:latest #${REPOSITORY_TAG}
+          ports:
+            - containerPort: 8888
+          env:
+            - name: SPRING_PROFILES_ACTIVE
+              value: docker
+            - name: PORT
+              value: '8888'
+          imagePullPolicy: Never
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: configserver
+
+spec:
+  selector:
+    app: configserver
+  ports:
+    - port: 8888
+      protocol: TCP
+  type: NodePort
