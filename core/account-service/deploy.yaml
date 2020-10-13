@@ -19,7 +19,7 @@ spec:
             - containerPort: 8081
           env:
             - name: SPRING_PROFILES_ACTIVE
-              value: docker #deployment
+              value: deployment
             - name: PORT
               value: '8081'
             - name: CONFIGSERVER_URI

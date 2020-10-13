@@ -1,7 +1,7 @@
 spring:
   data:
     mongodb:
-      uri: mongodb://mongod-2.mongodb-service.default.svc.cluster.local:27017,mongod-2.mongodb-service.default.svc.cluster.local:27017,mongod-2.mongodb-service.default.svc.cluster.local:27017/account?replicaSet=MainRepSet
+      uri: mongodb://mongo1:27017,mongo2:27017,mongo3:27017/account?replicaSet=rs0
   zipkin:
         enabled: true
         baseUrl: http://tracing:9411

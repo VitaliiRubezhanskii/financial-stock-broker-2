@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: order
-          image: order #${REPOSITORY_TAG}
+          image: vitalii1992/order-service:latest #${REPOSITORY_TAG}
           ports:
             - containerPort: 8092
           env:
