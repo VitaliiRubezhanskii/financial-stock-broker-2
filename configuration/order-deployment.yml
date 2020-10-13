@@ -1,4 +1,13 @@
-spring.data.mongodb.uri: mongodb://mongod-2.mongodb-service.default.svc.cluster.local:27017,mongod-2.mongodb-service.default.svc.cluster.local:27017,mongod-2.mongodb-service.default.svc.cluster.local:27017/account?replicaSet=MainRepSet
+spring:
+  data:
+    mongodb:
+      uri: mongodb://mongod-2.mongodb-service.default.svc.cluster.local:27017,mongod-2.mongodb-service.default.svc.cluster.local:27017,mongod-2.mongodb-service.default.svc.cluster.local:27017/account?replicaSet=MainRepSet
+  zipkin:
+    enabled: true
+    baseUrl: http://tracing:9411
+    sleuth:
+      sampler:
+        probability: 100
 
 security.oauth2:
     client:
@@ -8,35 +17,16 @@ security.oauth2:
       grant-type: client_credentials
       scope: server
 
+
     resource:
       user-info-uri: http://auth:8084/uaa/user/current
       token-info-uri: http://auth:8084/uaa/oauth/check_token
 
-spring:
-  cloud:
-    stream:
-         producer:
-          useNativeEncoding: true
-         consumer:
-          useNativeEncoding: true
-      bindings:
-        process-in-0:
-          destination: orders
-          content-type: application/*+avro
-        process-out-0:
-          destination: orders
-          content-type: application/*+avro
-          group: group-1
-          concurrency: 3
-      kafka:
-          binder:
-           producer-properties:
-             key.serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
-             value.serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
-             schema.registry.url: http://schema-registry:8081
-           consumer-properties:
-             key.deserializer: io.confluent.kafka.serializers.KafkaAvroDeserializer
-             value.deserializer: io.confluent.kafka.serializers.KafkaAvroDeserializer
-             schema.registry.url: http://schema-registry:8081
-             specific.avro.reader: true
-           brokers: broker
+eureka:
+  client:
+    service-url:
+      defaultZone: http://discovery:8761/eureka/
+    healthcheck:
+      enabled: true
+    register-with-eureka: true
+    fetch-registry: true
