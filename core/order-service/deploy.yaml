@@ -24,7 +24,7 @@ spec:
               value: '8092'
             - name: CONFIGSERVER_URI
               value: http://configserver:8888
-          imagePullPolicy: Never
+          imagePullPolicy: Always
 
 ---
 apiVersion: v1
