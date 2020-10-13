@@ -7,8 +7,8 @@ cfg = rs.initiate( {
     ]
 });
 
-cfg = rs.conf();
-cfg.members[0].priority = 5;
-cfg.members[1].priority = 5;
-cfg.members[2].priority = 50;
-rs.reconfig(cfg);
+cfg = rs.conf()
+cfg.members[0].priority = 5
+cfg.members[1].priority = 5
+cfg.members[2].priority = 50
+rs.reconfig(cfg)

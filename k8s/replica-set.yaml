@@ -20,31 +20,31 @@ spec:
           imagePullPolicy: Always
           ports:
             - containerPort: 27017
----
-apiVersion: apps/v1
-kind: ReplicaSet
-metadata:
-  name: orderservice
-  labels:
-    app: orderservice
-  spec:
-    replicas: 3
-    selector:
-      matchLabels:
-        app: orderservice
-    template:
-      metadata:
-          labels:
-            app: orderservice
-      spec:
-        containers:
-          - name: orderservice
-            image: vitalii1992/order_service:latest
-            imagePullPolicy: Always
-            ports:
-              - containerPort: 8080
-            env:
-              - name: SERVER_PORT
-                value: 8080
+#---
+#apiVersion: apps/v1
+#kind: ReplicaSet
+#metadata:
+#  name: orderservice
+#  labels:
+#    app: orderservice
+#  spec:
+#    replicas: 3
+#    selector:
+#      matchLabels:
+#        app: orderservice
+#    template:
+#      metadata:
+#          labels:
+#            app: orderservice
+#      spec:
+#        containers:
+#          - name: orderservice
+#            image: vitalii1992/order_service:latest
+#            imagePullPolicy: Always
+#            ports:
+#              - containerPort: 8080
+#            env:
+#              - name: SERVER_PORT
+#                value: 8080
 #                - name: URI
 #                  value: mongodb://

@@ -24,7 +24,7 @@ spec:
               value: '8761'
             - name: CONFIGSERVER_URI
               value: http://configserver:8888
-          imagePullPolicy: Never
+          imagePullPolicy: Always
 
 ---
 apiVersion: v1
@@ -37,6 +37,6 @@ spec:
   selector:
     app: discovery
   ports:
-    - port: 8791
+    - port: 8761
       protocol: TCP
   type: NodePort

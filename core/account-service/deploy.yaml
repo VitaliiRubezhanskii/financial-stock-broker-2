@@ -14,17 +14,17 @@ spec:
     spec:
       containers:
         - name: account
-          image: account #${REPOSITORY_TAG}
+          image: vitalii1992/account-service:latest #${REPOSITORY_TAG}
           ports:
             - containerPort: 8081
           env:
             - name: SPRING_PROFILES_ACTIVE
-              value: deployment
+              value: docker #deployment
             - name: PORT
               value: '8081'
             - name: CONFIGSERVER_URI
               value: http://configserver:8888
-          imagePullPolicy: Never
+          imagePullPolicy: Always
 
 ---
 apiVersion: v1

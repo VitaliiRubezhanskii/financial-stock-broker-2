@@ -22,7 +22,7 @@ spec:
               value: docker
             - name: PORT
               value: '8888'
-          imagePullPolicy: Never
+          imagePullPolicy: Always
 
 ---
 apiVersion: v1
