@@ -57,24 +57,24 @@ spec:
               memory: 200Mi
           ports:
             - containerPort: 27017
-#          volumeMounts:
-#            - name: secrets-volume
-#              readOnly: true
-#              mountPath: /etc/secrets-volume
-#            - name: mongodb-persistent-storage-claim
-#              mountPath: /data/db
-#      volumes:
-#        - name: secrets-volume
-#          secret:
-#            secretName: shared-bootstrap-data
-#            defaultMode: 256
-#  volumeClaimTemplates:
-#    - metadata:
-#        name: mongodb-persistent-storage-claim
-#        annotations:
-#          volume.beta.kubernetes.io/storage-class: "standard"
-#      spec:
-#        accessModes: [ "ReadWriteOnce" ]
-#        resources:
-#          requests:
-#            storage: 1Gi
+          volumeMounts:
+            - name: secrets-volume
+              readOnly: true
+              mountPath: /etc/secrets-volume
+            - name: mongodb-persistent-storage-claim
+              mountPath: /data/db
+      volumes:
+        - name: secrets-volume
+          secret:
+            secretName: shared-bootstrap-data
+            defaultMode: 256
+  volumeClaimTemplates:
+    - metadata:
+        name: mongodb-persistent-storage-claim
+        annotations:
+          volume.beta.kubernetes.io/storage-class: "standard"
+      spec:
+        accessModes: [ "ReadWriteOnce" ]
+        resources:
+          requests:
+            storage: 1Gi
