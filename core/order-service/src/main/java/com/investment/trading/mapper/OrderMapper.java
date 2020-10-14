@@ -12,4 +12,6 @@ import org.mapstruct.NullValuePropertyMappingStrategy;
 public interface OrderMapper {
 
     Order toEntity(OrderCreationDto orderCreationDto);
+
+    OrderCreatedDto toDto(Order order);
 }
