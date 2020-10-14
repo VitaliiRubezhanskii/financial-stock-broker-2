@@ -14,7 +14,7 @@ import static org.springframework.data.mongodb.core.aggregation.Aggregation.matc
 import static org.springframework.data.mongodb.core.aggregation.Aggregation.newAggregation;
 import static org.springframework.data.mongodb.core.query.Criteria.where;
 
-@Profile("!local")
+@Profile({"!deployment", "!local"})
 @Configuration
 @RequiredArgsConstructor
 public class ChangeStreamConfiguration {
