@@ -6,7 +6,7 @@ COPY ./authClientDetails.json /authClientDetails.json
 COPY ./mongoAccessToken.json /mongoAccessToken.json
 COPY ./mongoRefreshToken.json /mongoRefreshToken.json
 ADD ./replicate.js /replicate.js
-#ADD ./setup.sh /setup.sh
-#CMD ["/setup.sh"]
+ADD ./setup.sh /setup.sh
+CMD ["/setup.sh"]
 
 
