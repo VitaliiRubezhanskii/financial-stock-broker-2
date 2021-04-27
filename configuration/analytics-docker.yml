@@ -1,5 +1,6 @@
 server.port: 9998
 spring.application.name: analytics
+spring.cloud.stream.kafka.binder.brokers: broker
 spring.cloud.stream.bindings.output:
     destination: quote-aggregation
 spring.cloud.stream.bindings.input:
@@ -17,7 +18,7 @@ spring.cloud.stream.kafka.streams.bindings.input:
   consumer:
     keySerde: org.apache.kafka.common.serialization.Serdes$StringSerde
     valueSerde: io.confluent.kafka.streams.serdes.avro.SpecificAvroSerde
-spring.cloud.stream.kafka.binder.brokers: broker
+
 
 eureka:
   instance:

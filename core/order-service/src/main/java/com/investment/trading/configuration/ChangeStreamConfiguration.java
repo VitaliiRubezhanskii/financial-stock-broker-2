@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.bson.Document;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.messaging.*;
 
@@ -13,26 +14,25 @@ import static org.springframework.data.mongodb.core.aggregation.Aggregation.matc
 import static org.springframework.data.mongodb.core.aggregation.Aggregation.newAggregation;
 import static org.springframework.data.mongodb.core.query.Criteria.where;
 
+@Profile({"!deployment", "!local"})
 @Configuration
 @RequiredArgsConstructor
 public class ChangeStreamConfiguration {
 
-
-
-    private final Gson gson = new Gson();
-
-    @Bean
-    public Subscription streamOrderRequestToKafkaTopic(MessageListenerContainer container) {
-        return container.register(ChangeStreamRequest
-                .builder(
-                        this::convert
-//                        stream -> sendToKafkaTopic(
-//                                payloadToOrderRequest(gson.fromJson(stream.getRaw().getFullDocument().toJson(), OrderCreatedDto.class)), processor.output())
-                )
-                .collection("order")
-                .filter(newAggregation(match(where("operationType").is("insert"))))
-                .build(), com.investment.trading.model.domain.Order.class);
-    }
+//    private final Gson gson = new Gson();
+//
+//    @Bean
+//    public Subscription streamOrderRequestToKafkaTopic(MessageListenerContainer container) {
+//        return container.register(ChangeStreamRequest
+//                .builder(
+//                        this::convert
+////                        stream -> sendToKafkaTopic(
+////                                payloadToOrderRequest(gson.fromJson(stream.getRaw().getFullDocument().toJson(), OrderCreatedDto.class)), processor.output())
+//                )
+//                .collection("order")
+//                .filter(newAggregation(match(where("operationType").is("insert"))))
+//                .build(), com.investment.trading.model.domain.Order.class);
+//    }
 
 //    @Bean
 //    public Subscription streamOrderToKafkaTopic(MessageListenerContainer container) {
@@ -42,15 +42,15 @@ public class ChangeStreamConfiguration {
 //                .build(), com.investment.trading.kafka.avro.Order.class);
 //    }
 
-    @Bean
-    public MessageListenerContainer messageListenerContainer(MongoTemplate template) {
-        return new DefaultMessageListenerContainer(template) {
-            @Override
-            public boolean isAutoStartup() {
-                return true;
-            }
-        };
-    }
+//    @Bean
+//    public MessageListenerContainer messageListenerContainer(MongoTemplate template) {
+//        return new DefaultMessageListenerContainer(template) {
+//            @Override
+//            public boolean isAutoStartup() {
+//                return true;
+//            }
+//        };
+//    }
 
 
 

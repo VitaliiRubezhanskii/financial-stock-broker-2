@@ -7,3 +7,11 @@ server:
   servlet:
     context-path: /uaa
 
+eureka:
+  client:
+    service-url:
+      defaultZone: http://discovery:8761/eureka/
+    healthcheck:
+      enabled: true
+    register-with-eureka: true
+    fetch-registry: true

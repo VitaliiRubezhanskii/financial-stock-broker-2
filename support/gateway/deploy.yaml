@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: gateway
-          image: gateway #${REPOSITORY_TAG}
+          image: vitalii1992/api-gateway-service:latest #${REPOSITORY_TAG}
           ports:
             - containerPort: 5000
           env:
@@ -24,7 +24,7 @@ spec:
               value: '5000'
             - name: CONFIGSERVER_URI
               value: http://configserver:8888
-          imagePullPolicy: Never
+          imagePullPolicy: Always
 
 ---
 apiVersion: v1

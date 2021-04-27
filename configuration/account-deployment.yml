@@ -1,7 +1,8 @@
 spring:
   data:
     mongodb:
-      uri: mongodb://mongodb/account
+      uri: mongodb://fleetman-mongodb:27017/account
+#      mongodb://mongod-2.mongodb-service.default.svc.cluster.local:27017,mongod-2.mongodb-service.default.svc.cluster.local:27017,mongod-2.mongodb-service.default.svc.cluster.local:27017/account?replicaSet=MainRepSet
 
 security:
   oauth2:
@@ -15,3 +16,15 @@ security:
     resource:
       user-info-uri: http://auth:8084/uaa/user/current
       token-info-uri: http://auth:8084/uaa/oauth/check_token
+eureka:
+  client:
+    service-url:
+      defaultZone: http://discovery:8761/eureka/
+    healthcheck:
+      enabled: true
+    register-with-eureka: true
+    fetch-registry: true
+
+microservice:
+  client:
+    url: http://localhost:8099

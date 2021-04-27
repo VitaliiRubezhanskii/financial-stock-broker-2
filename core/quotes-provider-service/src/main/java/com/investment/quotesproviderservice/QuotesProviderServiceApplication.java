@@ -1,6 +1,8 @@
 package com.investment.quotesproviderservice;
 
 import avro.Quote;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -16,6 +18,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.reactive.function.client.WebClient;
 
+import java.io.IOException;
+import java.util.Collections;
+import java.util.List;
 import java.util.Random;
 
 @SpringBootApplication
@@ -31,20 +36,28 @@ public class QuotesProviderServiceApplication {
         SpringApplication.run(QuotesProviderServiceApplication.class, args);
     }
 
-    @Bean
-    public WebClient client() {
-        return WebClient.create("http://localhost:9010");
-    }
+//    @Bean
+//    public WebClient client() {
+//        return WebClient.create("http://localhost:9010");
+//    }
 
     @Bean
-    public CommandLineRunner demo(WebClient client) {
+    public CommandLineRunner demo() {
         return args -> {
-            client.get()
-                    .uri("/events")
-                    .accept(MediaType.TEXT_EVENT_STREAM)
-                    .exchange()
-                    .flatMapMany(cr -> cr.bodyToFlux(Quote.class))
-                    .subscribe(quote -> source.output().send(MessageBuilder.withPayload(quote).build()));
+            ObjectMapper mapper = new ObjectMapper();
+//            List v = Collections.emptyList();
+//            try{
+//                v =   mapper.readValue(QuotesProviderServiceApplication.class.getResourceAsStream("/data.json"), List.class);
+//            }catch (IOException ex){
+//                ex.printStackTrace();
+//            }
+//            client.get()
+//                    .uri("/events")
+//                    .accept(MediaType.TEXT_EVENT_STREAM)
+//                    .exchange()
+//                    .flatMapMany(cr -> cr.bodyToFlux(Quote.class))
+//                    .subscribe(quote ->
+//                            source.output().send(MessageBuilder.withPayload(v).build());
         };
     }
 

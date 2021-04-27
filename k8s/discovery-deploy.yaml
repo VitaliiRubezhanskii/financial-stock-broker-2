@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: discovery
+spec:
+  selector:
+    matchLabels:
+      app: discovery
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: discovery
+    spec:
+      containers:
+        - name: discovery
+          image: vitalii1992/discovery:latest #${REPOSITORY_TAG}
+          ports:
+            - containerPort: 8761
+          env:
+            - name: SPRING_PROFILES_ACTIVE
+              value: docker
+            - name: PORT
+              value: '8761'
+            - name: CONFIGSERVER_URI
+              value: http://configserver:8888
+          imagePullPolicy: Always
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: discovery
+
+spec:
+
+  selector:
+    app: discovery
+  ports:
+    - port: 8761
+      protocol: TCP
+  type: NodePort

@@ -7,6 +7,7 @@ import io.confluent.kafka.streams.serdes.avro.SpecificAvroSerializer;
 
 import java.util.Collections;
 import java.util.Map;
+import org.springframework.context.annotation.Profile;
 
 public class QuoteSerde extends SpecificAvroSerializer<Quote> {
 

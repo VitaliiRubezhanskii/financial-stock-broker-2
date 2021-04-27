@@ -12,6 +12,7 @@ import org.apache.kafka.streams.state.KeyValueStore;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.cloud.stream.annotation.EnableBinding;
 import org.springframework.cloud.stream.annotation.StreamListener;
 import org.springframework.cloud.stream.binder.kafka.streams.annotations.KafkaStreamsProcessor;
@@ -22,7 +23,8 @@ import java.util.Map;
 
 
 @SpringBootApplication
-@EnableDiscoveryClient
+//@EnableDiscoveryClient
+@EnableEurekaClient
 @EnableBinding(KafkaStreamsProcessor.class)
 public class AnalyticsServiceApplication {
 
@@ -37,7 +39,7 @@ public class AnalyticsServiceApplication {
     public KStream<String, String> process(KStream<Object, Quote> input) {
 
         final Map<String, String> serdeConfig = Collections.singletonMap(
-                AbstractKafkaAvroSerDeConfig.SCHEMA_REGISTRY_URL_CONFIG, "http://schema-registry:8081");
+                AbstractKafkaAvroSerDeConfig.SCHEMA_REGISTRY_URL_CONFIG, "http://localhost:8081");
 
         final SpecificAvroSerde<Quote> sensorSerde = new SpecificAvroSerde<>();
         sensorSerde.configure(serdeConfig, false);

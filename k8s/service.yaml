@@ -3,7 +3,7 @@ kind: Service
 metadata:
  name: mongodb
  labels:
- name: mongodb
+  name: mongodb
 spec:
  ports:
  - port: 27017
@@ -12,15 +12,15 @@ spec:
  selector:
    role: mongodb
 ---
-kind: Service
-apiVersion: v1
-metadata:
-  name: orderservice
-spec:
-  selector:
-    app: orderservice
-  ports:
-    - port: 8080
-      targetPort: 8080
-  type: ClusterIP
+#kind: Service
+#apiVersion: v1
+#metadata:
+#  name: orderservice
+#spec:
+#  selector:
+#    app: orderservice
+#  ports:
+#    - port: 8080
+#      targetPort: 8080
+#  type: ClusterIP
 

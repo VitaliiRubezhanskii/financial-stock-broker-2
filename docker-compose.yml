@@ -110,6 +110,8 @@ services:
         - 8888
        ports:
         - 8888:8888
+       environment:
+         SPRING_PROFILES_ACTIVE: docker
        healthcheck:
          test: ["CMD", "curl", "-f", "http://localhost:8888"]
          interval: 30s
@@ -188,10 +190,8 @@ services:
      container_name: auth
      expose:
        - 8084
-
      ports:
        - 8084:8084
-
      healthcheck:
        test: ["CMD", "curl", "-f", "http://localhost:8084"]
        interval: 30s
@@ -260,6 +260,7 @@ services:
        - 8091:8091
       environment:
         PORT: 8091
+        HOST_NAME: account
         SPRING_PROFILES_ACTIVE: docker
         CONFIGSERVER_URI: http://configserver:8888
       healthcheck:
@@ -272,7 +273,9 @@ services:
         context: ./core/account-service
         dockerfile: Dockerfile
       depends_on:
-         - mongo-replicator
+         - mongo1
+         - mongo2
+         - mongo3
          - configserver
          - discovery
          - broker

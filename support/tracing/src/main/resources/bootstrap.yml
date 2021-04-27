@@ -1,17 +1,14 @@
 server:
-  port: 9411
+  port: ${PORT}
 
 spring:
   application:
     name: tracing
   cloud:
     config:
-      uri: http://configserver:8888
-
+      uri: ${CONFIGSERVER_URI}}
 
 eureka:
-  instance:
-    prefer-ip-address: true
   client:
     register-with-eureka: true
     fetch-registry: true
