@@ -1,0 +1,99 @@
+version: '3.2'
+
+services:
+    elasticsearch:
+        build:
+            context: ./
+            args:
+                ELK_VERSION: 7.6.2
+        volumes:
+            - type: bind
+              source: ./elasticsearch.yml
+              target: /usr/share/elasticsearch/config/elasticsearch.yml
+              read_only: true
+            - type: volume
+              source: ./elasticsearch
+              target: /usr/share/elasticsearch/data
+        ports:
+            - "9200:9200"
+            - "9300:9300"
+        environment:
+            ES_JAVA_OPTS: "-Xmx256m -Xms256m"
+            ELASTIC_PASSWORD: changeme
+            discovery.type: single-node
+        networks:
+            - elk
+    logstash:
+        image: logstash:7.6.1
+        links:
+            - elasticsearch
+        volumes:
+            - /home/vitalii/Documents/logstash:/usr/share/logstash/pipeline
+        command: logstash -f /usr/share/logstash/pipeline/logstash.conf
+        depends_on:
+            - elasticsearch
+        networks:
+            - elk
+    kibana:
+         image: kibana:6.5.2
+         environment:
+            LOGGING_QUIET: "true"
+            ELASTICSEARCH_HOSTS: http://elasticsearch:9200
+            ES_JAVA_OPTS: -Xms256m -Xmx256m
+         links:
+           - elasticsearch
+         ports:
+           - 5601:5601
+         networks:
+           - elk
+    broker:
+       image: confluentinc/cp-enterprise-kafka:latest
+       hostname: broker
+       container_name: broker
+       depends_on:
+         - zookeeper
+       ports:
+         - "9092:9092"
+         - "29092:29092"
+       environment:
+         KAFKA_BROKER_ID: 1
+         KAFKA_ZOOKEEPER_CONNECT: 'zookeeper:2181'
+         KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+         KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+         KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://broker:9092,PLAINTEXT_HOST://broker:29092
+         KAFKA_METRIC_REPORTERS: io.confluent.metrics.reporter.ConfluentMetricsReporter
+         KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+         KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
+         CONFLUENT_METRICS_REPORTER_BOOTSTRAP_SERVERS: localhost:9092
+         CONFLUENT_METRICS_REPORTER_ZOOKEEPER_CONNECT: zookeeper:2181
+         CONFLUENT_METRICS_REPORTER_TOPIC_REPLICAS: 1
+         CONFLUENT_METRICS_ENABLE: 'true'
+         CONFLUENT_SUPPORT_CUSTOMER_ID: 'anonymous'
+         KAFKA_AUTO_CREATE_TOPICS_ENABLE: "true"
+         KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
+         KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
+         KAFKA_LOG4J_LOGGERS: "kafka.controller=INFO,kafka.producer.async.DefaultEventHandler=INFO,state.change.logger=INFO"
+       volumes:
+           - ./elasticsearch/kafka:/var/lib/kafka/data
+       networks:
+           - elk
+    zookeeper:
+       image: confluentinc/cp-zookeeper:latest
+       hostname: zookeeper
+       container_name: zookeeper
+       ports:
+         - "2181:2181"
+       environment:
+         ZOOKEEPER_CLIENT_PORT: 2181
+         ZOOKEEPER_TICK_TIME: 2000
+#       volumes:
+#           - ./zookeeper/data:/data
+#           - ./zookeeper/datalog:/datalog
+       networks:
+           - elk
+
+networks:
+    elk:
+        driver: bridge
+volumes:
+    elasticsearch:
