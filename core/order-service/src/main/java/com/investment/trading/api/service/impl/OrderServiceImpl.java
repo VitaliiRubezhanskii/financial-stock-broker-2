@@ -1,13 +1,13 @@
 package com.investment.trading.api.service.impl;
 
-import com.investment.trading.api.repository.OrderRepository;
+import com.investment.trading.api.service.OrderRepository;
 import com.investment.trading.api.service.OrderService;
 import com.investment.trading.mapper.OrderMapper;
 import com.investment.trading.model.domain.Order;
 import com.investment.trading.model.dto.OrderCreatedDto;
 import com.investment.trading.model.dto.OrderCreationDto;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,13 +15,17 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
-@RequiredArgsConstructor
 @Slf4j
 public class OrderServiceImpl implements OrderService {
 
-    private final OrderRepository orderRepository;
+    private OrderRepository orderRepository;
+    private OrderMapper orderMapper;
 
-    private final OrderMapper orderMapper;
+    @Autowired
+    public OrderServiceImpl(OrderRepository orderRepository, OrderMapper orderMapper) {
+        this.orderRepository = orderRepository;
+        this.orderMapper = orderMapper;
+    }
 
     @Override
     public OrderCreatedDto newOrder(OrderCreationDto orderCreationDto) {

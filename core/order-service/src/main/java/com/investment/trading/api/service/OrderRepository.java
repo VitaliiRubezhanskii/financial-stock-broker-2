@@ -1,4 +1,4 @@
-package com.investment.trading.api.repository;
+package com.investment.trading.api.service;
 
 import com.investment.trading.model.domain.Order;
 import org.springframework.data.mongodb.repository.MongoRepository;

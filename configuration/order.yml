@@ -1,7 +1,7 @@
 spring:
   data:
     mongodb:
-      uri: mongodb://root:root@localhost:27017/order
+      uri: mongodb://root:root@localhost:27018,localhost:27019,localhost:27020/order
   zipkin:
     enabled: true
     baseUrl: http://localhost:9411
