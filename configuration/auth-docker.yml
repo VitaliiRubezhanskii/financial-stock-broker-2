@@ -1,7 +1,8 @@
 spring:
   data:
     mongodb:
-      uri: mongodb://mongo1:27017,mongo2:27017,mongo3:27017/auth?replicaSet=rs0
+      uri: mongodb://root:root@localhost:27018,localhost:27019,localhost:27020/auth
+      #uri: mongodb://mongo1:27017,mongo2:27017,mongo3:27017/auth?replicaSet=rs0
 
 server:
   servlet:
