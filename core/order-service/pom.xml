@@ -17,7 +17,7 @@
     <description>Ordering application</description>
 
     <properties>
-        <java.version>8</java.version>
+        <java.version>1.8</java.version>
         <confluent.version>4.0.0</confluent.version>
         <project.lombok.version>1.18.0</project.lombok.version>
         <apache.maven.compiler.plugin.version>3.8.0</apache.maven.compiler.plugin.version>
@@ -272,8 +272,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>${apache.maven.compiler.plugin.version}</version>
                 <configuration>
-                    <source>12</source>
-                    <target>12</target>
+                    <source>1.8</source>
+                    <target>1.8</target>
                     <annotationProcessorPaths>
                         <path>
                             <groupId>org.projectlombok</groupId>
