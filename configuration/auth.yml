@@ -1,8 +1,7 @@
 spring:
   data:
     mongodb:
-      uri: mongodb://root:root@mongo1:27017,mongo2:27017,mongo3:27017/auth?replicaSet=rs0&&authSource=admin
-      authentication-database: admin
+      uri: mongodb://user:user@mongo1:27017,mongo2:27017,mongo3:27017/auth?replicaSet=rs0&&authSource=admin
 #      host: localhost
 #      port: 27019
 #      username: root
