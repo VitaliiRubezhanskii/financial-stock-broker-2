@@ -1,7 +1,7 @@
 spring:
   data:
     mongodb:
-     uri: mongodb://user:user@financial-stock-brocker_mongo3_1,financial-stock-brocker_mongo2_1,financial-stock-brocker_mongo1_1/auth
+     uri: mongodb://root:root@financial-stock-brocker_mongo3_1,financial-stock-brocker_mongo2_1,financial-stock-brocker_mongo1_1/auth
       #host: localhost
       #port: 27017
       #username: root
