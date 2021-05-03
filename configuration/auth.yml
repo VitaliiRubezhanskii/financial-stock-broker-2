@@ -1,11 +1,12 @@
 spring:
   data:
     mongodb:
-      host: localhost
-      port: 27017
-      username: root
-      password: root
-      database: auth
+      uri: mongodb://root:root@localhost:27020
+#      host: localhost
+#      port: 27020
+#      username: root
+#      password: root
+#      database: auth
 
 server:
   servlet:
