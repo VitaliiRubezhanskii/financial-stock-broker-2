@@ -1,7 +1,7 @@
 spring:
   data:
     mongodb:
-     uri: mongodb://mongo1,mongo2,mongo3/auth?replicaSet=rs0
+     uri: mongodb://mongo1:27018,mongo2:27019,mongo3:27020/auth?replicaSet=rs0
       #host: localhost
       #port: 27017
       #username: root
