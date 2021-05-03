@@ -7,7 +7,7 @@ spring.cloud.stream.bindings.input:
   consumer:
     useNativeDecoding: true
 spring.cloud.stream.kafka.streams.binder:
-  brokers: 172.27.0.1
+  brokers: broker
   configuration:
     schema.registry.url: http://schema-registry:8081
     commit.interval.ms: 1000
