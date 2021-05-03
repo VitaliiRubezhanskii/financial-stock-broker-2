@@ -3,7 +3,7 @@ spring:
     mongodb:
 #      uri: mongodb://root:root@mongo1:27018,mongo2:27019,mongo3:27020/order?replicaSet=rs0
       host: localhost
-      port: 27019
+      port: 27017
       username: root
       password: root
       database: order
