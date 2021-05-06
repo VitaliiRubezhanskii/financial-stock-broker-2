@@ -7,7 +7,7 @@ spring.cloud.stream.bindings.input:
   consumer:
     useNativeDecoding: true
 spring.cloud.stream.kafka.streams.binder:
-  brokers: localhost
+  brokers: broker
   #configuration:
     #schema.registry.url: http://schema-registry:8081
     #commit.interval.ms: 1000
@@ -19,7 +19,7 @@ spring.cloud.stream.kafka.streams.bindings.input:
     keySerde: org.apache.kafka.common.serialization.Serdes$StringSerde
     valueSerde: org.apache.kafka.common.serialization.Serdes$StringSerde
     #io.confluent.kafka.streams.serdes.avro.SpecificAvroSerde
-spring.cloud.stream.kafka.binder.brokers: localhost
+spring.cloud.stream.kafka.binder.brokers: broker
 
 eureka:
   instance:
