@@ -1,12 +1,3 @@
-spring:
-  data:
-    mongodb:
-      #uri: mongodb://mongo1:27017,mongo2:27017,mongo3:27017/feign?replicaSet=rs0
-       host: localhost
-       port: 27017
-       username: root
-       password: rootpassword
-       database: feign
 feign:
   hystrix:
     enabled: true
