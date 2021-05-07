@@ -38,14 +38,13 @@ public class QuotesProviderServiceApplication {
 
     @Bean
     public CommandLineRunner demo(WebClient client) {
-        return args -> {
-            client.get()
+        return args -> client.get()
                     .uri("/events")
                     .accept(MediaType.TEXT_EVENT_STREAM)
                     .exchange()
                     .flatMapMany(cr -> cr.bodyToFlux(Quote.class))
                     .subscribe(quote -> source.output().send(MessageBuilder.withPayload(quote).build()));
-        };
+
     }
 
 

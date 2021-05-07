@@ -36,8 +36,9 @@ public class QuotesProviderServer {
 //        List<Quote> quotes = v.stream().map(e->gson.fromJson(e.toString(), LinkedHashMap.class));
         Flux<Quote> eventFlux = Flux.fromStream(v.stream().map(e->gson.fromJson(gson.toJson(e), LinkedHashMap.class)));
 
-        Flux<Long> durationFlux = Flux.interval(Duration.ofSeconds(1));
-        return Flux.zip(eventFlux, durationFlux).map(Tuple2::getT1);
+//        Flux<Long> durationFlux = Flux.interval(Duration.ofSeconds(1));
+//        return Flux.zip(eventFlux, durationFlux).map(Tuple2::getT1);
+        return Flux.fromIterable(v);
 
     }
 

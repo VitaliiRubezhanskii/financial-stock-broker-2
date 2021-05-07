@@ -13,7 +13,7 @@ public class QuoteSerde extends SpecificAvroSerializer<Quote> {
     @Override
     public void configure(Map<String, ?> serializerConfig, boolean isSerializerForRecordKeys) {
         final Map<String, String> serdeConfig = Collections.singletonMap(
-                AbstractKafkaAvroSerDeConfig.SCHEMA_REGISTRY_URL_CONFIG, "http://schema-registry:8081");
+                AbstractKafkaAvroSerDeConfig.SCHEMA_REGISTRY_URL_CONFIG, "http://localhost:8081");
         super.configure(serdeConfig, isSerializerForRecordKeys);
     }
 

@@ -37,12 +37,12 @@ public class AnalyticsServiceApplication {
     public KStream<String, String> process(KStream<Object, Quote> input) {
 
         final Map<String, String> serdeConfig = Collections.singletonMap(
-                AbstractKafkaAvroSerDeConfig.SCHEMA_REGISTRY_URL_CONFIG, "http://schema-registry:8081");
+                AbstractKafkaAvroSerDeConfig.SCHEMA_REGISTRY_URL_CONFIG, "http://localhost:8081");
 
         final SpecificAvroSerde<Quote> sensorSerde = new SpecificAvroSerde<>();
         sensorSerde.configure(serdeConfig, false);
 
-        return input
+        return input.peek((k,v)-> System.out.println("KEY = " + k + " VALUE = " + v))
                 .map((k, value) -> {
                     String newKey = "v1";
                     if (value.getId().toString().endsWith("v2")) {

@@ -1,9 +1,9 @@
 server:
-  port: 8888
+  port: ${PORT}
 
 spring:
   application:
     name: configserver
   profiles:
-    active: default
+    active: ${SPRING_PROFILES_ACTIVE}
 

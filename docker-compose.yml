@@ -95,8 +95,8 @@ services:
 
    mongo-replicator:
       build:
-        context: ./
-        dockerfile: ./mongodb/Dockerfile
+        context: ./mongodb
+        dockerfile: Dockerfile
       networks:
         - my-mongo-cluster
       depends_on:
@@ -426,11 +426,11 @@ services:
          KAFKA_ZOOKEEPER_CONNECT: 'zookeeper:2181'
          KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
          KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
-         KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://broker:9092,PLAINTEXT_HOST://broker:29092
+         KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://172.18.0.1:9092,PLAINTEXT_HOST://172.18.0.1:29092
          KAFKA_METRIC_REPORTERS: io.confluent.metrics.reporter.ConfluentMetricsReporter
          KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
          KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
-         CONFLUENT_METRICS_REPORTER_BOOTSTRAP_SERVERS: broker:9092
+         CONFLUENT_METRICS_REPORTER_BOOTSTRAP_SERVERS: localhost:9092
          CONFLUENT_METRICS_REPORTER_ZOOKEEPER_CONNECT: zookeeper:2181
          CONFLUENT_METRICS_REPORTER_TOPIC_REPLICAS: 1
          CONFLUENT_METRICS_ENABLE: 'true'
@@ -447,7 +447,6 @@ services:
 
    schema-registry:
        image: confluentinc/cp-schema-registry:latest
-       hostname: schema-registry
        container_name: schema-registry
        depends_on:
          - zookeeper
@@ -455,10 +454,12 @@ services:
        ports:
          - "8081:8081"
        environment:
-         SCHEMA_REGISTRY_KAFKASTORE_BOOTSTRAP_SERVERS: PLAINTEXT://broker:29092
+         SCHEMA_REGISTRY_KAFKASTORE_BOOTSTRAP_SERVERS: PLAINTEXT://172.18.0.1:9092
          SCHEMA_REGISTRY_HOST_NAME: schema-registry
          SCHEMA_REGISTRY_LISTENERS: http://0.0.0.0:8081
          SCHEMA_REGISTRY_KAFKASTORE_CONNECTION_URL: 'zookeeper:2181'
+         SCHEMA_REGISTRY_DEBUG: 'true'
+
        networks:
          - my-mongo-cluster
 
@@ -518,7 +519,6 @@ services:
        hostname: cassandra
        restart: always
        container_name: cassandra
-       hostname: cassandra
        networks:
          - my-mongo-cluster
 
