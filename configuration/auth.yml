@@ -5,7 +5,8 @@ spring:
        port: 27017
        username: root
        password: rootpassword
-       database: admin
+       database: auth
+       authentication-database: admin
 server:
   servlet:
     context-path: /uaa
