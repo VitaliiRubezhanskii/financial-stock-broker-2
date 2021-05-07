@@ -17,7 +17,7 @@ spring.cloud.stream.kafka.streams.bindings.input:
   consumer:
     keySerde: org.apache.kafka.common.serialization.Serdes$StringSerde
     valueSerde: io.confluent.kafka.streams.serdes.avro.SpecificAvroSerde
-spring.cloud.stream.kafka.binder.brokers: 172.18.0.1
+spring.cloud.stream.kafka.binder.brokers: 172.18.0.1, 127.0.0.1
 
 eureka:
   instance:
