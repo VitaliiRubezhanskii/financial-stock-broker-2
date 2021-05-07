@@ -2,7 +2,7 @@ spring:
   cloud:
     stream:
       bindings:
-        output:
+        intput:
           producer:
             useNativeEncoding: true
           destination: quote
