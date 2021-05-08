@@ -1,7 +1,7 @@
 spring:
   data:
     mongodb:
-      hostname: mongodb.default.svc.cluster.local
+      host: mongodb.default.svc.cluster.local
       port: 27017
       database: account
 #      uri: mongodb://mongod-2.mongodb-service.default.svc.cluster.local:27017,mongod-2.mongodb-service.default.svc.cluster.local:27017,mongod-2.mongodb-service.default.svc.cluster.local:27017/account?replicaSet=MainRepSet
