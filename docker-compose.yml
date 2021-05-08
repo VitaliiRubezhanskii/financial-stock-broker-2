@@ -56,6 +56,16 @@ services:
 #       networks:
 #         - my-mongo-cluster
 
+   mongodb_container:
+     image: mongo:latest
+     environment:
+       MONGO_INITDB_ROOT_USERNAME: root
+       MONGO_INITDB_ROOT_PASSWORD: rootpassword
+     ports:
+       - 27017:27017
+     networks:
+      - my-mongo-cluster
+
 
    mongo1:
       image: mongo:4.1.13-bionic
@@ -110,6 +120,10 @@ services:
         - 8888
        ports:
         - 8888:8888
+       environment:
+         SPRING_PROFILES_ACTIVE: docker
+         PORT: 8888
+         DISCOVERY: http://discovery/eureka
        healthcheck:
          test: ["CMD", "curl", "-f", "http://localhost:8888"]
          interval: 30s
@@ -135,6 +149,9 @@ services:
        - 8761
       ports:
        - 8761:8761
+      environment:
+        CONFIGSERVER_URI: http://configserver:8888
+        PORT: 8761
       healthcheck:
         test: ["CMD", "curl", "-f", "http://localhost:8761/eureka/"]
         interval: 30s
@@ -426,7 +443,7 @@ services:
          KAFKA_ZOOKEEPER_CONNECT: 'zookeeper:2181'
          KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
          KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
-         KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://172.18.0.1:9092,PLAINTEXT_HOST://172.18.0.1:29092
+         KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://broker:9092,PLAINTEXT_HOST://broker:29092
          KAFKA_METRIC_REPORTERS: io.confluent.metrics.reporter.ConfluentMetricsReporter
          KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
          KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
@@ -454,7 +471,7 @@ services:
        ports:
          - "8081:8081"
        environment:
-         SCHEMA_REGISTRY_KAFKASTORE_BOOTSTRAP_SERVERS: PLAINTEXT://172.18.0.1:9092
+         SCHEMA_REGISTRY_KAFKASTORE_BOOTSTRAP_SERVERS: PLAINTEXT://broker:9092
          SCHEMA_REGISTRY_HOST_NAME: schema-registry
          SCHEMA_REGISTRY_LISTENERS: http://0.0.0.0:8081
          SCHEMA_REGISTRY_KAFKASTORE_CONNECTION_URL: 'zookeeper:2181'

@@ -1,23 +1,23 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: monitoring
+  name: discovery
 spec:
   selector:
     matchLabels:
-      app: monitoring
+      app: discovery
   replicas: 1
   template:
     metadata:
       labels:
-        app: monitoring
+        app: discovery
     spec:
       containers:
-        - name: monitoring
-          image: discovery #${REPOSITORY_TAG}
+        - name: discovery
+          image: vitalii1992/discovery:latest #${REPOSITORY_TAG}
           ports:
             - containerPort: 8761
-          imagePullPolicy: Never
+          imagePullPolicy: Always
 
 #          readinessProbe:
 #            httpGet:
@@ -27,11 +27,11 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: monitoring
+  name: discovery
 
 spec:
   selector:
-    app: monitoring
+    app: discovery
   ports:
     - port: 8761
       protocol: TCP

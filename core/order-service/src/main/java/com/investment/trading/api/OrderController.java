@@ -14,10 +14,13 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "/order")
-@RequiredArgsConstructor
 public class OrderController {
 
     private final OrderService orderService;
+
+    public OrderController(OrderService orderService) {
+        this.orderService = orderService;
+    }
 
     @PostMapping
     public ResponseEntity<OrderCreatedDto> create(@RequestBody OrderCreationDto orderCreationDto) {
