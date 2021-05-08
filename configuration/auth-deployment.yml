@@ -1,7 +1,7 @@
 spring:
   data:
     mongodb:
-      hostname: mongodb.default.svc.cluster.local
+      host: mongodb.default.svc.cluster.local
       port: 27017
       database: auth
 
