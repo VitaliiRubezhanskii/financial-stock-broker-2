@@ -5,7 +5,7 @@ sleuth:
 eureka:
   client:
     service-url:
-      defaultZone: http://monitoring:8761/eureka/
+      defaultZone: http://discovery:8761/eureka/
     healthcheck:
       enabled: true
     register-with-eureka: true
