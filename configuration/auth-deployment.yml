@@ -1,7 +1,9 @@
 spring:
   data:
     mongodb:
-      uri: mongodb://mongodb/auth
+      hostname: mongodb.default.svc.cluster.local
+      port: 27017
+      database: auth
 
 server:
   servlet:
