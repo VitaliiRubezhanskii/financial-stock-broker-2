@@ -1,6 +1,6 @@
 spring:
   application:
-    name: monitoring
+    name: discovery
   cloud:
     config:
       uri: ${CONFIGSERVER_URI}
