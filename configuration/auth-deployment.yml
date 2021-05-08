@@ -3,7 +3,10 @@ spring:
     mongodb:
       host: mongodb.default.svc.cluster.local
       port: 27017
+      username: admin
+      password: password
       database: auth
+      authentication-database: admin
 
 server:
   servlet:
