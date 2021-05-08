@@ -1,11 +1,16 @@
 spring:
   data:
     mongodb:
-      uri: mongodb://fleetman-mongodb:27017/order
+      host: mongodb-service.default.svc.cluster.local
+      port: 27017
+      user: username
+      password: password
+      database: order
+      authentication-database: admin
 #      mongodb://mongod-2.mongodb-service.default.svc.cluster.local:27017,mongod-2.mongodb-service.default.svc.cluster.local:27017,mongod-2.mongodb-service.default.svc.cluster.local:27017/order?replicaSet=MainRepSet
   zipkin:
     enabled: true
-    baseUrl: http://tracing:9411
+    baseUrl: http://tracing.default.svc.cluster.local:9411
     sleuth:
       sampler:
         probability: 100
@@ -14,19 +19,19 @@ security.oauth2:
     client:
       clientId: order
       clientSecret: 1234
-      accessTokenUri: http://auth:8084/uaa/oauth/token
+      accessTokenUri: http://auth.default.svc.cluster.local:8084/uaa/oauth/token
       grant-type: client_credentials
       scope: server
 
 
     resource:
-      user-info-uri: http://auth:8084/uaa/user/current
-      token-info-uri: http://auth:8084/uaa/oauth/check_token
+      user-info-uri: http://auth.default.svc.cluster.local:8084/uaa/user/current
+      token-info-uri: http://auth.default.svc.cluster.local:8084/uaa/oauth/check_token
 
 eureka:
   client:
     service-url:
-      defaultZone: http://discovery:8761/eureka/
+      defaultZone: http://discovery.default.svc.cluster.local:8761/eureka/
     healthcheck:
       enabled: true
     register-with-eureka: true
