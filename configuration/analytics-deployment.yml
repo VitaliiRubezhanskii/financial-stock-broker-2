@@ -5,7 +5,7 @@ spring.zipkin.baseUrl: http://tracing.default.svc.cluster.local:9411
 spring.cloud.stream.bindings.output:
   destination: quote-aggregation
 spring.cloud.stream.bindings.input:
-  destination: quote
+  destination: quoteA
   consumer:
     useNativeDecoding: true
 spring.cloud.stream.kafka.streams.binder:
