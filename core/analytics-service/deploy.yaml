@@ -1,27 +1,27 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: order
+  name: analytics
 spec:
   selector:
     matchLabels:
-      app: order
+      app: analytics
   replicas: 1
   template:
     metadata:
       labels:
-        app: order
+        app: analytics
     spec:
       containers:
-        - name: order
+        - name: analytics
           image: vitalii1992/analytics-service:latest #${REPOSITORY_TAG}
           ports:
-            - containerPort: 8092
+            - containerPort: 8093
           env:
             - name: SPRING_PROFILES_ACTIVE
               value: deployment
             - name: PORT
-              value: '8092'
+              value: '8093'
             - name: CONFIGSERVER_URI
               value: http://configserver.default.svc.cluster.local:8888
           imagePullPolicy: Always
@@ -30,12 +30,12 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: order
+  name: analytics
 
 spec:
   ports:
     - port: 8092
       protocol: TCP
   selector:
-    app: order
+    app: analytics
   type: LoadBalancer

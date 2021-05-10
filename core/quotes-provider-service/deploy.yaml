@@ -1,27 +1,27 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: order
+  name: quote-provider-service
 spec:
   selector:
     matchLabels:
-      app: order
+      app: quote-provider-service
   replicas: 1
   template:
     metadata:
       labels:
-        app: order
+        app: quote-provider-service
     spec:
       containers:
-        - name: order
-          image: vitalii1992/analytics-service:latest #${REPOSITORY_TAG}
+        - name: quote-provider-service
+          image: vitalii1992/quote-provider-service:latest #${REPOSITORY_TAG}
           ports:
-            - containerPort: 8092
+            - containerPort: 8094
           env:
             - name: SPRING_PROFILES_ACTIVE
               value: deployment
             - name: PORT
-              value: '8092'
+              value: '8094'
             - name: CONFIGSERVER_URI
               value: http://configserver.default.svc.cluster.local:8888
           imagePullPolicy: Always
@@ -30,12 +30,12 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: order
+  name: quote-provider-service
 
 spec:
   ports:
-    - port: 8092
+    - port: 8094
       protocol: TCP
   selector:
-    app: order
+    app: quote-provider-service
   type: LoadBalancer
