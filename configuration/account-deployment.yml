@@ -8,7 +8,9 @@ spring:
       database: auth
       authentication-database: admin
 #      uri: mongodb://mongod-2.mongodb-service.default.svc.cluster.local:27017,mongod-2.mongodb-service.default.svc.cluster.local:27017,mongod-2.mongodb-service.default.svc.cluster.local:27017/account?replicaSet=MainRepSet
-
+  zipkin:
+    enabled: true
+    baseUrl: http://tracing.default.svc.cluster.local:9411
 security:
   oauth2:
     client:
