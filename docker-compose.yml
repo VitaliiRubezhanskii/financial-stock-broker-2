@@ -63,6 +63,9 @@ services:
        MONGO_INITDB_ROOT_PASSWORD: rootpassword
      ports:
        - 27017:27017
+     volumes:
+       - /etc/localtime:/etc/localtime:ro
+       - /mongo_standalone/data1:/data/db
      networks:
       - my-mongo-cluster
 

@@ -1,0 +1,18 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: order-microservice-ingress
+  annotations:
+    ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules:
+    - http:
+        paths:
+          - path: /order/
+            backend:
+              serviceName: order
+              servicePort: 8092
+          -  path: /
+             backend:
+              serviceName: mongodb-service
+              servicePort: 27017
