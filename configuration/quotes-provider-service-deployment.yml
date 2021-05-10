@@ -10,7 +10,7 @@ spring:
         output:
           producer:
             useNativeEncoding: true
-          destination: quote
+          destination: quoteQ
       kafka:
         binder:
           autoAddPartitions: true
