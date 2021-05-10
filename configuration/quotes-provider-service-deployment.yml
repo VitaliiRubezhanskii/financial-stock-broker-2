@@ -10,7 +10,7 @@ spring:
           destination: quote
       kafka:
         binder:
-          brokers: broker
+          brokers: kafka-broker.default.svc.cluster.local
           configuration:
             schema.registry.url: http://schema-registry.default.svc.cluster.local:8081
             key.serializer: org.apache.kafka.common.serialization.ByteArraySerializer
