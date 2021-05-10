@@ -19,7 +19,10 @@ spring.cloud.stream.kafka.streams.bindings.input:
   consumer:
     keySerde: org.apache.kafka.common.serialization.Serdes$StringSerde
     valueSerde: io.confluent.kafka.streams.serdes.avro.SpecificAvroSerde
-spring.cloud.stream.kafka.binder.brokers: kafka-broker.default.svc.cluster.local
+spring.cloud.stream.kafka.binder:
+  autoAddPartitions: true
+  minPartitionsCount: 2
+  brokers: kafka-broker.default.svc.cluster.local
 eureka:
   instance:
     leaseRenewalIntervalInSeconds: 1
