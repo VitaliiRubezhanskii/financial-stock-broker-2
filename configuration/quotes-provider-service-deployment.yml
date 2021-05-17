@@ -10,16 +10,17 @@ spring:
         output:
           producer:
             useNativeEncoding: true
-          destination: quoteQ
+          destination: quote
       kafka:
         binder:
           autoAddPartitions: true
           minPartitionsCount: 2
-          brokers: kafka-broker.default.svc.cluster.local
+          brokers: broker.default.svc.cluster.local
           configuration:
             schema.registry.url: http://schema-registry.default.svc.cluster.local:8081
             key.serializer: org.apache.kafka.common.serialization.ByteArraySerializer
-            value.serializer: com.investment.quotesproviderservice.serdes.QuoteSerde
+            value.serializer: org.apache.kafka.common.serialization.Serdes$StringSerde
+            #com.investment.quotesproviderservice.serdes.QuoteSerde
 
 eureka:
   instance:
