@@ -9,7 +9,7 @@ spring.cloud.stream.bindings.process-in-0:
   consumer:
     useNativeDecoding: true
 spring.cloud.stream.kafka.streams.binder:
-  brokers: broker.default.svc.cluster.local
+  brokers: kafka-broker.default.svc.cluster.local
   configuration:
     schema.registry.url: http://schema-registry.default.svc.cluster.local:8081
     commit.interval.ms: 1000
@@ -24,7 +24,7 @@ spring.cloud.stream.kafka.streams.bindings.input:
 spring.cloud.stream.kafka.binder:
   autoAddPartitions: true
   minPartitionsCount: 2
-  brokers: broker.default.svc.cluster.local
+  brokers: kafka-broker.default.svc.cluster.local
 eureka:
   instance:
     leaseRenewalIntervalInSeconds: 1
