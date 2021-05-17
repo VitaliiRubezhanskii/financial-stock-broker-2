@@ -2,14 +2,14 @@ server.port: 9998
 spring.application.name: analytics
 spring.zipkin.enabled: true
 spring.zipkin.baseUrl: http://tracing.default.svc.cluster.local:9411
-spring.cloud.stream.bindings.output:
+spring.cloud.stream.bindings.process-out-0:
   destination: quote-aggregation
-spring.cloud.stream.bindings.input:
-  destination: quoteA
+spring.cloud.stream.bindings.process-in-0:
+  destination: quote
   consumer:
     useNativeDecoding: true
 spring.cloud.stream.kafka.streams.binder:
-  brokers: kafka-broker.default.svc.cluster.local
+  brokers: broker.default.svc.cluster.local
   configuration:
     schema.registry.url: http://schema-registry.default.svc.cluster.local:8081
     commit.interval.ms: 1000
@@ -22,7 +22,7 @@ spring.cloud.stream.kafka.streams.bindings.input:
 spring.cloud.stream.kafka.binder:
   autoAddPartitions: true
   minPartitionsCount: 2
-  brokers: kafka-broker.default.svc.cluster.local
+  brokers: broker.default.svc.cluster.local
 eureka:
   instance:
     leaseRenewalIntervalInSeconds: 1
