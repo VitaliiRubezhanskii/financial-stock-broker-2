@@ -2,7 +2,7 @@ server.port: 9998
 spring.application.name: analytics
 spring.cloud.stream.bindings.output:
   destination: quote-aggregation
-spring.cloud.stream.bindings.input:
+spring.cloud.stream.bindings.process-in-0:
   destination: quote
   consumer:
     useNativeDecoding: true
@@ -14,7 +14,7 @@ spring.cloud.stream.kafka.streams.binder:
     default.key.serde: org.apache.kafka.common.serialization.Serdes$StringSerde
     default.value.serde: org.apache.kafka.common.serialization.Serdes$StringSerde
     #io.confluent.kafka.streams.serdes.avro.SpecificAvroSerde
-spring.cloud.stream.kafka.streams.bindings.input:
+spring.cloud.stream.kafka.streams.bindings.process-in-0:
   consumer:
     keySerde: org.apache.kafka.common.serialization.Serdes$StringSerde
     valueSerde: org.apache.kafka.common.serialization.Serdes$StringSerde
