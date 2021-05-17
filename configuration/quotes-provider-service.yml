@@ -8,7 +8,7 @@ spring:
           destination: quote
       kafka:
         binder:
-          brokers: 172.18.0.1
+          brokers: broker
 server.port: 9010
 
 spring.application.name: quotes-provider-service
