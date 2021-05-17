@@ -1,6 +1,6 @@
 server.port: 9998
 spring.application.name: analytics
-spring.cloud.stream.bindings.output:
+spring.cloud.stream.bindings.process-in-0:
   destination: quote-aggregation
 spring.cloud.stream.bindings.process-in-0:
   destination: quote
