@@ -33,7 +33,7 @@ public class QuotesProviderServiceApplication {
 
     @Bean
     public WebClient client() {
-        return WebClient.create("http://localhost:9010");
+        return WebClient.create("http://analytics.default.svc.cluster.local:9010");
     }
 
     @Bean
@@ -42,7 +42,7 @@ public class QuotesProviderServiceApplication {
                     .uri("/events")
                     .accept(MediaType.TEXT_EVENT_STREAM)
                     .exchange()
-                    .flatMapMany(cr -> cr.bodyToFlux(Quote.class))
+                    .flatMapMany(cr -> cr.bodyToFlux(String.class))
                     .subscribe(quote -> source.output().send(MessageBuilder.withPayload(quote).build()));
 
     }
