@@ -4,7 +4,7 @@ spring:
       host: mongodb-service.default.svc.cluster.local
       port: 27017
       username: admin
-      password: password
+      password: username
       database: auth
       authentication-database: admin
 #      uri: mongodb://mongod-2.mongodb-service.default.svc.cluster.local:27017,mongod-2.mongodb-service.default.svc.cluster.local:27017,mongod-2.mongodb-service.default.svc.cluster.local:27017/account?replicaSet=MainRepSet
