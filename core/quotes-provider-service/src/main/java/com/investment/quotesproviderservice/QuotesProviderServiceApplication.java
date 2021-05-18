@@ -33,7 +33,7 @@ public class QuotesProviderServiceApplication {
 
     @Bean
     public WebClient client() {
-        return WebClient.create("http://analytics.default.svc.cluster.local:9010");
+        return WebClient.create("http://localhost:9010");
     }
 
     @Bean
