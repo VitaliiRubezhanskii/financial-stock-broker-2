@@ -16,7 +16,7 @@ spring.cloud.stream.kafka.streams.binder:
     default.key.serde: org.apache.kafka.common.serialization.Serdes$StringSerde
     default.value.serde: org.apache.kafka.common.serialization.Serdes$StringSerde
     #io.confluent.kafka.streams.serdes.avro.SpecificAvroSerde
-spring.cloud.stream.kafka.streams.bindings.input:
+spring.cloud.stream.kafka.streams.bindings.process-in-0:
   consumer:
     keySerde: org.apache.kafka.common.serialization.Serdes$StringSerde
     valueSerde: org.apache.kafka.common.serialization.Serdes$StringSerde
