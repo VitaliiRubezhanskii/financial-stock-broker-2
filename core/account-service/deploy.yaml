@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: account
-          image: vitalii1992/account-service:latest #${REPOSITORY_TAG}
+          image: account-service #${REPOSITORY_TAG}
           ports:
             - containerPort: 8081
           env:
@@ -24,7 +24,7 @@ spec:
               value: '8085'
             - name: CONFIGSERVER_URI
               value: http://configserver.default.svc.cluster.local:8888
-          imagePullPolicy: Always
+          imagePullPolicy: IfNotPresent
 
 ---
 apiVersion: v1

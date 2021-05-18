@@ -1,0 +1,12 @@
+apiVersion: skaffold/v2beta15
+kind: Config
+metadata:
+  name: configserver
+build:
+  artifacts:
+    - image: configserver
+      jib: {}
+deploy:
+  kubectl:
+    manifests:
+      - deploy.yaml

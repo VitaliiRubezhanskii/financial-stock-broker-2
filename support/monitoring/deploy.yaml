@@ -14,10 +14,17 @@ spec:
     spec:
       containers:
         - name: discovery
-          image: vitalii1992/discovery:latest #${REPOSITORY_TAG}
+          image: monitoring #${REPOSITORY_TAG}
           ports:
             - containerPort: 8761
-          imagePullPolicy: Always
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: PORT
+              value: '8761'
+            - name: SPRING_PROFILES_ACTIVE
+              value: deployment
+            - name: CONFIGSERVER_URI
+              value: http://configserver.default.svc.cluster.local:8888
 
 #          readinessProbe:
 #            httpGet:
