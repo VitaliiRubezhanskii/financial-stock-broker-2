@@ -22,9 +22,7 @@ spec:
               value: deployment
             - name: PORT
               value: '8099'
-            - name: CONFIGSERVER_URI
-              value: http://configserver:8888
-          imagePullPolicy: Never
+          imagePullPolicy: IfNotPresent
 
 ---
 apiVersion: v1

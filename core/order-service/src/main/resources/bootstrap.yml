@@ -4,10 +4,6 @@ spring:
 
   application:
     name: order
-
-  cloud:
-    config:
-      uri: ${CONFIGSERVER_URI}
 server:
   port: ${PORT}
 

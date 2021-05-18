@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: auth
+data:
+  spring.cloud.kubernetes.discovery.all-namespaces: "true"
+  spring.data.mongodb.host: mongodb-service.default.svc.cluster.local
+  spring.data.mongodb.port: '27017'
+  spring.data.mongodb.username: username
+  spring.data.mongodb.password: password
+  spring.data.mongodb.database: auth
+  spring.data.mongodb.authentication-database: admin
+
+  server.servlet.context-path: /uaa
