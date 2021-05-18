@@ -10,5 +10,5 @@ data:
   spring.data.mongodb.password: password
   spring.data.mongodb.database: auth
   spring.data.mongodb.authentication-database: admin
-
+  server.port: '8084'
   server.servlet.context-path: /uaa

@@ -12,3 +12,4 @@ data:
   security.oauth2.client.scope: server
   security.oauth2.resource.user-info-uri: http://auth.default.svc.cluster.local:8084/uaa/user/current
   security.oauth2.resource.token-info-uri: http://auth.default.svc.cluster.local:8084/uaa/oauth/check_token
+  server.port: '8099'

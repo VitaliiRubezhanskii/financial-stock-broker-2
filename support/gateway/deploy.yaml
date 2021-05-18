@@ -24,7 +24,7 @@ spec:
               value: '5000'
             - name: CONFIGSERVER_URI
               value: http://configserver:8888
-          imagePullPolicy: Never
+          imagePullPolicy: IfNotPresent
 
 ---
 apiVersion: v1

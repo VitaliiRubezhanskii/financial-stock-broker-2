@@ -20,7 +20,6 @@ data:
   security.oauth2.client.accessTokenUri: http://auth.default.svc.cluster.local:8084/uaa/oauth/token
   security.oauth2.client.grant-type: client_credentials
   security.oauth2.client.scope: server
-
-
+  server.port: '8092'
   security.oauth2.resource.user-info-uri: http://auth.default.svc.cluster.local:8084/uaa/user/current
   security.oauth2.resource.token-info-uri: http://auth.default.svc.cluster.local:8084/uaa/oauth/check_token

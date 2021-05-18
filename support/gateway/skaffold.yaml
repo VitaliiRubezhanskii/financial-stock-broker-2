@@ -1,10 +1,10 @@
 apiVersion: skaffold/v2beta15
 kind: Config
 metadata:
-  name: configserver
+  name: gateway
 build:
   artifacts:
-    - image: configserver
+    - image: gateway
       jib: {}
 deploy:
   kubectl:

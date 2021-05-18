@@ -29,8 +29,6 @@
         <module>core/analytics-service</module>
         <module>core/quotes-provider-service</module>
         <module>support/auth</module>
-        <module>support/config</module>
-        <module>support/monitoring</module>
         <module>support/feign-hystrix-client</module>
         <module>support/gateway</module>
         <module>support/turbine</module>
