@@ -38,16 +38,16 @@ pipeline {
             script {
                 docker.withRegistry('', registryCredential){
 
-                def accountServiceImage = docker.build(accountServiceImageName + ":latest", '/var/jenkins_home/jobs/financial_stock_broker/workspace/core/account-service')
-                def analyticsServiceImage = docker.build(analyticsServiceImageName + ":latest", '/var/jenkins_home/jobs/financial_stock_broker/workspace/core/analytics-service')
-                def orderServiceImage = docker.build(orderServiceImageName + ":latest", 'var/jenkins_home/jobs/financial_stock_broker/workspace/core/order-service')
-                def quotesProviderServiceImage = docker.build(quotesProviderServiceImageName + ':latest', 'var/jenkins_home/jobs/financial_stock_broker/workspace/core/quotes-provider-service')
+                def accountServiceImage = docker.build(accountServiceImageName + ":latest", '/var/jenkins_home/jobs/financial_stock_broker/workspace/_service_spring-cloud-k8s-native/core/account-service')
+                def analyticsServiceImage = docker.build(analyticsServiceImageName + ":latest", '/var/jenkins_home/jobs/financial_stock_broker/workspace/_service_spring-cloud-k8s-native/core/analytics-service')
+                def orderServiceImage = docker.build(orderServiceImageName + ":latest", 'var/jenkins_home/jobs/financial_stock_broker/workspace/_service_spring-cloud-k8s-native/core/order-service')
+                def quotesProviderServiceImage = docker.build(quotesProviderServiceImageName + ':latest', 'var/jenkins_home/jobs/financial_stock_broker/workspace/_service_spring-cloud-k8s-native/core/quotes-provider-service')
 
-                def authServiceImage = docker.build(authServiceImageName + ':latest', 'var/jenkins_home/jobs/financial_stock_broker/workspace/support/auth')
-                def feignServiceImage = docker.build(feignServiceImageName + ':latest', 'var/jenkins_home/jobs/financial_stock_broker/workspace/support/feign-hystrix-client')
-                def gatewayServiceImage = docker.build(gatewayServiceImageName + ':latest', 'var/jenkins_home/jobs/financial_stock_broker/workspace/support/gateway')
-                def tracingServiceImage = docker.build(tracingServiceImageName + ':latest', 'var/jenkins_home/jobs/financial_stock_broker/workspace/support/tracing')
-                def turbineServiceImage = docker.build(tracingServiceImageName + ':latest', 'var/jenkins_home/jobs/financial_stock_broker/workspace/support/turbine')
+                def authServiceImage = docker.build(authServiceImageName + ':latest', 'var/jenkins_home/jobs/financial_stock_broker/workspace/_service_spring-cloud-k8s-native/support/auth')
+                def feignServiceImage = docker.build(feignServiceImageName + ':latest', 'var/jenkins_home/jobs/financial_stock_broker/workspace/_service_spring-cloud-k8s-native/support/feign-hystrix-client')
+                def gatewayServiceImage = docker.build(gatewayServiceImageName + ':latest', 'var/jenkins_home/jobs/financial_stock_broker/workspace/_service_spring-cloud-k8s-native/support/gateway')
+                def tracingServiceImage = docker.build(tracingServiceImageName + ':latest', 'var/jenkins_home/jobs/financial_stock_broker/workspace/_service_spring-cloud-k8s-native/support/tracing')
+                def turbineServiceImage = docker.build(tracingServiceImageName + ':latest', 'var/jenkins_home/jobs/financial_stock_broker/workspace/_service_spring-cloud-k8s-native/support/turbine')
 
                 accountServiceImage.push()
                 analyticsServiceImage.push()
