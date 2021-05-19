@@ -69,8 +69,16 @@ pipeline {
         steps {
              script {
 
-              sh 'kubectl apply -f /var/jenkins_home/workspace/financial_stock_broker/k8s/configserver-deploy.yaml'
-              sh 'kubectl apply -f /var/jenkins_home/workspace/financial_stock_broker/k8s/discovery-deploy.yaml'
+              sh 'kubectl apply -f ./core/account-service/deploy.yaml'
+              sh 'kubectl apply -f ./core/order-service/deploy.yaml'
+              sh 'kubectl apply -f ./core/analytics-service/deploy.yaml'
+              sh 'kubectl apply -f ./core/quotes-provider-service/deploy.yaml'
+
+            sh 'kubectl apply -f ./support/auth/deploy.yaml'
+            sh 'kubectl apply -f ./support/feign-hystrix-client/deploy.yaml'
+            sh 'kubectl apply -f ./support/gateway/deploy.yaml'
+            sh 'kubectl apply -f ./support/tracing/deploy.yaml'
+
 
              }
 
