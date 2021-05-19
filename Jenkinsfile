@@ -78,6 +78,7 @@ pipeline {
 //             sh 'kubectl apply -f ./support/feign-hystrix-client/deploy.yaml'
 //             sh 'kubectl apply -f ./support/gateway/deploy.yaml'
 //             sh 'kubectl apply -f ./support/tracing/deploy.yaml'
+            echo ${WORKSPACE}
             sh 'envsubst < ${WORKSPACE}/deploy.yaml | kubectl apply -f -'
 
 
