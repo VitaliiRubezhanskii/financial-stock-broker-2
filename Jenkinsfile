@@ -38,7 +38,7 @@ pipeline {
             script {
                 docker.withRegistry('', registryCredential){
 
-                def accountServiceImage = docker.build(accountServiceImageName + ":latest", '/var/jenkins_home/workspace/_service_spring-cloud-k8s-native/core/account-service')
+                def accountServiceImage = docker.build(accountServiceImageName + ":latest", './core/account-service')
                 def analyticsServiceImage = docker.build(analyticsServiceImageName + ":latest", '/var/jenkins_home/workspace/_service_spring-cloud-k8s-native/core/analytics-service')
                 def orderServiceImage = docker.build(orderServiceImageName + ":latest", 'var/jenkins_home/workspace/_service_spring-cloud-k8s-native/core/order-service')
                 def quotesProviderServiceImage = docker.build(quotesProviderServiceImageName + ':latest', 'var/jenkins_home/workspace/_service_spring-cloud-k8s-native/core/quotes-provider-service')
