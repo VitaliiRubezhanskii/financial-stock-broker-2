@@ -79,7 +79,7 @@ pipeline {
 //             sh 'kubectl apply -f ./support/gateway/deploy.yaml'
 //             sh 'kubectl apply -f ./support/tracing/deploy.yaml'
             sh 'echo ${WORKSPACE}'
-            sh 'envsubst < ${WORKSPACE}/deploy.yaml | kubectl apply -f -'
+            sh 'envsubst < ./core/account-service/deploy.yaml | kubectl apply -f -'
 
 
              }
