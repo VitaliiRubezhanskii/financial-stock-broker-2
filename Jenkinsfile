@@ -39,15 +39,15 @@ pipeline {
                 docker.withRegistry('', registryCredential){
 
                 def accountServiceImage = docker.build(accountServiceImageName + ":latest", './core/account-service')
-                def analyticsServiceImage = docker.build(analyticsServiceImageName + ":latest", '/var/jenkins_home/workspace/_service_spring-cloud-k8s-native/core/analytics-service')
-                def orderServiceImage = docker.build(orderServiceImageName + ":latest", 'var/jenkins_home/workspace/_service_spring-cloud-k8s-native/core/order-service')
-                def quotesProviderServiceImage = docker.build(quotesProviderServiceImageName + ':latest', 'var/jenkins_home/workspace/_service_spring-cloud-k8s-native/core/quotes-provider-service')
+                def analyticsServiceImage = docker.build(analyticsServiceImageName + ":latest", './core/analytics-service')
+                def orderServiceImage = docker.build(orderServiceImageName + ":latest", './core/order-service')
+                def quotesProviderServiceImage = docker.build(quotesProviderServiceImageName + ':latest', './core/quotes-provider-service')
 
-                def authServiceImage = docker.build(authServiceImageName + ':latest', 'var/jenkins_home/workspace/_service_spring-cloud-k8s-native/support/auth')
-                def feignServiceImage = docker.build(feignServiceImageName + ':latest', 'var/jenkins_home/workspace/_service_spring-cloud-k8s-native/support/feign-hystrix-client')
-                def gatewayServiceImage = docker.build(gatewayServiceImageName + ':latest', 'var/jenkins_home/workspace/_service_spring-cloud-k8s-native/support/gateway')
-                def tracingServiceImage = docker.build(tracingServiceImageName + ':latest', 'var/jenkins_home/workspace/_service_spring-cloud-k8s-native/support/tracing')
-                def turbineServiceImage = docker.build(tracingServiceImageName + ':latest', 'var/jenkins_home/workspace/_service_spring-cloud-k8s-native/support/turbine')
+                def authServiceImage = docker.build(authServiceImageName + ':latest', './support/auth')
+                def feignServiceImage = docker.build(feignServiceImageName + ':latest', './support/feign-hystrix-client')
+                def gatewayServiceImage = docker.build(gatewayServiceImageName + ':latest', './support/gateway')
+                def tracingServiceImage = docker.build(tracingServiceImageName + ':latest', './support/tracing')
+                def turbineServiceImage = docker.build(tracingServiceImageName + ':latest', './support/turbine')
 
                 accountServiceImage.push()
                 analyticsServiceImage.push()
