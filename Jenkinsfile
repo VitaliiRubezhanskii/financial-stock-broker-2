@@ -10,7 +10,9 @@ pipeline {
     stage('Checkout code') {
           steps{
             cleanWs()
-            git credentialsId: 'GitHub', url: "https://github.com/VitaliiRubezhanskii/financial-stock-broker-2.git"
+            git credentialsId: 'GitHub',
+            url: "https://github.com/VitaliiRubezhanskii/financial-stock-broker-2.git",
+            branch 'spring-cloud-k8s-native'
         }
     }
 
