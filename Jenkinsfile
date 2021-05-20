@@ -13,15 +13,15 @@ pipeline {
 
     registryCredential = 'DockerHub'
 
-    ANALYTICS_SERVICE_IMAGE = analyticsServiceImageName
-    ORDER_SERVICE_IMAGE = orderServiceImageName
-    ACCOUNT_SERVICE_IMAGE = accountServiceImageName
-    QUOTES_PROVIDER_SERVICE_IMAGE = quotesProviderServiceImageName
+    ANALYTICS_SERVICE_IMAGE = 'analyticsServiceImageName'
+    ORDER_SERVICE_IMAGE = 'orderServiceImageName'
+    ACCOUNT_SERVICE_IMAGE = 'accountServiceImageName'
+    QUOTES_PROVIDER_SERVICE_IMAGE = 'quotesProviderServiceImageName'
 
-    AUTH_SERVICE_IMAGE = authServiceImageName
-    FEIGN_CLIENT_SERVICE_IMAGE = feignServiceImageName
-    API_GATEWAY_SERVICE_IMAGE = gatewayServiceImageName
-    TRACING_SERVICE_IMAGE = tracingServiceImageName
+    AUTH_SERVICE_IMAGE = 'authServiceImageName'
+    FEIGN_CLIENT_SERVICE_IMAGE = 'feignServiceImageName'
+    API_GATEWAY_SERVICE_IMAGE = 'gatewayServiceImageName'
+    TRACING_SERVICE_IMAGE = 'tracingServiceImageName'
 }
     agent { label 'master'}
     stages {
