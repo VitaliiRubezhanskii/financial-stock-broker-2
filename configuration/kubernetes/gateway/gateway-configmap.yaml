@@ -5,7 +5,7 @@ metadata:
 data:
   zuul.ignored-services: '*'
   zuul.routes.account.path: /account/**
-  zuul.routes.account.ribbon.listOfServers: http://account.default.svc.cluster.local:8094
+  zuul.routes.account.ribbon.listOfServers: http://account.default.svc.cluster.local:8085
   zuul.routes.order.path: /order/**
   zuul.routes.order.ribbon.listOfServers: http://order.default.svc.cluster.local:8092
   zuul.routes.feign.path: /feign/**

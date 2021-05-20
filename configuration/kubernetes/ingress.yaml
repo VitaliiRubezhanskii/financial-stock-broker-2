@@ -28,3 +28,7 @@ spec:
             backend:
               serviceName: auth
               servicePort: 8084
+          - path: /api
+            backend:
+              serviceName: gateway
+              servicePort: 5000
