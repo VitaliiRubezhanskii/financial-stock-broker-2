@@ -22,6 +22,8 @@ spec:
               value: deployment
             - name: PORT
               value: '8092'
+            - name: ORDER_SERVICE_IMAGE
+              value: vitalii1992/order-service:latest
           imagePullPolicy: IfNotPresent
 
 ---

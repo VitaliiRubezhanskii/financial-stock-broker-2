@@ -18,6 +18,9 @@ spec:
           ports:
             - containerPort: 9411
           imagePullPolicy: Always
+          env:
+            - name: TRACING_SERVICE_IMAGE
+              value: vitalii1992/tracing-service:latest
 
 #          readinessProbe:
 #            httpGet:

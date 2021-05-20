@@ -24,6 +24,8 @@ spec:
               value: '8094'
             - name: CONFIGSERVER_URI
               value: http://configserver.default.svc.cluster.local:8888
+            - name: QUOTES_PROVIDER_SERVICE_IMAGE
+              value: vitalii1992/quote-provider-service:latest
           imagePullPolicy: IfNotPresent
 
 ---

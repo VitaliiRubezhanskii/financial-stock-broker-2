@@ -22,6 +22,8 @@ spec:
               value: deployment
             - name: PORT
               value: '8099'
+            - name: FEIGN_CLIENT_SERVICE_IMAGE
+              value: vitalii1992/feign-service:latest
           imagePullPolicy: IfNotPresent
 
 ---
