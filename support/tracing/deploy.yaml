@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: tracing
-          image: ${TRACING_SERVICE_IMAGE} #vitalii1992/tracing-service:latest #${REPOSITORY_TAG}
+          image: vitalii1992/tracing-service:latest #vitalii1992/tracing-service:latest #${REPOSITORY_TAG}
           ports:
             - containerPort: 9411
           imagePullPolicy: Always

@@ -79,16 +79,32 @@ pipeline {
         steps {
              script {
 
-              sh 'kubectl apply -f ./core/account-service/deploy.yaml --kubeconfig=../../kubeconfig/config'
-              sh 'kubectl apply -f ./core/order-service/deploy.yaml --kubeconfig=../../kubeconfig/config'
-              sh 'kubectl apply -f ./core/analytics-service/deploy.yaml --kubeconfig=../../kubeconfig/config'
-              sh 'kubectl apply -f ./core/quotes-provider-service/deploy.yaml --kubeconfig=../../kubeconfig/config'
+              sh 'kubectl apply -f ./mongodb/mongodb-secret.yaml --kubeconfig=../../kubeconfig/config'
+              sh 'kubectl apply -f ./mongodb/mongodb-deployment.yaml --kubeconfig=../../kubeconfig/config'
 
-              sh 'kubectl apply -f ./support/auth/deploy.yaml --kubeconfig=../../kubeconfig/config'
-              sh 'kubectl apply -f ./support/feign-hystrix-client/deploy.yaml --kubeconfig=../../kubeconfig/config'
-              sh 'kubectl apply -f ./support/gateway/deploy.yaml --kubeconfig=../../kubeconfig/config'
-              sh 'kubectl apply -f ./support/tracing/deploy.yaml --kubeconfig=../../kubeconfig/config'
+              sh 'kubectl apply -f ./kafka/kafka-deployment.yaml --kubeconfig=../../kubeconfig/config'
 
+              sh 'kubectl apply -f ./configuration/kubernetes/account/account-configmap.yaml --kubeconfig=../../kubeconfig/config'
+              sh 'kubectl apply -f ./configuration/kubernetes/analytics/analytics-configmap.yaml --kubeconfig=../../kubeconfig/config'
+              sh 'kubectl apply -f ./configuration/kubernetes/auth/auth-configmap.yaml --kubeconfig=../../kubeconfig/config'
+              sh 'kubectl apply -f ./configuration/kubernetes/feign/feign-configmap.yaml --kubeconfig=../../kubeconfig/config'
+              sh 'kubectl apply -f ./configuration/kubernetes/gateway/gateway-configmap.yaml --kubeconfig=../../kubeconfig/config'
+              sh 'kubectl apply -f ./configuration/kubernetes/order/order-configmap.yaml --kubeconfig=../../kubeconfig/config'
+              sh 'kubectl apply -f ./configuration/kubernetes/quotes-provider/quotes-provider.yaml --kubeconfig=../../kubeconfig/config'
+              sh 'kubectl apply -f ./configuration/kubernetes/cluster-rbac.yaml --kubeconfig=../../kubeconfig/config'
+              sh 'kubectl apply -f ./configuration/kubernetes/ingress.yaml --kubeconfig=../../kubeconfig/config'
+
+              sh 'sleep 7s'
+
+                sh 'kubectl apply -f ./core/account-service/deploy.yaml --kubeconfig=../../kubeconfig/config'
+                sh 'kubectl apply -f ./core/order-service/deploy.yaml --kubeconfig=../../kubeconfig/config'
+                sh 'kubectl apply -f ./core/analytics-service/deploy.yaml --kubeconfig=../../kubeconfig/config'
+                sh 'kubectl apply -f ./core/quotes-provider-service/deploy.yaml --kubeconfig=../../kubeconfig/config'
+
+                sh 'kubectl apply -f ./support/auth/deploy.yaml --kubeconfig=../../kubeconfig/config'
+                sh 'kubectl apply -f ./support/feign-hystrix-client/deploy.yaml --kubeconfig=../../kubeconfig/config'
+                sh 'kubectl apply -f ./support/gateway/deploy.yaml --kubeconfig=../../kubeconfig/config'
+                sh 'kubectl apply -f ./support/tracing/deploy.yaml --kubeconfig=../../kubeconfig/config'
              }
 
          }

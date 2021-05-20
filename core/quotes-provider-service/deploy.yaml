@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: quote-provider-service
-          image: ${QUOTES_PROVIDER_SERVICE_IMAGE} #quotes-provider-service #${REPOSITORY_TAG}
+          image: vitalii1992/quote-provider-service:latest #quotes-provider-service #${REPOSITORY_TAG}
           ports:
             - containerPort: 8094
           env:

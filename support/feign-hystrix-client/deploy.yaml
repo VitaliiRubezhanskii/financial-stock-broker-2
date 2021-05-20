@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: feign
-          image: ${FEIGN_CLIENT_SERVICE_IMAGE} #feign #${REPOSITORY_TAG}
+          image: vitalii1992/feign-service:latest #feign #${REPOSITORY_TAG}
           ports:
             - containerPort: 8099
           env:

@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: analytics
-          image: ${ANALYTICS_SERVICE_IMAGE} #analytics-service #${REPOSITORY_TAG}
+          image: vitalii1992/analytics-service:latest #analytics-service #${REPOSITORY_TAG}
           ports:
             - containerPort: 8093
           env:
