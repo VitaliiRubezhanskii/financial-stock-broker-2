@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: auth
-          image: auth #${REPOSITORY_TAG}
+          image: ${AUTH_SERVICE_IMAGE} #auth #${REPOSITORY_TAG}
           ports:
             - containerPort: 8084
           env:

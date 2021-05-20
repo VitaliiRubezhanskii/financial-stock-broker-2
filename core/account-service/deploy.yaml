@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: account
-          image: account-service #${REPOSITORY_TAG}
+          image: ${ACCOUNT_SERVICE_IMAGE} #account-service #${REPOSITORY_TAG}
           ports:
             - containerPort: 8085
           env:
