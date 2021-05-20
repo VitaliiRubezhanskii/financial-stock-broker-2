@@ -20,7 +20,7 @@ spec:
           imagePullPolicy: Always
           env:
             - name: TRACING_SERVICE_IMAGE
-              value: vitalii1992/tracing-service:latest
+              value: "vitalii1992/tracing-service:latest"
 
 #          readinessProbe:
 #            httpGet:
