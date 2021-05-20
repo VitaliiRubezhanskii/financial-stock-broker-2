@@ -15,7 +15,7 @@ spec:
           - path: /account
             backend:
               serviceName: account
-              servicePort: 8094
+              servicePort: 8085
           - path: /order
             backend:
               serviceName: order
@@ -27,4 +27,4 @@ spec:
           - path: /uaa
             backend:
               serviceName: auth
-              servicePort: 8094
+              servicePort: 8084
