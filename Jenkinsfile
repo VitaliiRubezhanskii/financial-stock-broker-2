@@ -69,15 +69,15 @@ pipeline {
         steps {
              script {
 
-              sh 'kubectl apply -f ./core/account-service/deploy.yaml'
-              sh 'kubectl apply -f ./core/order-service/deploy.yaml'
-              sh 'kubectl apply -f ./core/analytics-service/deploy.yaml'
-              sh 'kubectl apply -f ./core/quotes-provider-service/deploy.yaml'
+              sh 'kubectl apply -f ./core/account-service/deploy.yaml --kubeconfig=config '
+              sh 'kubectl apply -f ./core/order-service/deploy.yaml --kubeconfig=config '
+              sh 'kubectl apply -f ./core/analytics-service/deploy.yaml --kubeconfig=config '
+              sh 'kubectl apply -f ./core/quotes-provider-service/deploy.yaml --kubeconfig=config '
 
-              sh 'kubectl apply -f ./support/auth/deploy.yaml'
-              sh 'kubectl apply -f ./support/feign-hystrix-client/deploy.yaml'
-              sh 'kubectl apply -f ./support/gateway/deploy.yaml'
-              sh 'kubectl apply -f ./support/tracing/deploy.yaml'
+              sh 'kubectl apply -f ./support/auth/deploy.yaml --kubeconfig=config '
+              sh 'kubectl apply -f ./support/feign-hystrix-client/deploy.yaml --kubeconfig=config '
+              sh 'kubectl apply -f ./support/gateway/deploy.yaml --kubeconfig=config '
+              sh 'kubectl apply -f ./support/tracing/deploy.yaml --kubeconfig=config '
 
              }
 
