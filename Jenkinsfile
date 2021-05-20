@@ -35,54 +35,54 @@ pipeline {
         }
     }
 
-//     stage('Build'){
-//         steps{
-//             script {
-//                sh 'mvn clean install -DskipTests=true'
-//             }
-//         }
-//     }
-//
-//     stage('Docker image'){
-//         steps {
-//             script {
-//                 docker.withRegistry('', registryCredential){
-//
-//                 def accountServiceImage = docker.build(accountServiceImageName + ":latest", './core/account-service')
-//                 def analyticsServiceImage = docker.build(analyticsServiceImageName + ":latest", './core/analytics-service')
-//                 def orderServiceImage = docker.build(orderServiceImageName + ":latest", './core/order-service')
-//                 def quotesProviderServiceImage = docker.build(quotesProviderServiceImageName + ':latest', './core/quotes-provider-service')
-//
-//                 def authServiceImage = docker.build(authServiceImageName + ':latest', './support/auth')
-//                 def feignServiceImage = docker.build(feignServiceImageName + ':latest', './support/feign-hystrix-client')
-//                 def gatewayServiceImage = docker.build(gatewayServiceImageName + ':latest', './support/gateway')
-//                 def tracingServiceImage = docker.build(tracingServiceImageName + ':latest', './support/tracing')
-//                 def turbineServiceImage = docker.build(tracingServiceImageName + ':latest', './support/turbine')
-//
-//                 accountServiceImage.push()
-//                 analyticsServiceImage.push()
-//                 orderServiceImage.push()
-//                 quotesProviderServiceImage.push()
-//
-//                 authServiceImage.push()
-//                 feignServiceImage.push()
-//                 gatewayServiceImage.push()
-//                 tracingServiceImage.push()
-//                 turbineServiceImage.push()
-//
-//                 }
-//             }
-//         }
-//     }
+    stage('Build'){
+        steps{
+            script {
+               sh 'mvn clean install -DskipTests=true'
+            }
+        }
+    }
+
+    stage('Docker image'){
+        steps {
+            script {
+                docker.withRegistry('', registryCredential){
+
+                def accountServiceImage = docker.build(accountServiceImageName + ":latest", './core/account-service')
+                def analyticsServiceImage = docker.build(analyticsServiceImageName + ":latest", './core/analytics-service')
+                def orderServiceImage = docker.build(orderServiceImageName + ":latest", './core/order-service')
+                def quotesProviderServiceImage = docker.build(quotesProviderServiceImageName + ':latest', './core/quotes-provider-service')
+
+                def authServiceImage = docker.build(authServiceImageName + ':latest', './support/auth')
+                def feignServiceImage = docker.build(feignServiceImageName + ':latest', './support/feign-hystrix-client')
+                def gatewayServiceImage = docker.build(gatewayServiceImageName + ':latest', './support/gateway')
+                def tracingServiceImage = docker.build(tracingServiceImageName + ':latest', './support/tracing')
+                def turbineServiceImage = docker.build(tracingServiceImageName + ':latest', './support/turbine')
+
+                accountServiceImage.push()
+                analyticsServiceImage.push()
+                orderServiceImage.push()
+                quotesProviderServiceImage.push()
+
+                authServiceImage.push()
+                feignServiceImage.push()
+                gatewayServiceImage.push()
+                tracingServiceImage.push()
+                turbineServiceImage.push()
+
+                }
+            }
+        }
+    }
 
     stage('Deploy') {
         steps {
              script {
 
-              sh 'kubectl apply -f ./mongodb/mongodb-secret.yaml --kubeconfig=../../kubeconfig/config'
-              sh 'kubectl apply -f ./mongodb/mongodb-deployment.yaml --kubeconfig=../../kubeconfig/config'
+              sh 'kubectl apply -f ./mongodb/mongodb-secret.yml --kubeconfig=../../kubeconfig/config'
+              sh 'kubectl apply -f ./mongodb/mongodb-deployment.yml --kubeconfig=../../kubeconfig/config'
 
-              sh 'kubectl apply -f ./kafka/kafka-deployment.yaml --kubeconfig=../../kubeconfig/config'
+              sh 'kubectl apply -f ./kafka/kafka-deployment.yml --kubeconfig=../../kubeconfig/config'
 
               sh 'kubectl apply -f ./configuration/kubernetes/account/account-configmap.yaml --kubeconfig=../../kubeconfig/config'
               sh 'kubectl apply -f ./configuration/kubernetes/analytics/analytics-configmap.yaml --kubeconfig=../../kubeconfig/config'
