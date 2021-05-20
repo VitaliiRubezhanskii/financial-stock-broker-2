@@ -24,7 +24,7 @@ spec:
               value: '8085'
             - name: ACCOUNT_SERVICE_IMAGE
               value: "vitalii1992/account-service:latest"
-          imagePullPolicy: IfNotPresent
+          imagePullPolicy: Always
 
 ---
 apiVersion: v1

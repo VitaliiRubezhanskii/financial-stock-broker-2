@@ -24,7 +24,7 @@ spec:
               value: '8084'
             - name: AUTH_SERVICE_IMAGE
               value: "vitalii1992/auth-service:latest"
-          imagePullPolicy: IfNotPresent
+          imagePullPolicy: Always
 
 ---
 apiVersion: v1

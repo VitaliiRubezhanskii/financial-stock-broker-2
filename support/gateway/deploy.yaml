@@ -26,7 +26,7 @@ spec:
               value: http://configserver:8888
             - name: API_GATEWAY_SERVICE_IMAGE
               value: "vitalii1992/api-gateway-service:latest"
-          imagePullPolicy: IfNotPresent
+          imagePullPolicy: Always
 
 ---
 apiVersion: v1

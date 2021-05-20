@@ -26,7 +26,7 @@ spec:
               value: http://configserver.default.svc.cluster.local:8888
             - name: QUOTES_PROVIDER_SERVICE_IMAGE
               value: "vitalii1992/quote-provider-service:latest"
-          imagePullPolicy: IfNotPresent
+          imagePullPolicy: Always
 
 ---
 apiVersion: v1
