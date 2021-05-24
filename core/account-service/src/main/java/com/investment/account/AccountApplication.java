@@ -17,13 +17,13 @@ public class AccountApplication {
 
     }
 
-    @Autowired
-    private MongoTemplate mongoTemplate;
-
-    @PostConstruct
-    public void init() {
-        if (!mongoTemplate.getCollectionNames().contains("collectionName")) {
-            mongoTemplate.createCollection("collectionName");
-        }
-    }
+//    @Autowired
+//    private MongoTemplate mongoTemplate;
+//
+//    @PostConstruct
+//    public void init() {
+//        if (!mongoTemplate.getCollectionNames().contains("collectionName")) {
+//            mongoTemplate.createCollection("collectionName");
+//        }
+//    }
 }
