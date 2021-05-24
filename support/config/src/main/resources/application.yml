@@ -10,7 +10,7 @@ spring:
         git:
           uri: https://github.com/VitaliiRubezhanskii/financial-stock-broker-2.git
           search-paths: configuration
-          clone-on-start: true
+#          clone-on-start: true
 
 eureka:
   client:
