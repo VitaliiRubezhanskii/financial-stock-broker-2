@@ -21,6 +21,10 @@ spec:
           env:
             - name: TRACING_SERVICE_IMAGE
               value: "vitalii1992/tracing-service:latest"
+            - name: SPRING_PROFILES_ACTIVE
+              value: deployment
+            - name: PORT
+              value: '9411'
 
 #          readinessProbe:
 #            httpGet:

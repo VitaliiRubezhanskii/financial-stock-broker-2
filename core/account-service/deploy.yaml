@@ -38,4 +38,4 @@ spec:
         protocol: TCP
   selector:
     app: account
-  type: NodePort
+  type: LoadBalancer
