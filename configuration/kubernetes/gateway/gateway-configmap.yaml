@@ -16,9 +16,11 @@ data:
 
   management.endpoints.web.exposure.include: routes
 
-  hystrix.command.default.execution.isolation.thread.timeoutInMilliseconds: '60000'
-  ribbon.ConnectTimeout: '3000'
+#  hystrix.command.default.execution.isolation.thread.timeoutInMilliseconds: '60000'
+#  ribbon.ConnectTimeout: '60000'
   ribbon.ReadTimeout: '60000'
+#  zuul.host.connect-timeout-millis: '10000'
+#  zuul.host.socket-timeout-millis: '60000'
   spring.cloud.kubernetes.discovery.all-namespaces: "true"
 
   security.oauth2.client.clientId: gateway
