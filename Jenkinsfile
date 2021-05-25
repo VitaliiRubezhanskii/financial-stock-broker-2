@@ -79,8 +79,8 @@ pipeline {
         steps {
              script {
 
-//               sh 'kubectl apply -f ./mongodb/mongodb-secret.yml --kubeconfig=../../kubeconfig/config'
-//               sh 'kubectl apply -f ./mongodb/mongodb-deployment.yml --kubeconfig=../../kubeconfig/config'
+              sh 'kubectl apply -f ./mongodb/mongodb-secret.yml --kubeconfig=../../kubeconfig/config'
+              sh 'kubectl apply -f ./mongodb/mongodb-deployment.yml --kubeconfig=../../kubeconfig/config'
 
               sh 'kubectl apply -f ./kafka/kafka-deployment.yml --kubeconfig=../../kubeconfig/config'
 
