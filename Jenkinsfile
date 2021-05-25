@@ -26,22 +26,22 @@ pipeline {
     agent { label 'master'}
     stages {
 
-//     stage('Checkout code') {
-//           steps{
-//             cleanWs()
-//             git branch: 'spring-cloud-k8s-native',
-//             credentialsId: 'GitHub',
-//             url: "https://github.com/VitaliiRubezhanskii/financial-stock-broker-2.git"
-//         }
-//     }
-//
-//     stage('Build'){
-//         steps{
-//             script {
-//                sh 'mvn --settings settings.xml clean install -DskipTests=true'
-//             }
-//         }
-//     }
+    stage('Checkout code') {
+          steps{
+            cleanWs()
+            git branch: 'spring-cloud-k8s-native',
+            credentialsId: 'GitHub',
+            url: "https://github.com/VitaliiRubezhanskii/financial-stock-broker-2.git"
+        }
+    }
+
+    stage('Build'){
+        steps{
+            script {
+               sh 'mvn --settings settings.xml clean install -DskipTests=true'
+            }
+        }
+    }
 //
 //     stage('Docker image'){
 //         steps {
