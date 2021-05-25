@@ -35,13 +35,13 @@ pipeline {
         }
     }
 
-    stage('Build'){
-        steps{
-            script {
-               sh 'mvn --settings settings.xml clean install -DskipTests=true'
-            }
-        }
-    }
+//     stage('Build'){
+//         steps{
+//             script {
+//                sh 'mvn --settings settings.xml clean install -DskipTests=true'
+//             }
+//         }
+//     }
 //
 //     stage('Docker image'){
 //         steps {
