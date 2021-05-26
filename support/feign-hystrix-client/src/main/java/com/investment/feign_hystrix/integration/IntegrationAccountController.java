@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class IntegrationAccountController {
 
     private final IntegrationClient integrationClient;
+    private final AccountServiceClient accountServiceClient;
+
 
     @PostMapping(value = "/account")
     public AccountCreatedDto createAccount(@RequestBody AccountCreationDto accountCreationDto){
@@ -36,6 +38,11 @@ public class IntegrationAccountController {
     @GetMapping(value = "/{accountId}")
     public AccountCreatedDto getAccountById(@PathVariable(value = "accountId") String id){
         return integrationClient.getAccountById(id);
+    }
+
+    @GetMapping(value = "/account/name/{account}")
+    public AccountCreatedDto getAccountByAccount(@PathVariable(value = "account") String account){
+        return accountServiceClient.getAccountByAccount(account);
     }
 
 }
