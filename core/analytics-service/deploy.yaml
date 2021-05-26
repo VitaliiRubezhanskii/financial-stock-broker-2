@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: analytics
-          image: analytics-service #${REPOSITORY_TAG}
+          image: vitalii1992/analytics-service:latest #analytics-service #${REPOSITORY_TAG}
           ports:
             - containerPort: 8093
           env:
@@ -24,7 +24,9 @@ spec:
               value: '8093'
             - name: CONFIGSERVER_URI
               value: http://configserver.default.svc.cluster.local:8888
-          imagePullPolicy: IfNotPresent
+            - name: ANALYTICS_SERVICE_IMAGE
+              value: "vitalii1992/analytics-service:latest"
+          imagePullPolicy: Always
 
 ---
 apiVersion: v1
@@ -34,7 +36,7 @@ metadata:
 
 spec:
   ports:
-    - port: 8092
+    - port: 8093
       protocol: TCP
   selector:
     app: analytics

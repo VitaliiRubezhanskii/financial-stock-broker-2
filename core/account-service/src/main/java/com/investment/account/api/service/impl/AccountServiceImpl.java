@@ -61,4 +61,9 @@ public class AccountServiceImpl implements AccountService {
                 })
                 .orElseThrow(() -> new RuntimeException("Not found"));
     }
+
+    @Override
+    public Account getAccountByAccount(String account) {
+        return accountRepository.findAccountByAccount(account);
+    }
 }

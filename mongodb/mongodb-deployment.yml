@@ -30,6 +30,14 @@ spec:
                 secretKeyRef:
                   name: mongodb-secret
                   key: mongo-root-password
+          volumeMounts:
+            - name: mongo-persistent-storage2
+              mountPath: /data/db
+      volumes:
+        - name: mongo-persistent-storage2
+          # pointer to the configuration of HOW we want the mount to be implemented
+          persistentVolumeClaim:
+            claimName: mongo-pvc
 
 ---
 apiVersion: v1
@@ -43,3 +51,31 @@ spec:
     - protocol: TCP
       port: 27017
       targetPort: 27017
+  type: LoadBalancer
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mongo-pvc
+spec:
+  storageClassName: mylocalstorage
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 2Gi
+---
+# How do we want it implemented
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: local-storage2
+spec:
+  storageClassName: mylocalstorage
+  capacity:
+    storage: 2Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "/mongodb-data"
+    type: DirectoryOrCreate

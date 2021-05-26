@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: feign
-          image: feign #${REPOSITORY_TAG}
+          image: vitalii1992/feign-service:latest #feign #${REPOSITORY_TAG}
           ports:
             - containerPort: 8099
           env:
@@ -22,9 +22,9 @@ spec:
               value: deployment
             - name: PORT
               value: '8099'
-            - name: CONFIGSERVER_URI
-              value: http://configserver:8888
-          imagePullPolicy: Never
+            - name: FEIGN_CLIENT_SERVICE_IMAGE
+              value: "vitalii1992/feign-service:latest"
+          imagePullPolicy: Always
 
 ---
 apiVersion: v1

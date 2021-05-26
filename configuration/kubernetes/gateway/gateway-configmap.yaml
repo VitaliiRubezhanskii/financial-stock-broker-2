@@ -1,0 +1,32 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: gateway
+data:
+  zuul.ignored-services: '*'
+  zuul.routes.account.path: /account/**
+  zuul.routes.account.ribbon.listOfServers: http://account.default.svc.cluster.local:8085
+  zuul.routes.order.path: /order/**
+  zuul.routes.order.ribbon.listOfServers: http://order.default.svc.cluster.local:8092
+  zuul.routes.feign.path: /feign/**
+  zuul.routes.feign.ribbon.listOfServers: http://feign.default.svc.cluster.local:8099
+  zuul.routes.auth.path: /uaa/**
+  zuul.routes.auth.ribbon.listOfServers: http://auth.default.svc.cluster.local:8084
+  zuul.sensitiveHeaders: ''
+
+  management.endpoints.web.exposure.include: routes
+
+#  hystrix.command.default.execution.isolation.thread.timeoutInMilliseconds: '60000'
+#  ribbon.ConnectTimeout: '60000'
+  ribbon.ReadTimeout: '60000'
+#  zuul.host.connect-timeout-millis: '10000'
+#  zuul.host.socket-timeout-millis: '60000'
+  spring.cloud.kubernetes.discovery.all-namespaces: "true"
+
+  security.oauth2.client.clientId: gateway
+  security.oauth2.client.clientSecret: '1234'
+  security.oauth2.client.accessTokenUri: http://auth.default.svc.cluster.local:8084/uaa/oauth/token
+  security.oauth2.client.grant-type: client_credentials
+  security.oauth2.client.scope: server
+  security.oauth2.resource.user-info-uri: http://auth.default.svc.cluster.local:8084/uaa/user/current
+  security.oauth2.resource.token-info-uri: http://auth.default.svc.cluster.local:8084/uaa/oauth/check_token

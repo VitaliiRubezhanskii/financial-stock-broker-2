@@ -14,17 +14,17 @@ spec:
     spec:
       containers:
         - name: account
-          image: account-service #${REPOSITORY_TAG}
+          image: vitalii1992/account-service:latest #account-service #${REPOSITORY_TAG}
           ports:
-            - containerPort: 8081
+            - containerPort: 8085
           env:
             - name: SPRING_PROFILES_ACTIVE
               value: deployment
             - name: PORT
               value: '8085'
-            - name: CONFIGSERVER_URI
-              value: http://configserver.default.svc.cluster.local:8888
-          imagePullPolicy: IfNotPresent
+            - name: ACCOUNT_SERVICE_IMAGE
+              value: "vitalii1992/account-service:latest"
+          imagePullPolicy: Always
 
 ---
 apiVersion: v1
@@ -34,8 +34,8 @@ metadata:
 
 spec:
   ports:
-      - port: 8081
+      - port: 8085
         protocol: TCP
   selector:
     app: account
-  type: NodePort
+  type: LoadBalancer

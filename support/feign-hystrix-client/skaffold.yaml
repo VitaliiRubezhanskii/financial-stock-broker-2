@@ -1,0 +1,12 @@
+apiVersion: skaffold/v2beta15
+kind: Config
+metadata:
+  name: feign
+build:
+  artifacts:
+  - image: feign
+    jib: {}
+deploy:
+  kubectl:
+    manifests:
+    - deploy.yaml

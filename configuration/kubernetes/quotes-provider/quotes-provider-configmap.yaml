@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: quotes-provider-service
+data:
+  spring.cloud.kubernetes.discovery.all-namespaces: "true"
+  spring.application.name: quotes-provider-service
+  spring.zipkin.enabled: 'true'
+  spring.zipkin.baseUrl: http://tracing.default.svc.cluster.local:9411
+  spring.cloud.stream.bindings.output.producer.useNativeEncoding: 'true'
+  spring.cloud.stream.bindings.output.destination: quote
+  spring.cloud.stream.kafka.binder.brokers: kafka-broker.default.svc.cluster.local
+  spring.cloud.stream.kafka.binder.configuration.schema.registry.url: http://schema-registry.default.svc.cluster.local:8081
+  spring.cloud.stream.kafka.binder.configuration.key.serializer: org.apache.kafka.common.serialization.ByteArraySerializer
+  spring.cloud.stream.kafka.binder.configuration.value.serializer: org.apache.kafka.common.serialization.StringSerializer
+
+  management.security.enabled: 'false'
+
+  server.port: '9010'
