@@ -1,16 +1,19 @@
 package com.investment.auth.domain;
 
-import com.investment.auth.enums.Authorities;
+import com.investment.auth.enums.SimpleAuthority;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.time.LocalDate;
 import java.util.*;
 
 @Document
+@Getter
+@Setter
 public class User implements UserDetails {
 
     @Id
@@ -20,6 +23,8 @@ public class User implements UserDetails {
     private String username;
 
     private String password;
+
+    private Set<String> roles;
 
 //    private String firstname;
 //
@@ -35,29 +40,11 @@ public class User implements UserDetails {
 
     private String resetPasswordKey;
 
-    private Set<Authorities> authorities = new HashSet<>();
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
+    private Set<SimpleAuthority> authorities = new HashSet<>();
 
     @Override
-    public String getPassword() {
-        return password;
-    }
-
-    @Override
-    public String getUsername() {
-        return username;
-    }
-
-    @Override
-    public List<GrantedAuthority> getAuthorities() {
-        return new ArrayList<>(authorities);
+    public Set<? extends GrantedAuthority> getAuthorities() {
+        return authorities;
     }
 
     public void setUsername(String username) {
@@ -112,7 +99,7 @@ public class User implements UserDetails {
         this.resetPasswordKey = resetPasswordKey;
     }
 
-    public void setAuthorities(Set<Authorities> authorities) {
+    public void setAuthorities(Set<SimpleAuthority> authorities) {
         this.authorities = authorities;
     }
 
