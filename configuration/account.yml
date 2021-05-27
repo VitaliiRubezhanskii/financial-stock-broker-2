@@ -14,6 +14,12 @@ spring:
   sleuth:
     sampler:
       probability: 100
+      
+security.oauth2.client.clientId: account
+security.oauth2.client.clientSecret: '123'
+security.oauth2.client.accessTokenUri: http://auth.default.svc.cluster.local:8084/uaa/oauth/token
+security.oauth2.client.grant-type: client_credentials
+security.oauth2.client.scope: server
 
 eureka:
   client:
