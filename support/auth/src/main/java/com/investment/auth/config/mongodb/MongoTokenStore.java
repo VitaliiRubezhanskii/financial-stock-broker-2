@@ -144,7 +144,7 @@ public class MongoTokenStore implements TokenStore {
         }
 //        return accessToken;
         return null;
-    }
+}
 
     @Override
     public Collection<OAuth2AccessToken> findTokensByClientIdAndUserName(String clientId, String username) {
