@@ -22,12 +22,5 @@ security:
     auth_host: /uaa/oauth/token
     logging.level.org.springframework.web: DEBUG
     
-  oauth2:
-    client:
-      clientId: auth
-      clientSecret: 123
-      accessTokenUri: http://localhost:9000/uaa/oauth/token
-      grant-type: client_credentials
-      scope: server
-spring.main.allow-bean-definition-overriding: true
+
  
