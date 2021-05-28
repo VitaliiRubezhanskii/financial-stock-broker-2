@@ -8,7 +8,7 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
 
-@FeignClient(name = "account", url = "http://localhost:5000/account/", configuration = ResourceServerConfig.class)
+@FeignClient(name = "account", url = "http://localhost:8100/account/", configuration = ResourceServerConfig.class)
 @Service
 public interface AccountServiceClient {
 
