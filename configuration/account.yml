@@ -24,6 +24,19 @@ eureka:
       enabled: true
     register-with-eureka: true
     fetch-registry: true
+    
+security:
+  oauth2:
+    client:
+      clientId: account
+      clientSecret: 1234
+      accessTokenUri: http://localhost:9000/uaa/oauth/token
+      grant-type: client_credentials
+      scope: server
+    #
+    resource:
+      user-info-uri: http://localhost:9000/uaa/user/current
+      token-info-uri: http://localhost:9000/uaa/oauth/check_token
 
 microservice:
   client:
