@@ -21,7 +21,7 @@ security:
     grant_type: password
     auth_host: /uaa/oauth/token
     logging.level.org.springframework.web: DEBUG
-    security:
+    
 security.oauth2:
     client:
       clientId: feign
