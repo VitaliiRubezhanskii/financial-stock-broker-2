@@ -1,7 +1,7 @@
 spring:
   data:
     mongodb:
-       host: 10.102.26.199
+       host: 10.98.53.183
        port: 27017
        username: username
        password: password
