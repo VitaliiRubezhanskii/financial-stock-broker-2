@@ -22,7 +22,7 @@ security:
     auth_host: /uaa/oauth/token
     logging.level.org.springframework.web: DEBUG
     security:
-  oauth2:
+security.oauth2:
     client:
       clientId: feign
       clientSecret: 1234
