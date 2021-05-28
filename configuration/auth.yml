@@ -25,7 +25,7 @@ security:
 security:
   oauth2:
     client:
-      client-id: browser
+      clientId: auth
       clientSecret: 123
       accessTokenUri: http://localhost:9000/uaa/oauth/token
       grant-type: client_credentials
