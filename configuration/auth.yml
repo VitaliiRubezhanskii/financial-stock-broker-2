@@ -22,7 +22,6 @@ security:
     auth_host: /uaa/oauth/token
     logging.level.org.springframework.web: DEBUG
     
-security:
   oauth2:
     client:
       clientId: auth
