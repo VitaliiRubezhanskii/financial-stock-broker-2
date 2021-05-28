@@ -12,11 +12,11 @@ zuul:
     feign:
       path: /feign/**
       ribbon:
-        listOfServers: http://localhost:8099
+        listOfServers: http://localhost:8091
     auth:
       path: /uaa/**
       ribbon:
-        listOfServers: http://localhost:8084
+        listOfServers: http://localhost:9000
   sensitiveHeaders:
 
 
