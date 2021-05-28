@@ -21,3 +21,15 @@ security:
     grant_type: password
     auth_host: /uaa/oauth/token
     logging.level.org.springframework.web: DEBUG
+    security:
+  oauth2:
+    client:
+      clientId: feign
+      clientSecret: 1234
+      accessTokenUri: http://localhost:9000/uaa/oauth/token
+      grant-type: client_credentials
+      scope: server
+    #
+    resource:
+      user-info-uri: http://localhost:9000/uaa/user/current
+      token-info-uri: http://localhost:9000/uaa/oauth/check_token
