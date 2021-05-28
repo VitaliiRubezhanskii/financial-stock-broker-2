@@ -19,7 +19,7 @@ security:
   oauth2:
     client:
       clientId: feign
-      clientSecret: '1234'
+      clientSecret: 1234
       accessTokenUri: http://localhost:9000/uaa/oauth/token
       grant-type: client_credentials
       scope: server
