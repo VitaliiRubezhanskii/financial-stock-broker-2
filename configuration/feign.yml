@@ -1,6 +1,6 @@
 feign:
   hystrix:
-    enabled: true
+    enabled: false
 
 security:
   oauth2:
