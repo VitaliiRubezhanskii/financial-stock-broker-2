@@ -7,10 +7,10 @@ security:
     client:
       clientId: feign
       clientSecret: 1234
-      accessTokenUri: http://localhost:8084/uaa/oauth/token
+      accessTokenUri: http://localhost:9000/uaa/oauth/token
       grant-type: client_credentials
       scope: server
     #
     resource:
-      user-info-uri: http://localhost:8084/uaa/user/current
-      token-info-uri: http://localhost:8084/uaa/oauth/check_token
+      user-info-uri: http://localhost:9000/uaa/user/current
+      token-info-uri: http://localhost:9000/uaa/oauth/check_token
