@@ -18,8 +18,8 @@ spring:
 security:
   oauth2:
     client:
-      clientId: account
-      clientSecret: '123'
+      clientId: feign
+      clientSecret: '1234'
       accessTokenUri: http://localhost:9000/uaa/oauth/token
       grant-type: client_credentials
       scope: server
