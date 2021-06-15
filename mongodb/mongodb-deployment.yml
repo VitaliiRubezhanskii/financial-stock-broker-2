@@ -17,8 +17,6 @@ spec:
       containers:
         - name: mongocustom
           image: mongocustom:latest
-          command: ["/bin/sh"]
-          args: ["-c", "mongoimport --host 10.100.70.27 --db auth --collection user --type json --file /user.json --jsonArray"]
           ports:
             - containerPort: 27017
           env:
