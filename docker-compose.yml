@@ -56,8 +56,8 @@ services:
 #       networks:
 #         - my-mongo-cluster
 
-   mongodb_container:
-     image: mongo:latest
+   mongodb:
+     image: mongocustom:latest
      environment:
        MONGO_INITDB_ROOT_USERNAME: root
        MONGO_INITDB_ROOT_PASSWORD: rootpassword
@@ -65,7 +65,7 @@ services:
        - 27017:27017
      volumes:
        - /etc/localtime:/etc/localtime:ro
-       - /mongo_standalone/data1:/data/db
+       - ./mongodb/data:/data/db
      networks:
       - my-mongo-cluster
 
