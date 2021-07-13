@@ -11,9 +11,14 @@ spring:
           brokers: localhost
   datasource:
     url: jdbc:postgresql://localhost:5432/quotes_provider
-    driver-class-name: org.postgresql.Driver
     password: postgres
     username: postgres
+    hikari:
+      connectionTimeOut: 2000
+      maximumPoolSize: 5
+  jpa:
+    hibernate:
+      ddl-auto: create
 server.port: 9010
 
 spring.application.name: quotes-provider-service
