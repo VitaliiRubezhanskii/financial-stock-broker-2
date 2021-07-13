@@ -26,7 +26,9 @@ spring.jpa:
       ddl-auto: create
     properties: 
       hibernate: 
+        dialect: org.hibernate.dialect.PostgreSQLDialect
         format_sql: true
+        temp.use_jdbc_metadata_defaults: false
 server.port: 9010
 
 spring.application.name: quotes-provider-service
