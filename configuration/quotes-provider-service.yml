@@ -19,11 +19,15 @@ spring:
       maximumPoolSize: 5
   jpa:
     show-sql: true
+    database: org.hibernate.dialect.PostgreSQLDialect
     hibernate:
-      ddl-auto: update
+      naming:
+        implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyJpaCompliantImpl
+      ddl-auto: create-drop
     properties: 
       hibernate: 
         dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
 server.port: 9010
 
 spring.application.name: quotes-provider-service
