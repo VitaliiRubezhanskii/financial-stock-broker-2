@@ -26,7 +26,6 @@ spring:
       ddl-auto: create-drop
     properties: 
       hibernate: 
-        dialect: org.hibernate.dialect.PostgreSQLDialect
         format_sql: true
 server.port: 9010
 
