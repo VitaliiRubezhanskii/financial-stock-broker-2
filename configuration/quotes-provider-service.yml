@@ -10,7 +10,7 @@ spring:
         binder:
           brokers: localhost
   datasource:
-    url: jdbc:postgresql://localhost:5432/quotes_provider
+    url: jdbc:postgresql://localhost:5432/tickets
     password: postgres
     username: postgres
     driver-class-name: org.postgresql.Driver
