@@ -23,7 +23,7 @@ spring:
     hibernate:
       naming:
         implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyJpaCompliantImpl
-      ddl-auto: update
+      ddl-auto: create
     properties: 
       hibernate: 
         format_sql: true
