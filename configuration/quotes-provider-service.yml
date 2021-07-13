@@ -18,6 +18,7 @@ spring:
       connectionTimeOut: 2000
       maximumPoolSize: 5
   jpa:
+    show-sql: true
     hibernate:
       ddl-auto: create-drop
     properties: 
