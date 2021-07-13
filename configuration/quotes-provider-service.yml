@@ -20,7 +20,7 @@ spring.datasource:
 spring.jpa:
     show-sql: true
     database-platform: org.hibernate.dialect.PostgreSQL94Dialect
-    generate-ddl: true
+    hibernate.ddl-auto: create-drop
     properties: 
       hibernate: 
         dialect: org.hibernate.dialect.PostgreSQLDialect
