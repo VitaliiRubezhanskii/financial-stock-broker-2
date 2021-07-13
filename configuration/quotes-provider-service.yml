@@ -19,7 +19,6 @@ spring:
       maximumPoolSize: 5
   jpa:
     show-sql: true
-    database: org.hibernate.dialect.PostgreSQLDialect
     hibernate:
       naming:
         implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyJpaCompliantImpl
