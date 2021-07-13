@@ -9,15 +9,15 @@ spring:
       kafka:
         binder:
           brokers: localhost
-  datasource:
+spring.datasource:
     url: jdbc:postgresql://localhost:5432/quotes_provider
     password: postgres
     username: postgres
-    driver-class-name: org.postgresql.Driver
+    driverClassName: org.postgresql.Driver
     hikari:
       connectionTimeOut: 2000
       maximumPoolSize: 5
-  jpa:
+spring.jpa:
     show-sql: true
     database-platform: org.hibernate.dialect.PostgreSQL94Dialect
     hibernate:
