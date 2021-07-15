@@ -20,7 +20,7 @@ spring:
   jpa:
     show-sql: true
     database-platform: org.hibernate.dialect.PostgreSQL94Dialect
-    hibernate.ddl-auto: create-drop
+    hibernate.ddl-auto: validate
     properties: 
       hibernate: 
         dialect: org.hibernate.dialect.PostgreSQLDialect
