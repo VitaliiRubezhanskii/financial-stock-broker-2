@@ -11,16 +11,31 @@ server:
   servlet:
     context-path: /uaa
 security:
-  jwt:
-    key-store: classpath:keystore.jks
-    key-store-password: letmein
-    key-pair-alias: mytestkey
-    key-pair-password: changeme
-    clientId: clientId
-    secret: secret
-    grant_type: password
-    auth_host: /uaa/oauth/token
-    logging.level.org.springframework.web: DEBUG
+  oauth2:
+    client:
+      provider:
+        keycloak:
+          token-uri: http://localhost:8080/auth/realms/broker/protocol/openid-connect/token
+          authorization-uri: http://localhost:8080/auth/realms/broker/protocol/openid-connect/auth
+          userinfo-uri: http://localhost:8080/auth/realms/broker/protocol/openid-connect/userinfo
+          user-name-attribute: vitalii.rubezhanskii
+      registration:
+        broker:
+          provider: keycloak
+          client-id: broker
+          client-secret: 89623893-4aab-4ae3-a646-411193462f8a
+          authorization-grant-type: authorization_code
+          redirect-uri: http://localhost:9000/uaa/user/current
+  #jwt:
+   # key-store: classpath:keystore.jks
+   # key-store-password: letmein
+   # key-pair-alias: mytestkey
+   # key-pair-password: changeme
+   # clientId: clientId
+   # secret: secret
+   # grant_type: password
+   # auth_host: /uaa/oauth/token
+   # logging.level.org.springframework.web: DEBUG
     
 
  
