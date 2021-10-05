@@ -4,13 +4,17 @@ feign:
 
 security:
   oauth2:
-    client:
-      clientId: feign
-      clientSecret: 1234
-      accessTokenUri: http://localhost:9000/uaa/oauth/token
-      grant-type: client_credentials
-      scope: server
+    resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8080/auth/realms/broker
+  #oauth2:
+   #client:
+    # clientId: feign
+    # clientSecret: 1234
+    #  accessTokenUri: http://localhost:9000/uaa/oauth/token
+    #  grant-type: client_credentials
+    #  scope: server
     #
-    resource:
-      user-info-uri: http://localhost:9000/uaa/user/current
-      token-info-uri: http://localhost:9000/uaa/oauth/check_token
+    #resource:
+    #  user-info-uri: http://localhost:9000/uaa/user/current
+    #  token-info-uri: http://localhost:9000/uaa/oauth/check_token
