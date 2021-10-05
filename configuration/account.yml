@@ -26,19 +26,15 @@ eureka:
     fetch-registry: true
     
 security:
-  oauth2:
-    resourceserver:
-        jwt:
-          issuer-uri: http://localhost:8080/auth/realms/broker
-    #client:
-     # clientId: account
-     # clientSecret: 1234
-     # accessTokenUri: http://localhost:9000/uaa/oauth/token
-     # grant-type: client_credentials
-     # scope: server
-    #resource:
-      # user-info-uri: http://localhost:9000/uaa/user/current
-      # token-info-uri: http://localhost:9000/uaa/oauth/check_token
+    client:
+      clientId: account
+      clientSecret: 1234
+      accessTokenUri: http://localhost:9000/uaa/oauth/token
+      grant-type: client_credentials
+      scope: server
+    resource:
+       user-info-uri: http://localhost:9000/uaa/user/current
+       token-info-uri: http://localhost:9000/uaa/oauth/check_token
 
 microservice:
   client:
