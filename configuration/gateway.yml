@@ -63,6 +63,7 @@ security:
           client-secret: 89623893-4aab-4ae3-a646-411193462f8a
           authorization-grant-type: authorization_code
           redirect-uri: http://localhost:9000/uaa/user/current
+          scope: phone
     #client:
     #  clientId: gateway
     #  clientSecret: 1234
