@@ -62,7 +62,7 @@ security:
           client-id: broker
           client-secret: 89623893-4aab-4ae3-a646-411193462f8a
           authorization-grant-type: authorization_code
-          redirect-uri-template: 'https://piotrminkowski.com/'
+          redirect-uri-template: https://piotrminkowski.com/
           scope: phone
     #client:
     #  clientId: gateway
