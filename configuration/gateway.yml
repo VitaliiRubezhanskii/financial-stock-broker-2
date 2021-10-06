@@ -55,7 +55,7 @@ spring.security:
           token-uri: http://localhost:8080/auth/realms/broker/protocol/openid-connect/token
           authorization-uri: http://localhost:8080/auth/realms/broker/protocol/openid-connect/auth
           userinfo-uri: http://localhost:8080/auth/realms/broker/protocol/openid-connect/userinfo
-          user-name-attribute: vitalii.rubezhanskii
+          user-name-attribute: preferred_username
       registration:
         broker:
           provider: keycloak
