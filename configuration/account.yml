@@ -26,16 +26,24 @@ eureka:
     register-with-eureka: true
     fetch-registry: true
     
-security:
-    client:
-      clientId: account
-      clientSecret: 1234
-      accessTokenUri: http://localhost:9000/uaa/oauth/token
-      grant-type: client_credentials
-      scope: server
-    resource:
-       user-info-uri: http://localhost:9000/uaa/user/current
-       token-info-uri: http://localhost:9000/uaa/oauth/check_token
+#security:
+#    client:
+#      clientId: account
+#      clientSecret: 1234
+#      accessTokenUri: http://localhost:9000/uaa/oauth/token
+#      grant-type: client_credentials
+#      scope: server
+#    resource:
+#       user-info-uri: http://localhost:9000/uaa/user/current
+#       token-info-uri: http://localhost:9000/uaa/oauth/check_token
+
+spring:
+  security:
+    oauth2:
+      resourceserver:
+          jwt:
+            issuer-uri: http://localhost:8080/auth/realms/broker
+            jwk-set-uri: http://localhost:8080/auth/realms/broker/protocol/openid-connect/certs
 
 microservice:
   client:
