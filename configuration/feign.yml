@@ -9,6 +9,7 @@ security:
           issuer-uri: http://localhost:8080/auth/realms/broker
         jwk:
           key-set-uri: http://localhost:8080/auth/realms/broker/protocol/openid-connect/certs
+                     
   #oauth2:
    #client:
     # clientId: feign
