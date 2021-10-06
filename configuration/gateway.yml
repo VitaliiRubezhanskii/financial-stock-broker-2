@@ -15,12 +15,11 @@ zuul:
       ribbon:
         listOfServers: http://localhost:8091
       sensitiveHeaders: Cookie,Set-Cookie
-  sensitiveHeaders:
-
     auth:
       path: /uaa/**
       ribbon:
         listOfServers: http://localhost:9000
+  sensitiveHeaders:
  
 
 eureka:
