@@ -1,4 +1,5 @@
 zuul:
+  add-proxy-headers: false
   ignored-services: '*'
   routes:
     account:
