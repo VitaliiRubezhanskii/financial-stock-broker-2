@@ -14,12 +14,12 @@ zuul:
       path: /feign/**
       ribbon:
         listOfServers: http://localhost:8091
-      sensitiveHeaders: Cookie,Set-Cookie
+      sensitive-headers: Cookie,Set-Cookie
     auth:
       path: /uaa/**
       ribbon:
         listOfServers: http://localhost:9000
-  sensitiveHeaders:
+  sensitive-headers:
  
 
 eureka:
