@@ -62,7 +62,7 @@ spring.security:
           client-id: broker
           client-secret: 89623893-4aab-4ae3-a646-411193462f8a
           authorization-grant-type: authorization_code
-          redirect-uri: "{baseUrl}/login/oauth2/code/keycloak"
+          redirect-uri: "http://localhost:8100/login/oauth2/code/broker"
           scope: phone
     #client:
     #  clientId: gateway
