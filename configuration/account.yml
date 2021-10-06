@@ -40,3 +40,12 @@ security:
 microservice:
   client:
     url: http://localhost:8099
+  server.port = 8081
+keycloak.realm: broker
+keycloak.auth-server-url: http://localhost:8080/auth
+keycloak.ssl-required: external
+#keycloak resource is the client ID
+keycloak.resource: broker
+keycloak.use-resource-role-mappings: true
+#The line below will prevent redirect to login page
+keycloak.bearer-only: true
