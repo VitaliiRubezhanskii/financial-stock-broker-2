@@ -17,7 +17,7 @@ zuul:
       path: /uaa/**
       ribbon:
         listOfServers: http://localhost:9000
-  sensitiveHeaders:
+  sensitiveHeaders: Cookie,Set-Cookie
 
 
 eureka:
