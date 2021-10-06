@@ -48,7 +48,7 @@ spring:
 microservice:
   client:
     url: http://localhost:8099
-  server.port = 8081
+server.port: 8081
 keycloak:
   enabled: true
   realm: broker
