@@ -2,11 +2,12 @@ spring:
   data:
     mongodb:
       #uri: mongodb://root:root@localhost:27017/admin
-       host: localhost
-       port: 27017
-       username: root
-       password: rootpassword
-       database: account
+       uri: mongodb://root:rootpassword@localhost:27017/account?authSource=admin&directConnection=true&ssl=false
+       #host: localhost
+       #port: 27017
+       #username: root
+       #password: rootpassword
+       #database: account
        
   zipkin:
     enabled: true
