@@ -37,7 +37,6 @@ eureka:
 #       user-info-uri: http://localhost:9000/uaa/user/current
 #       token-info-uri: http://localhost:9000/uaa/oauth/check_token
 
-spring:
   security:
     oauth2:
       resourceserver:
