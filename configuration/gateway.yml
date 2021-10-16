@@ -1,28 +1,36 @@
-zuul:
+#zuul:
   #add-proxy-headers: true
   #ignoredHeaders:
   #  - authorization
-  ignored-services: '*'
+ # ignored-services: '*'
+ # routes:
+ #   account:
+ #     path: /account/**
+ #     ribbon:
+ #       listOfServers: http://localhost:8093
+ #   order:
+ #     path: /order/**
+ #     ribbon:
+ #       listOfServers: http://localhost:8092
+ #   feign:
+ #     path: /feign/**
+ #     ribbon:
+ #       listOfServers: http://localhost:8091
+ #     sensitive-headers: Cookie,Set-Cookie
+ #   auth:
+ #     path: /uaa/**
+ #     ribbon:
+ #       listOfServers: http://localhost:9000
+ # sensitive-headers: Cookie,Set-Cookie
+spring.cloud.gateway:
   routes:
-    account:
-      path: /account/**
-      ribbon:
-        listOfServers: http://localhost:8093
-    order:
-      path: /order/**
-      ribbon:
-        listOfServers: http://localhost:8092
-    feign:
-      path: /feign/**
-      ribbon:
-        listOfServers: http://localhost:8091
-      sensitive-headers: Cookie,Set-Cookie
-    auth:
-      path: /uaa/**
-      ribbon:
-        listOfServers: http://localhost:9000
-  sensitive-headers: Cookie,Set-Cookie
- 
+     - id: feign-service
+       uri: lb://feign-service
+       predicates:
+        - Path=/feign/**
+       filters:
+        - StripPrefix=2
+
 
 eureka:
   instance:
