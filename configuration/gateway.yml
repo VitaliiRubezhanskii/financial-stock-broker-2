@@ -23,13 +23,15 @@
  #       listOfServers: http://localhost:9000
  # sensitive-headers: Cookie,Set-Cookie
 spring.cloud.gateway:
+  default-filters:
+     - TokenRelay
   routes:
      - id: feign
-       uri: http://localhost:8093
+       uri: http://localhost:8093/feign
        predicates:
         - Path=/feign/**
-       #filters:
-       # - StripPrefix=2
+       filters:
+        - StripPrefix=2
 
 
 eureka:
