@@ -24,7 +24,7 @@
  # sensitive-headers: Cookie,Set-Cookie
 spring.cloud.gateway:
   routes:
-     - id: feign-service
+     - id: feign
        uri: lb://feign
        predicates:
         - Path=/feign/**
