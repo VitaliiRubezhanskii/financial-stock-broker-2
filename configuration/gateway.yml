@@ -30,11 +30,11 @@ spring.cloud.gateway:
      - TokenRelay
   routes:
      - id: feign
-       uri: http://localhost:8093/feign
+       uri: http://localhost:8093
        predicates:
-        - Path=/feign/**
-       filters:
-        - StripPrefix=2
+        - Path=/feign/{segment}
+      # filters:
+      # - StripPrefix=2
 
 
 eureka:
