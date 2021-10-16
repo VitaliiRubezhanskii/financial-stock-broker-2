@@ -29,10 +29,10 @@ spring.cloud.gateway:
   default-filters:
      - TokenRelay
   routes:
-  - id: feign
-    uri: http://localhost:8093
-    predicates:
-    - Path=/feign/**
+    - id: feign
+      uri: http://localhost:8093
+      predicates:
+    - Path=/feign/{segment}
      #filters:
      # - StripPrefix=2
 
