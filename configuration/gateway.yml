@@ -32,7 +32,7 @@ spring.cloud.gateway:
     - id: feign
       uri: http://localhost:8093
       predicates:
-    - Path=/feign/**
+       - Path=/feign/**
      #filters:
      # - StripPrefix=2
 
