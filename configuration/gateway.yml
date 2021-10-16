@@ -23,6 +23,9 @@
  #       listOfServers: http://localhost:9000
  # sensitive-headers: Cookie,Set-Cookie
 spring.cloud.gateway:
+  discovery:
+     locator:
+       enabled: true
   default-filters:
      - TokenRelay
   routes:
