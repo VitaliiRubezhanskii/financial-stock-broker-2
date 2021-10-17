@@ -28,7 +28,7 @@ spring:
       default-filters:
         - TokenRelay
       routes:
-        - id: FEIGN
+        - id: feign
           uri: http://localhost:8093/
           predicates:
            - Path=/feign/**
