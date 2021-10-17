@@ -22,19 +22,18 @@
  #     ribbon:
  #       listOfServers: http://localhost:9000
  # sensitive-headers: Cookie,Set-Cookie
-spring.cloud.gateway:
-  discovery:
-     locator:
-       enabled: true
-  default-filters:
-     - TokenRelay
-  routes:
-    - id: feign
-      uri: http://localhost:8093/
-      predicates:
-       - Path=/feign/**
-     #filters:
-     # - StripPrefix=2
+spring:
+  cloud:
+    gateway:
+      default-filters:
+         - TokenRelay
+      routes:
+        - id: FEIGN
+          uri: http://localhost:8093/
+          predicates:
+           - Path=/feign/**
+         #filters:
+         # - StripPrefix=2
 
 
 eureka:
