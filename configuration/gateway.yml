@@ -32,8 +32,8 @@ spring:
           uri: http://localhost:8093/
           predicates:
            - Path=/feign/**
-         #filters:
-         # - StripPrefix=2
+          filters:
+           - StripPrefix=2
 
 
 eureka:
