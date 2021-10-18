@@ -8,7 +8,12 @@ spring:
        #username: root
        #password: rootpassword
        #database: account
-       
+  security:
+    oauth2:
+      resourceserver:
+          jwt:
+            issuer-uri: http://localhost:8080/auth/realms/broker
+            jwk-set-uri: http://localhost:8080/auth/realms/broker/protocol/openid-connect/certs
   zipkin:
     enabled: true
     baseUrl: http://localhost:9411
@@ -37,12 +42,6 @@ eureka:
 #       user-info-uri: http://localhost:9000/uaa/user/current
 #       token-info-uri: http://localhost:9000/uaa/oauth/check_token
 
-  security:
-    oauth2:
-      resourceserver:
-          jwt:
-            issuer-uri: http://localhost:8080/auth/realms/broker
-            jwk-set-uri: http://localhost:8080/auth/realms/broker/protocol/openid-connect/certs
 
 microservice:
   client:
