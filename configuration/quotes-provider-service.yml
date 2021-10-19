@@ -14,7 +14,8 @@ spring:
               producer:
                 useNativeEncoding: true
                 key.serializer: org.apache.kafka.common.serialization.StringSerializer
-                value.serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
+                value.serializer: org.apache.kafka.common.serialization.StringSerializer
+                #io.confluent.kafka.serializers.KafkaAvroSerializer
   datasource:
     url: jdbc:postgresql://localhost:5432/quotes_provider
     password: postgres
@@ -41,7 +42,8 @@ spring.application.name: quotes-provider-service
 spring.cloud.stream.kafka.binder.configuration:
   schema.registry.url: http://localhost:8081
   key.serializer: org.apache.kafka.common.serialization.ByteArraySerializer
-  value.serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
+  value.serializer: org.apache.kafka.common.serialization.StringSerializer
+  #io.confluent.kafka.serializers.KafkaAvroSerializer
   #com.investment.quotesproviderservice.serdes.QuoteSerde 
   #com.investment.quotesproviderservice.serdes.CustomSerializer
 
