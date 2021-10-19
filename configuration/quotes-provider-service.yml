@@ -4,6 +4,7 @@ spring:
       bindings:
         process-out-0:
           destination: quote
+          contentType: application/*+avro
       kafka:
         binder:
           brokers: 172.18.0.1
