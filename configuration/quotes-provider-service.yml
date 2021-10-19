@@ -40,8 +40,9 @@ spring.application.name: quotes-provider-service
 spring.cloud.stream.kafka.binder.configuration:
   schema.registry.url: http://localhost:8081
   key.serializer: org.apache.kafka.common.serialization.ByteArraySerializer
-  value.serializer: com.investment.quotesproviderservice.serdes.CustomSerializer
-  #com.investment.quotesproviderservice.serdes.QuoteSerde
+  value.serializer: com.investment.quotesproviderservice.serdes.QuoteSerde 
+  #com.investment.quotesproviderservice.serdes.CustomSerializer
+
 
 
 eureka:
