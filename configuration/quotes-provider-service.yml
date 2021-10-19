@@ -12,8 +12,8 @@ spring:
             process-in-0:
               producer:
                 useNativeEncoding: true
-                key.serializer: org.apache.kafka.common.serialization.StringSerializer
-                value.serializer: org.apache.kafka.common.serialization.StringSerializer
+                key.serializer: com.investment.quotesproviderservice.serdes.CustomSerializer
+                value.serializer: com.investment.quotesproviderservice.serdes.CustomSerializer
   datasource:
     url: jdbc:postgresql://localhost:5432/quotes_provider
     password: postgres
