@@ -2,10 +2,7 @@ spring:
   cloud:
     stream:
       bindings:
-        output:
-          producer:
-            useNativeEncoding: true
-          destination: quote
+        process-out-0: quote
       kafka:
         binder:
           brokers: localhost
