@@ -8,13 +8,13 @@ spring:
       kafka:
         binder:
           brokers: 172.18.0.1
-        streams:
-          bindings:
-            process-in-0:
-              producer:
-                useNativeEncoding: true
-                key.serializer: org.apache.kafka.common.serialization.StringSerializer
-                value.serializer: org.apache.kafka.common.serialization.StringSerializer
+        #streams:
+        #  bindings:
+        #    process-in-0:
+        #      producer:
+        #        useNativeEncoding: true
+        #        key.serializer: org.apache.kafka.common.serialization.Serdes$StringSerde
+        #        value.serializer: org.apache.kafka.common.serialization.Serdes$StringSerde
                 #io.confluent.kafka.serializers.KafkaAvroSerializer
   datasource:
     url: jdbc:postgresql://localhost:5432/quotes_provider
