@@ -2,7 +2,8 @@ spring:
   cloud:
     stream:
       bindings:
-        process-out-0: quote
+        process-out-0:
+          destination: quote
       kafka:
         binder:
           brokers: localhost
