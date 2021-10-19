@@ -7,6 +7,12 @@ spring:
       kafka:
         binder:
           brokers: localhost
+        streams:
+          bindings:
+            process-in-0:
+              producer:
+                keySerde: org.apache.kafka.common.serialization.Serdes$StringSerde
+                valueSerde: org.apache.kafka.common.serialization.Serdes$StringSerde
   datasource:
     url: jdbc:postgresql://localhost:5432/quotes_provider
     password: postgres
