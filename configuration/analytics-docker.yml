@@ -8,6 +8,7 @@ spring.cloud.stream.bindings.process-in-0:
     useNativeDecoding: true
 spring.cloud.stream.kafka.streams.binder:
     brokers: broker
+    replicationFactor: 1
     configuration:
       schema.registry.url: http://schema-registry:8081
       commit.interval.ms: 1000
