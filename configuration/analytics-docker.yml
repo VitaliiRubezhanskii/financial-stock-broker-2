@@ -1,12 +1,11 @@
 server.port: 9998
 spring.application.name: analytics
-spring.cloud.stream.kafka.binder.brokers: broker
-spring.cloud.stream.bindings.output:
-    destination: quote-aggregation
-spring.cloud.stream.bindings.input:
-    destination: quote
-    consumer:
-      useNativeDecoding: true
+spring.cloud.stream.bindings.process-out-0:
+  destination: quote-aggregation
+spring.cloud.stream.bindings.process-in-0:
+  destination: quote
+  consumer:
+    useNativeDecoding: true
 spring.cloud.stream.kafka.streams.binder:
     brokers: broker
     configuration:
