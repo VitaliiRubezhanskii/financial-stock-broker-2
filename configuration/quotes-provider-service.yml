@@ -9,7 +9,7 @@ spring:
           contentType: application/*+avro
       kafka:
         binder:
-          brokers: localhost
+          brokers: 172.18.0.1
         #streams:
         #  bindings:
         #    process-in-0:
