@@ -8,7 +8,6 @@ spring.cloud.stream.bindings.process-in-0:
     useNativeDecoding: true
 spring.cloud.stream.kafka.streams.binder:
   brokers: localhost
-  defaultBrokerPort: 29092
   configuration:
     schema.registry.url: http://localhost:8081
     commit.interval.ms: 1000
