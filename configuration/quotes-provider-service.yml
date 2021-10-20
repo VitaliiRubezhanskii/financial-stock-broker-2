@@ -1,7 +1,7 @@
 spring:
   cloud:
     stream:
-      schema-registry-client:
+      schemaRegistryClient:
         endpoint: http://localhost:8081
       bindings:
         process-out-0:
