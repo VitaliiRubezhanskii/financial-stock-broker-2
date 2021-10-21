@@ -4,10 +4,10 @@ spring:
   cloud:
     stream:
       bindings:
-        output:
-          producer:
-            useNativeEncoding: true
-          destination: quote
+       # output:
+       #   producer:
+       #     useNativeEncoding: true
+       #   destination: quote
       kafka:
         binder:
           brokers: broker
