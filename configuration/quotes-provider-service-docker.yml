@@ -20,7 +20,7 @@ spring:
           #replicationFactor: 1
           #partitionCount: 4
           configuration:
-          #  schema.registry.url: http://schema-registry:8081
+            schema.registry.url: http://schema-registry:8081
           #  commit.interval.ms: 1000
             key.serializer: io.confluent.kafka.streams.serdes.avro.GenericAvroSerializer
             value.serializer: io.confluent.kafka.streams.serdes.avro.GenericAvroSerializer
