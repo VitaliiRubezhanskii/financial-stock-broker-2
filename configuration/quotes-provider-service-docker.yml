@@ -8,7 +8,7 @@ spring:
       bindings:
         process-out-0:
           destination: quote
-       #   content-type: avro/bytes
+          content-type: application/*+avro
        # output:
        #   producer:
        #     useNativeEncoding: true
