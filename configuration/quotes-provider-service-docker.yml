@@ -3,6 +3,7 @@ spring:
     name: quotes-provider-service
   cloud:
     stream:
+      source: process
       bindings:
         process-out-0:
           destination: quote
