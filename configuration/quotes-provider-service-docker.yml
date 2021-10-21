@@ -26,7 +26,7 @@ spring:
             schema.registry.url: http://schema-registry:8081
           #  commit.interval.ms: 1000
             key.serializer: io.confluent.kafka.streams.serdes.avro.GenericAvroSerializer
-            value.serializer: io.confluent.kafka.streams.serdes.avro.GenericAvroSerializer
+            value.serializer: com.investment.quotesproviderservice.serdes.QuoteAvroSerializer
 
   datasource:
     url: jdbc:postgresql://postgres:5432/quotes_provider
