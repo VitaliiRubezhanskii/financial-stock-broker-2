@@ -2,13 +2,13 @@ spring:
   application:
     name: quotes-provider-service
   cloud:
+    schemaRegistryClient.endpoint: http://schema-registry:8081
     stream:
       source: process
       bindings:
         process-out-0:
           destination: quote
           contentType: application/*+avro
-      schemaRegistryClient: http://schema-registry:8081
        # output:
        #   producer:
        #     useNativeEncoding: true
@@ -66,6 +66,4 @@ management:
 
 server:
   port: 9010
-value.converter.schema.registry.url: http://schema-registry:8081
-key.converter.schema.registry.url: http://schema-registry:8081
 
