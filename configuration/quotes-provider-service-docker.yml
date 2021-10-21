@@ -1,6 +1,9 @@
 spring:
   application:
     name: quotes-provider-service
+  kafka:
+    properties:
+      schema.registry.url: http://schema-registry:8081
   cloud:
     stream:
       #function: 
@@ -23,9 +26,8 @@ spring:
             schema.registry.url: http://schema-registry:8081
           #  commit.interval.ms: 1000
             key.serializer: io.confluent.kafka.streams.serdes.avro.GenericAvroSerializer
-            key.converter.schema.registry.url: http://schema-registry:8081
             value.serializer: io.confluent.kafka.streams.serdes.avro.GenericAvroSerializer
-            value.converter.schema.registry.url: http://schema-registry:8081
+
   datasource:
     url: jdbc:postgresql://postgres:5432/quotes_provider
     password: postgres
