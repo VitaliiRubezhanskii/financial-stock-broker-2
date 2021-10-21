@@ -62,5 +62,5 @@ management:
 
 server:
   port: 9010
-
+schema.registry.url: http://schema-registry:8081
 
