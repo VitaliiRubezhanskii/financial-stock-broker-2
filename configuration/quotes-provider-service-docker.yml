@@ -7,6 +7,7 @@ spring:
         process-out-0:
           destination: quote
           contentType: application/*+avro
+      schemaRegistryClient: http://schema-registry:8081
        # output:
        #   producer:
        #     useNativeEncoding: true
