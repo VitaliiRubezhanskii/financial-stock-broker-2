@@ -4,6 +4,8 @@ spring:
   cloud:
     stream:
       bindings:
+        process-out-0:
+          destination: quote
        # output:
        #   producer:
        #     useNativeEncoding: true
