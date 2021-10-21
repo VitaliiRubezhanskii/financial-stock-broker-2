@@ -1,18 +1,12 @@
 spring:
   application:
     name: quotes-provider-service
-  kafka:
-    properties:
-      schema.registry.url: http://schema-registry:8081
   cloud:
     stream:
-      #function: 
-      #  definition: process
       bindings:
         process-out-0:
           destination: quote
-          useNativeEncoding: true
-          content-type: application/*+avro
+          contentType: application/*+avro
        # output:
        #   producer:
        #     useNativeEncoding: true
