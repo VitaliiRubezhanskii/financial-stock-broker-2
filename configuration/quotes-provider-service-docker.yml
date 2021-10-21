@@ -3,6 +3,7 @@ spring:
     name: quotes-provider-service
   cloud:
     schemaRegistryClient.endpoint: http://schema-registry:8081
+    schema.avro.dynamicSchemaGenerationEnabled: true
     stream:
       source: process
       bindings:
