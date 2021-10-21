@@ -14,11 +14,11 @@ spring.cloud.stream.kafka.streams.binder:
       schema.registry.url: http://schema-registry:8081
       commit.interval.ms: 1000
       default.key.serde: org.apache.kafka.common.serialization.Serdes$StringSerde
-      default.value.serde: com.investment.quotesproviderservice.serdes.QuoteSerde
+      default.value.serde: com.investment.serde.QuoteSerde
 spring.cloud.stream.kafka.streams.bindings.input:
   consumer:
     keySerde: org.apache.kafka.common.serialization.Serdes$StringSerde
-    valueSerde: com.investment.quotesproviderservice.serdes.QuoteSerde
+    valueSerde: com.investment.serde.QuoteSerde
 
 
 eureka:
