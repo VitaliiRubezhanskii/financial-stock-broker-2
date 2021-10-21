@@ -3,10 +3,10 @@ spring:
     name: quotes-provider-service
   cloud:
     stream:
-      schema.avro.shema-locations: classpath*:avro/quote.avsc
       bindings:
         process-out-0:
           destination: quote
+          content-type: avro/bytes
        # output:
        #   producer:
        #     useNativeEncoding: true
