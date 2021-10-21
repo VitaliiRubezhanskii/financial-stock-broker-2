@@ -3,12 +3,12 @@ spring:
     name: quotes-provider-service
   cloud:
     stream:
-      function: 
-        definition: process
+      #function: 
+      #  definition: process
       bindings:
         process-out-0:
           destination: quote
-          content-type: avro/bytes
+       #   content-type: avro/bytes
        # output:
        #   producer:
        #     useNativeEncoding: true
