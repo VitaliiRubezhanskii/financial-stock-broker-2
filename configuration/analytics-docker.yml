@@ -1,6 +1,6 @@
 server.port: 9998
 spring.application.name: analytics
-#spring.kafka.properties.
+spring.kafka.properties.schema.registry.url: http://schema-registry:8081
 spring.cloud.stream.bindings.process-out-0:
   destination: quote-aggregation
 spring.cloud.stream.bindings.process-in-0:
