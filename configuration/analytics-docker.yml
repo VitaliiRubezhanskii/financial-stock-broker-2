@@ -18,8 +18,8 @@ spring.cloud.stream.kafka.streams.binder:
       value.serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
 spring.cloud.stream.kafka.streams.bindings.input:
   consumer:
-    keySerde: org.apache.kafka.common.serialization.Serdes$StringSerde
-    valueSerde: org.apache.kafka.common.serialization.Serdes$StringSerde
+    keySerde: io.confluent.kafka.streams.serdes.avro.GenericAvroSerde
+    valueSerde: io.confluent.kafka.streams.serdes.avro.GenericAvroSerde
 
 
 eureka:
