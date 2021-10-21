@@ -8,6 +8,7 @@ spring:
       bindings:
         process-out-0:
           destination: quote
+          useNativeEncoding: true
           content-type: application/*+avro
        # output:
        #   producer:
@@ -19,8 +20,8 @@ spring:
           replicationFactor: 1
           partitionCount: 4
           configuration:
-            schema.registry.url: http://schema-registry:8081
-            commit.interval.ms: 1000
+          #  schema.registry.url: http://schema-registry:8081
+          #  commit.interval.ms: 1000
             default.key.serde: org.apache.kafka.common.serialization.Serdes$StringSerde
             default.value.serde: com.investment.quotesproviderservice.serdes.QuoteSerde
   datasource:
