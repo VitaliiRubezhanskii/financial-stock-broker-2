@@ -19,7 +19,7 @@ spring.cloud.stream.kafka.streams.binder:
 spring.cloud.stream.kafka.streams.bindings.input:
   consumer:
     keySerde: org.apache.kafka.common.serialization.Serdes$StringSerde
-    valueSerde: com.investment.serde.QuoteSerde
+    valueSerde: org.apache.kafka.common.serialization.Serdes$StringSerde
 
 
 eureka:
