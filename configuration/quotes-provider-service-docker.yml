@@ -18,8 +18,9 @@ spring:
           partitionCount: 4
           configuration:
             schema.registry.url: http://schema-registry:8081
-            key.serializer: org.apache.kafka.common.serialization.ByteArraySerializer
-            value.serializer: com.investment.quotesproviderservice.serdes.QuoteSerde
+            commit.interval.ms: 1000
+            default.key.serde: org.apache.kafka.common.serialization.Serdes$StringSerde
+            default.value.serde: io.confluent.kafka.streams.serdes.avro.SpecificAvroSerde
   datasource:
     url: jdbc:postgresql://postgres:5432/quotes_provider
     password: postgres
