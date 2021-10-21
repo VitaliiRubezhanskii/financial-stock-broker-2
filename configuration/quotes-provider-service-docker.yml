@@ -3,6 +3,10 @@ spring:
     name: quotes-provider-service
   cloud:
     stream:
+      schema-registry-client:
+        endpoint: http://schema-registry:8081
+      default:
+        contentType: application/*+avro
       bindings:
         process-out-0:
           destination: quote
