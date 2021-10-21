@@ -23,7 +23,7 @@ spring:
           #  schema.registry.url: http://schema-registry:8081
           #  commit.interval.ms: 1000
             default.key.serde: org.apache.kafka.common.serialization.Serdes$StringSerde
-            default.value.serde: org.apache.kafka.common.serialization.Serdes$StringSerde
+            default.value.serde: io.confluent.kafka.streams.serdes.avro.GenericAvroSerde
   datasource:
     url: jdbc:postgresql://postgres:5432/quotes_provider
     password: postgres
