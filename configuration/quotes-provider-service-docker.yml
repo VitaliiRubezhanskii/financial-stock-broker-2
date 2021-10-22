@@ -30,7 +30,7 @@ spring:
          #   value.serializer: com.investment.quotesproviderservice.serdes.QuoteAvroSerializer
          #   key.converter.schema.registry.url: http://schema-registry:8081
          #   value.converter.schema.registry.url: http://schema-registry:8081
-        streams.bindings.process-0-out.producer:
+        streams.bindings.process-out-0.producer:
           keySerde: com.investment.quotesproviderservice.serdes.QuoteAvroSerde
           valueSerde: com.investment.quotesproviderservice.serdes.QuoteAvroSerde
 
