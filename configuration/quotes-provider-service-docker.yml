@@ -23,13 +23,16 @@ spring:
           brokers: broker
           #replicationFactor: 1
           #partitionCount: 4
-          configuration:
-            schema.registry.url: http://schema-registry:8081
+         # configuration:
+          #  schema.registry.url: http://schema-registry:8081
           #  commit.interval.ms: 1000
-            key.serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
-            value.serializer: com.investment.quotesproviderservice.serdes.QuoteAvroSerializer
-            key.converter.schema.registry.url: http://schema-registry:8081
-            value.converter.schema.registry.url: http://schema-registry:8081
+         #   key.serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
+         #   value.serializer: com.investment.quotesproviderservice.serdes.QuoteAvroSerializer
+         #   key.converter.schema.registry.url: http://schema-registry:8081
+         #   value.converter.schema.registry.url: http://schema-registry:8081
+        streams.bindings.process-0-out.producer:
+          keySerde: org.apache.kafka.common.serialization.Serdes$StringSerde
+          valueSerde: com.investment.quotesproviderservice.serdes.QuoteAvroSerializer
 
   datasource:
     url: jdbc:postgresql://postgres:5432/quotes_provider
