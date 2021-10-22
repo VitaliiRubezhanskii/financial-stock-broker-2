@@ -7,12 +7,13 @@ spring:
     stream:
       kafka:
         streams:
-          binder.brokers: broker
-          configuration:
-            schema.registry.url: http://schema-registry:8081
-            commit.interval.ms: 1000
-          #  key.serializer: org.apache.kafka.common.serialization.StringSerializer
-           # value.serializer: org.apache.kafka.common.serialization.StringSerializer
+          binder:
+            brokers: broker
+            configuration:
+              schema.registry.url: http://schema-registry:8081
+              commit.interval.ms: 1000
+              key.serializer: org.apache.kafka.common.serialization.StringSerializer
+              value.serializer: org.apache.kafka.common.serialization.StringSerializer
           bindings:    
             process-out-0:
               destination: quote
