@@ -18,8 +18,9 @@ spring:
             process-out-0:
               destination: quote
               contentType: application/*+avro
-              #keySerde: io.confluent.kafka.streams.serdes.avro.SpecificAvroSerde
-             # valueSerde: io.confluent.kafka.streams.serdes.avro.SpecificAvroSerde
+              producer:
+                keySerde: io.confluent.kafka.streams.serdes.avro.SpecificAvroSerde
+                valueSerde: io.confluent.kafka.streams.serdes.avro.SpecificAvroSerde
           
               
 
