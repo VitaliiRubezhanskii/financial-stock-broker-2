@@ -11,8 +11,8 @@ spring:
           configuration:
             schema.registry.url: http://schema-registry:8081
             commit.interval.ms: 1000
-            key.serializer: org.apache.kafka.common.serialization.ByteArraySerializer
-            value.serializer: org.apache.kafka.common.serialization.ByteArraySerializer
+            key.serializer: org.apache.kafka.common.serialization.StringSerializer
+            value.serializer: org.apache.kafka.common.serialization.StringSerializer
           bindings:    
             process-out-0:
               destination: quote
