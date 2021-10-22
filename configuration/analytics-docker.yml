@@ -6,7 +6,7 @@ spring.cloud.stream.bindings.process-out-0:
   contentType: application/*+avro
 spring.cloud.stream.bindings.process-in-0:
   destination: quote
-  contentType=application/*+avro
+  contentType: application/*+avro
   #consumer:
   #  useNativeDecoding: true
 spring.cloud.stream.kafka.streams.binder:
