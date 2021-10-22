@@ -8,12 +8,12 @@ spring:
   cloud:
     schemaRegistryClient.endpoint: http://schema-registry:8081
     schema.avro.dynamicSchemaGenerationEnabled: true
-    stream:
-      source: process
-      bindings:
-        process-out-0:
-          destination: quote
-          contentType: application/*+avro
+    #stream:
+    #  source: process
+    #  bindings:
+    #    process-out-0:
+    #      destination: quote
+    #      contentType: application/*+avro
        # output:
        #   producer:
        #     useNativeEncoding: true
@@ -30,9 +30,13 @@ spring:
          #   value.serializer: com.investment.quotesproviderservice.serdes.QuoteAvroSerializer
          #   key.converter.schema.registry.url: http://schema-registry:8081
          #   value.converter.schema.registry.url: http://schema-registry:8081
-        streams.bindings.process-out-0.producer:
-          keySerde: com.investment.quotesproviderservice.serdes.QuoteAvroSerde
-          valueSerde: com.investment.quotesproviderservice.serdes.QuoteAvroSerde
+        streams.bindings.process-out-0:
+          destination: quote
+          contentType: application/*+avro
+          producer:
+            nativeDecoding: false
+            keySerde: com.investment.quotesproviderservice.serdes.QuoteAvroSerde
+            valueSerde: com.investment.quotesproviderservice.serdes.QuoteAvroSerde
 
   datasource:
     url: jdbc:postgresql://postgres:5432/quotes_provider
