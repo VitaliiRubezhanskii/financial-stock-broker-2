@@ -27,7 +27,7 @@ spring:
             schema.registry.url: http://schema-registry:8081
           #  commit.interval.ms: 1000
             key.serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
-            value.serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
+            value.serializer: com.investment.serde.QuoteAvroSerializer
             key.converter.schema.registry.url: http://schema-registry:8081
             value.converter.schema.registry.url: http://schema-registry:8081
 
