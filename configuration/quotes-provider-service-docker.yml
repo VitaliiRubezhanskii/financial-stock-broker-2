@@ -32,7 +32,7 @@ spring:
          #   value.converter.schema.registry.url: http://schema-registry:8081
         streams.bindings.process-0-out.producer:
           keySerde: org.apache.kafka.common.serialization.Serdes$StringSerde
-          valueSerde: com.investment.quotesproviderservice.serdes.QuoteAvroSerializer
+          valueSerde: com.investment.quotesproviderservice.serdes.QuoteAvroSerde
 
   datasource:
     url: jdbc:postgresql://postgres:5432/quotes_provider
