@@ -9,18 +9,18 @@ spring:
         streams:
           binder:
             brokers: broker
-            configuration:
-              schema.registry.url: http://schema-registry:8081
-              commit.interval.ms: 1000
-              key.serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
-              value.serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
+            #configuration:
+            #  schema.registry.url: http://schema-registry:8081
+            #  commit.interval.ms: 1000
+            #  key.serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
+            #  value.serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
           bindings:    
             process-out-0:
               destination: quote
-              contentType: application/*+avro
-              producer:
-                keySerde: io.confluent.kafka.streams.serdes.avro.SpecificAvroSerde
-                valueSerde: io.confluent.kafka.streams.serdes.avro.SpecificAvroSerde
+             # contentType: application/*+avro
+             # producer:
+             #   keySerde: io.confluent.kafka.streams.serdes.avro.SpecificAvroSerde
+             #   valueSerde: io.confluent.kafka.streams.serdes.avro.SpecificAvroSerde
           
               
 
