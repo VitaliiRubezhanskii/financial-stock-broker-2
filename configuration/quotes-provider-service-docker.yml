@@ -11,14 +11,14 @@ spring:
           configuration:
             schema.registry.url: http://schema-registry:8081
             commit.interval.ms: 1000
-            key.serializer: org.apache.kafka.common.serialization.StringSerializer
-            value.serializer: org.apache.kafka.common.serialization.StringSerializer
+          #  key.serializer: org.apache.kafka.common.serialization.StringSerializer
+           # value.serializer: org.apache.kafka.common.serialization.StringSerializer
           bindings:    
             process-out-0:
               destination: quote
               contentType: application/*+avro
-              keySerde: io.confluent.kafka.streams.serdes.avro.SpecificAvroSerde
-              valueSerde: io.confluent.kafka.streams.serdes.avro.SpecificAvroSerde
+              #keySerde: io.confluent.kafka.streams.serdes.avro.SpecificAvroSerde
+             # valueSerde: io.confluent.kafka.streams.serdes.avro.SpecificAvroSerde
           
               
 
