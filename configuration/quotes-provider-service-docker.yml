@@ -1,6 +1,9 @@
 spring:
   application:
-    name: quotes-provider-service      
+    name: quotes-provider-service   
+  kafka:
+    properties:
+      schema.registry.url: http://schema-registry:8081
   cloud:
     schemaRegistryClient: http://schema-registry:8081
     schema.avro.dynamicSchemaGenerationEnabled: true
