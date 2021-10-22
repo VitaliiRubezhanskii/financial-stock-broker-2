@@ -19,24 +19,24 @@ spring:
        #     useNativeEncoding: true
        #   destination: quote
       kafka:
-        binder:
-          brokers: broker
+        streams:
+          binder.brokers: broker
           #replicationFactor: 1
           #partitionCount: 4
-         # configuration:
+          configuration:
           #  schema.registry.url: http://schema-registry:8081
           #  commit.interval.ms: 1000
-         #   key.serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
-         #   value.serializer: com.investment.quotesproviderservice.serdes.QuoteAvroSerializer
+            key.serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
+            value.serializer: com.investment.quotesproviderservice.serdes.QuoteAvroSerializer
          #   key.converter.schema.registry.url: http://schema-registry:8081
          #   value.converter.schema.registry.url: http://schema-registry:8081
-        streams.bindings.process-out-0:
-          destination: quote
-          contentType: application/*+avro
-          producer:
-            #nativeDecoding: false
-            keySerde: io.confluent.kafka.streams.serdes.avro.SpecificAvroSerde
-            valueSerde: io.confluent.kafka.streams.serdes.avro.SpecificAvroSerde
+          bindings.process-out-0:
+            destination: quote
+            contentType: application/*+avro
+            producer:
+              #nativeDecoding: false
+              keySerde: io.confluent.kafka.streams.serdes.avro.SpecificAvroSerde
+              valueSerde: io.confluent.kafka.streams.serdes.avro.SpecificAvroSerde
 
   datasource:
     url: jdbc:postgresql://postgres:5432/quotes_provider
