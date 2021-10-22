@@ -2,8 +2,8 @@ spring:
   application:
     name: quotes-provider-service      
   cloud:
-    schemaRegistryClient.endpoint: http://schema-registry:8081
-    schema.avro.dynamicSchemaGenerationEnabled: true
+    #schemaRegistryClient.endpoint: http://schema-registry:8081
+    #schema.avro.dynamicSchemaGenerationEnabled: true
     stream:
       kafka:
         streams:
@@ -11,16 +11,14 @@ spring:
           configuration:
             schema.registry.url: http://schema-registry:8081
             commit.interval.ms: 1000
-            default.key.serializer: org.apache.kafka.common.serialization.ByteArraySerializer
-            default.value.serializer: org.apache.kafka.common.serialization.ByteArraySerializer
-          bindings:
-            output:
-              producer:
-                key-serde: io.confluent.kafka.streams.serdes.avro.SpecificAvroSerde
-                value-serde: io.confluent.kafka.streams.serdes.avro.SpecificAvroSerde
+            key.serializer: org.apache.kafka.common.serialization.ByteArraySerializer
+            value.serializer: org.apache.kafka.common.serialization.ByteArraySerializer
+          bindings:    
             process-out-0:
               destination: quote
               contentType: application/*+avro
+              keySerde: io.confluent.kafka.streams.serdes.avro.SpecificAvroSerde
+              valueSerde: io.confluent.kafka.streams.serdes.avro.SpecificAvroSerde
           
               
 
