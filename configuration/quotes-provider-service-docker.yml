@@ -2,7 +2,7 @@ spring:
   application:
     name: quotes-provider-service      
   cloud:
-    schema-registry-client: http://schema-registry:8081
+    schemaRegistryClient: http://schema-registry:8081
     schema.avro.dynamicSchemaGenerationEnabled: true
     stream:
       function.definition: process
