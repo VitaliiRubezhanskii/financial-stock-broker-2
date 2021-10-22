@@ -9,6 +9,8 @@ spring:
       kafka:
         binder:
           brokers: broker
+          minPartitionCount: 2
+          replicationFactor: 1
           configuration:
             schema.registry.url: http://schema-registry:8081
           #  commit.interval.ms: 1000
