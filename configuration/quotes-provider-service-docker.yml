@@ -12,7 +12,7 @@ spring:
             configuration:
               schema.registry.url: http://schema-registry:8081
               commit.interval.ms: 1000
-              key.serializer: org.apache.kafka.common.serialization.StringSerializer
+              key.serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
               value.serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
           bindings:    
             process-out-0:
