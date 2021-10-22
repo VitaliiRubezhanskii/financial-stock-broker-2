@@ -13,12 +13,16 @@ spring:
             commit.interval.ms: 1000
             default.key.serializer: org.apache.kafka.common.serialization.ByteArraySerializer
             default.value.serializer: org.apache.kafka.common.serialization.ByteArraySerializer
-          bindings.process-out-0:
-            destination: quote
-            contentType: application/*+avro
-            producer:
-              keySerde: io.confluent.kafka.streams.serdes.avro.SpecificAvroSerde
-              valueSerde: io.confluent.kafka.streams.serdes.avro.SpecificAvroSerde
+          bindings:
+            output:
+              producer:
+                keySerde: io.confluent.kafka.streams.serdes.avro.SpecificAvroSerde
+                valueSerde: io.confluent.kafka.streams.serdes.avro.SpecificAvroSerde
+            process-out-0:
+              destination: quote
+              contentType: application/*+avro
+          
+              
 
   datasource:
     url: jdbc:postgresql://postgres:5432/quotes_provider
