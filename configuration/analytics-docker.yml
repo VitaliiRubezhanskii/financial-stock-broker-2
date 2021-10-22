@@ -3,10 +3,12 @@ spring.application.name: analytics
 spring.kafka.properties.schema.registry.url: http://schema-registry:8081
 spring.cloud.stream.bindings.process-out-0:
   destination: quote-aggregation
+  contentType: application/*+avro
 spring.cloud.stream.bindings.process-in-0:
   destination: quote
-  consumer:
-    useNativeDecoding: true
+  contentType=application/*+avro
+  #consumer:
+  #  useNativeDecoding: true
 spring.cloud.stream.kafka.streams.binder:
     brokers: broker
     replicationFactor: 1
