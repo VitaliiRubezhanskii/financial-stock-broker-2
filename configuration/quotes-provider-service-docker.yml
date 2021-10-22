@@ -24,8 +24,8 @@ spring:
           #replicationFactor: 1
           #partitionCount: 4
           configuration:
-          #  schema.registry.url: http://schema-registry:8081
-          #  commit.interval.ms: 1000
+            schema.registry.url: http://schema-registry:8081
+            commit.interval.ms: 1000
             key.serializer: org.apache.kafka.common.serialization.ByteArraySerializer
             value.serializer: org.apache.kafka.common.serialization.ByteArraySerializer
          #   key.converter.schema.registry.url: http://schema-registry:8081
@@ -78,6 +78,6 @@ management:
 
 server:
   port: 9010
-key.converter.schema.registry.url: http://schema-registry:8081
-value.converter.schema.registry.url: http://schema-registry:8081
+#key.converter.schema.registry.url: http://schema-registry:8081
+#value.converter.schema.registry.url: http://schema-registry:8081
 
