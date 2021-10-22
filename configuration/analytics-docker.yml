@@ -21,7 +21,7 @@ spring.cloud.stream.kafka.streams.binder:
 spring.cloud.stream.kafka.streams.bindings.input:
   consumer:
     keySerde: io.confluent.kafka.streams.serdes.avro.GenericAvroSerde
-    valueSerde: io.confluent.kafka.streams.serdes.avro.SpecificAvroSerde
+    valueSerde: com.investment.serde.QuoteSerde
 
 
 eureka:
