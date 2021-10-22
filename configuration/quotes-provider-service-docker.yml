@@ -1,9 +1,9 @@
 spring:
   application:
     name: quotes-provider-service
-  kafka:
-    properties:
-      schema.registry.url: http://schema-registry:8081
+  #kafka:
+  #  properties:
+  #    schema.registry.url: http://schema-registry:8081
       
   cloud:
     schemaRegistryClient.endpoint: http://schema-registry:8081
