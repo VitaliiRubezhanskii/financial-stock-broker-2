@@ -36,7 +36,7 @@ spring:
             producer:
               #nativeDecoding: false
               keySerde: io.confluent.kafka.streams.serdes.avro.SpecificAvroSerde
-              valueSerde: io.confluent.kafka.streams.serdes.avro.SpecificAvroSerde
+              valueSerde: org.springframework.kafka.support.serializer.JsonSerde
 
   datasource:
     url: jdbc:postgresql://postgres:5432/quotes_provider
