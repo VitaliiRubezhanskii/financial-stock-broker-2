@@ -16,8 +16,8 @@ spring:
           bindings:
             output:
               producer:
-                keySerde: io.confluent.kafka.streams.serdes.avro.SpecificAvroSerde
-                valueSerde: io.confluent.kafka.streams.serdes.avro.SpecificAvroSerde
+                key-serde: io.confluent.kafka.streams.serdes.avro.SpecificAvroSerde
+                value-serde: io.confluent.kafka.streams.serdes.avro.SpecificAvroSerde
             process-out-0:
               destination: quote
               contentType: application/*+avro
