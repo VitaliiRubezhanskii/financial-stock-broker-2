@@ -1,40 +1,22 @@
 spring:
   application:
-    name: quotes-provider-service
-  #kafka:
-  #  properties:
-  #    schema.registry.url: http://schema-registry:8081
-      
+    name: quotes-provider-service      
   cloud:
     schemaRegistryClient.endpoint: http://schema-registry:8081
     schema.avro.dynamicSchemaGenerationEnabled: true
     stream:
-    #  source: process
-    #  bindings:
-    #    process-out-0:
-    #      destination: quote
-    #      contentType: application/*+avro
-       # output:
-       #   producer:
-       #     useNativeEncoding: true
-       #   destination: quote
       kafka:
         streams:
           binder.brokers: broker
-          #replicationFactor: 1
-          #partitionCount: 4
           configuration:
             schema.registry.url: http://schema-registry:8081
             commit.interval.ms: 1000
-            key.serializer: org.apache.kafka.common.serialization.ByteArraySerializer
-            value.serializer: org.apache.kafka.common.serialization.ByteArraySerializer
-         #   key.converter.schema.registry.url: http://schema-registry:8081
-         #   value.converter.schema.registry.url: http://schema-registry:8081
+            default.key.serializer: org.apache.kafka.common.serialization.ByteArraySerializer
+            default.value.serializer: org.apache.kafka.common.serialization.ByteArraySerializer
           bindings.process-out-0:
             destination: quote
             contentType: application/*+avro
             producer:
-              #nativeDecoding: false
               keySerde: io.confluent.kafka.streams.serdes.avro.SpecificAvroSerde
               valueSerde: io.confluent.kafka.streams.serdes.avro.SpecificAvroSerde
 
