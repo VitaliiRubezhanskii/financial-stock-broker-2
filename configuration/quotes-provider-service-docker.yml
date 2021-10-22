@@ -5,6 +5,7 @@ spring:
     schema-registry-client: http://schema-registry:8081
     schema.avro.dynamicSchemaGenerationEnabled: true
     stream:
+      function.definition: process
       kafka:
         binder:
           brokers: broker
@@ -17,10 +18,11 @@ spring:
           bindings:    
             process-out-0:
               destination: quote
-             # contentType: application/*+avro
-             # producer:
-             #   keySerde: io.confluent.kafka.streams.serdes.avro.SpecificAvroSerde
-             #   valueSerde: io.confluent.kafka.streams.serdes.avro.SpecificAvroSerde
+              contentType: application/*+avro
+              producer:
+                schema.registry.url: http://schema-registry:8081
+                keySerde: io.confluent.kafka.streams.serdes.avro.SpecificAvroSerde
+                valueSerde: io.confluent.kafka.streams.serdes.avro.SpecificAvroSerde
           
               
 
