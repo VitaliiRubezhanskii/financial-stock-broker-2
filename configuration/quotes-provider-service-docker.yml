@@ -64,6 +64,6 @@ management:
 
 server:
   port: 9010
-#key.converter.schema.registry.url: http://schema-registry:8081
-#value.converter.schema.registry.url: http://schema-registry:8081
+key.converter.schema.registry.url: http://schema-registry:8081
+value.converter.schema.registry.url: http://schema-registry:8081
 
