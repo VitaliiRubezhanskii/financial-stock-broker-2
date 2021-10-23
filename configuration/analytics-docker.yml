@@ -15,7 +15,7 @@ spring:
           
    
       kafka:
-        binder.brokers: broker
+        binder.brokers: broker;localhost
         bindings:
           process-out-0:
             producer:
