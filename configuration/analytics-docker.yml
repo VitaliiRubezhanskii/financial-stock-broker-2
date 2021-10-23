@@ -22,19 +22,19 @@ spring.cloud.stream.kafka.streams.binder:
     configuration:
       schema.registry.url: http://schema-registry:8081
       commit.interval.ms: 1000
-      key.serializer: io.confluent.kafka.streams.serdes.avro.SpecificAvroSerializer
-      value.serializer: io.confluent.kafka.streams.serdes.avro.SpecificAvroSerializer
-      key.deserializer: io.confluent.kafka.streams.serdes.avro.SpecificAvroDeserializer
-      value.deserializer: io.confluent.kafka.streams.serdes.avro.SpecificAvroDeserializer
-    producer-properties:
-       key.serializer: io.confluent.kafka.streams.serdes.avro.SpecificAvroSerializer
-       value.serializer: io.confluent.kafka.streams.serdes.avro.SpecificAvroSerializer
-       schema.registry.url: http://schema-registry:8081
-    consumer-properties:
-       key.deserializer: io.confluent.kafka.streams.serdes.avro.SpecificAvroDeserializer
-       value.deserializer: io.confluent.kafka.streams.serdes.avro.SpecificAvroDeserializer
-       schema.registry.url: http://schema-registry:8081
-       specific.avro.reader: true
+      key.serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
+      value.serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
+     # key.deserializer: io.confluent.kafka.streams.serdes.avro.SpecificAvroDeserializer
+     # value.deserializer: io.confluent.kafka.streams.serdes.avro.SpecificAvroDeserializer
+    # producer-properties:
+     #  key.serializer: io.confluent.kafka.streams.serdes.avro.SpecificAvroSerializer
+     #  value.serializer: io.confluent.kafka.streams.serdes.avro.SpecificAvroSerializer
+     #  schema.registry.url: http://schema-registry:8081
+     # consumer-properties:
+     #  key.deserializer: io.confluent.kafka.streams.serdes.avro.SpecificAvroDeserializer
+     #  value.deserializer: io.confluent.kafka.streams.serdes.avro.SpecificAvroDeserializer
+     #  schema.registry.url: http://schema-registry:8081
+     #  specific.avro.reader: true
 
 
 eureka:
