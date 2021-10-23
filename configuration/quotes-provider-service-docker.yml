@@ -26,8 +26,8 @@ spring:
               contentType: application/*+avro
               producer:
                 schema.registry.url: http://schema-registry:8081
-                keySerde: io.confluent.kafka.streams.serdes.avro.SpecificAvroSerde
-                valueSerde: io.confluent.kafka.streams.serdes.avro.SpecificAvroSerde
+                keySerde: com.investment.quotesproviderservice.serdes.QuoteSerde
+                valueSerde: com.investment.quotesproviderservice.serdes.QuoteSerde
           
               
 
