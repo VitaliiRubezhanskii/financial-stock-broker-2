@@ -22,7 +22,7 @@ spring:
               configuration:
                 schema.registry.url: http://schema-registry:8081
                 key.serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
-                value.serializer: org.apache.kafka.common.serialization.IntegerSerializer
+                value.serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
           process-in-0:
             consumer:
               configuration:
