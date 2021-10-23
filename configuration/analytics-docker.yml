@@ -29,8 +29,8 @@ spring.cloud.stream.kafka.streams.binder:
        value.serializer: io.confluent.kafka.streams.serdes.avro.SpecificAvroSerializer
        schema.registry.url: http://schema-registry:8081
     consumer-properties:
-       key.deserializer: io.confluent.kafka.streams.serdes.avro.SpecificAvroSerializer
-       value.deserializer: io.confluent.kafka.streams.serdes.avro.SpecificAvroSerializer
+       key.deserializer: io.confluent.kafka.streams.serdes.avro.SpecificAvroDeserializer
+       value.deserializer: io.confluent.kafka.streams.serdes.avro.SpecificAvroDeserializer
        schema.registry.url: http://schema-registry:8081
        specific.avro.reader: true
 
