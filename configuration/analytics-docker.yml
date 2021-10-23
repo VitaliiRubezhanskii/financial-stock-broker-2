@@ -24,6 +24,8 @@ spring.cloud.stream.kafka.streams.binder:
       commit.interval.ms: 1000
       key.serializer: io.confluent.kafka.streams.serdes.avro.SpecificAvroSerializer
       value.serializer: io.confluent.kafka.streams.serdes.avro.SpecificAvroSerializer
+      key.deserializer: io.confluent.kafka.streams.serdes.avro.SpecificAvroDeserializer
+      value.deserializer: io.confluent.kafka.streams.serdes.avro.SpecificAvroDeserializer
     producer-properties:
        key.serializer: io.confluent.kafka.streams.serdes.avro.SpecificAvroSerializer
        value.serializer: io.confluent.kafka.streams.serdes.avro.SpecificAvroSerializer
