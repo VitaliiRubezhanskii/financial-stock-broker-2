@@ -15,7 +15,7 @@ spring:
           
    
       kafka:
-        binder.brokers: broker
+        binder.brokers: "broker:9092"
         bindings:
           process-out-0:
             producer:
