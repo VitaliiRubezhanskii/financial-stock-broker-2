@@ -1,6 +1,6 @@
 server.port: 9998
 spring.application.name: analytics
-spring.kafka.properties.bootstrap-servers: broker
+spring.kafka.bootstrap-servers: broker
 spring:
   cloud:
     stream:
