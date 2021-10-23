@@ -5,15 +5,14 @@ spring.cloud.stream.bindings.process-out-0:
   destination: quote-aggregation
   contentType: application/*+avro
   producer:
-    keySerde: com.investment.serde.QuoteSerde
+    keySerde: org.apache.kafka.common.serialization.Serdes$StringSerde
     valueSerde: com.investment.serde.QuoteSerde
     
 spring.cloud.stream.bindings.process-in-0:
   destination: quote
   contentType: application/*+avro
   consumer:
-    keySerde: com.investment.serde.QuoteSerde
-    # org.apache.kafka.common.serialization.Serdes$StringSerde
+    keySerde: org.apache.kafka.common.serialization.Serdes$StringSerde
     valueSerde: com.investment.serde.QuoteSerde
 spring.cloud.stream.kafka.streams.binder:
     brokers: broker
