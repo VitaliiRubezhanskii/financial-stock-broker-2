@@ -1,5 +1,6 @@
 spring.application.name: quotes-provider-service   
-spring.cloud:
+spring:
+  cloud:
     stream:
       function.definition: process
       bindings:
