@@ -1,39 +1,39 @@
 server.port: 9998
 spring.application.name: analytics
-spring.kafka.properties.schema.registry.url: http://schema-registry:8081
-spring.cloud.stream.bindings.process-out-0:
-  destination: quote-aggregation
-  contentType: application/*+avro
-  producer:
-    keySerde: org.apache.kafka.common.serialization.Serdes$StringSerde
-    valueSerde: com.investment.serde.QuoteSerde
-    
-spring.cloud.stream.bindings.process-in-0:
-  destination: quote
-  contentType: application/*+avro
-  consumer:
-    keySerde: org.apache.kafka.common.serialization.Serdes$StringSerde
-    valueSerde: com.investment.serde.QuoteSerde
-spring.cloud.stream.kafka.streams.binder:
-    brokers: broker
-    replicationFactor: 1
-    partitionCount: 4
-    configuration:
-      schema.registry.url: http://schema-registry:8081
-      commit.interval.ms: 1000
-      key.serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
-      value.serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
-     # key.deserializer: io.confluent.kafka.streams.serdes.avro.SpecificAvroDeserializer
-     # value.deserializer: io.confluent.kafka.streams.serdes.avro.SpecificAvroDeserializer
-    # producer-properties:
-     #  key.serializer: io.confluent.kafka.streams.serdes.avro.SpecificAvroSerializer
-     #  value.serializer: io.confluent.kafka.streams.serdes.avro.SpecificAvroSerializer
-     #  schema.registry.url: http://schema-registry:8081
-     # consumer-properties:
-     #  key.deserializer: io.confluent.kafka.streams.serdes.avro.SpecificAvroDeserializer
-     #  value.deserializer: io.confluent.kafka.streams.serdes.avro.SpecificAvroDeserializer
-     #  schema.registry.url: http://schema-registry:8081
-     #  specific.avro.reader: true
+#spring.kafka.properties.schema.registry.url: http://schema-registry:8081
+spring:
+  cloud:
+    stream:
+      function.definition: process
+      bindings:
+        process-in-0:
+          destination: quote
+        process-out-0:
+          destination: quote-aggregation
+          producer:
+            use-native-encoding: true
+          
+   
+      kafka:
+        bindings:
+          process-out-0:
+            producer:
+              configuration:
+                schema.registry.url: http://schema-registry:8081
+                key.serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
+                value.serializer: org.apache.kafka.common.serialization.IntegerSerializer
+          process-in-0:
+            consumer:
+              configuration:
+                schema.registry.url: http://schema-registry:8081
+                key.serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
+                value.serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
+        streams:
+          binder:
+            configuration:
+              schema.registry.url: http://localhost:8081
+              specific.avro.reader: true
+
 
 
 eureka:
