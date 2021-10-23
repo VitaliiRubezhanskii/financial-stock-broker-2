@@ -1,6 +1,6 @@
 server.port: 9998
 spring.application.name: analytics
-#spring.kafka.properties.schema.registry.url: http://schema-registry:8081
+spring.kafka.properties.bootstrapServer: broker:9092
 spring:
   cloud:
     stream:
