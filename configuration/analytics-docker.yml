@@ -34,6 +34,15 @@ spring:
             configuration:
               schema.registry.url: http://localhost:8081
               specific.avro.reader: true
+          bindings:
+            process-out-0:
+              producer:
+                keySerde: org.apache.kafka.common.serialization.Serdes$StringSerde
+                valueSerde: com.investment.serde.QuoteSerde
+            process-in-0:
+              consumer:
+                keySerde: org.apache.kafka.common.serialization.Serdes$StringSerde
+                valueSerde: com.investment.serde.QuoteSerde
 
 
 
