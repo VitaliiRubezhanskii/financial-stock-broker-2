@@ -25,6 +25,7 @@ spring:
                 schema.registry.url: http://schema-registry:8081
                 key.serializer: org.apache.kafka.common.serialization.StringSerializer
                 value.serializer: com.investment.serde.QuoteAvroSerializer
+                admin.replication-factor: 3
           process-in-0:
             consumer:
               configuration:
