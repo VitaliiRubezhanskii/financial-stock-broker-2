@@ -24,13 +24,13 @@ spring:
             producer:
               configuration:
                 schema.registry.url: http://schema-registry:8081
-                key.serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
+                key.serializer: org.apache.kafka.common.serialization.StringSerializer
                 value.serializer: com.investment.serde.QuoteAvroSerializer
           process-in-0:
             consumer:
               configuration:
                 schema.registry.url: http://schema-registry:8081
-                key.serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
+                key.serializer: org.apache.kafka.common.serialization.StringSerializer
                 value.serializer: com.investment.serde.QuoteAvroSerializer
         streams:
           binder:
