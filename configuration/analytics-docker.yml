@@ -33,6 +33,7 @@ spring:
                 key.serializer: org.apache.kafka.common.serialization.StringSerializer
                 value.serializer: com.investment.serde.QuoteAvroSerializer
                 admin.replication-factor: 3
+                allow.auto.create.topics: true
         streams:
           binder:
             configuration:
