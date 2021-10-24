@@ -1,6 +1,8 @@
 server.port: 9998
 spring.application.name: analytics
-spring.kafka.bootstrap-servers: broker:9092
+spring.kafka:
+  bootstrap-servers: broker:9092
+  allow.auto.create.topics: true
 spring:
   cloud:
     stream:
