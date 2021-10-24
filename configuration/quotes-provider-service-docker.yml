@@ -20,6 +20,11 @@ spring:
             configuration:
                 schema.registry.url: http://schema-registry:8081
                 value.serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
+          bindings:
+            process-out-0:
+              producer:
+                keySerde: org.apache.kafka.common.serialization.Serdes$StringSerde
+                valueSerde: com.investment.serdes.QuoteSerde
           
               
 
