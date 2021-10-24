@@ -14,11 +14,13 @@ spring:
            producer:
              configuration:
                 schema.registry.url: http://schema-registry:8081
+                key.serializer: org.apache.kafka.common.serialization.StringSerializer
                 value.serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
         streams:
           binder:    
             configuration:
                 schema.registry.url: http://schema-registry:8081
+                key.serializer: org.apache.kafka.common.serialization.StringSerializer
                 value.serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
           bindings:
             process-out-0:
