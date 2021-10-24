@@ -17,8 +17,7 @@ spring:
       kafka:
         binder:
           brokers: broker;localhost
-          minPartitionCount: 2
-          replicationFactor: 1
+          autoAddPartitions: true
         bindings:
           process-out-0:
             producer:
