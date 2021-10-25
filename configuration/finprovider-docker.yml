@@ -1,4 +1,4 @@
-spring.application.name: quotes-provider-service
+spring.application.name: finprovider
 spring.kafka:
   bootstrap-servers: localhost:19092,localhost:29092,localhost:39092 
 spring:
