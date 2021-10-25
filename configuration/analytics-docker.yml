@@ -6,7 +6,7 @@ spring.kafka:
 spring:
   cloud:
     stream:
-      function.definition: publish;process
+      function.definition: process
       bindings:
         publish-out-0:
           destination: quote
