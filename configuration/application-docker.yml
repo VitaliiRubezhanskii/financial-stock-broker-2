@@ -1,26 +1,76 @@
-zipkin:
-  enabled: true
-  baseUrl: http://tracing:9411
+spring.application.name: finprovider
+spring.kafka:
+  bootstrap-servers: localhost:19092,localhost:29092,localhost:39092 
+spring:
+  cloud:
+    stream:
+      function.definition: process
+      bindings:
+        process-out-0:
+          destination: quote
+          producer:
+            use-native-encoding: true
+      kafka:
+        bindings:
+          process-out-0:
+           producer:
+             configuration:
+                schema.registry.url: http://localhost:8081
+                key.serializer: org.apache.kafka.common.serialization.StringSerializer
+                value.serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
+        streams:
+          binder:    
+            configuration:
+                schema.registry.url: http://localhost:8081
+                key.serializer: org.apache.kafka.common.serialization.StringSerializer
+                value.serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
+          bindings:
+            process-out-0:
+              producer:
+                keySerde: org.apache.kafka.common.serialization.Serdes$StringSerde
+                valueSerde: com.investment.serdes.QuoteSerde
+          
+              
 
-sleuth:
-  sampler:
-    probability: 100
+  datasource:
+    url: jdbc:postgresql://localhost:5432/quotes_provider
+    password: postgres
+    username: postgres
+    driverClassName: org.postgresql.Driver
+    hikari:
+      connectionTimeOut: 2000
+      maximumPoolSize: 5
+  jpa:
+    show-sql: true
+    database-platform: org.hibernate.dialect.PostgreSQL94Dialect
+    hibernate.ddl-auto: update
+    properties: 
+      hibernate: 
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+        temp.use_jdbc_metadata_defaults: false
+  flyway:
+    enabled: true
+    validate-on-migrate: true
 
 eureka:
+  instance:
+    leaseRenewalIntervalInSeconds: 1
+    leaseExpirationDurationInSeconds: 2
+
   client:
-    service-url:
-      defaultZone: http://discovery:8761/eureka/
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
     healthcheck:
       enabled: true
-    register-with-eureka: true
-    fetch-registry: true
+    lease:
+      duration: 5
 
-microservice:
-  client:
-    url: http://feign:8099
+management:
+  security:
+    enabled: false
 
-security:
-  oauth2:
-    resource:
-      user-info-uri: http://auth:8084/uaa/user/current
-      token-info-uri: http://auth:8084/uaa/oauth/check_token
+server:
+  port: 9010
+key.converter.schema.registry.url: http://localhost:8081
+value.converter.schema.registry.url: http://localhost:8081
