@@ -6,8 +6,12 @@ spring.kafka:
 spring:
   cloud:
     stream:
-      function.definition: process
+      function.definition: process;publish
       bindings:
+        publish-out-0:
+          destination: quote
+          producer:
+            use-native-encoding: true
         process-in-0:
           destination: quote
         process-out-0:
@@ -22,7 +26,7 @@ spring:
           #minPartitionCount: 3
           #defaultBrokerPort: kafka-1:19092,kafka-2:29092,kafka-3:39092
         bindings:
-          process-out-0:
+          publish-out-0:
             producer:
               configuration:
                 schema.registry.url: http://localhost:8081
@@ -34,12 +38,25 @@ spring:
                 schema.registry.url: http://localhost:8081
                 key.serializer: org.apache.kafka.common.serialization.StringSerializer
                 value.serializer: com.investment.serde.QuoteAvroSerializer
+          process-out-0:
+            producer:
+              configuration:
+                schema.registry.url: http://localhost:8081
+                key.serializer: org.apache.kafka.common.serialization.StringSerializer
+                value.serializer: org.apache.kafka.common.serialization.IntegerSerializer
+                # com.investment.serde.QuoteAvroSerializer
+  
         streams:
           binder:
             configuration:
               schema.registry.url: http://localhost:8081
               specific.avro.reader: true
           bindings:
+            publish-out-0:
+              producer:
+                keySerde: org.apache.kafka.common.serialization.Serdes$StringSerde
+                valueSerde: com.investment.serde.QuoteSerde
+                
             process-out-0:
               producer:
                 keySerde: org.apache.kafka.common.serialization.Serdes$StringSerde
