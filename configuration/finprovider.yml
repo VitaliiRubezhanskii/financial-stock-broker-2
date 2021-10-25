@@ -1,3 +1,4 @@
+spring.application.name: finprovider
 spring:
   cloud:
     stream:
@@ -40,7 +41,6 @@ spring:
     validate-on-migrate: true
 server.port: 9010
 
-spring.application.name: quotes-provider-service
 spring.cloud.stream.kafka.binder.configuration:
   schema.registry.url: http://localhost:8081
   key.serializer: org.apache.kafka.common.serialization.ByteArraySerializer
