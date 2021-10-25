@@ -1,4 +1,7 @@
-spring.application.name: quotes-provider-service   
+spring.application.name: quotes-provider-service
+spring.kafka:
+  bootstrap-servers: localhost:19092,localhost:29092,localhost:39092
+  properties.allow.auto.create.topics: true
 spring:
   cloud:
     stream:
@@ -13,13 +16,13 @@ spring:
           process-out-0:
            producer:
              configuration:
-                schema.registry.url: http://schema-registry:8081
+                schema.registry.url: http://localhost:8081
                 key.serializer: org.apache.kafka.common.serialization.StringSerializer
                 value.serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
         streams:
           binder:    
             configuration:
-                schema.registry.url: http://schema-registry:8081
+                schema.registry.url: http://localhost:8081
                 key.serializer: org.apache.kafka.common.serialization.StringSerializer
                 value.serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
           bindings:
@@ -58,7 +61,7 @@ eureka:
 
   client:
     serviceUrl:
-      defaultZone: http://discovery:8761/eureka/
+      defaultZone: http://localhost:8761/eureka/
     healthcheck:
       enabled: true
     lease:
@@ -70,6 +73,6 @@ management:
 
 server:
   port: 9010
-key.converter.schema.registry.url: http://schema-registry:8081
-value.converter.schema.registry.url: http://schema-registry:8081
+key.converter.schema.registry.url: http://localhost:8081
+value.converter.schema.registry.url: http://localhost:8081
 
