@@ -19,7 +19,7 @@ spring:
       kafka:
         binder:
           #replication-factor: 1
-          brokers: kafka-1;kafka-2;kafka-3
+          defaultBrokerPort: kafka-1:19092,kafka-2:29092,kafka-3:39092
         bindings:
           process-out-0:
             producer:
