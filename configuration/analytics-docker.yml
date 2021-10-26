@@ -57,8 +57,8 @@ spring:
           bindings:                
             process-out-0:
               producer:
-                keySerde: org.apache.kafka.common.serialization.Serdes$IntegerSerde
-                valueSerde: org.apache.kafka.common.serialization.Serdes$IntegerSerde
+                keySerde: org.apache.kafka.common.serialization.Serdes$StringSerde
+                valueSerde: org.apache.kafka.common.serialization.Serdes$StringSerde
             process-in-0:
               consumer:
                 keySerde: org.apache.kafka.common.serialization.Serdes$StringSerde
