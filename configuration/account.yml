@@ -1,8 +1,8 @@
 spring:
-  data:
-    mongodb:
+  # data:
+  #  mongodb:
       #uri: mongodb://root:root@localhost:27017/admin
-       uri: mongodb://root:rootpassword@localhost:27017/account?authSource=admin&directConnection=true&ssl=false&authMode=scram-sha1
+    #   uri: mongodb://root:rootpassword@localhost:27017/account?authSource=admin&directConnection=true&ssl=false&authMode=scram-sha1
        #host: localhost
        #port: 27017
        #username: root
