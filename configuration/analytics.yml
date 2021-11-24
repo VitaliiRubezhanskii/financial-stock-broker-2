@@ -32,7 +32,8 @@ spring:
         binder:
           replicationFactor: 1
           #minPartitionCount: 3
-          #defaultBrokerPort: kafka-1:19092,kafka-2:29092,kafka-3:39092
+          brokers: pkc-4ygn6.europe-west3.gcp.confluent.cloud
+          defaultBrokerPort: 9092
         bindings:
           publish-out-0:
             producer:
