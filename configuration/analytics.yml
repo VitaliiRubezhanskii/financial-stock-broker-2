@@ -71,7 +71,8 @@ spring:
             process-in-0:
               consumer:
                 keySerde: org.apache.kafka.common.serialization.Serdes$StringSerde
-                valueSerde: com.investment.serde.QuoteSerde
+                valueSerde: org.apache.kafka.common.serialization.Serde$ByteArraySerde
+                #com.investment.serde.QuoteSerde
 
 
 
