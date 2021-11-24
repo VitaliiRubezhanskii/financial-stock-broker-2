@@ -35,12 +35,6 @@ spring:
           brokers: pkc-4ygn6.europe-west3.gcp.confluent.cloud:9092
           #defaultBrokerPort: 9092
         bindings:
-          publish-out-0:
-            producer:
-              configuration:
-                schema.registry.url: https://psrc-2312y.europe-west3.gcp.confluent.cloud
-                key.serializer: org.apache.kafka.common.serialization.StringSerializer
-                value.serializer: com.investment.serde.QuoteAvroSerializer
           process-in-0:
             consumer:
               configuration:
