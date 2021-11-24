@@ -46,7 +46,8 @@ spring:
               configuration:
                 schema.registry.url: https://psrc-2312y.europe-west3.gcp.confluent.cloud
                 key.serializer: org.apache.kafka.common.serialization.StringSerializer
-                value.serializer: com.investment.serde.QuoteAvroSerializer
+                value.serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
+                # com.investment.serde.QuoteAvroSerializer
                 # io.confluent.kafka.serializers.KafkaAvroSerializer
                 
           process-out-0:
