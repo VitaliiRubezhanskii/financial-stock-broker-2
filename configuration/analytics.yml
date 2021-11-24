@@ -45,6 +45,8 @@ spring:
             consumer:
               configuration:
                 schema.registry.url: https://psrc-2312y.europe-west3.gcp.confluent.cloud
+                basic.auth.credentials.source: USER_INFO
+                basic.auth.user.info: 4JYXYBS7AXSTQRFG:Sw4ib3vEDg4lmHFcB7p7EMsMHUiaqQkQFJHC7J5fmPXDkB3TfHPiXVWMoHyfg/qc
                 key.deserializer: org.apache.kafka.common.serialization.StringDeserializer
                 value.deserializer: com.investment.serde.QuoteAvroDeserializer
                 # com.investment.serde.QuoteAvroSerializer
@@ -54,6 +56,8 @@ spring:
             producer:
               configuration:
                 schema.registry.url: https://psrc-2312y.europe-west3.gcp.confluent.cloud
+                basic.auth.credentials.source: USER_INFO
+                basic.auth.user.info: 4JYXYBS7AXSTQRFG:Sw4ib3vEDg4lmHFcB7p7EMsMHUiaqQkQFJHC7J5fmPXDkB3TfHPiXVWMoHyfg/qc
                 key.serializer: org.apache.kafka.common.serialization.StringSerializer
                 value.serializer: org.apache.kafka.common.serialization.IntegerSerializer
                 # com.investment.serde.QuoteAvroSerializer
@@ -63,6 +67,8 @@ spring:
             brokers: pkc-4ygn6.europe-west3.gcp.confluent.cloud
             configuration:
               schema.registry.url: https://psrc-2312y.europe-west3.gcp.confluent.cloud
+              basic.auth.credentials.source: USER_INFO
+              basic.auth.user.info: 4JYXYBS7AXSTQRFG:Sw4ib3vEDg4lmHFcB7p7EMsMHUiaqQkQFJHC7J5fmPXDkB3TfHPiXVWMoHyfg/qc
               specific.avro.reader: true
           bindings:                
             process-out-0:
