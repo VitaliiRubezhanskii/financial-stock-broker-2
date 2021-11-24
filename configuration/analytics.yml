@@ -38,28 +38,28 @@ spring:
           publish-out-0:
             producer:
               configuration:
-                schema.registry.url: http://localhost:8081
+              #  schema.registry.url: http://localhost:8081
                 key.serializer: org.apache.kafka.common.serialization.StringSerializer
                 value.serializer: com.investment.serde.QuoteAvroSerializer
           process-in-0:
             consumer:
               configuration:
-                schema.registry.url: http://localhost:8081
+               # schema.registry.url: http://localhost:8081
                 key.serializer: org.apache.kafka.common.serialization.StringSerializer
                 value.serializer: com.investment.serde.QuoteAvroSerializer
           process-out-0:
             producer:
               configuration:
-                schema.registry.url: http://localhost:8081
+               # schema.registry.url: http://localhost:8081
                 key.serializer: org.apache.kafka.common.serialization.StringSerializer
                 value.serializer: org.apache.kafka.common.serialization.IntegerSerializer
                 # com.investment.serde.QuoteAvroSerializer
   
         streams:
           binder:
-            configuration:
-              schema.registry.url: http://localhost:8081
-              specific.avro.reader: true
+            #configuration:
+            #  schema.registry.url: http://localhost:8081
+            #  specific.avro.reader: true
           bindings:                
             process-out-0:
               producer:
