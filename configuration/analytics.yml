@@ -6,7 +6,7 @@ spring.kafka:
     properties.allow.auto.create.topics: true
     sasl.mechanism: PLAIN
     sasl.jaas.config: org.apache.kafka.common.security.plain.PlainLoginModule required username='IHA6RC3BC3XCYJUO' password='RBtSbbYMrHe3K6VS3LuswJDDoQ/OwnMd3AtyAqhnEN4SAvX8SIvC6T2GmW/0OEpu';
-    security.protocol=: SASL_SSL
+    security.protocol: SASL_SSL
     
     basic.auth.credentials.source: USER_INFO
     basic.auth.user.info: 4JYXYBS7AXSTQRFG:Sw4ib3vEDg4lmHFcB7p7EMsMHUiaqQkQFJHC7J5fmPXDkB3TfHPiXVWMoHyfg/qc
