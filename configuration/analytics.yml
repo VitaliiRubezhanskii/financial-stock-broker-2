@@ -38,20 +38,20 @@ spring:
           publish-out-0:
             producer:
               configuration:
-              #  schema.registry.url: http://localhost:8081
+                schema.registry.url: https://psrc-2312y.europe-west3.gcp.confluent.cloud
                 key.serializer: org.apache.kafka.common.serialization.StringSerializer
                 value.serializer: com.investment.serde.QuoteAvroSerializer
           process-in-0:
             consumer:
               configuration:
-               # schema.registry.url: http://localhost:8081
+                schema.registry.url: https://psrc-2312y.europe-west3.gcp.confluent.cloud
                 key.serializer: org.apache.kafka.common.serialization.StringSerializer
                 value.serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
                 #com.investment.serde.QuoteAvroSerializer
           process-out-0:
             producer:
               configuration:
-               # schema.registry.url: http://localhost:8081
+                schema.registry.url: https://psrc-2312y.europe-west3.gcp.confluent.cloud
                 key.serializer: org.apache.kafka.common.serialization.StringSerializer
                 value.serializer: org.apache.kafka.common.serialization.IntegerSerializer
                 # com.investment.serde.QuoteAvroSerializer
