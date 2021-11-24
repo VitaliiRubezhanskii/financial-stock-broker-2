@@ -20,6 +20,9 @@ spring:
           producer:
             use-native-encoding: true
       kafka:
+        binder:
+          brokers: pkc-4ygn6.europe-west3.gcp.confluent.cloud
+          defaultBrokerPort: 9092
         bindings:
           process-out-0:
            producer:
