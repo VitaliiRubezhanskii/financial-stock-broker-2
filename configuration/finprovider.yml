@@ -1,24 +1,37 @@
 spring.application.name: finprovider
+spring.kafka:
+  bootstrap-servers: localhost:19092,localhost:29092,localhost:39092 
 spring:
   cloud:
     stream:
-      schema-registry-client:
-        endpoint: http://localhost:8081
+      function.definition: process
       bindings:
         process-out-0:
           destination: quote
-          contentType: application/*+avro
+          producer:
+            use-native-encoding: true
       kafka:
-        binder:
-          brokers: 172.18.0.1
-        #streams:
-        #  bindings:
-        #    process-in-0:
-        #      producer:
-        #        useNativeEncoding: true
-        #        key.serializer: org.apache.kafka.common.serialization.Serdes$StringSerde
-        #        value.serializer: org.apache.kafka.common.serialization.Serdes$StringSerde
-                #io.confluent.kafka.serializers.KafkaAvroSerializer
+        bindings:
+          process-out-0:
+           producer:
+             configuration:
+                schema.registry.url: http://localhost:8081
+                key.serializer: org.apache.kafka.common.serialization.StringSerializer
+                value.serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
+        streams:
+          binder:    
+            configuration:
+                schema.registry.url: http://localhost:8081
+                key.serializer: org.apache.kafka.common.serialization.StringSerializer
+                value.serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
+          bindings:
+            process-out-0:
+              producer:
+                keySerde: org.apache.kafka.common.serialization.Serdes$StringSerde
+                valueSerde: com.investment.serdes.QuoteSerde
+          
+              
+
   datasource:
     url: jdbc:postgresql://localhost:5432/quotes_provider
     password: postgres
@@ -39,17 +52,6 @@ spring:
   flyway:
     enabled: true
     validate-on-migrate: true
-server.port: 9010
-
-spring.cloud.stream.kafka.binder.configuration:
-  schema.registry.url: http://localhost:8081
-  key.serializer: org.apache.kafka.common.serialization.ByteArraySerializer
-  value.serializer: org.apache.kafka.common.serialization.StringSerializer
-  #io.confluent.kafka.serializers.KafkaAvroSerializer
-  #com.investment.quotesproviderservice.serdes.QuoteSerde 
-  #com.investment.quotesproviderservice.serdes.CustomSerializer
-
-
 
 eureka:
   instance:
@@ -68,4 +70,7 @@ management:
   security:
     enabled: false
 
-
+server:
+  port: 9010
+key.converter.schema.registry.url: http://localhost:8081
+value.converter.schema.registry.url: http://localhost:8081
