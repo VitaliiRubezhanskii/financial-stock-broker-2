@@ -9,7 +9,7 @@ spring.kafka:
     security.protocol: SASL_SSL
     
     basic.auth.credentials.source: USER_INFO
-    basic.auth.user.info: LQXVBK453LMWAJFK:Flj/AhQHLcHs0WpEbmCqzvbXfYhLR5ABxo8NXx/igZwwbufY0eLmzbEkxR3mfxab
+    basic.auth.user.info: 4JYXYBS7AXSTQRFG:Sw4ib3vEDg4lmHFcB7p7EMsMHUiaqQkQFJHC7J5fmPXDkB3TfHPiXVWMoHyfg/qc
     schema.registry.url: https://psrc-2312y.europe-west3.gcp.confluent.cloud
 spring:
   cloud:
@@ -51,7 +51,7 @@ spring:
               configuration:
                 schema.registry.url: https://psrc-2312y.europe-west3.gcp.confluent.cloud
                 basic.auth.credentials.source: USER_INFO
-                basic.auth.user.info: LQXVBK453LMWAJFK:Flj/AhQHLcHs0WpEbmCqzvbXfYhLR5ABxo8NXx/igZwwbufY0eLmzbEkxR3mfxab
+                basic.auth.user.info: 4JYXYBS7AXSTQRFG:Sw4ib3vEDg4lmHFcB7p7EMsMHUiaqQkQFJHC7J5fmPXDkB3TfHPiXVWMoHyfg/qc
                 key.serializer: org.apache.kafka.common.serialization.StringSerializer
                 value.serializer: org.apache.kafka.common.serialization.IntegerSerializer
                 # com.investment.serde.QuoteAvroSerializer
@@ -62,7 +62,7 @@ spring:
             configuration:
               schema.registry.url: https://psrc-2312y.europe-west3.gcp.confluent.cloud
               basic.auth.credentials.source: USER_INFO
-              basic.auth.user.info: LQXVBK453LMWAJFK:Flj/AhQHLcHs0WpEbmCqzvbXfYhLR5ABxo8NXx/igZwwbufY0eLmzbEkxR3mfxab
+              basic.auth.user.info: 4JYXYBS7AXSTQRFG:Sw4ib3vEDg4lmHFcB7p7EMsMHUiaqQkQFJHC7J5fmPXDkB3TfHPiXVWMoHyfg/qc
               specific.avro.reader: true
           bindings:                
             process-out-0:
