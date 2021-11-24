@@ -1,12 +1,3 @@
-zuul:
-  ignored-services: '*'
-  routes:
-    account: /account/**
-    order: /order/**
-    feign: /feign/**
-    auth: /uaa/**
-  sensitiveHeaders:
-
 eureka:
   instance:
     preferIpAddress: true
@@ -14,7 +5,7 @@ eureka:
     registerWithEureka: true
     fetchRegistry: true
     serviceUrl:
-      defaultZone: http://discovery:8761/eureka/
+      defaultZone: http://localhost:8761/eureka/
     healthcheck:
       enabled: true
     lease:
@@ -29,23 +20,25 @@ management:
 hystrix.command.default.execution.isolation.thread.timeoutInMilliseconds: 60000
 ribbon:
   ConnectTimeout: 3000
-  ReadTimeout: 60000
+  ReadTimeout: 15000
 
-security:
+  eureka:
+    enabled: true
+
+spring.security:
   oauth2:
     client:
-      clientId: gateway
-      clientSecret: 1234
-      accessTokenUri: http://auth:8084/uaa/oauth/token
-      grant-type: client_credentials
-      scope: server
-
-    resource:
-      user-info-uri: http://auth:8084/uaa/user/current
-      token-info-uri: http://auth:8084/uaa/oauth/check_token
-
-
-
-
-
-
+      provider:
+        keycloak:
+          token-uri: http://localhost:8080/auth/realms/broker/protocol/openid-connect/token
+          authorization-uri: http://localhost:8080/auth/realms/broker/protocol/openid-connect/auth
+          userinfo-uri: http://localhost:8080/auth/realms/broker/protocol/openid-connect/userinfo
+          user-name-attribute: preferred_username
+      registration:
+        broker:
+          provider: keycloak
+          client-id: broker
+          client-secret: 7b7d7018-9ac0-4b24-9527-c28965fa7fa1
+          authorization-grant-type: authorization_code
+          redirect-uri: http://localhost:8100/login/oauth2/code/broker
+          scope: phone
