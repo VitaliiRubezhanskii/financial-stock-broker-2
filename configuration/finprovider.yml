@@ -1,6 +1,15 @@
 spring.application.name: finprovider
 spring.kafka:
-  bootstrap-servers: localhost:19092,localhost:29092,localhost:39092 
+  properties:
+    bootstrap-servers: pkc-4ygn6.europe-west3.gcp.confluent.cloud:9092
+    properties.allow.auto.create.topics: true
+    sasl.mechanism: PLAIN
+    sasl.jaas.config: org.apache.kafka.common.security.plain.PlainLoginModule required username='2EKDCAOB2MBFB7ND' password='+eLR7UsQDTcv2p5wHduRS4Azcl9Yv8TRCdSzghF4/giQDr+JPH1NjEZy5KFsZClz';
+    security.protocol: SASL_SSL
+    
+    basic.auth.credentials.source: USER_INFO
+    basic.auth.user.info: 4JYXYBS7AXSTQRFG:Sw4ib3vEDg4lmHFcB7p7EMsMHUiaqQkQFJHC7J5fmPXDkB3TfHPiXVWMoHyfg/qc
+    schema.registry.url: https://psrc-2312y.europe-west3.gcp.confluent.cloud
 spring:
   cloud:
     stream:
