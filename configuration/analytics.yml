@@ -42,9 +42,9 @@ spring:
                 basic.auth.credentials.source: USER_INFO
                 basic.auth.user.info: 4JYXYBS7AXSTQRFG:Sw4ib3vEDg4lmHFcB7p7EMsMHUiaqQkQFJHC7J5fmPXDkB3TfHPiXVWMoHyfg/qc
                 key.deserializer: org.apache.kafka.common.serialization.StringDeserializer
-                value.deserializer: com.investment.serde.QuoteAvroDeserializer
+                value.deserializer: io.confluent.kafka.serializers.KafkaAvroDeserializer
                 # com.investment.serde.QuoteAvroSerializer
-                # io.confluent.kafka.serializers.KafkaAvroSerializer
+                # io.confluent.kafka.serializers.KafkaAvroDeserializer
                 
           process-out-0:
             producer:
