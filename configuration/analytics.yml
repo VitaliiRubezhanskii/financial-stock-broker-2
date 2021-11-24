@@ -2,12 +2,10 @@ server.port: 9998
 spring.application.name: analytics
 spring.kafka:
   properties:
-    #schema.registry.url: "http://localhost:8081"
-    #specific.avro.reader: true
     bootstrap-servers: pkc-4ygn6.europe-west3.gcp.confluent.cloud:9092
     properties.allow.auto.create.topics: true
     sasl.mechanism: PLAIN
-    sasl.jaas.config: org.apache.kafka.common.security.plain.PlainLoginModule 
+    sasl.jaas.config: org.apache.kafka.common.security.plain.PlainLoginModule required username='IHA6RC3BC3XCYJUO' password='RBtSbbYMrHe3K6VS3LuswJDDoQ/OwnMd3AtyAqhnEN4SAvX8SIvC6T2GmW/0OEpu';
     security.protocol=: SASL_SSL
     
     basic.auth.credentials.source: USER_INFO
