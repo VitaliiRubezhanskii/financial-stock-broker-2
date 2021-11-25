@@ -55,7 +55,8 @@ spring:
                 basic.auth.credentials.source: USER_INFO
                 basic.auth.user.info: 4JYXYBS7AXSTQRFG:Sw4ib3vEDg4lmHFcB7p7EMsMHUiaqQkQFJHC7J5fmPXDkB3TfHPiXVWMoHyfg/qc
                 key.serializer: org.apache.kafka.common.serialization.StringSerializer
-                value.serializer: org.apache.kafka.common.serialization.IntegerSerializer
+                value.serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
+                #org.apache.kafka.common.serialization.IntegerSerializer
                 # com.investment.serde.QuoteAvroSerializer
   
         streams:
