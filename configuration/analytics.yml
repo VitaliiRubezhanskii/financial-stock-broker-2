@@ -5,7 +5,7 @@ spring.kafka:
     bootstrap-servers: pkc-4ygn6.europe-west3.gcp.confluent.cloud:9092
     properties.allow.auto.create.topics: true
     sasl.mechanism: PLAIN
-    sasl.jaas.config: org.apache.kafka.common.security.plain.PlainLoginModule required username='' password='3TpQsPu/GR/E6ioGF+ZTMRrXE83M7jMRw+x2lb7n5Ey9ji9io0gTwe0aBrKmcJNl';
+    sasl.jaas.config: org.apache.kafka.common.security.plain.PlainLoginModule required username='IPCTGUI4SLTO4NBM' password='3TpQsPu/GR/E6ioGF+ZTMRrXE83M7jMRw+x2lb7n5Ey9ji9io0gTwe0aBrKmcJNl';
     security.protocol: SASL_SSL
     
     basic.auth.credentials.source: USER_INFO
