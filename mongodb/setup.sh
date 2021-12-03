@@ -21,8 +21,8 @@
   sleep 15
   mongo --host mongocustom
   mongoimport --db auth --collection user --type json --file /user.json --jsonArray
-  mongoimport --host mongodb-service.default.svc.cluster.local --db auth --collection authClientDetails --type json --file /authClientDetails.json --jsonArray
-  mongoimport --host mongodb-service.default.svc.cluster.local --db auth --collection mongoAccessToken --type json --file /mongoAccessToken.json --jsonArray
-  mongoimport --host mongodb-service.default.svc.cluster.local --db auth --collection mongoRefreshToken --type json --file /mongoRefreshToken.json --jsonArray
+  mongoimport --host localhostL27017 --db auth --collection authClientDetails --type json --file /authClientDetails.json --jsonArray
+  mongoimport --host localhostL27017--db auth --collection mongoAccessToken --type json --file /mongoAccessToken.json --jsonArray
+  mongoimport --host localhostL27017 --db auth --collection mongoRefreshToken --type json --file /mongoRefreshToken.json --jsonArray
 echo "Seeding done..."
 

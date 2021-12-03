@@ -1,9 +1,16 @@
 package com.investment.auth.dto;
 
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
+
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
+@Getter
+@Setter
+@RequiredArgsConstructor
 public class UserRegistrationDto implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -15,20 +22,4 @@ public class UserRegistrationDto implements Serializable {
     @NotNull
     @NotBlank
     private String password;
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
 }

@@ -47,14 +47,6 @@ public class User implements UserDetails {
         return authorities;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
     @Override
     public boolean isAccountNonExpired() {
         return true;
@@ -75,32 +67,18 @@ public class User implements UserDetails {
         return activated;
     }
 
-    public boolean isActivated() {
-        return activated;
-    }
-
     public void setActivated(boolean activated) {
         this.activated = activated;
     }
 
-    public String getActivationKey() {
-        return activationKey;
+    @Override
+    public String getUsername() {
+        return username;
     }
 
-    public void setActivationKey(String activationKey) {
-        this.activationKey = activationKey;
-    }
-
-    public String getResetPasswordKey() {
-        return resetPasswordKey;
-    }
-
-    public void setResetPasswordKey(String resetPasswordKey) {
-        this.resetPasswordKey = resetPasswordKey;
-    }
-
-    public void setAuthorities(Set<SimpleAuthority> authorities) {
-        this.authorities = authorities;
+    @Override
+    public String getPassword() {
+        return password;
     }
 
     @Override

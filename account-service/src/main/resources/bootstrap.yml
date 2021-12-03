@@ -1,0 +1,38 @@
+spring:
+  profiles:
+    active: ${SPRING_PROFILES_ACTIVE}
+  security:
+#    oauth2:
+#      client:
+#        provider:
+
+
+  application:
+    name: account
+
+  cloud:
+    config:
+      uri: ${CONFIGSERVER_URI}
+
+server:
+  port: ${PORT}
+
+#keycloak:
+#  enabled: true
+#  realm: master
+#  auth-server-url: http://localhost:8080/auth
+#  ssl-required: none
+#  #keycloak resource is the client ID
+#  resource: broker
+#  use-resource-role-mappings: true
+#  #The line below will prevent redirect to login page
+#  bearer-only: true
+
+
+
+
+
+
+
+
+

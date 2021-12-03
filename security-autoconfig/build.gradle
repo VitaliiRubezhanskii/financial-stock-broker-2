@@ -1,0 +1,66 @@
+buildscript {
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-allopen:1.5.31"
+        classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.31'
+        classpath 'org.jetbrains.kotlin:kotlin-maven-plugin:1.5.31'
+    }
+}
+
+plugins {
+//    id "org.jetbrains.kotlin.plugin.allopen" version "1.5.31"
+//    id "org.jetbrains.kotlin.plugin.spring" version "1.6.0-RC"
+    id 'org.springframework.boot'
+//	version '2.5.5'
+    id 'io.spring.dependency-management'
+//    id 'org.jetbrains.kotlin.jvm'  version "1.5.31"
+//	version '1.0.11.RELEASE'
+}
+
+apply plugin: 'idea'
+apply plugin: 'kotlin'
+apply plugin: 'java'
+apply plugin: 'kotlin-allopen'
+apply plugin: "org.jetbrains.kotlin.plugin.spring"
+apply plugin: 'io.spring.dependency-management'
+apply plugin: 'maven-publish'
+
+
+repositories {
+    mavenCentral()
+//	maven { url = "https://plugins.gradle.org/m2/" }
+//	maven { url = "http://maven.springframework.org/release" }
+//	maven { url = "https://maven.fabric.io/public" }
+//	maven { url = 'https://repo.spring.io/release/' }
+//	maven { url = "https://repo.spring.io/libs-snapshot-local" }
+//	maven { url = "https://repo.spring.io/libs-milestone-local" }
+//	maven { url = "https://repo.spring.io/libs-release-local" }
+    google()
+}
+
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:2020.0.4"
+    }
+}
+dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.20"
+    implementation "org.jetbrains.kotlin:kotlin-allopen:1.5.20"
+
+    implementation 'org.springframework.boot:spring-boot-autoconfigure'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-configuration-processor'
+    implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
+    implementation 'org.springframework.security:spring-security-oauth2-resource-server'
+
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.jetbrains.kotlin:kotlin-reflect:1.5.20'
+    implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.5.20'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:1.5.20"
+    implementation 'org.springframework.cloud:spring-cloud-starter-openfeign:2.2.0.RELEASE'
+
+    implementation 'com.sun.jersey.contribs:jersey-apache-client:1.19.4'
+}
+
+
+bootJar {enabled = false}
+jar {enabled = true}
