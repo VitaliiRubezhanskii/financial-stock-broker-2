@@ -7,7 +7,7 @@ spring:
        #port: 27017
        #username: root
        #password: rootpassword
-       database: account
+      database: account
   security:
     oauth2:
       resourceserver:
