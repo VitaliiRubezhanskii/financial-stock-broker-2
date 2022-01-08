@@ -19,7 +19,7 @@ buildscript {
         classpath 'org.jetbrains.kotlin:kotlin-maven-plugin:1.5.31'
     }
 }
-//
+
 plugins {
     id 'java'
     id 'org.springframework.boot'

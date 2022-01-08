@@ -10,8 +10,24 @@ buildscript {
         classpath "com.commercehub.gradle.plugin:gradle-avro-plugin:0.14.2"
     }
 }
+repositories {
+    mavenCentral()
+    maven { url "https://plugins.gradle.org/m2/" }
+    maven { url "https://packages.confluent.io/maven/" }
+}
+
 
 apply plugin: "com.commercehub.gradle.plugin.avro-base"
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'io.spring.dependency-management'
+apply plugin: 'org.springframework.boot'
+
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:2020.0.4"
+    }
+}
 
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'

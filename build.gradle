@@ -24,8 +24,8 @@ plugins {
     id 'io.spring.dependency-management' version '1.0.11.RELEASE'
     id 'org.jetbrains.kotlin.jvm'  version "1.5.31"
 }
-
-subprojects {
+//
+//subprojects {
     apply plugin: 'java'
     apply plugin: 'idea'
     apply plugin: 'io.spring.dependency-management'
@@ -42,7 +42,7 @@ subprojects {
 
     dependencyManagement {
         imports {
-            mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+            mavenBom "org.springframework.cloud:spring-cloud-dependencies:2020.0.4"
         }
     }
 //    configure(subprojects.stream().filter {
@@ -92,6 +92,12 @@ subprojects {
 //        }
 //    }
 
+//}
+
+tasks.whenTaskAdded { task ->
+    if(task.name.contains("compileJava") || task.name.contains("bootJarMainClassName")) {
+        task.enabled = false
+    }
 }
 
 dependencies {
@@ -109,10 +115,10 @@ dependencies {
 
 }
 
-//bootJar {
-//    enabled = false
-//}
+bootJar {
+    enabled = false
+}
 
-//jar {
-//    enabled = true
-//}
+jar {
+    enabled = true
+}

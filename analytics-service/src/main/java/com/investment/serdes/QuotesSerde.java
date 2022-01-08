@@ -1,4 +1,4 @@
-package com.investment.analytics.serdes;
+package com.investment.serdes;
 
 import com.investment.avro.Quote;
 import io.confluent.kafka.serializers.AbstractKafkaAvroSerDeConfig;
