@@ -15,5 +15,6 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
       - /Users/vitalii/Documents/01.FSB/financial-stock-broker-2/jenkins/kubeconfig:/.kube
       - /Users/vitalii/.m2/repository:/var/jenkins_home/.m2/repository
+      - /usr/local/Cellar/gradle/7.0.2_2:/var/jenkins_home/gradle/7.0.2_2
     networks:
       - my-mongo-cluster
