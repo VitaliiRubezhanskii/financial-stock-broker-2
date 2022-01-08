@@ -1,5 +1,5 @@
 {
-  "namespace" : "avro",
+  "namespace" : "com.investment.avro",
   "type" : "record",
   "name" : "Quote",
   "fields" : [
