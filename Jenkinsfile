@@ -64,11 +64,11 @@ pipeline {
                 orderServiceImage.push()
                 quotesProviderServiceImage.push()
 
-                authServiceImage.push()
+//                 authServiceImage.push()
                 feignServiceImage.push()
                 gatewayServiceImage.push()
-                tracingServiceImage.push()
-                turbineServiceImage.push()
+//                 tracingServiceImage.push()
+//                 turbineServiceImage.push()
 
                 }
             }
