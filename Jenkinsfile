@@ -38,7 +38,7 @@ pipeline {
     stage('Build'){
         steps{
             script {
-               sh 'mvn --settings settings.xml clean install -DskipTests=true'
+               sh 'gradle clean install'
             }
         }
     }
