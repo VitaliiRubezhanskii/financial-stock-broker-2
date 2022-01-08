@@ -5,14 +5,10 @@ import com.investment.feign_hystrix.integration.domain.account.AccountCreationDt
 import com.investment.feign_hystrix.integration.domain.enums.AccountStatus;
 import com.investment.feign_hystrix.integration.domain.orders.OrderCreatedDto;
 import com.investment.feign_hystrix.integration.domain.orders.OrderCreationDto;
-import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,43 +21,43 @@ public class IntegrationClient {
 
     private final OrderServiceClient orderServiceClient;
 
-    @HystrixCommand(fallbackMethod = "saveOrderDataAndNotifyUser")
+//    @HystrixCommand(fallbackMethod = "saveOrderDataAndNotifyUser")
     @PreAuthorize("hasRole('ROLE_USER')")
     public OrderCreatedDto newOrder(OrderCreationDto orderCreationDto){
         return orderServiceClient.newOrder(orderCreationDto);
     }
 
     @PreAuthorize("hasRole('ROLE_USER')")
-    @HystrixCommand(fallbackMethod = "cacheRequestAndNotifyUser")
+//    @HystrixCommand(fallbackMethod = "cacheRequestAndNotifyUser")
     public OrderCreatedDto findOrderById(String id){
         return orderServiceClient.findOrderById(id);
     }
 
     @PreAuthorize("hasRole('ROLE_USER')")
-    @HystrixCommand(fallbackMethod = "cacheRequestAndNotifyUser")
+//    @HystrixCommand(fallbackMethod = "cacheRequestAndNotifyUser")
     public List<OrderCreatedDto> findOrdersByAccountId(String accountID){
         return orderServiceClient.findOrdersByAccountId(accountID);
     }
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    @HystrixCommand(fallbackMethod = "saveAccountDataAndNotifyUser")
+//    @HystrixCommand(fallbackMethod = "saveAccountDataAndNotifyUser")
     public AccountCreatedDto createAccount(AccountCreationDto accountCreationDto){
         return accountServiceClient.createAccount(accountCreationDto);
     }
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    @HystrixCommand(fallbackMethod = "saveAccountDataAndNotifyUser")
+//    @HystrixCommand(fallbackMethod = "saveAccountDataAndNotifyUser")
     public AccountCreatedDto updateAccount(String accountId, AccountCreationDto accountCreationDto){
         return accountServiceClient.updateAccount(accountId, accountCreationDto);
     }
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    @HystrixCommand(fallbackMethod = "cacheRequestAndNotifyUserThenLockAccount")
+//    @HystrixCommand(fallbackMethod = "cacheRequestAndNotifyUserThenLockAccount")
     public void lockAccount(String id, AccountStatus status){
         accountServiceClient.lockAccount(id, status);
     }
 
-    @HystrixCommand(fallbackMethod = "cacheRequestAndNotifyUser")
+//    @HystrixCommand(fallbackMethod = "cacheRequestAndNotifyUser")
     public AccountCreatedDto getAccountById(String id){
         return accountServiceClient.getAccountById(id);
     }

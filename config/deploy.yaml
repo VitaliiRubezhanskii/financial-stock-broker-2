@@ -15,9 +15,14 @@ spec:
       containers:
         - name: configserver
           image: configserver  #${REPOSITORY_TAG}
-          imagePullPolicy: Never
+          imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8888
+          env:
+            - name: SPRING_PROFILES_ACTIVE
+              value: deployment
+            - name: PORT
+              value: '8888'
 
 ---
 apiVersion: v1

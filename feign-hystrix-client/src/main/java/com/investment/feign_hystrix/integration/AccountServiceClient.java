@@ -1,13 +1,18 @@
 package com.investment.feign_hystrix.integration;
 
+//import com.investment.feign_hystrix.config.ResourceServerConfig;
 import com.investment.feign_hystrix.integration.domain.account.AccountCreatedDto;
 import com.investment.feign_hystrix.integration.domain.account.AccountCreationDto;
 import com.investment.feign_hystrix.integration.domain.enums.AccountStatus;
+import com.investment.security.configuration.SecurityConfiguration;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
 
-@FeignClient(name = "account")
+@FeignClient(name = "account"
+        , url = "http://localhost:8093/",
+        configuration = SecurityConfiguration.class
+)
 @Service
 public interface AccountServiceClient {
 

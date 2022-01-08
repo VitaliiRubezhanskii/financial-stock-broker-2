@@ -13,7 +13,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Order {
 
     @Id
-    private String id;
+    private String _id;
 
     private String ticket;
 

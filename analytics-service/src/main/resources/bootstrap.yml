@@ -8,5 +8,7 @@ spring:
   cloud:
     config:
       uri: ${CONFIGSERVER_URI}
+  main:
+    allow-bean-definition-overriding: true
 server:
   port: ${PORT}

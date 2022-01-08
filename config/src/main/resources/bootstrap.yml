@@ -1,18 +1,9 @@
 server:
-  port: 8888
+  port: ${PORT}
 
 spring:
   application:
     name: configserver
   profiles:
-    active: docker
-eureka:
-  client:
-    service-url:
-      defaultZone: http://localhost:8761/eureka/
-    healthcheck:
-      enabled: true
-    register-with-eureka: true
-    fetch-registry: true
-
+    active: ${SPRING_PROFILES_ACTIVE}
 

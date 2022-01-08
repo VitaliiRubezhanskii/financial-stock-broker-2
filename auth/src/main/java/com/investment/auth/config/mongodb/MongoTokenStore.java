@@ -2,7 +2,9 @@ package com.investment.auth.config.mongodb;
 
 import com.investment.auth.domain.MongoAccessToken;
 import com.investment.auth.domain.MongoRefreshToken;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
@@ -22,12 +24,13 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+@Configuration
+@RequiredArgsConstructor
 public class MongoTokenStore implements TokenStore {
 
     private AuthenticationKeyGenerator authenticationKeyGenerator = new DefaultAuthenticationKeyGenerator();
 
-    @Autowired
-    private MongoTemplate mongoTemplate;
+    private final MongoTemplate mongoTemplate;
 
     @Override
     public OAuth2Authentication readAuthentication(OAuth2AccessToken accessToken) {
@@ -139,8 +142,9 @@ public class MongoTokenStore implements TokenStore {
                 this.storeAccessToken(accessToken, authentication);
             }
         }
-        return accessToken;
-    }
+//        return accessToken;
+        return null;
+}
 
     @Override
     public Collection<OAuth2AccessToken> findTokensByClientIdAndUserName(String clientId, String username) {

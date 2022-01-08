@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: quote-provider-service
+spec:
+  selector:
+    matchLabels:
+      app: quote-provider-service
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: quote-provider-service
+    spec:
+      containers:
+        - name: quote-provider-service
+          image: quotes-provider-service #${REPOSITORY_TAG}
+          ports:
+            - containerPort: 8094
+          env:
+            - name: SPRING_PROFILES_ACTIVE
+              value: deployment
+            - name: PORT
+              value: '8094'
+            - name: CONFIGSERVER_URI
+              value: http://configserver.default.svc.cluster.local:8888
+          imagePullPolicy: IfNotPresent
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: quote-provider-service
+
+spec:
+  ports:
+    - port: 8094
+      protocol: TCP
+  selector:
+    app: quote-provider-service
+  type: LoadBalancer

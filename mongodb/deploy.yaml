@@ -14,7 +14,12 @@ spec:
     spec:
       containers:
         - name: mongodb
-          image: mongo:3.6.5-jessie
+          image: mongo:4.0.8
+          env:
+            - name: MONGO_INITDB_ROOT_USERNAME
+              value: admin
+            - name: MONGO_INITDB_ROOT_PASSWORD
+              value: password
           volumeMounts:
             - name: mongo-persistent-storage
               mountPath: /data/db

@@ -1,0 +1,28 @@
+
+dependencies {
+    implementation 'org.springframework.cloud:spring-cloud-starter-bootstrap:3.0.0'
+
+    implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-server'
+
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+
+    implementation 'org.springframework.cloud:spring-cloud-config-client'
+
+    implementation 'com.sun.xml.bind:jaxb-core:3.0.1'
+    implementation 'com.sun.xml.bind:jaxb-impl:3.0.1'
+    implementation 'org.glassfish.jaxb:jaxb-runtime:2.3.0'
+    implementation 'javax.activation:activation:1.1.1'
+
+    implementation 'org.springframework.retry:spring-retry:1.2.4.RELEASE'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+bootRun {
+    mainClass = 'com.investment.monitoring.MonitoringApplication'
+}
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'com.investment.monitoring.MonitoringApplication'
+    }
+}

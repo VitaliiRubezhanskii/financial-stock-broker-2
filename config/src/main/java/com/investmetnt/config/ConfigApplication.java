@@ -7,8 +7,9 @@ import org.springframework.cloud.config.server.EnableConfigServer;
 
 
 @EnableConfigServer
-@SpringBootApplication
-@EnableDiscoveryClient
+@SpringBootApplication(
+        exclude = {org.springframework.boot.autoconfigure.gson.GsonAutoConfiguration.class}
+)
 public class ConfigApplication {
 
     public static void main(String[] args) {

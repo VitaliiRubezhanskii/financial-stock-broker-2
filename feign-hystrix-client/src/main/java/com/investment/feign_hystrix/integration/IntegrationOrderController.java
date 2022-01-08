@@ -2,19 +2,22 @@ package com.investment.feign_hystrix.integration;
 
 import com.investment.feign_hystrix.integration.domain.orders.OrderCreatedDto;
 import com.investment.feign_hystrix.integration.domain.orders.OrderCreationDto;
-import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
-import lombok.RequiredArgsConstructor;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
-import javax.ws.rs.Path;
 import java.util.List;
 
 @RestController
-@RequiredArgsConstructor
 public class IntegrationOrderController {
 
     private final IntegrationClient integrationClient;
+
+    public IntegrationOrderController(IntegrationClient integrationClient) {
+        this.integrationClient = integrationClient;
+    }
 
     @PostMapping(value = "/order")
     public OrderCreatedDto newOrder(@RequestBody OrderCreationDto orderCreationDto){

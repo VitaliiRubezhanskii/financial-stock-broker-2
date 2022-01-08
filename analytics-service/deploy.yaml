@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: analytics
+spec:
+  selector:
+    matchLabels:
+      app: analytics
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: analytics
+    spec:
+      containers:
+        - name: analytics
+          image: analytics-service #${REPOSITORY_TAG}
+          ports:
+            - containerPort: 8093
+          env:
+            - name: SPRING_PROFILES_ACTIVE
+              value: deployment
+            - name: PORT
+              value: '8093'
+            - name: CONFIGSERVER_URI
+              value: http://configserver.default.svc.cluster.local:8888
+          imagePullPolicy: IfNotPresent
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: analytics
+
+spec:
+  ports:
+    - port: 8092
+      protocol: TCP
+  selector:
+    app: analytics
+  type: LoadBalancer

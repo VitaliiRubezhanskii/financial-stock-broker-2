@@ -1,6 +1,8 @@
 package com.investment.auth.config;
 
 import com.investment.auth.api.service.CustomUserDetailsService;
+import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,17 +16,20 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @Configuration
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    @Autowired
     private CustomUserDetailsService userDetailsService;
+
+    public WebSecurityConfig(CustomUserDetailsService userDetailsService) {
+        this.userDetailsService = userDetailsService;
+    }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http
-                .authorizeRequests().anyRequest().authenticated()
+        http.authorizeRequests()
                 .antMatchers("/oauth/**").permitAll()
                 .and()
+                .authorizeRequests().anyRequest().authenticated()
+                .and()
                 .csrf().disable();
-
     }
 
     @Override

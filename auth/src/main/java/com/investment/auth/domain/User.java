@@ -1,16 +1,19 @@
 package com.investment.auth.domain;
 
-import com.investment.auth.enums.Authorities;
+import com.investment.auth.enums.SimpleAuthority;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.time.LocalDate;
 import java.util.*;
 
 @Document
+@Getter
+@Setter
 public class User implements UserDetails {
 
     @Id
@@ -20,6 +23,8 @@ public class User implements UserDetails {
     private String username;
 
     private String password;
+
+    private Set<String> roles;
 
 //    private String firstname;
 //
@@ -35,37 +40,11 @@ public class User implements UserDetails {
 
     private String resetPasswordKey;
 
-    private Set<Authorities> authorities = new HashSet<>();
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
+    private Set<SimpleAuthority> authorities = new HashSet<>();
 
     @Override
-    public String getPassword() {
-        return password;
-    }
-
-    @Override
-    public String getUsername() {
-        return username;
-    }
-
-    @Override
-    public List<GrantedAuthority> getAuthorities() {
-        return new ArrayList<>(authorities);
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
+    public Set<? extends GrantedAuthority> getAuthorities() {
+        return authorities;
     }
 
     @Override
@@ -88,32 +67,18 @@ public class User implements UserDetails {
         return activated;
     }
 
-    public boolean isActivated() {
-        return activated;
-    }
-
     public void setActivated(boolean activated) {
         this.activated = activated;
     }
 
-    public String getActivationKey() {
-        return activationKey;
+    @Override
+    public String getUsername() {
+        return username;
     }
 
-    public void setActivationKey(String activationKey) {
-        this.activationKey = activationKey;
-    }
-
-    public String getResetPasswordKey() {
-        return resetPasswordKey;
-    }
-
-    public void setResetPasswordKey(String resetPasswordKey) {
-        this.resetPasswordKey = resetPasswordKey;
-    }
-
-    public void setAuthorities(Set<Authorities> authorities) {
-        this.authorities = authorities;
+    @Override
+    public String getPassword() {
+        return password;
     }
 
     @Override

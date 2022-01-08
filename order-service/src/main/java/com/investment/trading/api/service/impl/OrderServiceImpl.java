@@ -1,6 +1,6 @@
 package com.investment.trading.api.service.impl;
 
-import com.investment.trading.api.repository.OrderRepository;
+import com.investment.trading.api.service.OrderRepository;
 import com.investment.trading.api.service.OrderService;
 import com.investment.trading.mapper.OrderMapper;
 import com.investment.trading.model.domain.Order;
@@ -8,6 +8,7 @@ import com.investment.trading.model.dto.OrderCreatedDto;
 import com.investment.trading.model.dto.OrderCreationDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,12 +16,11 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
-@RequiredArgsConstructor
 @Slf4j
+@RequiredArgsConstructor
 public class OrderServiceImpl implements OrderService {
 
     private final OrderRepository orderRepository;
-
     private final OrderMapper orderMapper;
 
     @Override
@@ -30,7 +30,7 @@ public class OrderServiceImpl implements OrderService {
                   Order order = orderRepository.save(orderMapper.toEntity(dto));
                   log.info("Order placrd with id  {} for ticket {} of volume {} " +
                           "with condition to {} for bid and ask prices {} {} respectively",
-                          order.getId(), order.getVolume(), order.getCondition(), order.getBid(), order.getAsk());
+                          order.get_id(), order.getVolume(), order.getCondition(), order.getBid(), order.getAsk());
                     return order;
                 })
                 .map(orderMapper::toDto).orElse(new OrderCreatedDto());
@@ -40,9 +40,9 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public OrderCreatedDto findOrderById(String id) {
-        return orderRepository.findById(id)
+        return orderRepository.findOrderBy_id(id)
                 .map(order -> {
-                    log.info("Order with id {} found for ticket {}", order.getId(), order.getTicket());
+                    log.info("Order with id {} found for ticket {}", order.get_id(), order.getTicket());
                     return orderMapper.toDto(order);
                 })
                 .orElseThrow(() -> new RuntimeException("Not Found"));
@@ -54,7 +54,7 @@ public class OrderServiceImpl implements OrderService {
                  .stream()
                  .map(order -> {
                      log.info("Orders with id [] found, for ticket {}",
-                             order.getId(), order.getTicket());
+                             order.get_id(), order.getTicket());
                      return orderMapper.toDto(order);
                  })
                  .collect(Collectors.toList());

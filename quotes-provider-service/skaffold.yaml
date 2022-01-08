@@ -1,0 +1,12 @@
+apiVersion: skaffold/v2beta15
+kind: Config
+metadata:
+  name: quotes-provider-service
+build:
+  artifacts:
+  - image: quotes-provider-service
+    jib: {}
+deploy:
+  kubectl:
+    manifests:
+    - deploy.yaml

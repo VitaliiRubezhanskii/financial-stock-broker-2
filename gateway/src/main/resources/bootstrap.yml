@@ -8,6 +8,7 @@ spring:
       uri: ${CONFIGSERVER_URI}
   main:
     allow-bean-definition-overriding: true
+    web-application-type: reactive
 
 server:
   port: ${PORT}

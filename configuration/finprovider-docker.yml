@@ -1,0 +1,84 @@
+spring:
+  application:
+    name: finprovider
+  kafka:
+    properties:
+      schema.registry.url: http://schema-registry:8081
+
+  cloud:
+    schemaRegistryClient.endpoint: http://schema-registry:8081
+    schema.avro.dynamicSchemaGenerationEnabled: true
+    stream:
+      #  source: process
+      #  bindings:
+      #    process-out-0:
+      #      destination: quote
+      #      contentType: application/*+avro
+      # output:
+      #   producer:
+      #     useNativeEncoding: true
+      #   destination: quote
+      kafka:
+        streams:
+          binder:
+            brokers: broker
+
+          #replicationFactor: 1
+          #partitionCount: 4
+          configuration:
+            #  schema.registry.url: http://schema-registry:8081
+            #  commit.interval.ms: 1000
+            key.serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
+            value.serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
+          #   key.converter.schema.registry.url: http://schema-registry:8081
+          #   value.converter.schema.registry.url: http://schema-registry:8081
+          bindings.process-out-0:
+            destination: quote
+            contentType: application/*+avro
+            producer:
+              #nativeDecoding: false
+              keySerde: io.confluent.kafka.streams.serdes.avro.SpecificAvroSerde
+              valueSerde: org.springframework.kafka.support.serializer.JsonSerde
+
+  datasource:
+    url: jdbc:postgresql://postgres:5432/quotes_provider
+    password: postgres
+    username: postgres
+    driverClassName: org.postgresql.Driver
+    hikari:
+      connectionTimeOut: 2000
+      maximumPoolSize: 5
+  jpa:
+    show-sql: true
+    database-platform: org.hibernate.dialect.PostgreSQL94Dialect
+    hibernate.ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+        temp.use_jdbc_metadata_defaults: false
+  flyway:
+    enabled: true
+    validate-on-migrate: true
+
+eureka:
+  instance:
+    leaseRenewalIntervalInSeconds: 1
+    leaseExpirationDurationInSeconds: 2
+
+  client:
+    serviceUrl:
+      defaultZone: http://discovery:8761/eureka/
+    healthcheck:
+      enabled: true
+    lease:
+      duration: 5
+
+management:
+  security:
+    enabled: false
+
+server:
+  port: 9010
+key.converter.schema.registry.url: http://schema-registry:8081
+value.converter.schema.registry.url: http://schema-registry:8081
