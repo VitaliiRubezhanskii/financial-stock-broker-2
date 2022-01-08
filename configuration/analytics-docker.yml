@@ -1,23 +1,69 @@
 server.port: 9998
 spring.application.name: analytics
-spring.cloud.stream.kafka.binder.brokers: broker
-spring.cloud.stream.bindings.output:
-    destination: quote-aggregation
-spring.cloud.stream.bindings.input:
-    destination: quote
-    consumer:
-      useNativeDecoding: true
-spring.cloud.stream.kafka.streams.binder:
-    brokers: broker
-    configuration:
-      schema.registry.url: http://schema-registry:8081
-      commit.interval.ms: 1000
-      default.key.serde: org.apache.kafka.common.serialization.Serdes$StringSerde
-      default.value.serde: io.confluent.kafka.streams.serdes.avro.SpecificAvroSerde
-spring.cloud.stream.kafka.streams.bindings.input:
-  consumer:
-    keySerde: org.apache.kafka.common.serialization.Serdes$StringSerde
-    valueSerde: io.confluent.kafka.streams.serdes.avro.SpecificAvroSerde
+spring.kafka:
+  properties:
+    schema.registry.url: "http://localhost:8081"
+    specific.avro.reader: true
+  bootstrap-servers: localhost:19092,localhost:29092,localhost:39092
+  properties.allow.auto.create.topics: true
+spring:
+  cloud:
+    stream:
+      function.definition: process
+      bindings:
+        publish-out-0:
+          destination: quote
+          producer:
+            use-native-encoding: true
+        process-in-0:
+          destination: quote
+        process-out-0:
+          destination: quote-aggregation
+          producer:
+            use-native-encoding: true
+          
+   
+      kafka:
+        binder:
+          replicationFactor: 1
+          #minPartitionCount: 3
+          #defaultBrokerPort: kafka-1:19092,kafka-2:29092,kafka-3:39092
+        bindings:
+          publish-out-0:
+            producer:
+              configuration:
+                schema.registry.url: http://localhost:8081
+                key.serializer: org.apache.kafka.common.serialization.StringSerializer
+                value.serializer: com.investment.serde.QuoteAvroSerializer
+          process-in-0:
+            consumer:
+              configuration:
+                schema.registry.url: http://localhost:8081
+                key.serializer: org.apache.kafka.common.serialization.StringSerializer
+                value.serializer: com.investment.serde.QuoteAvroSerializer
+          process-out-0:
+            producer:
+              configuration:
+                schema.registry.url: http://localhost:8081
+                key.serializer: org.apache.kafka.common.serialization.StringSerializer
+                value.serializer: org.apache.kafka.common.serialization.IntegerSerializer
+                # com.investment.serde.QuoteAvroSerializer
+  
+        streams:
+          binder:
+            configuration:
+              schema.registry.url: http://localhost:8081
+              specific.avro.reader: true
+          bindings:                
+            process-out-0:
+              producer:
+                keySerde: org.apache.kafka.common.serialization.Serdes$StringSerde
+                valueSerde: org.apache.kafka.common.serialization.Serdes$IntegerSerde
+            process-in-0:
+              consumer:
+                keySerde: org.apache.kafka.common.serialization.Serdes$StringSerde
+                valueSerde: com.investment.serde.QuoteSerde
+
 
 
 eureka:
@@ -27,7 +73,7 @@ eureka:
 
   client:
     serviceUrl:
-      defaultZone: http://discovery:8761/eureka/
+      defaultZone: http://localhost:8761/eureka/
     healthcheck:
       enabled: true
     lease:

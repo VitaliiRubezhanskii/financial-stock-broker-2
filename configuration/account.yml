@@ -1,18 +1,26 @@
 spring:
   data:
     mongodb:
-      #uri: mongodb://root:root@localhost:27017/admin
-       host: localhost
-       port: 27017
-       username: root
-       password: rootpassword
-       database: account
+      uri: mongodb://root:root@localhost:27017/account
+    #   uri: mongodb://root:rootpassword@localhost:27017/account?authSource=admin&directConnection=true&ssl=false&authMode=scram-sha1
+       #host: localhost
+       #port: 27017
+       #username: root
+       #password: rootpassword
+      database: account
+  security:
+    oauth2:
+      resourceserver:
+          jwt:
+            issuer-uri: http://localhost:8080/auth/realms/broker
+            jwk-set-uri: http://localhost:8080/auth/realms/broker/protocol/openid-connect/certs
   zipkin:
     enabled: true
     baseUrl: http://localhost:9411
   sleuth:
     sampler:
       probability: 100
+      
 
 eureka:
   client:
@@ -22,7 +30,30 @@ eureka:
       enabled: true
     register-with-eureka: true
     fetch-registry: true
+    
+#security:
+#    client:
+#      clientId: account
+#      clientSecret: 1234
+#      accessTokenUri: http://localhost:9000/uaa/oauth/token
+#      grant-type: client_credentials
+#      scope: server
+#    resource:
+#       user-info-uri: http://localhost:9000/uaa/user/current
+#       token-info-uri: http://localhost:9000/uaa/oauth/check_token
+
 
 microservice:
   client:
     url: http://localhost:8099
+
+keycloak:
+  enabled: true
+  realm: broker
+  auth-server-url: http://localhost:8080/auth
+  ssl-required: none
+#keycloak resource is the client ID
+  resource: broker
+  use-resource-role-mappings: true
+#The line below will prevent redirect to login page
+  bearer-only: true

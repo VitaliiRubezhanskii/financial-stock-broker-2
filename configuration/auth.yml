@@ -10,3 +10,18 @@ spring:
 server:
   servlet:
     context-path: /uaa
+security:
+  jwt:
+    key-store: classpath:keystore.jks
+    key-store-password: letmein
+    key-pair-alias: mytestkey
+    key-pair-password: changeme
+    clientId: clientId
+    secret: secret
+    grant_type: password
+    auth_host: /uaa/oauth/token
+    
+logging.level.org.springframework.web: DEBUG
+    
+
+ 

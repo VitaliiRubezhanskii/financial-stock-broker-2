@@ -1,6 +1,6 @@
 spring:
   application:
-    name: quotes-provider-service
+    name: finprovider
   zipkin:
     enabled: true
     baseUrl: http://tracing.default.svc.cluster.local:9411  

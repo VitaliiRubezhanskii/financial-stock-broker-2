@@ -1,23 +1,39 @@
-zuul:
-  ignored-services: '*'
-  routes:
-    account:
-      path: /account/**
-      ribbon:
-        listOfServers: http://localhost:8091
-    order:
-      path: /order/**
-      ribbon:
-        listOfServers: http://localhost:8092
-    feign:
-      path: /feign/**
-      ribbon:
-        listOfServers: http://localhost:8099
-    auth:
-      path: /uaa/**
-      ribbon:
-        listOfServers: http://localhost:8084
-  sensitiveHeaders:
+#zuul:
+  #add-proxy-headers: true
+  #ignoredHeaders:
+  #  - authorization
+ # ignored-services: '*'
+ # routes:
+ #   account:
+ #     path: /account/**
+ #     ribbon:
+ #       listOfServers: http://localhost:8093
+ #   order:
+ #     path: /order/**
+ #     ribbon:
+ #       listOfServers: http://localhost:8092
+ #   feign:
+ #     path: /feign/**
+ #     ribbon:
+ #       listOfServers: http://localhost:8091
+ #     sensitive-headers: Cookie,Set-Cookie
+ #   auth:
+ #     path: /uaa/**
+ #     ribbon:
+ #       listOfServers: http://localhost:9000
+ # sensitive-headers: Cookie,Set-Cookie
+#spring:
+#  cloud:
+#    gateway:
+#      default-filters:
+#        - TokenRelay
+#      routes:
+#        - id: feign
+#          uri: http://localhost:8093/
+#          predicates:
+#           - Path=/feign/**
+#          filters:
+#           - StripPrefix=2
 
 
 eureka:
@@ -42,20 +58,35 @@ management:
 hystrix.command.default.execution.isolation.thread.timeoutInMilliseconds: 60000
 ribbon:
   ConnectTimeout: 3000
-  ReadTimeout: 60000
+  ReadTimeout: 15000
 
   eureka:
-    enabled: false
+    enabled: true
 
-security:
+spring.security:
   oauth2:
     client:
-      clientId: gateway
-      clientSecret: 1234
-      accessTokenUri: http://localhost:8084/uaa/oauth/token
-      grant-type: client_credentials
-      scope: server
+      provider:
+        keycloak:
+          token-uri: http://localhost:8080/auth/realms/broker/protocol/openid-connect/token
+          authorization-uri: http://localhost:8080/auth/realms/broker/protocol/openid-connect/auth
+          userinfo-uri: http://localhost:8080/auth/realms/broker/protocol/openid-connect/userinfo
+          user-name-attribute: preferred_username
+      registration:
+        broker:
+          provider: keycloak
+          client-id: broker
+          client-secret: 7b7d7018-9ac0-4b24-9527-c28965fa7fa1
+          authorization-grant-type: authorization_code
+          redirect-uri: http://localhost:8100/login/oauth2/code/broker
+          scope: phone
+    #client:
+    #  clientId: gateway
+    #  clientSecret: 1234
+    #  accessTokenUri: http://localhost:8084/uaa/oauth/token
+    #  grant-type: client_credentials
+    #  scope: server
 
-    resource:
-      user-info-uri: http://localhost:8084/uaa/user/current
-      token-info-uri: http://localhost:8084/uaa/oauth/check_token
+    #resource:
+    #  user-info-uri: http://localhost:8084/uaa/user/current
+    #  token-info-uri: http://localhost:8084/uaa/oauth/check_token

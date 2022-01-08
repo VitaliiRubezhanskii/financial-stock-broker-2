@@ -1,10 +1,10 @@
-server.port: 9998
+server.port: 8094
 spring.application.name: analytics
 spring.zipkin.enabled: true
 spring.zipkin.baseUrl: http://tracing.default.svc.cluster.local:9411
-spring.cloud.stream.bindings.process-out-0:
+spring.cloud.stream.bindings.output:
   destination: quote-aggregation
-spring.cloud.stream.bindings.process-in-0:
+spring.cloud.stream.bindings.input:
   destination: quote
   consumer:
     useNativeDecoding: true
@@ -15,15 +15,17 @@ spring.cloud.stream.kafka.streams.binder:
     commit.interval.ms: 1000
     default.key.serde: org.apache.kafka.common.serialization.Serdes$StringSerde
     default.value.serde: org.apache.kafka.common.serialization.Serdes$StringSerde
+    #org.apache.kafka.common.serialization.StringSerializer
     #io.confluent.kafka.streams.serdes.avro.SpecificAvroSerde
 spring.cloud.stream.kafka.streams.bindings.input:
   consumer:
     keySerde: org.apache.kafka.common.serialization.Serdes$StringSerde
     valueSerde: org.apache.kafka.common.serialization.Serdes$StringSerde
+    #org.apache.kafka.common.serialization.StringSerializer
     #io.confluent.kafka.streams.serdes.avro.SpecificAvroSerde
 spring.cloud.stream.kafka.binder:
-  autoAddPartitions: true
-  minPartitionsCount: 2
+  #autoAddPartitions: true
+  #minPartitionsCount: 2
   brokers: kafka-broker.default.svc.cluster.local
 eureka:
   instance:
