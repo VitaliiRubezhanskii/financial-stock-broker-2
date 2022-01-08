@@ -1,8 +1,8 @@
 FROM openjdk:12-jdk
 
-ADD target/config-0.0.1-SNAPSHOT.jar config-0.0.1-SNAPSHOT.jar
+ADD build/libs/config.jar config.jar
 VOLUME /var/lib/financial-stock-broker-2/configuration
-ENTRYPOINT ["java","-jar","/config-0.0.1-SNAPSHOT.jar"]
+ENTRYPOINT ["java","-jar","/config.jar"]
 EXPOSE 8888
 
 
