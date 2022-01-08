@@ -29,7 +29,7 @@ pipeline {
     stage('Checkout code') {
           steps{
             cleanWs()
-            git branch: 'spring-cloud-k8s-native',
+            git branch: 'master',
             credentialsId: 'GitHub',
             url: "https://github.com/VitaliiRubezhanskii/financial-stock-broker-2.git"
         }
