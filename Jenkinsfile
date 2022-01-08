@@ -48,16 +48,16 @@ pipeline {
             script {
                 docker.withRegistry('', registryCredential){
 
-                def accountServiceImage = docker.build(accountServiceImageName + ":latest", './core/account-service')
-                def analyticsServiceImage = docker.build(analyticsServiceImageName + ":latest", './core/analytics-service')
-                def orderServiceImage = docker.build(orderServiceImageName + ":latest", './core/order-service')
-                def quotesProviderServiceImage = docker.build(quotesProviderServiceImageName + ':latest', './core/quotes-provider-service')
+                def accountServiceImage = docker.build(accountServiceImageName + ":latest", './account-service')
+                def analyticsServiceImage = docker.build(analyticsServiceImageName + ":latest", './analytics-service')
+                def orderServiceImage = docker.build(orderServiceImageName + ":latest", './order-service')
+                def quotesProviderServiceImage = docker.build(quotesProviderServiceImageName + ':latest', './quotes-provider-service')
 
-                def authServiceImage = docker.build(authServiceImageName + ':latest', './support/auth')
-                def feignServiceImage = docker.build(feignServiceImageName + ':latest', './support/feign-hystrix-client')
-                def gatewayServiceImage = docker.build(gatewayServiceImageName + ':latest', './support/gateway')
-                def tracingServiceImage = docker.build(tracingServiceImageName + ':latest', './support/tracing')
-                def turbineServiceImage = docker.build(tracingServiceImageName + ':latest', './support/turbine')
+//                 def authServiceImage = docker.build(authServiceImageName + ':latest', './support/auth')
+                def feignServiceImage = docker.build(feignServiceImageName + ':latest', './feign-hystrix-client')
+                def gatewayServiceImage = docker.build(gatewayServiceImageName + ':latest', './gateway')
+//                 def tracingServiceImage = docker.build(tracingServiceImageName + ':latest', './support/tracing')
+//                 def turbineServiceImage = docker.build(tracingServiceImageName + ':latest', './support/turbine')
 
                 accountServiceImage.push()
                 analyticsServiceImage.push()
