@@ -1,10 +1,9 @@
 package com.investment.quotesproviderservice.server;
 
-
-import avro.Quote;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.investment.avro.Quote;
 import com.investment.quotesproviderservice.QuotesProviderServiceApplication;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;

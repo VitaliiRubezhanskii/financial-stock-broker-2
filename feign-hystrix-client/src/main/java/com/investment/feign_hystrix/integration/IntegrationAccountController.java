@@ -3,7 +3,6 @@ package com.investment.feign_hystrix.integration;
 import com.investment.feign_hystrix.integration.domain.account.AccountCreatedDto;
 import com.investment.feign_hystrix.integration.domain.account.AccountCreationDto;
 import com.investment.feign_hystrix.integration.domain.enums.AccountStatus;
-import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 

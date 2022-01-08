@@ -23,8 +23,7 @@ import java.util.Map;
 
 
 @SpringBootApplication
-//@EnableDiscoveryClient
-@EnableEurekaClient
+@EnableDiscoveryClient
 @EnableBinding(KafkaStreamsProcessor.class)
 public class AnalyticsServiceApplication {
 

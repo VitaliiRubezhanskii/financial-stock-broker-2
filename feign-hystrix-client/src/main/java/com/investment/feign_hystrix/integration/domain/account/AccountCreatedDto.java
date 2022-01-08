@@ -1,6 +1,6 @@
 package com.investment.feign_hystrix.integration.domain.account;
 
-import com.investment.feign_hystrix.integration.domain.account.enums.AccountStatus;
+import com.investment.feign_hystrix.integration.domain.enums.AccountStatus;
 import lombok.*;
 
 import java.math.BigDecimal;
