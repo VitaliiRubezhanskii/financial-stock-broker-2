@@ -1,6 +1,6 @@
 package com.investment.serde;
 
-
+import com.investment.avro.Quote;
 import io.confluent.kafka.schemaregistry.client.SchemaRegistryClientConfig;
 import io.confluent.kafka.serializers.AbstractKafkaAvroSerDeConfig;
 import org.apache.kafka.common.serialization.Deserializer;
