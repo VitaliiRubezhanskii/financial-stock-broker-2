@@ -1,0 +1,30 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: analytics
+data:
+  spring.cloud.kubernetes.discovery.all-namespaces: "true"
+  server.port: '8094'
+  spring.application.name: analytics
+  spring.zipkin.enabled: 'true'
+  spring.zipkin.baseUrl: http://tracing.default.svc.cluster.local:9411
+  spring.cloud.stream.bindings.output.destination: quote-aggregation
+  spring.cloud.stream.bindings.input.destination: quote
+  spring.cloud.stream.bindings.input.consumer.useNativeDecoding: 'true'
+  spring.cloud.stream.kafka.streams.binder.brokers: kafka-broker.default.svc.cluster.local
+  spring.cloud.stream.kafka.streams.binder.configuration.schema.registry.url: http://schema-registry.default.svc.cluster.local:8081
+  spring.cloud.stream.kafka.streams.binder.configuration.commit.interval.ms: '1000'
+  spring.cloud.stream.kafka.streams.binder.configuration.default.key.serde: org.apache.kafka.common.serialization.Serdes$StringSerde
+  spring.cloud.stream.kafka.streams.binder.configuration.default.value.serde: org.apache.kafka.common.serialization.Serdes$StringSerde
+  spring.cloud.stream.kafka.streams.bindings.input.consumer.keySerde: org.apache.kafka.common.serialization.Serdes$StringSerde
+  spring.cloud.stream.kafka.streams.bindings.input.consumer.valueSerde: org.apache.kafka.common.serialization.Serdes$StringSerde
+
+  spring.cloud.stream.kafka.binder.brokers: kafka-broker.default.svc.cluster.local
+  eureka.instance.leaseRenewalIntervalInSeconds: '1'
+  eureka.instance.leaseExpirationDurationInSeconds: '2'
+
+  eureka.client.serviceUrl.defaultZone: http://discovery.default.svc.cluster.local:8761/eureka/
+  eureka.client.healthcheck.enabled: 'true'
+  eureka.client.lease.duration: '5'
+
+  management.security.enabled: 'false'
