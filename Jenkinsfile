@@ -26,54 +26,54 @@ pipeline {
     agent { label 'master'}
     stages {
 
-    stage('Checkout code') {
-          steps{
-            cleanWs()
-            git branch: 'master',
-            credentialsId: 'GitHub',
-            url: "https://github.com/VitaliiRubezhanskii/financial-stock-broker-2.git"
-        }
-    }
-
-    stage('Build'){
-        steps{
-            script {
-               sh './gradlew clean build'
-            }
-        }
-    }
-
-    stage('Docker image'){
-        steps {
-            script {
-                docker.withRegistry('', registryCredential){
-
-                def accountServiceImage = docker.build(accountServiceImageName + ":latest", './account-service')
-                def analyticsServiceImage = docker.build(analyticsServiceImageName + ":latest", './analytics-service')
-                def orderServiceImage = docker.build(orderServiceImageName + ":latest", './order-service')
-                def quotesProviderServiceImage = docker.build(quotesProviderServiceImageName + ':latest', './quotes-provider-service')
-
-//                 def authServiceImage = docker.build(authServiceImageName + ':latest', './support/auth')
-                def feignServiceImage = docker.build(feignServiceImageName + ':latest', './feign-hystrix-client')
-                def gatewayServiceImage = docker.build(gatewayServiceImageName + ':latest', './gateway')
-//                 def tracingServiceImage = docker.build(tracingServiceImageName + ':latest', './support/tracing')
-//                 def turbineServiceImage = docker.build(tracingServiceImageName + ':latest', './support/turbine')
-
-                accountServiceImage.push()
-                analyticsServiceImage.push()
-                orderServiceImage.push()
-                quotesProviderServiceImage.push()
-
-//                 authServiceImage.push()
-                feignServiceImage.push()
-                gatewayServiceImage.push()
-//                 tracingServiceImage.push()
-//                 turbineServiceImage.push()
-
-                }
-            }
-        }
-    }
+//     stage('Checkout code') {
+//           steps{
+//             cleanWs()
+//             git branch: 'master',
+//             credentialsId: 'GitHub',
+//             url: "https://github.com/VitaliiRubezhanskii/financial-stock-broker-2.git"
+//         }
+//     }
+//
+//     stage('Build'){
+//         steps{
+//             script {
+//                sh './gradlew clean build'
+//             }
+//         }
+//     }
+//
+//     stage('Docker image'){
+//         steps {
+//             script {
+//                 docker.withRegistry('', registryCredential){
+//
+//                 def accountServiceImage = docker.build(accountServiceImageName + ":latest", './account-service')
+//                 def analyticsServiceImage = docker.build(analyticsServiceImageName + ":latest", './analytics-service')
+//                 def orderServiceImage = docker.build(orderServiceImageName + ":latest", './order-service')
+//                 def quotesProviderServiceImage = docker.build(quotesProviderServiceImageName + ':latest', './quotes-provider-service')
+//
+// //                 def authServiceImage = docker.build(authServiceImageName + ':latest', './support/auth')
+//                 def feignServiceImage = docker.build(feignServiceImageName + ':latest', './feign-hystrix-client')
+//                 def gatewayServiceImage = docker.build(gatewayServiceImageName + ':latest', './gateway')
+// //                 def tracingServiceImage = docker.build(tracingServiceImageName + ':latest', './support/tracing')
+// //                 def turbineServiceImage = docker.build(tracingServiceImageName + ':latest', './support/turbine')
+//
+//                 accountServiceImage.push()
+//                 analyticsServiceImage.push()
+//                 orderServiceImage.push()
+//                 quotesProviderServiceImage.push()
+//
+// //                 authServiceImage.push()
+//                 feignServiceImage.push()
+//                 gatewayServiceImage.push()
+// //                 tracingServiceImage.push()
+// //                 turbineServiceImage.push()
+//
+//                 }
+//             }
+//         }
+//     }
 
     stage('Deploy') {
         steps {
