@@ -96,15 +96,15 @@ pipeline {
 
               sh 'sleep 7s'
 
-                sh 'kubectl apply -f ./core/account-service/deploy.yaml --kubeconfig=../../kubeconfig/config'
-                sh 'kubectl apply -f ./core/order-service/deploy.yaml --kubeconfig=../../kubeconfig/config'
-                sh 'kubectl apply -f ./core/analytics-service/deploy.yaml --kubeconfig=../../kubeconfig/config'
-                sh 'kubectl apply -f ./core/quotes-provider-service/deploy.yaml --kubeconfig=../../kubeconfig/config'
+                sh 'kubectl apply -f ./account-service/deploy.yaml --kubeconfig=../../kubeconfig/config'
+                sh 'kubectl apply -f ./order-service/deploy.yaml --kubeconfig=../../kubeconfig/config'
+                sh 'kubectl apply -f ./analytics-service/deploy.yaml --kubeconfig=../../kubeconfig/config'
+                sh 'kubectl apply -f ./quotes-provider-service/deploy.yaml --kubeconfig=../../kubeconfig/config'
 
-                sh 'kubectl apply -f ./support/auth/deploy.yaml --kubeconfig=../../kubeconfig/config'
-                sh 'kubectl apply -f ./support/feign-hystrix-client/deploy.yaml --kubeconfig=../../kubeconfig/config'
-                sh 'kubectl apply -f ./support/gateway/deploy.yaml --kubeconfig=../../kubeconfig/config'
-                sh 'kubectl apply -f ./support/tracing/deploy.yaml --kubeconfig=../../kubeconfig/config'
+//                 sh 'kubectl apply -f ./support/auth/deploy.yaml --kubeconfig=../../kubeconfig/config'
+                sh 'kubectl apply -f ./feign-hystrix-client/deploy.yaml --kubeconfig=../../kubeconfig/config'
+                sh 'kubectl apply -f ./gateway/deploy.yaml --kubeconfig=../../kubeconfig/config'
+//                 sh 'kubectl apply -f ./support/tracing/deploy.yaml --kubeconfig=../../kubeconfig/config'
              }
 
          }
