@@ -1,0 +1,12 @@
+apiVersion: skaffold/v2beta15
+kind: Config
+metadata:
+  name: gateway
+build:
+  artifacts:
+    - image: gateway
+      jib: {}
+deploy:
+  kubectl:
+    manifests:
+      - deploy.yaml

@@ -1,5 +1,6 @@
 package com.investment.account.api;
 
+import com.investment.account.model.domain.Account;
 import com.investment.account.model.domain.enums.AccountStatus;
 import com.investment.account.model.dto.AccountCreatedDto;
 import com.investment.account.model.dto.AccountCreationDto;
@@ -30,6 +31,11 @@ public class AccountController {
     @GetMapping(value = "/{accountId}")
     public ResponseEntity<AccountCreatedDto> getAccountById(@PathVariable("accountId") String accountId){
         return new ResponseEntity<>(accountService.getAccountById(accountId), HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/name/{account}")
+    public ResponseEntity<Account> getAccountByAccount(@PathVariable("account") String accountId){
+        return new ResponseEntity<>(accountService.getAccountByAccount(accountId), HttpStatus.OK);
     }
 
     @DeleteMapping(value = "/{accountId}/status/{status}")

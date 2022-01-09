@@ -1,6 +1,8 @@
 package com.investment.feign_hystrix.config;
 
 import feign.RequestInterceptor;
+import feign.RequestTemplate;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.oauth2.resource.ResourceServerProperties;
 import org.springframework.boot.autoconfigure.security.oauth2.resource.UserInfoTokenServices;
@@ -9,6 +11,7 @@ import org.springframework.cloud.security.oauth2.client.feign.OAuth2FeignRequest
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.oauth2.client.OAuth2ClientContext;
@@ -21,6 +24,7 @@ import org.springframework.security.oauth2.provider.token.ResourceServerTokenSer
 
 @Configuration
 @EnableResourceServer
+@Slf4j
 public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 
     private final ResourceServerProperties sso;
@@ -41,7 +45,17 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 
     @Bean
     public RequestInterceptor oauth2FeignRequestInterceptor() {
-        return new OAuth2FeignRequestInterceptor(oAuth2ClientContext, clientCredentialsResourceDetails());
+        return requestTemplate -> {
+            String token = oAuth2ClientContext.getAccessToken().getValue();
+            if (token != null) {
+                String bearerString = String.format("%s %s", "Bearer ", token);
+                System.out.println("set the template header to this bearer string:" + bearerString);
+                requestTemplate.header(HttpHeaders.AUTHORIZATION, bearerString);
+                log.debug("set the template header to this bearer string: {}", bearerString);
+            } else {
+                log.error("No bearer string.");
+            }
+        };
     }
 
     @Bean

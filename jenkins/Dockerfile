@@ -18,6 +18,9 @@ RUN apk add --no-cache maven \
     docker \
     gettext
 
+RUN apk add --no-cache su-exec
+RUN apk add --no-cache iptables bash
+
 # Kubectl
 RUN  wget https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl && chmod +x ./kubectl && mv ./kubectl /usr/local/bin/kubectl
 

@@ -1,0 +1,12 @@
+apiVersion: skaffold/v2beta12
+kind: Config
+requires:
+  - skaffold-account.yaml
+  - skaffold-order.yaml
+#  - './core/order-service/skaffold.yaml'
+#  - './core/analytics-service/skaffold.yaml'
+#  - './core/quotes-provider-service/skaffold.yaml'
+#
+#  - './support/auth/skaffold.yaml'
+#  - './support/feign-hystrix-client/skaffold.yaml'
+#  - './support/gateway/skaffold.yaml'

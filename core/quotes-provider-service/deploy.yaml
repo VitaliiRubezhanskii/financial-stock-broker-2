@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: quote-provider-service
-          image: quotes-provider-service #${REPOSITORY_TAG}
+          image: vitalii1992/quote-provider-service:latest #quotes-provider-service #${REPOSITORY_TAG}
           ports:
             - containerPort: 8094
           env:
@@ -24,7 +24,9 @@ spec:
               value: '8094'
             - name: CONFIGSERVER_URI
               value: http://configserver.default.svc.cluster.local:8888
-          imagePullPolicy: IfNotPresent
+            - name: QUOTES_PROVIDER_SERVICE_IMAGE
+              value: "vitalii1992/quote-provider-service:latest"
+          imagePullPolicy: Always
 
 ---
 apiVersion: v1
