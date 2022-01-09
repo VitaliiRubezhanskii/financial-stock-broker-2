@@ -1,20 +1,70 @@
+spring.application.name: finprovider
+spring.kafka:
+  properties:
+    bootstrap-servers: pkc-4ygn6.europe-west3.gcp.confluent.cloud:9092
+    properties.allow.auto.create.topics: true
+    sasl.mechanism: PLAIN
+    sasl.jaas.config: org.apache.kafka.common.security.plain.PlainLoginModule required username='' password='';
+    security.protocol: SASL_SSL
+
+    basic.auth.credentials.source: USER_INFO
+    basic.auth.user.info: 4JYXYBS7AXSTQRFG:Sw4ib3vEDg4lmHFcB7p7EMsMHUiaqQkQFJHC7J5fmPXDkB3TfHPiXVWMoHyfg/qc
+    schema.registry.url: https://psrc-2312y.europe-west3.gcp.confluent.cloud
 spring:
-  application:
-    name: finprovider
   cloud:
     stream:
+      function.definition: process
       bindings:
-        output:
-          producer:
-            useNativeEncoding: true
+        process-out-0:
           destination: quote
+          producer:
+            use-native-encoding: true
+
       kafka:
         binder:
-          brokers: broker
-          configuration:
-            schema.registry.url: http://schema-registry:8081
-            key.serializer: org.apache.kafka.common.serialization.ByteArraySerializer
-            value.serializer: com.investment.quotesproviderservice.serdes.QuoteSerde
+          brokers: pkc-4ygn6.europe-west3.gcp.confluent.cloud
+          defaultBrokerPort: 9092
+        bindings:
+          process-out-0:
+            producer:
+              configuration:
+                schema.registry.url: https://psrc-2312y.europe-west3.gcp.confluent.cloud
+                key.serializer: org.apache.kafka.common.serialization.StringSerializer
+                value.serializer: com.investment.serdes.QuoteAvroSerializer
+        streams:
+          binder:
+            configuration:
+              schema.registry.url: https://psrc-2312y.europe-west3.gcp.confluent.cloud
+              key.serializer: org.apache.kafka.common.serialization.StringSerializer
+              value.serializer: com.investment.serdes.QuoteAvroSerializer
+          bindings:
+            process-out-0:
+              producer:
+                keySerde: org.apache.kafka.common.serialization.Serdes$StringSerde
+                valueSerde: com.investment.serdes.QuoteSerde
+
+
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/quotes_provider
+    password: postgres
+    username: postgres
+    driverClassName: org.postgresql.Driver
+    hikari:
+      connectionTimeOut: 2000
+      maximumPoolSize: 5
+  jpa:
+    show-sql: true
+    database-platform: org.hibernate.dialect.PostgreSQL94Dialect
+    hibernate.ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+        temp.use_jdbc_metadata_defaults: false
+  flyway:
+    enabled: true
+    validate-on-migrate: true
 
 eureka:
   instance:
@@ -23,7 +73,7 @@ eureka:
 
   client:
     serviceUrl:
-      defaultZone: http://discovery:8761/eureka/
+      defaultZone: http://localhost:8761/eureka/
     healthcheck:
       enabled: true
     lease:
@@ -35,5 +85,5 @@ management:
 
 server:
   port: 9010
-
-
+key.converter.schema.registry.url: https://psrc-2312y.europe-west3.gcp.confluent.cloud
+value.converter.schema.registry.url: https://psrc-2312y.europe-west3.gcp.confluent.cloud
