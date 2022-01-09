@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -22,7 +23,7 @@ public class TicketQuote {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "quote_sequence_generator")
-//    @SequenceGenerator(name="ticket_quote_sequence_generator", sequenceName = "quote_sequence_seq")
+    @SequenceGenerator(name="ticket_quote_sequence_generator", sequenceName = "quote_sequence_seq")
     @Column(name = "id", updatable = false, nullable = false)
     private Long id;
 

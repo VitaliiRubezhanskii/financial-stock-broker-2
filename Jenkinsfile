@@ -16,12 +16,7 @@ pipeline {
     ANALYTICS_SERVICE_IMAGE = 'vitalii1992/analytics-service:latest'
     ORDER_SERVICE_IMAGE = 'vitalii1992/order-service:latest'
     ACCOUNT_SERVICE_IMAGE = 'vitalii1992/account-service:latest'
-    QUOTES_PROVIDER_SERVICE_IMAGE = 'vitalii1992/quote-provider-service:latest'
-
-    AUTH_SERVICE_IMAGE = 'vitalii1992/auth-service:latest'
-    FEIGN_CLIENT_SERVICE_IMAGE = 'vitalii1992/feign-service:latest'
-    API_GATEWAY_SERVICE_IMAGE = 'vitalii1992/api-gateway-service:latest'
-    TRACING_SERVICE_IMAGE = 'vitalii1992/tracing-service:latest'
+    QUOTES_PROVIDER_SERVICE_IMAGE = 'vitalii1992/quotes-provider-service:latest'
 }
     agent { label 'master'}
     stages {
@@ -50,25 +45,13 @@ pipeline {
 
                 def accountServiceImage = docker.build(accountServiceImageName + ":latest", './account-service')
                 def analyticsServiceImage = docker.build(analyticsServiceImageName + ":latest", './analytics-service')
-                def orderServiceImage = docker.build(orderServiceImageName + ":latest", './order-service')
                 def quotesProviderServiceImage = docker.build(quotesProviderServiceImageName + ':latest', './quotes-provider-service')
-
-//                 def authServiceImage = docker.build(authServiceImageName + ':latest', './support/auth')
-                def feignServiceImage = docker.build(feignServiceImageName + ':latest', './feign-hystrix-client')
-                def gatewayServiceImage = docker.build(gatewayServiceImageName + ':latest', './gateway')
-//                 def tracingServiceImage = docker.build(tracingServiceImageName + ':latest', './support/tracing')
-//                 def turbineServiceImage = docker.build(tracingServiceImageName + ':latest', './support/turbine')
+                def orderServiceImage = docker.build(orderServiceImageName + ":latest", './order-service')
 
                 accountServiceImage.push()
                 analyticsServiceImage.push()
-                orderServiceImage.push()
                 quotesProviderServiceImage.push()
-
-//                 authServiceImage.push()
-                feignServiceImage.push()
-                gatewayServiceImage.push()
-//                 tracingServiceImage.push()
-//                 turbineServiceImage.push()
+                orderServiceImage.push()
 
                 }
             }
@@ -78,33 +61,33 @@ pipeline {
     stage('Deploy') {
         steps {
              script {
-
+               // Deploy MongoDB
               sh 'kubectl apply -f ./mongodb/mongodb-secret.yml --kubeconfig=../../kubeconfig/config'
               sh 'kubectl apply -f ./mongodb/mongodb-deployment.yml --kubeconfig=../../kubeconfig/config'
 
-              sh 'kubectl apply -f ./kafka/kafka-deployment.yml --kubeconfig=../../kubeconfig/config'
+              // Deploy postgres
+              sh 'kubectl apply -f ./postgres/postgres-configmap.yml --kubeconfig=../../kubeconfig/config'
+              sh 'kubectl apply -f ./postgres/postgres-storage.yml --kubeconfig=../../kubeconfig/config'
+              sh 'kubectl apply -f ./postgres/postgres-service.yml --kubeconfig=../../kubeconfig/config'
+              sh 'kubectl apply -f ./postgres/postgres-deployment.yml --kubeconfig=../../kubeconfig/config'
 
+                // Deploy microservices configs
               sh 'kubectl apply -f ./configuration/kubernetes/account/account-configmap.yaml --kubeconfig=../../kubeconfig/config'
               sh 'kubectl apply -f ./configuration/kubernetes/analytics/analytics-configmap.yaml --kubeconfig=../../kubeconfig/config'
-              sh 'kubectl apply -f ./configuration/kubernetes/auth/auth-configmap.yaml --kubeconfig=../../kubeconfig/config'
-              sh 'kubectl apply -f ./configuration/kubernetes/feign/feign-configmap.yaml --kubeconfig=../../kubeconfig/config'
-              sh 'kubectl apply -f ./configuration/kubernetes/gateway/gateway-configmap.yaml --kubeconfig=../../kubeconfig/config'
               sh 'kubectl apply -f ./configuration/kubernetes/order/order-configmap.yaml --kubeconfig=../../kubeconfig/config'
-              sh 'kubectl apply -f ./configuration/kubernetes/quotes-provider/quotes-provider-configmap.yaml --kubeconfig=../../kubeconfig/config'
+              sh 'kubectl apply -f ./configuration/kubernetes/quotes-provider/finprovider-configmap.yaml --kubeconfig=../../kubeconfig/config'
+
+                // Deploy rbac & ingress
               sh 'kubectl apply -f ./configuration/kubernetes/cluster-rbac.yaml --kubeconfig=../../kubeconfig/config'
               sh 'kubectl apply -f ./configuration/kubernetes/ingress.yaml --kubeconfig=../../kubeconfig/config'
 
               sh 'sleep 7s'
 
-                sh 'kubectl apply -f ./account-service/deploy.yaml --kubeconfig=../../kubeconfig/config'
-                sh 'kubectl apply -f ./order-service/deploy.yaml --kubeconfig=../../kubeconfig/config'
-                sh 'kubectl apply -f ./analytics-service/deploy.yaml --kubeconfig=../../kubeconfig/config'
-                sh 'kubectl apply -f ./quotes-provider-service/deploy.yaml --kubeconfig=../../kubeconfig/config'
+              sh 'kubectl apply -f ./account-service/deploy.yaml --kubeconfig=../../kubeconfig/config'
+              sh 'kubectl apply -f ./order-service/deploy.yaml --kubeconfig=../../kubeconfig/config'
+              sh 'kubectl apply -f ./analytics-service/deploy.yaml --kubeconfig=../../kubeconfig/config'
+              sh 'kubectl apply -f ./quotes-provider-service/deploy.yaml --kubeconfig=../../kubeconfig/config'
 
-//                 sh 'kubectl apply -f ./support/auth/deploy.yaml --kubeconfig=../../kubeconfig/config'
-                sh 'kubectl apply -f ./feign-hystrix-client/deploy.yaml --kubeconfig=../../kubeconfig/config'
-                sh 'kubectl apply -f ./gateway/deploy.yaml --kubeconfig=../../kubeconfig/config'
-//                 sh 'kubectl apply -f ./support/tracing/deploy.yaml --kubeconfig=../../kubeconfig/config'
              }
 
          }

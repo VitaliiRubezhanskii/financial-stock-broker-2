@@ -14,17 +14,15 @@ spec:
     spec:
       containers:
         - name: analytics
-          image: analytics-service #${REPOSITORY_TAG}
+          image: vitalii1992/analytics-service:latest #${REPOSITORY_TAG}
           ports:
-            - containerPort: 8093
+            - containerPort: 9010
           env:
             - name: SPRING_PROFILES_ACTIVE
               value: deployment
             - name: PORT
-              value: '8093'
-            - name: CONFIGSERVER_URI
-              value: http://configserver.default.svc.cluster.local:8888
-          imagePullPolicy: IfNotPresent
+              value: '9010'
+          imagePullPolicy: Always
 
 ---
 apiVersion: v1
@@ -34,7 +32,7 @@ metadata:
 
 spec:
   ports:
-    - port: 8092
+    - port: 9010
       protocol: TCP
   selector:
     app: analytics

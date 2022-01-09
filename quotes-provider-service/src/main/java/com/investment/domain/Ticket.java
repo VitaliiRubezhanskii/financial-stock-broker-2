@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import java.util.Set;
 
@@ -21,7 +22,7 @@ public class Ticket {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "ticket_sequence_generator")
-//    @SequenceGenerator(name="ticket_sequence_generator", sequenceName = "ticket_sequence_seq")
+    @SequenceGenerator(name="ticket_sequence_generator", sequenceName = "ticket_sequence_seq")
     @Column(name = "id", updatable = false, nullable = false)
     private Long id;
 

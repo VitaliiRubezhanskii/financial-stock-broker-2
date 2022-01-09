@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: quote-provider-service
+  name: finprovider
 spec:
   selector:
     matchLabels:
-      app: quote-provider-service
+      app: finprovider
   replicas: 1
   template:
     metadata:
       labels:
-        app: quote-provider-service
+        app: finprovider
     spec:
       containers:
-        - name: quote-provider-service
-          image: quotes-provider-service #${REPOSITORY_TAG}
+        - name: finprovider
+          image: vitalii1992/quotes-provider-service:latest #${REPOSITORY_TAG}
           ports:
             - containerPort: 8094
           env:
@@ -22,20 +22,18 @@ spec:
               value: deployment
             - name: PORT
               value: '8094'
-            - name: CONFIGSERVER_URI
-              value: http://configserver.default.svc.cluster.local:8888
-          imagePullPolicy: IfNotPresent
+          imagePullPolicy: Always
 
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: quote-provider-service
+  name: finprovider
 
 spec:
   ports:
     - port: 8094
       protocol: TCP
   selector:
-    app: quote-provider-service
-  type: LoadBalancer
+    app: finprovider
+  type: NodePort

@@ -1,4 +1,4 @@
-FROM openjdk:12-jdk
+FROM adoptopenjdk/openjdk11
 WORKDIR /
 ADD build/libs/account-service.jar account-service.jar
 ADD /setup.sh setup.sh

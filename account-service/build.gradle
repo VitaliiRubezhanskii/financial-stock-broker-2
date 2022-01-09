@@ -16,7 +16,6 @@ buildscript {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:1.4.3.RELEASE")
         classpath "org.jetbrains.kotlin:kotlin-allopen:1.5.31"
         classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.31'
-//        classpath 'org.jetbrains.kotlin:kotlin-maven-plugin:1.5.31'
     }
 }
 repositories {
@@ -48,11 +47,9 @@ dependencies {
 
     implementation 'org.springframework.boot:spring-boot-starter-web'
 
+    implementation 'org.springframework.cloud:spring-cloud-starter-kubernetes-client-all'
     implementation 'org.springframework.boot:spring-boot-starter-security'
     implementation 'org.springframework.cloud:spring-cloud-starter-bootstrap'
-
-    implementation 'org.springframework.cloud:spring-cloud-starter-config'
-    implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
 
     implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
     implementation 'org.springframework.data:spring-data-mongodb'

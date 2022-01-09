@@ -1,0 +1,44 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: finprovider
+data:
+  spring.cloud.kubernetes.discovery.all-namespaces: "true"
+  spring.application.name: finprovider
+  spring.kafka.properties.bootstrap-servers: pkc-4ygn6.europe-west3.gcp.confluent.cloud:9092
+  spring.kafka.properties.properties.allow.auto.create.topics: "true"
+  spring.kafka.properties.sasl.mechanism: "PLAIN"
+  spring.kafka.properties.sasl.jaas.config: org.apache.kafka.common.security.plain.PlainLoginModule required username="IPCTGUI4SLTO4NBM" password="3TpQsPu/GR/E6ioGF+ZTMRrXE83M7jMRw+x2lb7n5Ey9ji9io0gTwe0aBrKmcJNl";
+  spring.kafka.properties.security.protocol: "SASL_SSL"
+  spring.kafka.properties.basic.auth.credentials.source: USER_INFO
+  spring.kafka.properties.basic.auth.user.info: 4JYXYBS7AXSTQRFG:Sw4ib3vEDg4lmHFcB7p7EMsMHUiaqQkQFJHC7J5fmPXDkB3TfHPiXVWMoHyfg/qc
+  spring.kafka.properties.schema.registry.url: https://psrc-2312y.europe-west3.gcp.confluent.cloud
+  spring.cloud.stream.function.definition: process
+  spring.cloud.stream.bindings.process-out-0.destination: quote
+  spring.cloud.stream.bindings.process-out-0.producer.use-native-encoding: "true"
+  spring.cloud.stream.kafka.binder.brokers: pkc-4ygn6.europe-west3.gcp.confluent.cloud
+  spring.cloud.stream.kafka.bindings.process-out-0.producer.configuration.schema.registry.url: https://psrc-2312y.europe-west3.gcp.confluent.cloud
+  spring.cloud.stream.kafka.bindings.process-out-0.producer.configuration.key.serializer: org.apache.kafka.common.serialization.StringSerializer
+  spring.cloud.stream.kafka.bindings.process-out-0.producer.configuration.value.serializer: com.investment.serdes.QuoteAvroSerializer
+  spring.cloud.stream.streams.binder.configuration.schema.registry.url: https://psrc-2312y.europe-west3.gcp.confluent.cloud
+  spring.cloud.stream.streams.binder.configuration.key.serializer: org.apache.kafka.common.serialization.StringSerializer
+  spring.cloud.stream.streams.binder.configuration.value.serializer: com.investment.serdes.QuoteAvroSerializer
+  spring.cloud.stream.kafka.streams.bindings.process-out-0.producer.keySerde: org.apache.kafka.common.serialization.Serdes$StringSerde
+  spring.cloud.stream.kafka.streams.bindings.process-out-0.producer.valueSerde: com.investment.serdes.QuoteSerde
+  key.converter.schema.registry.url: https://psrc-2312y.europe-west3.gcp.confluent.cloud
+  value.converter.schema.registry.url: https://psrc-2312y.europe-west3.gcp.confluent.cloud
+  management.security.enabled: "false"
+  spring.datasource.url: jdbc:postgresql://postgres.default.svc.cluster.local/quotes_provider
+  spring.datasource.password: postgres
+  spring.datasource.username: postgres
+  spring.datasource.driverClassName: org.postgresql.Driver
+  spring.datasource.hikari.connectionTimeOut: "2000"
+  spring.datasource.hikari.maximumPoolSize: "5"
+  spring.jpa.show-sql: "true"
+  spring.jpa.database-platform: org.hibernate.dialect.PostgreSQL94Dialect
+  spring.jpa.hibernate.ddl-auto: create-drop
+  spring.jpa.properties.hibernate.dialect: org.hibernate.dialect.PostgreSQLDialect
+  spring.jpa.properties.hibernate.format_sql: "true"
+  spring.jpa.properties.hibernate.temp.use_jdbc_metadata_defaults: "false"
+  spring.flyway.enabled: "true"
+  spring.flyway.validate-on-migrate: "true"

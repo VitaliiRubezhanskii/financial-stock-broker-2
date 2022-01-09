@@ -6,20 +6,7 @@ data:
   spring.cloud.kubernetes.discovery.all-namespaces: "true"
   spring.data.mongodb.host: mongodb-service.default.svc.cluster.local
   spring.data.mongodb.port: '27017'
-  spring.data.mongodb.username: username
+  spring.data.mongodb.username: admin
   spring.data.mongodb.password: password
   spring.data.mongodb.database: order
   spring.data.mongodb.authentication-database: admin
-
-  spring.zipkin.enabled: 'true'
-  spring.zipkin.baseUrl: http://tracing.default.svc.cluster.local:9411
-  spring.zipkin.sleuth.sampler.probability: '100'
-
-  security.oauth2.client.clientId: order
-  security.oauth2.client.clientSecret: '1234'
-  security.oauth2.client.accessTokenUri: http://auth.default.svc.cluster.local:8084/uaa/oauth/token
-  security.oauth2.client.grant-type: client_credentials
-  security.oauth2.client.scope: server
-  server.port: '8092'
-  security.oauth2.resource.user-info-uri: http://auth.default.svc.cluster.local:8084/uaa/user/current
-  security.oauth2.resource.token-info-uri: http://auth.default.svc.cluster.local:8084/uaa/oauth/check_token
