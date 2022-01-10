@@ -34,8 +34,8 @@ spec:
         - name: keycloak
           image: quay.io/keycloak/keycloak:16.1.0
           volumeMounts:
-            - mountPath: /var/lib/postgresql/data
-              name: postgredb
+            - mountPath: /var/lib/keycloak/data
+              name: keycloak
           env:
             - name: KEYCLOAK_USER
               value: "admin"
