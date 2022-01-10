@@ -62,19 +62,19 @@ pipeline {
                    // Deploy KeyCloak
                   sh 'kubectl create -f ./keycloak/keycloak-storage.yml'
                   sh 'kubectl create -f ./keycloak/keycloak-deployment.yml'
-                  sh (""" wget -q -O - https://raw.githubusercontent.com/keycloak/keycloak-quickstarts/latest/kubernetes-examples/keycloak-ingress.yaml | \
+                  sh ("""wget -q -O - https://raw.githubusercontent.com/keycloak/keycloak-quickstarts/latest/kubernetes-examples/keycloak-ingress.yaml | \
                       sed "s/KEYCLOAK_HOST/keycloak.$(minikube ip).nip.io/" | \
-                      kubectl create -f - """)
-                  sh (""" KEYCLOAK_URL=https://keycloak.$(minikube ip).nip.io/auth &&
+                      kubectl create -f -""")
+                  sh ("""KEYCLOAK_URL=https://keycloak.$(minikube ip).nip.io/auth &&
                       echo "" &&
                       echo "Keycloak:                 $KEYCLOAK_URL" &&
                       echo "Keycloak Admin Console:   $KEYCLOAK_URL/admin" &&
-                      echo "Keycloak Account Console: $KEYCLOAK_URL/realms/myrealm/account" """)
-                  sh (""" KEYCLOAK_URL=http://$(minikube ip):$(kubectl get services/keycloak -o go-template='{{(index .spec.ports 0).nodePort}}')/auth &&
+                      echo "Keycloak Account Console: $KEYCLOAK_URL/realms/myrealm/account"""")
+                  sh ("""KEYCLOAK_URL=http://$(minikube ip):$(kubectl get services/keycloak -o go-template='{{(index .spec.ports 0).nodePort}}')/auth &&
                       echo "" &&
                       echo "Keycloak:                 $KEYCLOAK_URL" &&
                       echo "Keycloak Admin Console:   $KEYCLOAK_URL/admin" &&
-                      echo "Keycloak Account Console: $KEYCLOAK_URL/realms/myrealm/account" """)
+                      echo "Keycloak Account Console: $KEYCLOAK_URL/realms/myrealm/account"""")
 
                    // Deploy MongoDB
                   sh 'kubectl apply -f ./mongodb/mongodb-secret.yml --kubeconfig=../../kubeconfig/config'
