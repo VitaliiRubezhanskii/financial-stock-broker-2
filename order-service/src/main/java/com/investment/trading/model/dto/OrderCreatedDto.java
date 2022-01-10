@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class OrderCreatedDto {
 
-    private String _id;
+    private String id;
 
     private String ticket;
 

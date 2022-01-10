@@ -24,7 +24,11 @@ public class AccountController {
 
     @PatchMapping(value = "/{accountId}")
     public ResponseEntity<AccountCreatedDto> updateAccount(@PathVariable("accountId") String accountId, @RequestBody AccountCreationDto accountCreationDto){
-        return new ResponseEntity<>(accountService.updateAccount(accountId, accountCreationDto), HttpStatus.OK);
+        AccountCreatedDto accountCreatedDto = new AccountCreatedDto();
+        accountCreatedDto.setId("2132wqqwqw2332");
+        accountCreatedDto.setAccount("acc-service-acc");
+        return new ResponseEntity<>(accountCreatedDto, HttpStatus.ACCEPTED);
+//        return new ResponseEntity<>(accountService.updateAccount(accountId, accountCreationDto), HttpStatus.OK);
     }
 
     @GetMapping(value = "/{accountId}")

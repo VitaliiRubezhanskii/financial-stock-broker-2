@@ -25,7 +25,11 @@ public class OrderController {
 
     @GetMapping(value = "/{id}")
     public ResponseEntity<OrderCreatedDto> findOrderById(@PathVariable("id") String id){
-        return new ResponseEntity<>(orderService.findOrderById(id), HttpStatus.OK);
+        OrderCreatedDto orderCreatedDto = new OrderCreatedDto();
+        orderCreatedDto.setId("4534545345345");
+        orderCreatedDto.setAccount("order-service-order");
+        return new ResponseEntity<>(orderCreatedDto, HttpStatus.OK);
+//        return new ResponseEntity<>(orderService.findOrderById(id), HttpStatus.OK);
     }
 
     @GetMapping(value = "/account/{accountId}")
