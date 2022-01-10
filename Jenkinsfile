@@ -16,44 +16,44 @@ pipeline {
      }
     agent { label 'master'}
     stages {
-        stage('Checkout code') {
-              steps{
-                cleanWs()
-                git branch: 'master',
-                credentialsId: 'GitHub',
-                url: "https://github.com/VitaliiRubezhanskii/financial-stock-broker-2.git"
-            }
-        }
-
-        stage('Build'){
-            steps{
-                script {
-                   sh './gradlew clean build'
-                }
-            }
-        }
-
-        stage('Docker image'){
-            steps {
-                script {
-                    docker.withRegistry('', registryCredential){
-
-                    def accountServiceImage = docker.build(accountServiceImageName + ":latest", './account-service')
-                    def analyticsServiceImage = docker.build(analyticsServiceImageName + ":latest", './analytics-service')
-                    def quotesProviderServiceImage = docker.build(quotesProviderServiceImageName + ':latest', './quotes-provider-service')
-                    def orderServiceImage = docker.build(orderServiceImageName + ":latest", './order-service')
-                    def feignServiceImage = docker.build(feignServiceImageName + ":latest", './feign-hystrix-client')
-
-                    accountServiceImage.push()
-                    analyticsServiceImage.push()
-                    quotesProviderServiceImage.push()
-                    orderServiceImage.push()
-                    feignServiceImage.push()
-
-                    }
-                }
-            }
-        }
+//         stage('Checkout code') {
+//               steps{
+//                 cleanWs()
+//                 git branch: 'master',
+//                 credentialsId: 'GitHub',
+//                 url: "https://github.com/VitaliiRubezhanskii/financial-stock-broker-2.git"
+//             }
+//         }
+//
+//         stage('Build'){
+//             steps{
+//                 script {
+//                    sh './gradlew clean build'
+//                 }
+//             }
+//         }
+//
+//         stage('Docker image'){
+//             steps {
+//                 script {
+//                     docker.withRegistry('', registryCredential){
+//
+//                     def accountServiceImage = docker.build(accountServiceImageName + ":latest", './account-service')
+//                     def analyticsServiceImage = docker.build(analyticsServiceImageName + ":latest", './analytics-service')
+//                     def quotesProviderServiceImage = docker.build(quotesProviderServiceImageName + ':latest', './quotes-provider-service')
+//                     def orderServiceImage = docker.build(orderServiceImageName + ":latest", './order-service')
+//                     def feignServiceImage = docker.build(feignServiceImageName + ":latest", './feign-hystrix-client')
+//
+//                     accountServiceImage.push()
+//                     analyticsServiceImage.push()
+//                     quotesProviderServiceImage.push()
+//                     orderServiceImage.push()
+//                     feignServiceImage.push()
+//
+//                     }
+//                 }
+//             }
+//         }
 
         stage('Deploy') {
             steps {
