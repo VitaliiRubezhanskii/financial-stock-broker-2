@@ -60,7 +60,7 @@ pipeline {
                  script {
 
                    // Deploy KeyCloak
-                  sh 'kubectl create -f ./keycloak/keycloak-storage.yml --kubeconfig=../../kubeconfig/config'
+//                   sh 'kubectl create -f ./keycloak/keycloak-storage.yml --kubeconfig=../../kubeconfig/config'
                   sh 'kubectl create -f ./keycloak/keycloak-deployment.yml --kubeconfig=../../kubeconfig/config'
                   sh 'wget -q -O - https://raw.githubusercontent.com/keycloak/keycloak-quickstarts/latest/kubernetes-examples/keycloak-ingress.yaml | sed "s/KEYCLOAK_HOST/keycloak.$(minikube ip).nip.io/" | kubectl create -f -'
                   sh 'KEYCLOAK_URL=https://keycloak.$(minikube ip).nip.io/auth && echo "" && echo "Keycloak: $KEYCLOAK_URL" && echo "Keycloak Admin Console:$KEYCLOAK_URL/admin" && echo "Keycloak Account Console: $KEYCLOAK_URL/realms/myrealm/account" '
