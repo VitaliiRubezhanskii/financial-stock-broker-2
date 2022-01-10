@@ -16,14 +16,14 @@ pipeline {
      }
     agent { label 'master'}
     stages {
-//         stage('Checkout code') {
-//               steps{
-//                 cleanWs()
-//                 git branch: 'master',
-//                 credentialsId: 'GitHub',
-//                 url: "https://github.com/VitaliiRubezhanskii/financial-stock-broker-2.git"
-//             }
-//         }
+        stage('Checkout code') {
+              steps{
+                cleanWs()
+                git branch: 'master',
+                credentialsId: 'GitHub',
+                url: "https://github.com/VitaliiRubezhanskii/financial-stock-broker-2.git"
+            }
+        }
 //
 //         stage('Build'){
 //             steps{
