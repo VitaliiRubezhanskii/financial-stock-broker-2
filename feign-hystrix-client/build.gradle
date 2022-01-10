@@ -49,18 +49,15 @@ dependencies {
 
     implementation 'org.springframework.boot:spring-boot-starter-security'
     implementation 'org.springframework.cloud:spring-cloud-starter-bootstrap'
-
-    implementation 'org.springframework.cloud:spring-cloud-starter-config'
-    implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
+    implementation 'org.springframework.cloud:spring-cloud-starter-kubernetes-client-all'
 
     implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
+    implementation 'org.springframework.cloud:spring-cloud-starter-loadbalancer'
+
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
 
     implementation 'io.jsonwebtoken:jjwt-api:0.10.5'
-//    implementation 'javax.xml.bind:jaxb-api:2.3.0'
-//    implementation 'javax.servlet.jsp:javax.servlet.jsp-api:2.3.3'
-//    implementation 'com.sun.xml.bind:jaxb-impl:2.3.0'
-//    implementation 'org.glassfish.jaxb:jaxb-runtime:2.3.0'
+
     implementation 'javax.activation:activation:1.1.1'
 
     compileOnly 'org.projectlombok:lombok:1.18.20'

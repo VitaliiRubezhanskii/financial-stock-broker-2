@@ -16,12 +16,10 @@ spec:
         - name: order
           image: vitalii1992/order-service:latest #${REPOSITORY_TAG}
           ports:
-            - containerPort: 8092
+            - containerPort: 8080
           env:
             - name: SPRING_PROFILES_ACTIVE
               value: deployment
-            - name: PORT
-              value: '8092'
           imagePullPolicy: Always
 
 ---
@@ -32,8 +30,9 @@ metadata:
 
 spec:
   ports:
-    - port: 8092
-      protocol: TCP
+    - port: 8080
+      name: http
+      targetPort: 8080
   selector:
     app: order
   type: NodePort

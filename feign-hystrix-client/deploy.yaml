@@ -16,14 +16,10 @@ spec:
         - name: feign
           image: vitalii1992/feign-service:latest #${REPOSITORY_TAG}
           ports:
-            - containerPort: 8099
+            - containerPort: 8080
           env:
             - name: SPRING_PROFILES_ACTIVE
               value: deployment
-            - name: PORT
-              value: '8099'
-            - name: CONFIGSERVER_URI
-              value: http://configserver:8888
           imagePullPolicy: Always
 
 ---
@@ -35,6 +31,7 @@ spec:
   selector:
     app: feign
   ports:
-    - port: 8099
-      protocol: TCP
+    - port: 8080
+      name: http
+      targetPort: 8080
   type: NodePort

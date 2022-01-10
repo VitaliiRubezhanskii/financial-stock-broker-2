@@ -16,12 +16,10 @@ spec:
         - name: account
           image: vitalii1992/account-service:latest #${REPOSITORY_TAG}
           ports:
-            - containerPort: 8081
+            - containerPort: 8080
           env:
             - name: SPRING_PROFILES_ACTIVE
               value: deployment
-            - name: PORT
-              value: '8085'
           imagePullPolicy: Always
 
 ---
@@ -32,8 +30,9 @@ metadata:
 
 spec:
   ports:
-      - port: 8081
-        protocol: TCP
+    - port: 8080
+      name: http
+      targetPort: 8080
   selector:
     app: account
   type: NodePort

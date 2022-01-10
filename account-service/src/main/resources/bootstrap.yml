@@ -10,12 +10,12 @@ spring:
   application:
     name: account
 
-  cloud:
-    config:
-      uri: ${CONFIGSERVER_URI}
-
-server:
-  port: ${PORT}
+#  cloud:
+#    config:
+#      uri: ${CONFIGSERVER_URI}
+#
+#server:
+#  port: ${PORT}
 
 #keycloak:
 #  enabled: true

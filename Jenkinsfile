@@ -4,12 +4,7 @@ pipeline {
         analyticsServiceImageName = "vitalii1992/analytics-service"
         orderServiceImageName = "vitalii1992/order-service"
         quotesProviderServiceImageName = "vitalii1992/quotes-provider-service"
-
-        authServiceImageName = "vitalii1992/auth-service"
         feignServiceImageName = "vitalii1992/feign-service"
-        gatewayServiceImageName = "vitalii1992/api-gateway-service"
-        tracingServiceImageName = "vitalii1992/tracing-service"
-        turbineServiceImageName = "vitalii1992/turbine-service"
 
         registryCredential = 'DockerHub'
 
@@ -17,6 +12,7 @@ pipeline {
         ORDER_SERVICE_IMAGE = 'vitalii1992/order-service:latest'
         ACCOUNT_SERVICE_IMAGE = 'vitalii1992/account-service:latest'
         QUOTES_PROVIDER_SERVICE_IMAGE = 'vitalii1992/quotes-provider-service:latest'
+        FEIGN = 'vitalii1992/feign-service:latest'
      }
     agent { label 'master'}
     stages {
@@ -46,11 +42,13 @@ pipeline {
                     def analyticsServiceImage = docker.build(analyticsServiceImageName + ":latest", './analytics-service')
                     def quotesProviderServiceImage = docker.build(quotesProviderServiceImageName + ':latest', './quotes-provider-service')
                     def orderServiceImage = docker.build(orderServiceImageName + ":latest", './order-service')
+                    def feignServiceImage = docker.build(feignServiceImageName + ":latest", './feign-hystrix-client')
 
                     accountServiceImage.push()
                     analyticsServiceImage.push()
                     quotesProviderServiceImage.push()
                     orderServiceImage.push()
+                    feignServiceImage.push()
 
                     }
                 }
@@ -75,6 +73,7 @@ pipeline {
                   sh 'kubectl apply -f ./configuration/kubernetes/analytics/analytics-configmap.yaml --kubeconfig=../../kubeconfig/config'
                   sh 'kubectl apply -f ./configuration/kubernetes/order/order-configmap.yaml --kubeconfig=../../kubeconfig/config'
                   sh 'kubectl apply -f ./configuration/kubernetes/quotes-provider/finprovider-configmap.yaml --kubeconfig=../../kubeconfig/config'
+                  sh 'kubectl apply -f ./configuration/kubernetes/feign/feign-configmap.yaml --kubeconfig=../../kubeconfig/config'
 
                     // Deploy rbac & ingress
                   sh 'kubectl apply -f ./configuration/kubernetes/cluster-rbac.yaml --kubeconfig=../../kubeconfig/config'
@@ -86,6 +85,7 @@ pipeline {
                   sh 'kubectl apply -f ./order-service/deploy.yaml --kubeconfig=../../kubeconfig/config'
                   sh 'kubectl apply -f ./analytics-service/deploy.yaml --kubeconfig=../../kubeconfig/config'
                   sh 'kubectl apply -f ./quotes-provider-service/deploy.yaml --kubeconfig=../../kubeconfig/config'
+                  sh 'kubectl apply -f ./feign-hystrix-client/deploy.yaml --kubeconfig=../../kubeconfig/config'
 
                  }
              }
