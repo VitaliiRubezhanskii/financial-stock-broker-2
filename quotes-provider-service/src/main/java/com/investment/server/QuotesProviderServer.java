@@ -33,4 +33,10 @@ public class QuotesProviderServer {
     }
 
 
+    @GetMapping(value = "/health")
+    public List<String> health() {
+        return Collections.singletonList("HEALTHY!!!");
+    }
+
+
 }
