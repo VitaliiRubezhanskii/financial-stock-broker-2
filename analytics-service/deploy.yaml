@@ -16,12 +16,12 @@ spec:
         - name: analytics
           image: vitalii1992/analytics-service:latest #${REPOSITORY_TAG}
           ports:
-            - containerPort: 9010
+            - containerPort: 80
           env:
             - name: SPRING_PROFILES_ACTIVE
               value: deployment
             - name: PORT
-              value: '9010'
+              value: '80'
           imagePullPolicy: Always
 
 ---
@@ -29,11 +29,19 @@ apiVersion: v1
 kind: Service
 metadata:
   name: analytics
-
+  annotations:
+    service.beta.kubernetes.io/aws-load-balancer-backend-protocol: http
+    service.beta.kubernetes.io/aws-load-balancer-ssl-cert: arn:aws:acm:eu-central-1:063132795330:certificate/c094fd1f-962c-4847-9ba5-b4ed7bb3cae6
+    service.beta.kubernetes.io/aws-load-balancer-ssl-ports: "https"
 spec:
   ports:
-    - port: 9010
-      protocol: TCP
+    - name: http
+      port: 80
+      targetPort: 80
+      nodePort: 30008
+    - name: https
+      port: 443
+      targetPort: 80
   selector:
     app: analytics
   type: LoadBalancer
