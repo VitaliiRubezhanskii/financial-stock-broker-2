@@ -4,7 +4,7 @@ metadata:
   name: analytics
 data:
   spring.cloud.kubernetes.discovery.all-namespaces: "true"
-  server.port: "8094"
+  server.port: "80"
   spring.application.name: "analytics"
   spring.kafka.properties.bootstrap-servers: pkc-4ygn6.europe-west3.gcp.confluent.cloud:9092
   spring.kafka.properties.properties.allow.auto.create.topics: "true"
