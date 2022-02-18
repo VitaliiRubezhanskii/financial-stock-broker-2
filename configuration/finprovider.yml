@@ -4,7 +4,7 @@ spring.kafka:
     bootstrap-servers: pkc-4ygn6.europe-west3.gcp.confluent.cloud:9092
     properties.allow.auto.create.topics: true
     sasl.mechanism: PLAIN
-    sasl.jaas.config: org.apache.kafka.common.security.plain.PlainLoginModule required username='' password='';
+    sasl.jaas.config: org.apache.kafka.common.security.plain.PlainLoginModule required username='%s' password='%s';
     security.protocol: SASL_SSL
 
     basic.auth.credentials.source: USER_INFO
@@ -63,8 +63,8 @@ spring:
         format_sql: true
         temp.use_jdbc_metadata_defaults: false
   flyway:
-    enabled: true
-    validate-on-migrate: true
+    enabled: false
+    validate-on-migrate: false
 
 eureka:
   instance:
