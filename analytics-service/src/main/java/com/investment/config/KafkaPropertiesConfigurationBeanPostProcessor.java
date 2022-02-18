@@ -28,7 +28,7 @@ public class KafkaPropertiesConfigurationBeanPostProcessor implements BeanPostPr
             KafkaProperties properties = (KafkaProperties) bean;
 
             AWSSecretsManager client = AWSSecretsManagerClientBuilder.standard()
-                    .withCredentials(new ProfileCredentialsProvider("default"))
+//                    .withCredentials(new ProfileCredentialsProvider("default"))
                     .withRegion("eu-central-1").build();
             String kafkaSecretsAsString = client.getSecretValue(new GetSecretValueRequest().withSecretId("dev/App/secret")).getSecretString();
             AwsKafkaSecrets kafkaSecrets = null;
