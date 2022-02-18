@@ -8,7 +8,7 @@ data:
   spring.kafka.properties.bootstrap-servers: pkc-4ygn6.europe-west3.gcp.confluent.cloud:9092
   spring.kafka.properties.properties.allow.auto.create.topics: "true"
   spring.kafka.properties.sasl.mechanism: "PLAIN"
-  spring.kafka.properties.sasl.jaas.config: org.apache.kafka.common.security.plain.PlainLoginModule required username="IPCTGUI4SLTO4NBM" password="3TpQsPu/GR/E6ioGF+ZTMRrXE83M7jMRw+x2lb7n5Ey9ji9io0gTwe0aBrKmcJNl";
+  spring.kafka.properties.sasl.jaas.config: org.apache.kafka.common.security.plain.PlainLoginModule required username="%s" password="%s";
   spring.kafka.properties.security.protocol: "SASL_SSL"
   spring.kafka.properties.basic.auth.credentials.source: USER_INFO
   spring.kafka.properties.basic.auth.user.info: 4JYXYBS7AXSTQRFG:Sw4ib3vEDg4lmHFcB7p7EMsMHUiaqQkQFJHC7J5fmPXDkB3TfHPiXVWMoHyfg/qc
