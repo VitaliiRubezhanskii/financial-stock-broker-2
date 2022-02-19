@@ -87,3 +87,4 @@ server:
   port: 9010
 key.converter.schema.registry.url: https://psrc-2312y.europe-west3.gcp.confluent.cloud
 value.converter.schema.registry.url: https://psrc-2312y.europe-west3.gcp.confluent.cloud
+management.endpoints.web.exposure.include: *
