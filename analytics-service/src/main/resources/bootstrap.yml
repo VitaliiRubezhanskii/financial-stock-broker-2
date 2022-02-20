@@ -12,3 +12,12 @@ spring:
     allow-bean-definition-overriding: true
 server:
   port: 30020
+aws:
+  secretsmanager:
+    name: backend
+    default-context: backend
+
+cloud:
+  aws:
+    region:
+      static: eu-central-1
