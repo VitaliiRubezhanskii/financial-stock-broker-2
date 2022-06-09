@@ -1,4 +1,4 @@
-FROM adoptopenjdk/openjdk11
+FROM adoptopenjdk/openjdk16
 WORKDIR /
 ADD build/libs/analytics-service.jar analytics-service.jar
 ADD /setup.sh setup.sh
