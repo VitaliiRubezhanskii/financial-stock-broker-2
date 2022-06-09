@@ -58,9 +58,8 @@ pipeline {
         stage('Deploy') {
             steps {
                  script {
-                    sh 'curl -LO "https://storage.googleapis.com/kubernetes-release/release/v1.20.5/bin/linux/amd64/kubectl"'
-                    sh 'chmod u+x ./kubectl'
-                    sh './kubectl apply -f ./configuration/kubernetes/analytics/analytics-configmap.yaml --kubeconfig=../../kubeconfig/config'
+
+                    sh 'kubectl apply -f ./configuration/kubernetes/analytics/analytics-configmap.yaml --kubeconfig=../../kubeconfig/config'
 //                    // Deploy KeyCloak
 //                   sh 'kubectl create -f ./keycloak/keycloak-storage.yml --kubeconfig=../../kubeconfig/config'
 //                   sh 'kubectl apply -f ./keycloak/keycloak-deployment.yml --kubeconfig=../../kubeconfig/config'
@@ -93,7 +92,7 @@ pipeline {
 //
 //                   sh 'kubectl apply -f ./account-service/deploy.yaml --kubeconfig=../../kubeconfig/config'
 //                   sh 'kubectl apply -f ./order-service/deploy.yaml --kubeconfig=../../kubeconfig/config'
-                  sh 'kubectl apply -f ./analytics-service/deploy.yaml --kubeconfig=../../kubeconfig/config'
+                  sh 'kubectl apply -f ./analytics-service/deploy.yaml --kubeconfig=./k8s/kube/config'
 //                   sh 'kubectl apply -f ./quotes-provider-service/deploy.yaml --kubeconfig=../../kubeconfig/config'
 //                   sh 'kubectl apply -f ./feign-hystrix-client/deploy.yaml --kubeconfig=../../kubeconfig/config'
 //

@@ -48,6 +48,12 @@ RUN apt-get update && \
 # Kubectl
 RUN wget https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl && chmod +x ./kubectl &&  mv ./kubectl /usr/local/bin/kubectl
 
+RUN mkdir /root/.kube
+
+COPY ../k8s/kube/ca.crt /root/
+COPY ../k8s/kube/client.crt /root/
+COPY ../k8s/kube/client.key /root/
+COPY ../k8s/kube/config /root/.kube
 # Need to ensure the gid here matches the gid on the host node. We ASSUME (hah!) this
 # will be stable....keep an eye out for unable to connect to docker.sock in the builds
 # RUN delgroup ping && delgroup docker && addgroup -g 999 docker && addgroup jenkins docker
