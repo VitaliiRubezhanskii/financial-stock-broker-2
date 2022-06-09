@@ -5,7 +5,7 @@ function build() {
 }
 
 function run() {
-  docker-compose --file docker-compose.dev.yml up -d
+  docker-compose --file docker-compose.jenkins.yml up -d
 #    docker run --name "$1" -p 8080:8080 -p 50000:50000 -v jenkins:/var/jenkins_home "$1":latest
 }
 

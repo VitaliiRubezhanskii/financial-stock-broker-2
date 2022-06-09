@@ -8,13 +8,10 @@ services:
       context: jenkins
       dockerfile: Dockerfile
     ports:
-      - 9001:8080
+      - 9000:8080
       - 50000:50000
     volumes:
       - ./jenkins:/var/jenkins_home
       - /var/run/docker.sock:/var/run/docker.sock
-#      - ./jenkins/kubeconfig:/.kube
-#      - /Users/vitalii/.m2/repository:/var/jenkins_home/.m2/repository
-#      - /usr/local/Cellar/gradle/7.0.2_2:/var/jenkins_home/gradle/7.0.2_2
     networks:
       - my-mongo-cluster

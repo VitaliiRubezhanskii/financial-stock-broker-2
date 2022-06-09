@@ -78,7 +78,7 @@ pipeline {
 //
 //                     // Deploy microservices configs
 //                   sh 'kubectl apply -f ./configuration/kubernetes/account/account-configmap.yaml --kubeconfig=../../kubeconfig/config'
-//                   sh 'kubectl apply -f ./configuration/kubernetes/analytics/analytics-configmap.yaml --kubeconfig=../../kubeconfig/config'
+                  sh 'kubectl apply -f ./configuration/kubernetes/analytics/analytics-configmap.yaml --kubeconfig=../../kubeconfig/config'
 //                   sh 'kubectl apply -f ./configuration/kubernetes/order/order-configmap.yaml --kubeconfig=../../kubeconfig/config'
 //                   sh 'kubectl apply -f ./configuration/kubernetes/quotes-provider/finprovider-configmap.yaml --kubeconfig=../../kubeconfig/config'
 //                   sh 'kubectl apply -f ./configuration/kubernetes/feign/feign-configmap.yaml --kubeconfig=../../kubeconfig/config'
@@ -91,7 +91,7 @@ pipeline {
 //
 //                   sh 'kubectl apply -f ./account-service/deploy.yaml --kubeconfig=../../kubeconfig/config'
 //                   sh 'kubectl apply -f ./order-service/deploy.yaml --kubeconfig=../../kubeconfig/config'
-//                   sh 'kubectl apply -f ./analytics-service/deploy.yaml --kubeconfig=../../kubeconfig/config'
+                  sh 'kubectl apply -f ./analytics-service/deploy.yaml --kubeconfig=../../kubeconfig/config'
 //                   sh 'kubectl apply -f ./quotes-provider-service/deploy.yaml --kubeconfig=../../kubeconfig/config'
 //                   sh 'kubectl apply -f ./feign-hystrix-client/deploy.yaml --kubeconfig=../../kubeconfig/config'
 //

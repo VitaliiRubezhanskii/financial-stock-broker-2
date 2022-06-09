@@ -2,8 +2,6 @@ package com.investment.security.configuration
 
 import feign.RequestInterceptor
 import feign.RequestTemplate
-import org.bouncycastle.util.Arrays
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.config.MethodInvokingFactoryBean
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty
 import org.springframework.boot.web.servlet.FilterRegistrationBean
@@ -12,8 +10,6 @@ import org.springframework.context.annotation.Configuration
 import org.springframework.core.convert.converter.Converter
 import org.springframework.http.HttpHeaders
 import org.springframework.security.authentication.AbstractAuthenticationToken
-import org.springframework.security.authentication.AuthenticationManager
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
@@ -24,10 +20,8 @@ import org.springframework.security.core.context.SecurityContextHolder.MODE_INHE
 import org.springframework.security.oauth2.core.DelegatingOAuth2TokenValidator
 import org.springframework.security.oauth2.core.OAuth2TokenValidator
 import org.springframework.security.oauth2.jwt.*
-import org.springframework.security.oauth2.server.resource.BearerTokenAuthenticationToken
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationConverter
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken
-import javax.servlet.GenericFilter
 
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
