@@ -55,10 +55,10 @@ pipeline {
             }
         }
 //
-//         stage('Deploy') {
-//             steps {
-//                  script {
-//
+        stage('Deploy') {
+            steps {
+                 script {
+
 //                    // Deploy KeyCloak
 //                   sh 'kubectl create -f ./keycloak/keycloak-storage.yml --kubeconfig=../../kubeconfig/config'
 //                   sh 'kubectl apply -f ./keycloak/keycloak-deployment.yml --kubeconfig=../../kubeconfig/config'
@@ -95,8 +95,8 @@ pipeline {
 //                   sh 'kubectl apply -f ./quotes-provider-service/deploy.yaml --kubeconfig=../../kubeconfig/config'
 //                   sh 'kubectl apply -f ./feign-hystrix-client/deploy.yaml --kubeconfig=../../kubeconfig/config'
 //
-//                  }
-//              }
-//         }
+                 }
+             }
+        }
     }
 }
