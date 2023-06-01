@@ -1,15 +1,15 @@
 spring.application.name: finprovider
 spring.kafka:
   properties:
-    bootstrap-servers: pkc-4ygn6.europe-west3.gcp.confluent.cloud:9092
-    properties.allow.auto.create.topics: true
-    sasl.mechanism: PLAIN
-    sasl.jaas.config: org.apache.kafka.common.security.plain.PlainLoginModule required username='${username}' password='${password}';
-    security.protocol: SASL_SSL
+    bootstrap-servers: localhost:9092
+    #properties.allow.auto.create.topics: true
+    #sasl.mechanism: PLAIN
+    #sasl.jaas.config: org.apache.kafka.common.security.plain.PlainLoginModule required username='${username}' password='${password}';
+    #security.protocol: SASL_SSL
 
-    basic.auth.credentials.source: USER_INFO
-    basic.auth.user.info: 4JYXYBS7AXSTQRFG:Sw4ib3vEDg4lmHFcB7p7EMsMHUiaqQkQFJHC7J5fmPXDkB3TfHPiXVWMoHyfg/qc
-    schema.registry.url: https://psrc-2312y.europe-west3.gcp.confluent.cloud
+    #basic.auth.credentials.source: USER_INFO
+    #basic.auth.user.info: 4JYXYBS7AXSTQRFG:Sw4ib3vEDg4lmHFcB7p7EMsMHUiaqQkQFJHC7J5fmPXDkB3TfHPiXVWMoHyfg/qc
+    schema.registry.url: http://localhost:8081
 spring:
   cloud:
     stream:
@@ -22,19 +22,19 @@ spring:
 
       kafka:
         binder:
-          brokers: pkc-4ygn6.europe-west3.gcp.confluent.cloud
+          brokers: localhost:9092
           defaultBrokerPort: 9092
         bindings:
           process-out-0:
             producer:
               configuration:
-                schema.registry.url: https://psrc-2312y.europe-west3.gcp.confluent.cloud
+                schema.registry.url: http://localhost:8081
                 key.serializer: org.apache.kafka.common.serialization.StringSerializer
                 value.serializer: com.investment.serdes.QuoteAvroSerializer
         streams:
           binder:
             configuration:
-              schema.registry.url: https://psrc-2312y.europe-west3.gcp.confluent.cloud
+              schema.registry.url: http://localhost:8081
               key.serializer: org.apache.kafka.common.serialization.StringSerializer
               value.serializer: com.investment.serdes.QuoteAvroSerializer
           bindings:
