@@ -19,12 +19,11 @@ spring:
         process-out-0:
           destination: quote
           producer:
-            use-native-encoding: true
+            useNativeEncoding: true
 
       kafka:
         binder:
           brokers: localhost:9092
-          defaultBrokerPort: 9092
         bindings:
           process-out-0:
             producer:
@@ -86,5 +85,3 @@ management:
 
 server:
   port: 9010
-key.converter.schema.registry.url: http://localhost:8081
-value.converter.schema.registry.url: http://localhost:8081
