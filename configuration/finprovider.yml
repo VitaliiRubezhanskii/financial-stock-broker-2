@@ -9,7 +9,7 @@ spring.application.name: finprovider
 
     #basic.auth.credentials.source: USER_INFO
     #basic.auth.user.info: 4JYXYBS7AXSTQRFG:Sw4ib3vEDg4lmHFcB7p7EMsMHUiaqQkQFJHC7J5fmPXDkB3TfHPiXVWMoHyfg/qc
-    schema.registry.url: http://localhost:8081
+ #   schema.registry.url: http://localhost:8081
 spring:
   cloud:
     stream:
