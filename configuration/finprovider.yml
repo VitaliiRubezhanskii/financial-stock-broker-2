@@ -18,7 +18,7 @@ spring:
   cloud:
     function.definition: process
     stream:
-      # default.contentType: application/*+avro
+      default.contentType: application/*+avro
       bindings:
         process-out-0:
           destination: quote
@@ -36,12 +36,12 @@ spring:
                 key.serializer: org.apache.kafka.common.serialization.LongSerializer
                 value.serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
                
-        streams:
-          binder:
-            configuration:
-              schema.registry.url: http://localhost:8081
-              key.serializer: org.apache.kafka.common.serialization.LongSerializer
-              value.serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
+        #streams:
+        #  binder:
+        #    configuration:
+        #      schema.registry.url: http://localhost:8081
+        #      key.serializer: org.apache.kafka.common.serialization.LongSerializer
+        #      value.serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
           #bindings:
           #  process-out-0:
           #    producer:
