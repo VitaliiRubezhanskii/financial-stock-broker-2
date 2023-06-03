@@ -11,6 +11,10 @@ spring.application.name: finprovider
     #basic.auth.user.info: 4JYXYBS7AXSTQRFG:Sw4ib3vEDg4lmHFcB7p7EMsMHUiaqQkQFJHC7J5fmPXDkB3TfHPiXVWMoHyfg/qc
  #   schema.registry.url: http://localhost:8081
 spring:
+  kafka:
+    properties:
+      bootstrap-servers: localhost:9092
+      schema.registry.url: http://localhost:8081
   cloud:
     stream:
       function.definition: process
