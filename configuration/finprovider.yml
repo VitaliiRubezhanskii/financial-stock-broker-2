@@ -33,7 +33,7 @@ spring:
             producer:
               configuration:
                 schema.registry.url: http://localhost:8081
-                key.serializer: org.apache.kafka.common.serialization.StringSerializer
+                key.serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
                 value.serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
                
         #streams:
