@@ -33,20 +33,20 @@ spring:
             producer:
               configuration:
                 schema.registry.url: http://localhost:8081
-                key.serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
+                key.serializer: org.apache.kafka.common.serialization.LongSerializer
                 value.serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
                
-        #streams:
-        #  binder:
-        #    configuration:
-        #      schema.registry.url: http://localhost:8081
-        #      key.serializer: org.apache.kafka.common.serialization.StringSerializer
-        #      value.serializer: com.investment.serdes.QuoteAvroSerializer
-        #  bindings:
-        #    process-out-0:
-        #      producer:
-        #        keySerde: org.apache.kafka.common.serialization.Serdes$StringSerde
-        #        valueSerde: com.investment.serdes.QuoteSerde
+        streams:
+          binder:
+            configuration:
+              schema.registry.url: http://localhost:8081
+              key.serializer: org.apache.kafka.common.serialization.LongSerializer
+              value.serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
+          #bindings:
+          #  process-out-0:
+          #    producer:
+          #      keySerde: org.apache.kafka.common.serialization.Serdes$LongSerde
+          #      valueSerde: com.investment.serdes.QuoteSerde
 
 
 
