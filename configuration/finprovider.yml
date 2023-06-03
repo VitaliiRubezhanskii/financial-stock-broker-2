@@ -13,7 +13,7 @@ spring.application.name: finprovider
 spring:
   cloud:
     stream:
-      # function.definition: process
+      function.definition: process
       # default.contentType: application/*+avro
       bindings:
         process-out-0:
