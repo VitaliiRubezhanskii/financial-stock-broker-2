@@ -16,8 +16,8 @@ spring:
       bootstrap-servers: localhost:9092
       schema.registry.url: http://localhost:8081
   cloud:
+    function.definition: process
     stream:
-      function.definition: process
       # default.contentType: application/*+avro
       bindings:
         process-out-0:
