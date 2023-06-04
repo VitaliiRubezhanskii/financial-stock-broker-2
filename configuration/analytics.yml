@@ -1,8 +1,8 @@
 server.port: 9998
-spring.application.name: analytics
-spring.kafka:
-  properties:
-    bootstrap-servers: localhost:9092
+#spring.application.name: analytics
+#spring.kafka:
+#  properties:
+#    bootstrap-servers: localhost:9092
     #properties.allow.auto.create.topics: true
     #sasl.mechanism: PLAIN
     #sasl.jaas.config: org.apache.kafka.common.security.plain.PlainLoginModule required username='${username}' password='${password}';
@@ -10,22 +10,22 @@ spring.kafka:
     
     #basic.auth.credentials.source: USER_INFO
     #basic.auth.user.info: 4JYXYBS7AXSTQRFG:Sw4ib3vEDg4lmHFcB7p7EMsMHUiaqQkQFJHC7J5fmPXDkB3TfHPiXVWMoHyfg/qc
-    schema.registry.url: http://localhost:8081
+ #   schema.registry.url: http://localhost:8081
 spring:
   cloud:
     stream:
       function.definition: process
       bindings:
-        publish-out-0:
-          destination: quote
-          producer:
-            use-native-encoding: true
+    #    publish-out-0:
+    #      destination: quote
+    #      producer:
+    #        use-native-encoding: true
         process-in-0:
           destination: quote
         process-out-0:
           destination: quote-aggregation
           producer:
-            use-native-encoding: true
+            useNativeEncoding: true
           
    
       kafka:
