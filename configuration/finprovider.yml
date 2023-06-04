@@ -33,8 +33,8 @@ spring:
             producer:
               configuration:
                 schema.registry.url: http://localhost:8081
-             #   key.serializer: org.apache.kafka.common.serialization.StringSerializer
-                value.serializer: com.investment.serializer.SensorSerializer
+                key.serializer: org.apache.kafka.common.serialization.StringSerializer
+                value.serializer: com.investment.serde.SensorSerde
                
         #streams:
         #  binder:
