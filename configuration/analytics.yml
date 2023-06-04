@@ -42,7 +42,7 @@ spring:
                 #basic.auth.credentials.source: USER_INFO
                 #basic.auth.user.info: 4JYXYBS7AXSTQRFG:Sw4ib3vEDg4lmHFcB7p7EMsMHUiaqQkQFJHC7J5fmPXDkB3TfHPiXVWMoHyfg/qc
                 key.deserializer: org.apache.kafka.common.serialization.StringDeserializer
-                value.deserializer: com.investment.serializer.SensorSerializer
+                value.deserializer: com.investment.serializer.SensorDeserializer
                 #io.confluent.kafka.streams.serdes.avro.SpecificAvroDeserializer
                 # io.confluent.kafka.serializers.KafkaAvroDeserializer
                 # com.investment.serde.QuoteAvroSerializer
@@ -71,7 +71,7 @@ spring:
             process-out-0:
               producer:
                 keySerde: org.apache.kafka.common.serialization.Serdes$StringSerde
-                valueSerde: com.investment.serializer.SensorSerializer
+                valueSerde: com.investment.serde.SensorSerde
                 #org.apache.kafka.common.serialization.Serdes$IntegerSerde
             process-in-0:
               consumer:
