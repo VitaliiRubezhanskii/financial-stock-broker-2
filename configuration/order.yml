@@ -29,6 +29,10 @@ spring:
     sampler:
       probability: 100
 
+management:
+  security:
+    enabled: false
+
 eureka:
   client:
     service-url:
