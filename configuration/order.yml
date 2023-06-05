@@ -1,4 +1,5 @@
 spring:
+  cloud.config.enabled: true
   datasource:
     url: jdbc:postgresql://localhost:5432/quotes_provider
     password: postgres
