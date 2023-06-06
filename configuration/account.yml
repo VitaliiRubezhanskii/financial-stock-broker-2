@@ -28,7 +28,7 @@ spring:
             scope: openid,profile,roles
         provider:
           account:
-            issuer-uri: http://localhost:8080/login/oauth2/code/account
+            issuer-uri: http://localhost:8080/auth/realms/account
   zipkin:
     enabled: true
     baseUrl: http://localhost:9411
