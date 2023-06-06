@@ -30,9 +30,9 @@ spring:
           redirectUri: "http://localhost:8093/login/oauth2/code/{registrationId}"
       provider:
         keycloak:
-          authorizationUri: ${kc.realm-url}/protocol/openid-connect/auth
-          jwkSetUri: ${kc.realm-url}/protocol/openid-connect/certs
-          tokenUri: ${kc.realm-url}/protocol/openid-connect/token
+          authorizationUri: ${kc.realm-url}/realms/broker/protocol/openid-connect/auth
+          jwkSetUri: ${kc.realm-url}/realms/broker/protocol/openid-connect/certs
+          tokenUri: ${kc.realm-url}/realms/broker/protocol/openid-connect/token
           # would be cool if there was a end-session-uri to propagate logouts
 
           #  User info endpoint not needed since Keycloak uses self-contained value tokens
