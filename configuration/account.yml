@@ -16,12 +16,12 @@ spring:
         dialect: org.hibernate.dialect.PostgreSQLDialect
         format_sql: true
         temp.use_jdbc_metadata_defaults: false
-  #security:
-  #  oauth2:
-  #    resourceserver:
-  #        jwt:
-  #          issuer-uri: http://localhost:8080/auth/realms/broker
-  #          jwk-set-uri: http://localhost:8080/auth/realms/broker/protocol/openid-connect/certs
+  security:
+    oauth2:
+      resourceserver:
+          jwt:
+            issuer-uri: http://localhost:8080/auth/realms/broker
+            jwk-set-uri: http://localhost:8080/auth/realms/broker/protocol/openid-connect/certs
   zipkin:
     enabled: true
     baseUrl: http://localhost:9411
@@ -39,16 +39,16 @@ eureka:
     register-with-eureka: true
     fetch-registry: true
     
-#security:
-#    client:
-#      clientId: account
-#      clientSecret: 1234
-#      accessTokenUri: http://localhost:9000/uaa/oauth/token
-#      grant-type: client_credentials
-#      scope: server
-#    resource:
-#       user-info-uri: http://localhost:9000/uaa/user/current
-#       token-info-uri: http://localhost:9000/uaa/oauth/check_token
+security:
+    client:
+      clientId: account
+      clientSecret: 1234
+      accessTokenUri: http://localhost:9000/uaa/oauth/token
+      grant-type: client_credentials
+      scope: server
+    resource:
+       user-info-uri: http://localhost:9000/uaa/user/current
+       token-info-uri: http://localhost:9000/uaa/oauth/check_token
 
 
 microservice:
