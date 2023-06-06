@@ -15,7 +15,29 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
         format_sql: true
-        temp.use_jdbc_metadata_defaults: false      
+        temp.use_jdbc_metadata_defaults: false  
+
+  security.oauth2:
+    client:
+      registration:
+        broker:
+          clientId: account
+          clientName: account
+          clientSecret: e549e738-d8e4-4cbd-8381-fc8dcc8194d5
+          provider: keycloak
+          authorizationGrantType: authorization_code
+          scope: openid, profile
+          redirectUri: "http://localhost:8093/login/oauth2/code/{registrationId}"
+      provider:
+        keycloak:
+          authorizationUri: ${kc.realm-url}/protocol/openid-connect/auth
+          jwkSetUri: ${kc.realm-url}/protocol/openid-connect/certs
+          tokenUri: ${kc.realm-url}/protocol/openid-connect/token
+          # would be cool if there was a end-session-uri to propagate logouts
+
+          #  User info endpoint not needed since Keycloak uses self-contained value tokens
+          #            user-info-uri: ${kc.realm-url}/protocol/openid-connect/userinfo
+          userNameAttribute: preferred_username
   zipkin:
     enabled: true
     baseUrl: http://localhost:9411
@@ -48,7 +70,10 @@ eureka:
 microservice:
   client:
     url: http://localhost:8099
-
+kc:
+  base-url: http://localhost:8080/auth
+  realm: broker
+  realm-url: ${kc.base-url}/realms/${kc.realm}
 keycloak:
   enabled: true
   realm: broker
