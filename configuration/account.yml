@@ -24,7 +24,7 @@ spring:
             client-id: account
             client-secret: e549e738-d8e4-4cbd-8381-fc8dcc8194d5
             authorization-grant-type: authorization_code
-            redirect-uri: http://localhost:8093/account
+            redirect-uri: http://localhost:8080/login/oauth2/code/account
             scope: openid,profile,roles
         provider:
           account:
