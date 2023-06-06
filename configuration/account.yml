@@ -15,7 +15,20 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
         format_sql: true
-        temp.use_jdbc_metadata_defaults: false       
+        temp.use_jdbc_metadata_defaults: false      
+  security:
+    oauth2:
+      client:
+        registration:
+          account:
+            client-id: account
+            client-secret: e549e738-d8e4-4cbd-8381-fc8dcc8194d5
+            authorization-grant-type: authorization_code
+            redirect-uri: http://localhost:8093/account
+            scope: openid,profile,roles
+        provider:
+          account:
+            issuer-uri: http://localhost:8080/login/oauth2/code/account
   zipkin:
     enabled: true
     baseUrl: http://localhost:9411
