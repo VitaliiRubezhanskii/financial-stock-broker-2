@@ -20,8 +20,8 @@ spring:
     oauth2:
       resourceserver:
           jwt:
-            issuer-uri: http://localhost:8080/auth/realms/broker
-            jwk-set-uri: http://localhost:8080/auth/realms/broker/protocol/openid-connect/certs
+            issuer-uri: http://localhost:8080/auth/realms/master
+            jwk-set-uri: http://localhost:8080/auth/realms/master/protocol/openid-connect/certs
   zipkin:
     enabled: true
     baseUrl: http://localhost:9411
