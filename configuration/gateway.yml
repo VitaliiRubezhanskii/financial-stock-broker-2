@@ -3,6 +3,7 @@ spring:
     gateway:
       default-filters:
         - TokenRelay
+        - StripPrefix=1
       routes:
         - id: account
           uri: http://localhost:8093
