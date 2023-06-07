@@ -5,11 +5,12 @@ spring:
         - TokenRelay
       routes:
         - id: account
-          uri: http://localhost:8093/
+          uri: http://localhost:8093
           predicates:
            - Path=/account/**
           filters:
-           - StripPrefix=2
+           #- StripPrefix=2
+           - RemoveRequestHeader=Cookie
 
 
 eureka:
