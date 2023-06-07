@@ -5,16 +5,16 @@ spring:
         - TokenRelay
         - StripPrefix=1
       routes:
-        - id: account
+        - id: account-service
           uri: http://localhost:8093
           predicates:
-           - Path=/account-service/**
+           - Path=/account/**
           filters:
            - RemoveRequestHeader=Cookie
-        - id: order
+        - id: order-service
           uri: http://localhost:8092
           predicates:
-           - Path=/order-service/**
+           - Path=/order/**
           filters:
            - RemoveRequestHeader=Cookie
 
