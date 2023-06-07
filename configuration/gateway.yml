@@ -7,9 +7,14 @@ spring:
         - id: account
           uri: http://localhost:8093
           predicates:
-           - Path=/account/**
+           - Path=/account-service/**
           filters:
-           #- StripPrefix=2
+           - RemoveRequestHeader=Cookie
+        - id: order
+          uri: http://localhost:8092
+          predicates:
+           - Path=/order-service/**
+          filters:
            - RemoveRequestHeader=Cookie
 
 
