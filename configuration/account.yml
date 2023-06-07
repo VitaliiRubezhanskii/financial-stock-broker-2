@@ -15,7 +15,12 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
         format_sql: true
-        temp.use_jdbc_metadata_defaults: false  
+        temp.use_jdbc_metadata_defaults: false
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8080/auth/realms/broker
   zipkin:
     enabled: true
     baseUrl: http://localhost:9411
