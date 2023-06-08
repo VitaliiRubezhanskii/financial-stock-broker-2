@@ -45,3 +45,4 @@ eureka:
 microservice:
   client:
     url: http://localhost:8099
+security.basic.enabled: false
