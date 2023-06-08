@@ -44,3 +44,4 @@ ribbon:
 
   eureka:
     enabled: true
+security.basic.enabled: false
