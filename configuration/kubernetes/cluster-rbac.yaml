@@ -1,7 +1,7 @@
-kind: Role
+kind: ClusterRole
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
-  namespace: default
+  namespace: kafka
   name: namespace-reader
 rules:
   - apiGroups: ["", "extensions", "apps"]
@@ -10,18 +10,18 @@ rules:
 
 ---
 
-kind: RoleBinding
+kind: ClusterRoleBinding
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
   name: namespace-reader-binding
-  namespace: default
+
 subjects:
   - kind: ServiceAccount
     name: default
-    namespace: default
+    namespace: kafka
     apiGroup: ""
 roleRef:
-  kind: Role
+  kind: ClusterRole
   name: namespace-reader
   apiGroup: ""
 

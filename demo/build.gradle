@@ -1,0 +1,44 @@
+plugins {
+	id 'org.springframework.boot' version "${springBootVersion}"
+	id 'org.jetbrains.kotlin.jvm'  version "${kotlinPluginVersion}"
+	id "org.jetbrains.kotlin.plugin.allopen" version "${kotlinPluginVersion}"
+}
+
+apply plugin: 'idea'
+apply plugin: 'kotlin'
+apply plugin: 'java'
+apply plugin: 'kotlin-allopen'
+apply plugin: 'org.jetbrains.kotlin.plugin.spring'
+apply plugin: 'io.spring.dependency-management'
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+
+	// Spring Cloud
+	implementation 'org.springframework.boot:spring-boot-starter-actuator'
+	implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
+	implementation 'org.springframework.cloud:spring-cloud-starter-bootstrap'
+	implementation 'org.springframework.cloud:spring-cloud-config-client'
+	implementation 'org.springframework.cloud:spring-cloud-context'
+	implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
+
+	implementation (project (':security-autoconfig'))
+
+	implementation 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.8.0'
+	implementation 'org.jetbrains.kotlin:kotlin-allopen:1.8.0'
+	implementation 'org.jetbrains.kotlin:kotlin-reflect:1.8.0'
+	implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.8.0'
+	implementation "org.jetbrains.kotlin:kotlin-stdlib:1.8.0"
+
+	annotationProcessor 'org.projectlombok:lombok'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+}
+
+java {
+	toolchain {
+		languageVersion = JavaLanguageVersion.of(17)
+
+	}
+}
+

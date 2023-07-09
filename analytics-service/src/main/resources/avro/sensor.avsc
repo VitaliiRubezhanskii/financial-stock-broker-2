@@ -1,0 +1,11 @@
+{
+  "namespace" : "com.example",
+  "type" : "record",
+  "name" : "Sensor",
+  "fields" : [
+    {"name":"id","type":"string"},
+    {"name":"temperature", "type":"int", "default":0},
+    {"name":"acceleration", "type":"int","default":0},
+    {"name":"velocity","type":"int","default":0}
+  ]
+}

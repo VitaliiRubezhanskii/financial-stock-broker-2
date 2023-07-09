@@ -1,4 +1,4 @@
-FROM adoptopenjdk/openjdk16
+FROM openjdk:17-oracle
 WORKDIR /
 ADD build/libs/analytics-service.jar analytics-service.jar
 ADD /setup.sh setup.sh

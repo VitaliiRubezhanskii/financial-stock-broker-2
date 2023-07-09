@@ -2,43 +2,44 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: finprovider
+  namespace: kafka
 data:
   spring.cloud.kubernetes.discovery.all-namespaces: "true"
-  spring.application.name: finprovider
-  spring.kafka.properties.bootstrap-servers: pkc-4ygn6.europe-west3.gcp.confluent.cloud:9092
-  spring.kafka.properties.properties.allow.auto.create.topics: "true"
-  spring.kafka.properties.sasl.mechanism: "PLAIN"
-  spring.kafka.properties.sasl.jaas.config: org.apache.kafka.common.security.plain.PlainLoginModule required username="${username}" password="${password}";
-  spring.kafka.properties.security.protocol: "SASL_SSL"
-  spring.kafka.properties.basic.auth.credentials.source: USER_INFO
-  spring.kafka.properties.basic.auth.user.info: 4JYXYBS7AXSTQRFG:Sw4ib3vEDg4lmHFcB7p7EMsMHUiaqQkQFJHC7J5fmPXDkB3TfHPiXVWMoHyfg/qc
-  spring.kafka.properties.schema.registry.url: https://psrc-2312y.europe-west3.gcp.confluent.cloud
-  spring.cloud.stream.function.definition: process
-  spring.cloud.stream.bindings.process-out-0.destination: quote
-  spring.cloud.stream.bindings.process-out-0.producer.use-native-encoding: "true"
-  spring.cloud.stream.kafka.binder.brokers: pkc-4ygn6.europe-west3.gcp.confluent.cloud
-  spring.cloud.stream.kafka.bindings.process-out-0.producer.configuration.schema.registry.url: https://psrc-2312y.europe-west3.gcp.confluent.cloud
+  spring.cloud.function.definition: "process"
+  spring.cloud.stream.default.contentType: "application/*+avro"
+  spring.cloud.stream.bindings.process-out-0.destination: "quote"
+  spring.cloud.stream.bindings.process-out-0.producer.useNativeEncoding: "true"
+
+  spring.cloud.stream.kafka.binder.brokers: "my-kafka-cluster-kafka-bootstrap:9092"
+
+  spring.cloud.stream.kafka.bindings.process-out-0.producer.configuration.schema.registry.url: "http://strimzi-registry-operator:8081"
   spring.cloud.stream.kafka.bindings.process-out-0.producer.configuration.key.serializer: org.apache.kafka.common.serialization.StringSerializer
-  spring.cloud.stream.kafka.bindings.process-out-0.producer.configuration.value.serializer: com.investment.serdes.QuoteAvroSerializer
-  spring.cloud.stream.streams.binder.configuration.schema.registry.url: https://psrc-2312y.europe-west3.gcp.confluent.cloud
-  spring.cloud.stream.streams.binder.configuration.key.serializer: org.apache.kafka.common.serialization.StringSerializer
-  spring.cloud.stream.streams.binder.configuration.value.serializer: com.investment.serdes.QuoteAvroSerializer
+  spring.cloud.stream.kafka.bindings.process-out-0.producer.configuration.value.serializer: com.investment.serializer.SensorSerializer
+
+  spring.cloud.stream.kafka.streams.binder.configuration.schema.registry.url: "http://strimzi-registry-operator:8081"
+  spring.cloud.stream.kafka.streams.binder.configuration.key.serializer: org.apache.kafka.common.serialization.StringSerializer
+  spring.cloud.stream.kafka.streams.binder.configuration.value.serializer: com.investment.serializer.SensorSerializer
+
   spring.cloud.stream.kafka.streams.bindings.process-out-0.producer.keySerde: org.apache.kafka.common.serialization.Serdes$StringSerde
-  spring.cloud.stream.kafka.streams.bindings.process-out-0.producer.valueSerde: com.investment.serdes.QuoteSerde
-  key.converter.schema.registry.url: https://psrc-2312y.europe-west3.gcp.confluent.cloud
-  value.converter.schema.registry.url: https://psrc-2312y.europe-west3.gcp.confluent.cloud
-  management.security.enabled: "false"
-  spring.datasource.url: jdbc:postgresql://postgres.default.svc.cluster.local/quotes_provider
-  spring.datasource.password: postgres
-  spring.datasource.username: postgres
-  spring.datasource.driverClassName: org.postgresql.Driver
+  spring.cloud.stream.kafka.streams.bindings.process-out-0.producer.valueSerde: com.investment.serde.SensorSerde
+
+  spring.datasource.url: "jdbc:postgresql://postgres:5432/quotes_provider"
+  spring.datasource.password: "postgres"
+  spring.datasource.username: "postgres"
+  spring.datasource.driverClassName: "org.postgresql.Driver"
   spring.datasource.hikari.connectionTimeOut: "2000"
   spring.datasource.hikari.maximumPoolSize: "5"
+
+
   spring.jpa.show-sql: "true"
-  spring.jpa.database-platform: org.hibernate.dialect.PostgreSQL94Dialect
-  spring.jpa.hibernate.ddl-auto: create-drop
-  spring.jpa.properties.hibernate.dialect: org.hibernate.dialect.PostgreSQLDialect
+  spring.jpa.database-platform: "org.hibernate.dialect.PostgreSQL94Dialect"
+  spring.jpa.hibernate.ddl-auto: "update"
+
+
+  spring.jpa.properties.hibernate.dialect: "org.hibernate.dialect.PostgreSQLDialect"
   spring.jpa.properties.hibernate.format_sql: "true"
   spring.jpa.properties.hibernate.temp.use_jdbc_metadata_defaults: "false"
-  spring.flyway.enabled: "true"
+
+  spring.flyway.enabled: "false"
   spring.flyway.validate-on-migrate: "false"
+

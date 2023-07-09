@@ -2,11 +2,22 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: order
+  namespace: kafka
 data:
+  server.port: "8092"
   spring.cloud.kubernetes.discovery.all-namespaces: "true"
-  spring.data.mongodb.host: mongodb-service.default.svc.cluster.local
-  spring.data.mongodb.port: '27017'
-  spring.data.mongodb.username: admin
-  spring.data.mongodb.password: password
-  spring.data.mongodb.database: order
-  spring.data.mongodb.authentication-database: admin
+  spring.datasource.url: "jdbc:postgresql://postgres:5432/quotes_provider"
+  spring.datasource.password: "postgres"
+  spring.datasource.username: "postgres"
+  spring.datasource.driverClassName: "org.postgresql.Driver"
+  spring.datasource.hikari.connectionTimeOut: "2000"
+  spring.datasource.hikari.maximumPoolSize: "5"
+  spring.jpa.show-sql: "true"
+  spring.jpa.database-platform: "org.hibernate.dialect.PostgreSQL94Dialect"
+  spring.jpa.hibernate.ddl-auto: "update"
+
+  spring.jpa.properties.hibernate.dialect: "org.hibernate.dialect.PostgreSQLDialect"
+  spring.jpa.properties.hibernate.format_sql: "true"
+  spring.jpa.properties.hibernate.temp.use_jdbc_metadata_defaults: "false"
+  spring.security.oauth2.resourceserver.jwt.jwk-set-uri: "http://keycloak:8080/realms/My-Realm/protocol/openid-connect/certs"
+  security.basic.enabled: "false"

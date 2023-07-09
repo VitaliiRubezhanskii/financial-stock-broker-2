@@ -3,10 +3,10 @@ networks:
 services:
   jenkins:
     hostname: jenkins
-    image: vitalii1992/jenkins-fsb:latest
+    image: vitalii1992/jenkins-fsb:v2
     build:
       context: jenkins
-      dockerfile: Dockerfile
+      dockerfile: jenkins/Dockerfile-Jenkins
     ports:
       - 9000:8080
       - 50000:50000

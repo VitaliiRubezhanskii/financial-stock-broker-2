@@ -1,73 +1,13 @@
-buildscript {
-    project.ext {
-        springBootVersion = '2.0.4.RELEASE'
-        springCloudVersion = '2020.0.4'
-        versionName = '0.0.1'
-        gradleDockerVersion = '1.2'
-        swagger2version = '2.9.2'
-    }
-    repositories {
-        jcenter()
-        maven { url "https://plugins.gradle.org/m2/" }
-        maven { url "https://repo.spring.io/libs-snapshot-local" }
-    }
-    dependencies {
-        classpath "io.spring.gradle:dependency-management-plugin:1.0.11.RELEASE"
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.4.3.RELEASE")
-        classpath "org.jetbrains.kotlin:kotlin-allopen:1.5.31"
-        classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.31'
-        classpath 'org.jetbrains.kotlin:kotlin-maven-plugin:1.5.31'
-    }
-}
-repositories {
-    mavenCentral()
-    maven {
-        url "https://plugins.gradle.org/m2/"
-    }
-    mavenLocal()
-    maven { url = uri('https://repo.maven.apache.org/maven2/') }
-    maven { url = uri('https://repo.spring.io/libs-snapshot-local') }
-    maven { url = uri('https://repo.spring.io/libs-milestone-local') }
-    maven { url = uri('https://packages.confluent.io/maven/') }
-    maven { url = uri('https://repo.spring.io/release') }
-
+plugins {
+    id 'org.springframework.boot' version "${springBootVersion}"
 }
 
 apply plugin: 'java'
-apply plugin: 'idea'
-apply plugin: 'io.spring.dependency-management'
-apply plugin: 'org.springframework.boot'
-
-dependencyManagement {
-    imports {
-        mavenBom "org.springframework.cloud:spring-cloud-dependencies:2020.0.4"
-    }
-}
 
 dependencies {
-    implementation 'org.springframework.cloud:spring-cloud-starter-bootstrap:3.0.0'
-
+    implementation 'org.springframework.cloud:spring-cloud-starter-bootstrap'
     implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-server'
-
-    implementation 'org.springframework.boot:spring-boot-starter-web'
-    implementation 'org.springframework.boot:spring-boot-starter-actuator'
-
     implementation 'org.springframework.cloud:spring-cloud-config-client'
 
-    implementation 'com.sun.xml.bind:jaxb-core:3.0.1'
-    implementation 'com.sun.xml.bind:jaxb-impl:3.0.1'
-    implementation 'org.glassfish.jaxb:jaxb-runtime:3.0.2'
-    implementation 'javax.activation:activation:1.1.1'
-
-    implementation 'org.springframework.retry:spring-retry:1.2.4.RELEASE'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
-}
-bootRun {
-    mainClass = 'com.investment.monitoring.MonitoringApplication'
-}
-
-jar {
-    manifest {
-        attributes 'Main-Class': 'com.investment.monitoring.MonitoringApplication'
-    }
 }

@@ -2,95 +2,89 @@ package com.investment.security.configuration
 
 import feign.RequestInterceptor
 import feign.RequestTemplate
-import org.springframework.beans.factory.config.MethodInvokingFactoryBean
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty
-import org.springframework.boot.web.servlet.FilterRegistrationBean
+import org.springframework.boot.autoconfigure.security.oauth2.client.OAuth2ClientProperties
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.core.convert.converter.Converter
 import org.springframework.http.HttpHeaders
 import org.springframework.security.authentication.AbstractAuthenticationToken
-import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter
 import org.springframework.security.config.http.SessionCreationPolicy
+import org.springframework.security.core.authority.mapping.SimpleAuthorityMapper
 import org.springframework.security.core.context.SecurityContextHolder
-import org.springframework.security.core.context.SecurityContextHolder.MODE_INHERITABLETHREADLOCAL
-import org.springframework.security.oauth2.core.DelegatingOAuth2TokenValidator
-import org.springframework.security.oauth2.core.OAuth2TokenValidator
 import org.springframework.security.oauth2.jwt.*
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationConverter
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken
+import org.springframework.security.web.SecurityFilterChain
+import org.springframework.web.client.RestTemplate
 
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(prePostEnabled = true)
+@EnableMethodSecurity(prePostEnabled = true)
 @Configuration
-@ConditionalOnProperty(value = ["spring.cloud.config.enabled"], havingValue = "true", matchIfMissing = true)
-class SecurityConfiguration : WebSecurityConfigurerAdapter() {
+class SecurityConfiguration(private val oAuth2ClientProperties: OAuth2ClientProperties) {
 
     @Throws(Exception::class)
-    override fun configure(httpSecurity: HttpSecurity) {
-        httpSecurity.anonymous().disable()
-        httpSecurity
-                .authorizeRequests()
-                .anyRequest()
-                .authenticated()
-                .and()
-                .sessionManagement()
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                .and()
-                .csrf()
-                .disable()
-                .oauth2ResourceServer { oauth2ResourceServer ->
-                    oauth2ResourceServer
-                            .jwt { jwt -> jwt.jwtAuthenticationConverter(getJwtAuthenticationConverter()) }
-                }
-    }
+    @Bean
+    fun securityFilterChain(
+        httpSecurity: HttpSecurity,
+        keycloakOauth2UserService: KeycloakOauth2UserService,
+        keycloakLogoutHandler: KeycloakLogoutHandler,
 
-    private fun getJwtAuthenticationConverter(): Converter<Jwt, AbstractAuthenticationToken>{
-        val jwtAuthenticationConverter = JwtAuthenticationConverter()
-        jwtAuthenticationConverter.setJwtGrantedAuthoritiesConverter(CustomJwtGrantedAuthoritiesConverter())
-        return jwtAuthenticationConverter
+    ): SecurityFilterChain {
+        return httpSecurity
+            .authorizeHttpRequests { customizer ->
+                customizer.anyRequest().authenticated()
+            }
+            .sessionManagement { customizer -> customizer.sessionCreationPolicy(SessionCreationPolicy.STATELESS) }
+            .logout { logoutCustomizer -> logoutCustomizer.addLogoutHandler(keycloakLogoutHandler) }
+            .oauth2Login { oauth2LoginCustomizer ->
+                oauth2LoginCustomizer.userInfoEndpoint { userIECustomizer ->
+                    userIECustomizer.oidcUserService(
+                        keycloakOauth2UserService
+                    )
+                }
+            }
+
+            .oauth2ResourceServer { c ->
+                c.jwt { jwt -> jwt
+                    .decoder(NimbusJwtDecoder.withJwkSetUri(oAuth2ClientProperties.provider["my-keycloak-provider"]?.jwkSetUri).build())
+                    .jwtAuthenticationConverter(jwtAuthenticationConverter())
+                }
+            }
+            .csrf { customizer -> customizer.disable() }
+            .httpBasic { httpBasicCustomizer -> httpBasicCustomizer.disable() }
+            .anonymous { c -> c.disable() }
+            .build()
     }
 
     @Bean
-    fun jwtDecoder(): JwtDecoder? {
-        println("Hello from SECURITY AUTOCONFIG ENABLED!!!!!")
-        val timestampValidator = JwtTimestampValidator()
-        val issuerValidator = JwtIssuerValidator("http://localhost:8080/auth/realms/broker")
-        val validator: OAuth2TokenValidator<Jwt> = DelegatingOAuth2TokenValidator(
-                timestampValidator,
-                issuerValidator)
-        val decoder = NimbusJwtDecoder.withJwkSetUri("http://localhost:8080/auth/realms/broker/protocol/openid-connect/certs")
-                .build()
-        decoder.setJwtValidator(validator)
-        return decoder
+    fun keycloakLogoutHandler(): KeycloakLogoutHandler {
+        return KeycloakLogoutHandler(RestTemplate())
+    }
+
+    @Bean
+    fun keycloakOidcUserService(): KeycloakOauth2UserService? {
+        val jwtDecoder = NimbusJwtDecoder.withJwkSetUri(oAuth2ClientProperties.provider["my-keycloak-provider"]?.jwkSetUri).build()
+        val authoritiesMapper = SimpleAuthorityMapper()
+        authoritiesMapper.setConvertToUpperCase(true)
+        return KeycloakOauth2UserService(jwtDecoder, authoritiesMapper)
+    }
+
+    private fun jwtAuthenticationConverter(): Converter<Jwt?, out AbstractAuthenticationToken?>? {
+        val jwtConverter = JwtAuthenticationConverter()
+        jwtConverter.setJwtGrantedAuthoritiesConverter(RealmRoleConverter())
+        return jwtConverter
     }
 
     @Bean
     fun oauth2FeignRequestInterceptor(): RequestInterceptor {
         return RequestInterceptor { requestTemplate: RequestTemplate ->
-            val token: String = (SecurityContextHolder.getContext().authentication as JwtAuthenticationToken).token.tokenValue
+            val token: String =
+                (SecurityContextHolder.getContext().authentication as JwtAuthenticationToken).token.tokenValue
             val bearerString = String.format("%s %s", "Bearer", token)
             requestTemplate.header(HttpHeaders.AUTHORIZATION, listOf(bearerString))
         }
-    }
-
-    @Bean
-    fun filterRegistrationBean(): FilterRegistrationBean<CustomAuthFilter> {
-        val registrationBean: FilterRegistrationBean<CustomAuthFilter> = FilterRegistrationBean<CustomAuthFilter>()
-        registrationBean.filter = CustomAuthFilter(authenticationManagerBean())
-        registrationBean.order = Int.MAX_VALUE
-        return registrationBean
-    }
-
-    @Bean
-    fun methodInvokingFactoryBean(): MethodInvokingFactoryBean {
-        val methodInvokingFactoryBean = MethodInvokingFactoryBean();
-        methodInvokingFactoryBean.targetClass = SecurityContextHolder::class.java
-        methodInvokingFactoryBean.targetMethod = "setStrategyName"
-        methodInvokingFactoryBean.setArguments(arrayOf(MODE_INHERITABLETHREADLOCAL))
-        return methodInvokingFactoryBean;
     }
 }

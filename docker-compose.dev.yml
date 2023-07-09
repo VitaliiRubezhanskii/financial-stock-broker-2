@@ -6,7 +6,7 @@ services:
     image: vitalii1992/jenkins-fsb:latest
     build:
       context: jenkins
-      dockerfile: Dockerfile
+      dockerfile: jenkins/Dockerfile-Jenkins
     ports:
       - 9001:8080
       - 50000:50000

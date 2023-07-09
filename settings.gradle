@@ -1,39 +1,16 @@
-pluginManagement {
-    repositories {
-        gradlePluginPortal()
-        mavenCentral()
-    }
-}
 rootProject.name = 'financial-stock-broker-2'
-
 include ':gateway'
 include ':security-autoconfig'
 include ':feign-hystrix-client'
 include ':config'
 include ':monitoring'
-
 include ':account-service'
 include ':analytics-service'
-include ':order-service'
 include ':quotes-provider-service'
+include ':order-service'
+include ':demo'
+include ':prodcons'
 
-//include ':demo'
-//include ':prodcons'
-
-project(":gateway").projectDir = file('gateway')
-project(":security-autoconfig").projectDir = file('security-autoconfig')
-
-project(":feign-hystrix-client").projectDir = file('feign-hystrix-client')
-project(":config").projectDir = file('config')
-project(":monitoring").projectDir = file('monitoring')
-
-project(":account-service").projectDir = file('account-service')
-project(":analytics-service").projectDir = file('analytics-service')
-project(":order-service").projectDir = file('order-service')
-project(":quotes-provider-service").projectDir = file('quotes-provider-service')
-
-//project(":demo").projectDir = file('demo')
-//project(":prodcons").projectDir = file('prodcons')
 
 
 

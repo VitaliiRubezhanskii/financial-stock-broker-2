@@ -2,6 +2,7 @@ kind: PersistentVolume
 apiVersion: v1
 metadata:
   name: keycloak-pv-volume
+  namespace: kafka
   labels:
     type: local
     app: keycloak
@@ -18,6 +19,7 @@ kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
   name: keycloak-pv-claim
+  namespace: kafka
   labels:
     app: keycloak
 spec:

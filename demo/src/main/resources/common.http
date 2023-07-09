@@ -1,0 +1,6 @@
+GET http://localhost:8080/mostExpensive/3
+Content-Type: application/json
+
+### ========================================
+GET http://localhost:8080/department/salary
+Content-Type: application/json

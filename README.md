@@ -14,3 +14,12 @@ Docker compose run services order:
 9. Run **ElasticSearch**
 10. Run **Kibana**
 11. Run **Logstash**
+
+kubectl config use-context minikube
+minikube start --driver=hyperkit --cpus=6 --memory 8000MB
+
+# **Deploy Kafka on Minikube**
+# 1. First add the Strimzi Chart Repository
+helm repo add strimzi https://strimzi.io/charts/
+# 2. Install version of Strimzi Cluster Operator
+helm install strimzi/strimzi-kafka-operator --name strimzi-release --namespace kafka --version 0.28.0

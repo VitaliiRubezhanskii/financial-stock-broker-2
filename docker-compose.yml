@@ -2,7 +2,28 @@ version: "3.2"
 networks:
     my-mongo-cluster:
 services:
-#   tracing:
+   fast-data-dev:
+    image: lensesio/fast-data-dev:latest
+    container_name: lensesio
+    environment:
+      - ADV_HOST=localhost
+      - FORWARDLOGS=0
+      - RUNTESTS=0
+      - SAMPLEDATA=0
+    expose:
+      - "2181"
+      - "8081"
+      - "8082"
+      - "9092"
+    ports:
+      - "9092:9092"
+      - "3030:3030"
+      - "8081:8081"
+      - "8082:8082"
+    networks:
+     - my-mongo-cluster
+
+      #   tracing:
 #      image: openzipkin/zipkin
 #      ports:
 #        - 9411:9411
@@ -57,18 +78,16 @@ services:
 #         - my-mongo-cluster
 
    mongodb:
-     image: mongocustom:latest
+     image: mongo
+     restart: always
      environment:
        MONGO_INITDB_ROOT_USERNAME: root
-       MONGO_INITDB_ROOT_PASSWORD: rootpassword
-     ports:
-       - 27017:27017
+       MONGO_INITDB_ROOT_PASSWORD: root
      volumes:
        - /etc/localtime:/etc/localtime:ro
        - ./mongodb/data:/data/db
      networks:
       - my-mongo-cluster
-
 
    mongo1:
       image: mongo:4.1.13-bionic
@@ -584,34 +603,42 @@ services:
        - ./logstash/pipeline:/usr/share/logstash/pipeline
 
    elasticsearch:
-     hostname: elasticsearch
-     image: docker-logs-elk/elasticsearch:1.0.0
-     build:
-       context: elasticsearch
-       dockerfile: Dockerfile
+     image: docker.elastic.co/elasticsearch/elasticsearch:7.10.0
+     container_name: elasticsearch
      environment:
-       - cluster.name=docker-logs-elk-cluster
-       - bootstrap.memory_lock=true
-       - ES_JAVA_OPTS=-Xms256m -Xmx256m
+       - xpack.security.enabled=false
+       - discovery.type=single-node
      ulimits:
        memlock:
          soft: -1
          hard: -1
+       nofile:
+         soft: 65536
+         hard: 65536
+     cap_add:
+       - IPC_LOCK
+     volumes:
+       - ./elasticsearch:/usr/share/elasticsearch/data
      ports:
        - 9200:9200
+       - 9300:9300
      networks:
        - my-mongo-cluster
 
 
    keycloak:
-     image: quay.io/keycloak/keycloak:15.0.1
+     image: quay.io/keycloak/keycloak:18.0.2
+     command:
+       - start-dev
+       - --import-realm
      ports:
        - "8080:8080"
      environment:
-       - KEYCLOAK_USER=admin
-       - KEYCLOAK_PASSWORD=admin
+       - KEYCLOAK_ADMIN=admin
+       - KEYCLOAK_ADMIN_PASSWORD=admin
      volumes:
        - ./keycloak/data:/data/
+       - ./keycloak/import/:/opt/keycloak/data/import/
 
    redis:
      image: "redis:alpine"

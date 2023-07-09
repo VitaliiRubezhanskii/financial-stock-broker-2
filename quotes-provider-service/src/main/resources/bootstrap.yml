@@ -6,19 +6,19 @@ spring:
   cloud:
     config:
       uri: ${CONFIGSERVER_URI}
-  main:
-    allow-bean-definition-overriding: true
-aws:
-  secretsmanager:
-    name: backend
-    default-context: backend
-
-cloud:
-  aws:
-   stack:
-    auto: false
-   region:
-    static: eu-central-1
+#  main:
+#    allow-bean-definition-overriding: true
+#aws:
+#  secretsmanager:
+#    name: backend
+#    default-context: backend
+#
+#cloud:
+#  aws:
+#   stack:
+#    auto: false
+#   region:
+#    static: eu-central-1
 
 management:
   context-path: /admin

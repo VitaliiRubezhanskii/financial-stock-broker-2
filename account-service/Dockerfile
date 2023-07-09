@@ -1,4 +1,4 @@
-FROM adoptopenjdk/openjdk11
+FROM openjdk:17-oracle
 WORKDIR /
 ADD build/libs/account-service.jar account-service.jar
 ADD /setup.sh setup.sh

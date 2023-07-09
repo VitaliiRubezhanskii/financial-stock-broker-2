@@ -13,17 +13,17 @@ spring:
 server:
   port: 30020
 
-aws:
-  secretsmanager:
-    name: backend
-    region: eu-central-1
-    enabled: true
+#aws:
+#  secretsmanager:
+#    name: backend
+#    region: eu-central-1
+#    enabled: true
 
-cloud:
-  aws:
-    stack:
-      auto: false
-    region:
-      static: eu-central-1
-    credentials:
-      profile-name: default
+#cloud:
+#  aws:
+#    stack:
+#      auto: false
+#    region:
+#      static: eu-central-1
+#    credentials:
+#      profile-name: default
