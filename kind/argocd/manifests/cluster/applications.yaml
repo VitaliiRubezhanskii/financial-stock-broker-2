@@ -1,0 +1,17 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: kafka
+  namespace: argocd
+spec:
+  destination:
+    namespace: kafka
+    server: https://kubernetes.default.svc
+  project: kafka
+  source:
+    path: kind/argocd/manifests/kafka
+    repoURL: https://vrubezhanskii@bitbucket.org/vrubezhanskii/financial-stock-broker-2.git
+    targetRevision: HEAD
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
