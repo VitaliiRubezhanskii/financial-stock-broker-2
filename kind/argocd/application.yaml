@@ -16,7 +16,7 @@ server:
           prune: false
           selfHeal: false
 
-    - name: cluster-config
+    - name: app-config
       namespace: argocd
       project: default
       source:
