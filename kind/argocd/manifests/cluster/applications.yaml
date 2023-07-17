@@ -22,7 +22,7 @@ metadata:
   name: account-service
   namespace: argocd
 spec:
-  project: account
+  project: default
   source:
     path: charts/account
     repoURL: https://vitaliirubezhanskii.github.io/financial-stock-broker-2-helm-charts.git

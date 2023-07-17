@@ -15,3 +15,19 @@ server:
         automated:
           prune: false
           selfHeal: false
+
+    - name: cluster-config
+      namespace: argocd
+      project: default
+      source:
+        repoURL: https://vitaliirubezhanskii.github.io/financial-stock-broker-2-helm-charts.git
+        targetRevision: HEAD
+        path: charts/account
+        directory:
+          recurse: true
+      destination:
+        server: https://kubernetes.default.svc
+      syncPolicy:
+        automated:
+          prune: false
+          selfHeal: false
