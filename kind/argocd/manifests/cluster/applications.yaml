@@ -5,13 +5,13 @@ metadata:
   namespace: argocd
 spec:
   destination:
-    namespace: kafka
+    namespace: argocd
     server: https://kubernetes.default.svc
   project: kafka
   source:
-    path: kind/argocd/manifests/kafka
-    repoURL: https://vrubezhanskii@bitbucket.org/vrubezhanskii/financial-stock-broker-2.git
-    targetRevision: HEAD
+    path: manifests/kafka
+    repoURL: https://bitbucket.org/vrubezhanskii/financial-stock-broker-2
+    targetRevision: develop
   syncPolicy:
     syncOptions:
       - CreateNamespace=true

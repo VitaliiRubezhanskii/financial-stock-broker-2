@@ -4,14 +4,15 @@ server:
       namespace: argocd
       project: default
       source:
-        repoURL: https://vrubezhanskii@bitbucket.org/vrubezhanskii/financial-stock-broker-2.git
-        targetRevision: HEAD
-        path: argocd/manifests/cluster
+        repoURL: https://bitbucket.org/vrubezhanskii/financial-stock-broker-2
+        targetRevision: develop
+        path: manifests/cluster
         directory:
           recurse: true
       destination:
+        namespace: argocd
         server: https://kubernetes.default.svc
       syncPolicy:
         automated:
-          prune: false
-          selfHeal: false
+          prune: true
+          selfHeal: true
