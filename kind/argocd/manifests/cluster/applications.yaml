@@ -24,10 +24,8 @@ metadata:
 spec:
   project: account
   source:
-    chart: account
-    repoURL: https://vitaliirubezhanskii.github.io/financial-stock-broker-2-helm-charts
-    targetRevision: 0.3.8
-    helm:
-      releaseName: account
+    path: account
+    repoURL: https://vitaliirubezhanskii.github.io/financial-stock-broker-2-helm-charts/charts/account
+    targetRevision: main
   destination:
-    server: "https://kubernetes.default.svc"
+    server: https://kubernetes.default.svc
