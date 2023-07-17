@@ -10,7 +10,7 @@ spec:
   project: kafka
   source:
     path: kind/argocd/manifests/kafka
-    repoURL: https://bitbucket.org/vrubezhanskii/financial-stock-broker-2
+    repoURL: https://github.com/VitaliiRubezhanskii/financial-stock-broker-2.git
     targetRevision: HEAD
   syncPolicy:
     syncOptions:

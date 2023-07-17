@@ -4,7 +4,7 @@ server:
       namespace: argocd
       project: default
       source:
-        repoURL: https://bitbucket.org/vrubezhanskii/financial-stock-broker-2
+        repoURL: https://github.com/VitaliiRubezhanskii/financial-stock-broker-2.git
         targetRevision: HEAD
         path: kind/argocd/manifests/cluster
         directory:
