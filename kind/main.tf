@@ -91,3 +91,12 @@ resource "helm_release" "argocd" {
     file("argocd/application.yaml")
   ]
 }
+
+resource "helm_release" "account" {
+  chart = "account"
+  repository = "https://vitaliirubezhanskii.github.io/financial-stock-broker-2-helm-charts.git"
+  name  = "account-service"
+  namespace = "kafka"
+  version = "0.3.8"
+  create_namespace = true
+}
