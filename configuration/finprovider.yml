@@ -1,47 +1,52 @@
-spring.application.name: finprovider
-spring.kafka:
-  properties:
-    bootstrap-servers: pkc-4ygn6.europe-west3.gcp.confluent.cloud:9092
-    properties.allow.auto.create.topics: true
-    sasl.mechanism: PLAIN
-    sasl.jaas.config: org.apache.kafka.common.security.plain.PlainLoginModule required username='${username}' password='${password}';
-    security.protocol: SASL_SSL
+#spring.application.name: finprovider
+#spring.kafka:
+#  properties:
+#    bootstrap-servers: localhost:9092
+    #properties.allow.auto.create.topics: true
+    #sasl.mechanism: PLAIN
+    #sasl.jaas.config: org.apache.kafka.common.security.plain.PlainLoginModule required username='${username}' password='${password}';
+    #security.protocol: SASL_SSL
 
-    basic.auth.credentials.source: USER_INFO
-    basic.auth.user.info: 4JYXYBS7AXSTQRFG:Sw4ib3vEDg4lmHFcB7p7EMsMHUiaqQkQFJHC7J5fmPXDkB3TfHPiXVWMoHyfg/qc
-    schema.registry.url: https://psrc-2312y.europe-west3.gcp.confluent.cloud
+    #basic.auth.credentials.source: USER_INFO
+    #basic.auth.user.info: 4JYXYBS7AXSTQRFG:Sw4ib3vEDg4lmHFcB7p7EMsMHUiaqQkQFJHC7J5fmPXDkB3TfHPiXVWMoHyfg/qc
+ #   schema.registry.url: http://localhost:8081
 spring:
+#  kafka:
+#    properties:
+#      bootstrap-servers: localhost:9092
+#      schema.registry.url: http://localhost:8081
   cloud:
+    function.definition: process
     stream:
-      function.definition: process
+      default.contentType: application/*+avro
       bindings:
         process-out-0:
           destination: quote
           producer:
-            use-native-encoding: true
+            useNativeEncoding: true
 
       kafka:
         binder:
-          brokers: pkc-4ygn6.europe-west3.gcp.confluent.cloud
-          defaultBrokerPort: 9092
+          brokers: localhost:9092
         bindings:
           process-out-0:
             producer:
               configuration:
-                schema.registry.url: https://psrc-2312y.europe-west3.gcp.confluent.cloud
+                schema.registry.url: http://localhost:8081
                 key.serializer: org.apache.kafka.common.serialization.StringSerializer
-                value.serializer: com.investment.serdes.QuoteAvroSerializer
+                value.serializer: com.investment.serializer.SensorSerializer
+               
         streams:
           binder:
             configuration:
-              schema.registry.url: https://psrc-2312y.europe-west3.gcp.confluent.cloud
+              schema.registry.url: http://localhost:8081
               key.serializer: org.apache.kafka.common.serialization.StringSerializer
-              value.serializer: com.investment.serdes.QuoteAvroSerializer
+              value.serializer: com.investment.serializer.SensorSerializer
           bindings:
             process-out-0:
               producer:
                 keySerde: org.apache.kafka.common.serialization.Serdes$StringSerde
-                valueSerde: com.investment.serdes.QuoteSerde
+                valueSerde: com.investment.serde.SensorSerde
 
 
 
@@ -85,5 +90,3 @@ management:
 
 server:
   port: 9010
-key.converter.schema.registry.url: https://psrc-2312y.europe-west3.gcp.confluent.cloud
-value.converter.schema.registry.url: https://psrc-2312y.europe-west3.gcp.confluent.cloud
