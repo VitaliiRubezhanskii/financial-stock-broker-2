@@ -1,0 +1,1 @@
+Run ChartMuseu, in Docker `docker run --rm -it -p 9090:8080 -e DEBUG=1 -e STORAGE=local -e STORAGE_LOCAL_ROOTDIR=./ -v $(pwd)/:/charts ghcr.io/helm/chartmuseum:v0.14.0`

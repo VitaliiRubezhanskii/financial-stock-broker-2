@@ -7,8 +7,10 @@ import com.investment.api.service.AccountService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+@RestController
 @RequestMapping(value = "/account")
 @RequiredArgsConstructor
 public class AccountController {
@@ -29,7 +31,7 @@ public class AccountController {
 //        return new ResponseEntity<>(accountService.updateAccount(accountId, accountCreationDto), HttpStatus.OK);
     }
 
-//    @PreAuthorize("hasRole('product_read')")
+    @PreAuthorize("hasRole('product_read')")
     @GetMapping("/")
     public ResponseEntity<AccountCreatedDto> getAccountById(){
         AccountCreatedDto accountCreatedDto = new AccountCreatedDto();

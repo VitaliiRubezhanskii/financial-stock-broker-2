@@ -12,7 +12,7 @@
     if not deployed so deploy them `kubectl apply -f <file-name.yaml> -n kafka`.
  5. Deploy Kafka Cluster. In `strimzi` folder find `strimzi-kafka.yml` and deploy 
     `kubectl apply -f strimzi-kafka.yml -n kafka` .
- 6. Deploy Kafka UI:  `kubectl apply -f kafka-ui.yml -n kafka`
+ 6. Deploy Kafka UI:  `kubectl apply -f kafka-ui.yaml -n kafka`
 
 # Deploy Schema Registry with Strimzi
  1. Go to strimzi/charts/strimzi-registry-operator and run `helm install kafka-schema-registry  . -n kafka` 

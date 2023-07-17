@@ -35,7 +35,9 @@ class SecurityConfiguration(private val oAuth2ClientProperties: OAuth2ClientProp
     ): SecurityFilterChain {
         return httpSecurity
             .authorizeHttpRequests { customizer ->
-                customizer.anyRequest().authenticated()
+                customizer
+                    .requestMatchers("/actuator/health/liveness", "/actuator/health/readiness").permitAll()
+                    .anyRequest().authenticated()
             }
             .sessionManagement { customizer -> customizer.sessionCreationPolicy(SessionCreationPolicy.STATELESS) }
             .logout { logoutCustomizer -> logoutCustomizer.addLogoutHandler(keycloakLogoutHandler) }

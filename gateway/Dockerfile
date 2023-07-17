@@ -1,4 +1,4 @@
-FROM openjdk:12-jdk
+FROM openjdk:17-oracle
 ADD build/libs/gateway.jar gateway.jar
 ENV JAVA_TOOL_OPTIONS -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005
 ADD /setup.sh setup.sh

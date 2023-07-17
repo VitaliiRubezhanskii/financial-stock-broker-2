@@ -6,9 +6,9 @@ apply plugin: 'java'
 
 dependencies {
     // Oauth2 Security
-//    implementation (project (':security-autoconfig'))
-//    implementation 'org.springframework.boot:spring-boot-starter-oauth2-resource-server'
-//    implementation 'org.springframework.security:spring-security-oauth2-jose'
+    implementation (project (':security-autoconfig'))
+    implementation 'org.springframework.boot:spring-boot-starter-oauth2-resource-server'
+    implementation 'org.springframework.security:spring-security-oauth2-jose'
 
     // Spring Boot
     implementation 'org.springframework.boot:spring-boot-starter-web'

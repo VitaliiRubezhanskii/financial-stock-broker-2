@@ -4,42 +4,62 @@ metadata:
   name: finprovider
   namespace: kafka
 data:
-  spring.cloud.kubernetes.discovery.all-namespaces: "true"
-  spring.cloud.function.definition: "process"
-  spring.cloud.stream.default.contentType: "application/*+avro"
-  spring.cloud.stream.bindings.process-out-0.destination: "quote"
-  spring.cloud.stream.bindings.process-out-0.producer.useNativeEncoding: "true"
+  application.yml: |-
+    
+    spring:
+      cloud:
+        kubernetes.discovery.all-namespaces: "true"
+        function.definition: "process"
+        stream:
+          default.contentType: "application/*+avro"
+          bindings:
+            process-out-0:
+              destination: "quote"
+              producer.useNativeEncoding: "true"
 
-  spring.cloud.stream.kafka.binder.brokers: "my-kafka-cluster-kafka-bootstrap:9092"
-
-  spring.cloud.stream.kafka.bindings.process-out-0.producer.configuration.schema.registry.url: "http://strimzi-registry-operator:8081"
-  spring.cloud.stream.kafka.bindings.process-out-0.producer.configuration.key.serializer: org.apache.kafka.common.serialization.StringSerializer
-  spring.cloud.stream.kafka.bindings.process-out-0.producer.configuration.value.serializer: com.investment.serializer.SensorSerializer
-
-  spring.cloud.stream.kafka.streams.binder.configuration.schema.registry.url: "http://strimzi-registry-operator:8081"
-  spring.cloud.stream.kafka.streams.binder.configuration.key.serializer: org.apache.kafka.common.serialization.StringSerializer
-  spring.cloud.stream.kafka.streams.binder.configuration.value.serializer: com.investment.serializer.SensorSerializer
-
-  spring.cloud.stream.kafka.streams.bindings.process-out-0.producer.keySerde: org.apache.kafka.common.serialization.Serdes$StringSerde
-  spring.cloud.stream.kafka.streams.bindings.process-out-0.producer.valueSerde: com.investment.serde.SensorSerde
-
-  spring.datasource.url: "jdbc:postgresql://postgres:5432/quotes_provider"
-  spring.datasource.password: "postgres"
-  spring.datasource.username: "postgres"
-  spring.datasource.driverClassName: "org.postgresql.Driver"
-  spring.datasource.hikari.connectionTimeOut: "2000"
-  spring.datasource.hikari.maximumPoolSize: "5"
-
-
-  spring.jpa.show-sql: "true"
-  spring.jpa.database-platform: "org.hibernate.dialect.PostgreSQL94Dialect"
-  spring.jpa.hibernate.ddl-auto: "update"
-
-
-  spring.jpa.properties.hibernate.dialect: "org.hibernate.dialect.PostgreSQLDialect"
-  spring.jpa.properties.hibernate.format_sql: "true"
-  spring.jpa.properties.hibernate.temp.use_jdbc_metadata_defaults: "false"
-
-  spring.flyway.enabled: "false"
-  spring.flyway.validate-on-migrate: "false"
-
+          kafka:
+            binder:
+              brokers: "my-kafka-cluster-kafka-bootstrap:9092"
+  
+            bindings:
+              process-out-0:
+                producer:
+                  configuration:
+                    schema.registry.url: "http://strimzi-registry-operator:8081"
+                    key.serializer: org.apache.kafka.common.serialization.StringSerializer
+                    value.serializer: com.investment.serializer.SensorSerializer
+  
+            streams:
+              binder:
+                configuration:
+                  schema.registry.url: "http://strimzi-registry-operator:8081"
+                  key.serializer: org.apache.kafka.common.serialization.StringSerializer
+                  value.serializer: com.investment.serializer.SensorSerializer
+  
+              bindings:
+                process-out-0:
+                  producer:
+                    keySerde: org.apache.kafka.common.serialization.Serdes$StringSerde
+                    valueSerde: com.investment.serde.SensorSerde
+      datasource:
+        url: "jdbc:postgresql://postgres:5432/quotes_provider"
+        password: "postgres"
+        username: "postgres"
+        driverClassName: "org.postgresql.Driver"
+        hikari:
+          connectionTimeOut: "2000"
+          maximumPoolSize: "5"
+      jpa:
+        show-sql: "true"
+        database-platform: "org.hibernate.dialect.PostgreSQL94Dialect"
+        hibernate.ddl-auto: "update"
+        properties:
+          hibernate:
+            dialect: "org.hibernate.dialect.PostgreSQLDialect"
+            format_sql: "true"
+            temp.use_jdbc_metadata_defaults: "false"
+  
+      flyway:
+        enabled: "false"
+        validate-on-migrate: "false"
+    

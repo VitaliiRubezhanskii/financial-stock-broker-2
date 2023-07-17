@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.app.name }}
+  namespace: {{ .Values.app.namespace }}
+spec:
+  ports:
+  {{- range .Values.ports }}
+  - targetPort: {{ .value }}
+    name: {{ .name }}
+    port: {{ .value }}
+  {{- end }}
+  selector:
+    app: {{ .Values.app.name }}
+  type: {{ .Values.service.type }}
+  externalIPs:
+    - {{ .Values.service.externalIP }}

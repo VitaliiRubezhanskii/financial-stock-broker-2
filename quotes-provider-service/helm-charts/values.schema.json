@@ -1,0 +1,111 @@
+{
+    "$schema": "http://json-schema.org/schema#",
+    "type": "object",
+    "properties": {
+        "app": {
+            "type": "object",
+            "properties": {
+                "environment": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "owner": {
+                    "type": "string"
+                }
+            }
+        },
+        "image": {
+            "type": "object",
+            "properties": {
+                "repository": {
+                    "type": "string"
+                },
+                "tag": {
+                    "type": "string"
+                }
+            }
+        },
+        "liveness": {
+            "type": "object",
+            "properties": {
+                "failureThreshold": {
+                    "type": "integer"
+                },
+                "initialDelaySeconds": {
+                    "type": "integer"
+                },
+                "path": {
+                    "type": "string"
+                },
+                "periodSeconds": {
+                    "type": "integer"
+                },
+                "port": {
+                    "type": "string"
+                },
+                "successThreshold": {
+                    "type": "integer"
+                },
+                "timeoutSeconds": {
+                    "type": "integer"
+                }
+            }
+        },
+        "ports": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    },
+                    "value": {
+                        "type": "integer"
+                    }
+                }
+            }
+        },
+        "readiness": {
+            "type": "object",
+            "properties": {
+                "failureThreshold": {
+                    "type": "integer"
+                },
+                "initialDelaySeconds": {
+                    "type": "integer"
+                },
+                "path": {
+                    "type": "string"
+                },
+                "periodSeconds": {
+                    "type": "integer"
+                },
+                "port": {
+                    "type": "string"
+                },
+                "successThreshold": {
+                    "type": "integer"
+                },
+                "timeoutSeconds": {
+                    "type": "integer"
+                }
+            }
+        },
+        "replicaCount": {
+            "type": "integer"
+        },
+        "service": {
+            "type": "object",
+            "properties": {
+                "externalIP": {
+                    "type": "string"
+                },
+                "type": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}

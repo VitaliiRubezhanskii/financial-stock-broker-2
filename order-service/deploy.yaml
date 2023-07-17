@@ -35,4 +35,6 @@ spec:
       targetPort: 8080
   selector:
     app: order
-  type: NodePort
+  type: LoadBalancer
+  externalIPs:
+    - 192.168.64.8

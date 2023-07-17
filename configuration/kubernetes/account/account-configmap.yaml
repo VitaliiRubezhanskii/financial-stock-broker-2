@@ -4,23 +4,52 @@ metadata:
   name: account
   namespace: kafka
 data:
-  server.port: "8080"
-  spring.cloud.kubernetes.discovery.all-namespaces: "true"
-
-  spring.datasource.url: "jdbc:postgresql://postgres:5432/quotes_provider"
-  spring.datasource.password: "postgres"
-  spring.datasource.username: "postgres"
-  spring.datasource.driverClassName: "org.postgresql.Driver"
-  spring.datasource.hikari.connectionTimeOut: "2000"
-  spring.datasource.hikari.maximumPoolSize: "5"
-
-  spring.jpa.show-sql: "true"
-  spring.jpa.database-platform: "org.hibernate.dialect.PostgreSQLDialect"
-  spring.jpa.hibernate.ddl-auto: "update"
-
-  spring.jpa.properties.hibernate.dialect: "org.hibernate.dialect.PostgreSQLDialect"
-  spring.jpa.properties.hibernate.format_sql: "true"
-  spring.jpa.properties.hibernate.temp.use_jdbc_metadata_defaults: "false"
-  security.oauth2.resourceserver.jwt.jwk-set-uri: "http://keycloak:8080/realms/My-Realm/protocol/openid-connect/certs"
-
-  security.basic.enabled: "false"
+  application.yml: |- 
+    spring: 
+      cloud:
+        kubernetes: 
+            discovery.all-namespaces: "true"
+  
+      datasource:
+        url: "jdbc:postgresql://postgres:5432/quotes_provider"
+        password: "postgres"
+        username: "postgres"
+        driverClassName: "org.postgresql.Driver"
+        hikari:
+          connectionTimeOut: "2000"
+          maximumPoolSize: "5"
+  
+      jpa:
+        show-sql: "true"
+        database-platform: "org.hibernate.dialect.PostgreSQLDialect"
+        hibernate.ddl-auto: "update"
+        properties:
+          hibernate:
+            dialect: "org.hibernate.dialect.PostgreSQLDialect"
+            format_sql: "true"
+            temp.use_jdbc_metadata_defaults: "false"
+      security:
+        oauth2:
+          client:
+            registration:
+              keycloak-spring-gateway-client:
+                provider: "my-keycloak-provider"
+                scope: "openid"
+                client-id: "spring-gateway-client"
+                client-secret: "3RhEF8pqKTANrQ6BhfxaYVmcjTXsDK0u"
+                authorization-grant-type: "authorization_code"
+                redirect-uri: "{baseUrl}/login/oauth2/code/keycloak"
+            provider:
+              my-keycloak-provider:
+                issuer-uri: ${kc.realm-url}
+                jwk-set-uri: ${kc.realm-url}/protocol/openid-connect/certs
+                authorization-uri: ${kc.realm-url}/protocol/openid-connect/auth
+          resourceserver:
+            jwt:
+              jwk-set-uri: ${kc.realm-url}/protocol/openid-connect/certs
+    kc:
+      base-url: "http://192.168.64.8:31760/auth"
+      realm: "My-Realm"
+      realm-url: ${kc.base-url}/realms/${kc.realm}  
+    security.basic.enabled: "false"
+    server.port: "8080"
