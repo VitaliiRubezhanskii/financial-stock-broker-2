@@ -4,9 +4,9 @@ server:
       namespace: argocd
       project: default
       source:
-        repoURL: https://github.com/piomin/sample-terraform-kubernetes-argocd.git
+        repoURL: https://bitbucket.org/vrubezhanskii/financial-stock-broker-2
         targetRevision: HEAD
-        path: argocd/manifests/cluster
+        path: kind/argocd/manifests/cluster
         directory:
           recurse: true
       destination:
