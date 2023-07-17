@@ -5,8 +5,8 @@ server:
       project: default
       source:
         repoURL: https://bitbucket.org/vrubezhanskii/financial-stock-broker-2
-        targetRevision: develop
-        path: manifests/cluster
+        targetRevision: HEAD
+        path: kind/argocd/manifests/cluster
         directory:
           recurse: true
       destination:

@@ -9,9 +9,9 @@ spec:
     server: https://kubernetes.default.svc
   project: kafka
   source:
-    path: manifests/kafka
+    path: kind/argocd/manifests/kafka
     repoURL: https://bitbucket.org/vrubezhanskii/financial-stock-broker-2
-    targetRevision: develop
+    targetRevision: HEAD
   syncPolicy:
     syncOptions:
       - CreateNamespace=true
