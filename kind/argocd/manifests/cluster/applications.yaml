@@ -22,12 +22,12 @@ metadata:
   name: account-service
   namespace: argocd
 spec:
-  project: default
+  project: account
   source:
-    chart: account-service
+    chart: account
     repoURL: https://vitaliirubezhanskii.github.io/financial-stock-broker-2-helm-charts
     targetRevision: 0.3.8
     helm:
-      releaseName: account-service
+      releaseName: account
   destination:
     server: "https://kubernetes.default.svc"
