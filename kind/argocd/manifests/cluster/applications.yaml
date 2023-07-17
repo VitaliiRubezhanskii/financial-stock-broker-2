@@ -28,6 +28,7 @@ spec:
     repoURL: https://vitaliirubezhanskii.github.io/financial-stock-broker-2-helm-charts.git
     targetRevision: HEAD
   destination:
+    namespace: kafka
     server: https://kubernetes.default.svc
   syncPolicy:
     syncOptions:
