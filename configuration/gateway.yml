@@ -1,6 +1,8 @@
 spring:
   cloud:
     gateway:
+      default-filters:
+        - TokenRelay=
       routes:
         - id: account-service
           uri: http://localhost:8093
@@ -10,11 +12,6 @@ spring:
           uri: http://localhost:8092
           predicates:
            - Path=/order-service/**
-          filters:
-            - DedupeResponseHeader=Access-Control-Allow-Credentials Access-Control-Allow-Origin
-            - TokenRelay=
-            - SaveSession
-            - StripPrefix=1
 
   security:
     oauth2:
