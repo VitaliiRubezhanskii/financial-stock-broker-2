@@ -31,7 +31,7 @@ public class AccountController {
 //        return new ResponseEntity<>(accountService.updateAccount(accountId, accountCreationDto), HttpStatus.OK);
     }
 
-    @PreAuthorize("hasRole('product_read')")
+    @PreAuthorize("hasRole('default-roles-my-realm')")
     @GetMapping("/")
     public ResponseEntity<AccountCreatedDto> getAccountById(){
         AccountCreatedDto accountCreatedDto = new AccountCreatedDto();

@@ -2,5 +2,4 @@ spring:
   application:
     name: gateway
   main:
-    allow-bean-definition-overriding: true
     web-application-type: reactive

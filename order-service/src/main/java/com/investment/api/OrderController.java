@@ -23,7 +23,7 @@ public class OrderController {
        return new ResponseEntity<>(orderService.newOrder(orderCreationDto), HttpStatus.CREATED);
     }
 
-    @PreAuthorize("hasRole('product_read')")
+    @PreAuthorize("hasRole('default-roles-my-realm')")
     @GetMapping(value = "/")
     public OrderCreatedDto findOrderById(){
         OrderCreatedDto orderCreatedDto = new OrderCreatedDto();

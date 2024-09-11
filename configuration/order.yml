@@ -16,11 +16,7 @@ spring:
         dialect: org.hibernate.dialect.PostgreSQLDialect
         format_sql: true
         temp.use_jdbc_metadata_defaults: false
-#  security:
-#    oauth2:
-#      resourceserver:
-#          jwt:
-#            jwk-set-uri: http://localhost:8080/realms/My-Realm/protocol/openid-connect/certs
+
   zipkin:
     enabled: true
     baseUrl: http://localhost:9411
@@ -45,3 +41,5 @@ microservice:
   client:
     url: http://localhost:8099
 security.basic.enabled: false
+
+server.port: 8092
