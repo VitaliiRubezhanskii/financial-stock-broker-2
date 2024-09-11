@@ -5,20 +5,22 @@ plugins {
 apply plugin: 'java'
 
 dependencies {
-    //Security Module
-    implementation(project(':security-autoconfig'))
+    //Spring Oauth 2 Security Module
+    implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
+    implementation 'org.springframework.security:spring-security-oauth2-resource-server'
 
     //Spring Boot
-    implementation 'org.springframework.boot:spring-boot-starter-web'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
 
     // Spring Cloud
     implementation 'org.springframework.cloud:spring-cloud-starter-bootstrap'
-    implementation 'org.springframework.cloud:spring-cloud-starter-kubernetes-client-all'
-//    implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
-//    implementation 'org.springframework.cloud:spring-cloud-starter-config'
+    implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
+    implementation 'org.springframework.cloud:spring-cloud-starter-config'
     implementation 'org.springframework.cloud:spring-cloud-starter-gateway'
+
+    // Spring Cloud Kubernetes
+//    implementation 'org.springframework.cloud:spring-cloud-starter-kubernetes-client-all'
 
     // Lombok
     compileOnly 'org.projectlombok:lombok:1.18.20'
