@@ -29,6 +29,7 @@ spring:
         provider:
           my-keycloak-provider:
             issuer-uri: http://localhost:8080/realms/My-Realm
+            token-uri: http://localhost:8080/realms/My-Realm/protocol/openid-connect/token
             jwk-set-uri: http://localhost:8080/realms/My-Realm/protocol/openid-connect/certs
             authorization-uri: http://localhost:8080/realms/My-Realm/protocol/openid-connect/auth
       resourceserver:
