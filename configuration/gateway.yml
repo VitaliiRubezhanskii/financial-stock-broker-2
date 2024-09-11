@@ -2,20 +2,35 @@ spring:
   cloud:
     gateway:
       default-filters:
-        - TokenRelay
+        - TokenRelay=
       routes:
         - id: account-service
           uri: http://localhost:8093
           predicates:
            - Path=/account/**
-          filters:
-           - RemoveRequestHeader=Cookie
         - id: order-service
           uri: http://localhost:8092
           predicates:
-           - Path=/order/**
-          filters:
-           - RemoveRequestHeader=Cookie
+           - Path=/order-service/**
+
+  security:
+    oauth2:
+      client:
+        registration:
+          keycloak-spring-gateway-client:
+            provider: my-keycloak-provider
+            client-id: spring-gateway-client
+            client-secret: 3RhEF8pqKTANrQ6BhfxaYVmcjTXsDK0u
+            authorization-grant-type: authorization_code
+            scope: openid
+        provider:
+          my-keycloak-provider:
+            issuer-uri: http://localhost:8080/realms/My-Realm
+            jwk-set-uri: http://localhost:8080/realms/My-Realm/protocol/openid-connect/certs
+            authorization-uri: http://localhost:8080/realms/My-Realm/protocol/openid-connect/auth
+        resourceserver:
+          jwt:
+            jwk-set-uri: http://localhost:8080/realms/My-Realm/protocol/openid-connect/certs
 
 
 eureka:
