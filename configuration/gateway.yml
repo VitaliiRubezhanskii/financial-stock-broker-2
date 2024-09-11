@@ -30,7 +30,7 @@ spring:
             authorization-uri: http://localhost:8080/realms/My-Realm/protocol/openid-connect/auth
       resourceserver:
         jwt:
-          jwk-set-uri: http://localhost:8080/realms/My-Realm/protocol/openid-connect/certs
+          issuer-uri: http://localhost:8080/realms/My-Realm
 
 
 eureka:
