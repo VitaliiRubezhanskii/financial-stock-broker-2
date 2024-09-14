@@ -11,10 +11,10 @@
     #basic.auth.user.info: 4JYXYBS7AXSTQRFG:Sw4ib3vEDg4lmHFcB7p7EMsMHUiaqQkQFJHC7J5fmPXDkB3TfHPiXVWMoHyfg/qc
  #   schema.registry.url: http://localhost:8081
 spring:
-#  kafka:
-#    properties:
-#      bootstrap-servers: localhost:9092
-#      schema.registry.url: http://localhost:8081
+  kafka:
+    properties:
+      bootstrap-servers: localhost:9092
+      schema.registry.url: http://localhost:8081
   cloud:
     function.definition: process
     stream:
@@ -27,7 +27,7 @@ spring:
 
       kafka:
         binder:
-          brokers: localhost:9092
+          brokers: http://localhost:9092
         bindings:
           process-out-0:
             producer:
@@ -47,8 +47,6 @@ spring:
               producer:
                 keySerde: org.apache.kafka.common.serialization.Serdes$StringSerde
                 valueSerde: com.investment.serde.SensorSerde
-
-
 
   datasource:
     url: jdbc:postgresql://localhost:5432/quotes_provider
