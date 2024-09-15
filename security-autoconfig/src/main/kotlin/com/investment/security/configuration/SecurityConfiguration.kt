@@ -36,7 +36,7 @@ class SecurityConfiguration(private val oAuth2ClientProperties: OAuth2ClientProp
         return httpSecurity
             .authorizeHttpRequests { customizer ->
                 customizer
-                    .requestMatchers("/actuator/health/liveness", "/actuator/health/readiness").permitAll()
+                    .requestMatchers("/actuator/**").permitAll()
                     .anyRequest().authenticated()
             }
             .sessionManagement { customizer -> customizer.sessionCreationPolicy(SessionCreationPolicy.STATELESS) }
