@@ -42,4 +42,21 @@ microservice:
     
 security.basic.enabled: false
 
+management:
+  health:
+    probes.enabled: true
+    livenessState:
+      enabled: true
+    readinessState:
+      enabled: true
+  server.port: 9235
+  security:
+    enabled: false
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+    refresh:
+      enabled: true
+
 

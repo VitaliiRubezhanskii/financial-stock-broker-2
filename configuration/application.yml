@@ -25,19 +25,3 @@ spring:
           issuer-uri: http://localhost:8080/auth/realms/My-Realm
           jwk-set-uri: http://localhost:8080/auth/realms/My-Realm/protocol/openid-connect/certs
 
-management:
-  health:
-    probes.enabled: true
-    livenessState:
-      enabled: true
-    readinessState:
-      enabled: true
-  server.port: 9235
-  security:
-    enabled: false
-  endpoints:
-    web:
-      exposure:
-        include: "*"
-    refresh:
-      enabled: true
