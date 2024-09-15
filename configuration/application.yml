@@ -29,3 +29,7 @@ management:
   health:
     livenessstate.enabled: true
     readinessstate.enabled: true
+    endpoint:
+    health.group.exploratory:
+      include: livenessState,readinessState,ping
+      show-details: always
