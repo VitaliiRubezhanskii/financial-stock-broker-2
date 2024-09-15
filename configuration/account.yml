@@ -49,7 +49,7 @@ management:
       enabled: true
     readinessState:
       enabled: true
-  server.port: 9235
+  server.port: 8080
   security:
     enabled: false
   endpoints:
