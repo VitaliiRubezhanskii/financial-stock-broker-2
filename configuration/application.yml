@@ -4,6 +4,9 @@ kc:
   realm-url: ${kc.base-url}/auth/realms/${kc.realm}
 
 spring:
+  profiles:
+    active: local
+
   security:
     oauth2:
       client:
