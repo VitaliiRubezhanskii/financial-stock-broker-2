@@ -1,7 +1,7 @@
 spring:
   application:
     name: quotes-provider-service
-    
+
 management:
   context-path: /admin
   security:
