@@ -17,14 +17,19 @@ dependencies {
     //Spring Cloud
     implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
-    // Spring Cloud for local run
-    implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
-    implementation 'org.springframework.cloud:spring-cloud-config-client'
     implementation 'org.springframework.cloud:spring-cloud-starter-bootstrap'
     implementation 'org.springframework.cloud:spring-cloud-context'
 
-    // Spring Cloud Kubernetes
-//    implementation 'org.springframework.cloud:spring-cloud-starter-kubernetes-client-all'
+    if ("${kubernetes}" == "false") {
+        // Spring Cloud for local application run
+        implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
+        implementation 'org.springframework.cloud:spring-cloud-config-client'
+        println " with Netflix"
+    } else {
+        // Spring Cloud Kubernetes
+        implementation 'org.springframework.cloud:spring-cloud-starter-kubernetes-fabric8-all'
+        println " with Kubernetes"
+    }
 
     // JPA
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
