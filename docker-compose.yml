@@ -553,7 +553,6 @@ services:
        hostname: cassandra
        restart: always
        container_name: cassandra
-       hostname: cassandra
        networks:
          - my-mongo-cluster
 
