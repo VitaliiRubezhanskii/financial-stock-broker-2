@@ -21,9 +21,9 @@ spec:
           image: provectuslabs/kafka-ui:latest
           env:
             - name: KAFKA_CLUSTERS_0_NAME
-              value: "my-kafka-cluster"
+              value: "my-cluster"
             - name: KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS
-              value: my-kafka-cluster-kafka-bootstrap:9092
+              value: my-cluster-kafka-bootstrap:9092
           imagePullPolicy: Always
           resources:
             requests:

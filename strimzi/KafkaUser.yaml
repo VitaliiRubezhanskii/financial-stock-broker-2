@@ -2,8 +2,9 @@ apiVersion: kafka.strimzi.io/v1beta2
 kind: KafkaUser
 metadata:
   name: confluent-schema-registry
+  namespace: kafka
   labels:
-    strimzi.io/cluster: my-kafka-cluster
+    strimzi.io/cluster: my-cluster
 spec:
   authentication:
     type: tls
@@ -16,7 +17,7 @@ spec:
       # Read, Write, and DescribeConfigs are known to be required
       - resource:
           type: topic
-          name: registry-schemas
+          name: quotes
           patternType: literal
         operation: All
         type: allow

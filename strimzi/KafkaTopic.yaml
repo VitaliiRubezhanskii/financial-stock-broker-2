@@ -1,12 +1,15 @@
 apiVersion: kafka.strimzi.io/v1beta2
 kind: KafkaTopic
 metadata:
-  name: registry-schemas
+  name: quotes
+  namespace: kafka
   labels:
-    strimzi.io/cluster: my-kafka-cluster
+    strimzi.io/cluster: my-cluster
 spec:
   partitions: 1
   replicas: 3
   config:
     # http://kafka.apache.org/documentation/#topicconfigs
     cleanup.policy: compact
+
+#    helm install my-strimzi-release strimzi/strimzi-kafka-operator --namespace kafka --version 0.33.2
